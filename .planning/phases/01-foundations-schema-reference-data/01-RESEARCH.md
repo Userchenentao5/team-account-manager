@@ -448,18 +448,21 @@ export default nextConfig;
 
 **If empty:** not empty — A2 (native build on Node 25) is the one to resolve before any install.
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Will better-sqlite3 install on Node 25 here, or must we switch to LTS?**
    - What we know: Node v25.5.0 installed; no Python/MSVC toolchain; better-sqlite3 needs a prebuild or compiles from source.
    - What's unclear: whether a Node-25-ABI prebuild exists for 12.11.x.
    - Recommendation: **Plan to run on Node 22/24 LTS** (use `nvm`/`fnm`). Cheapest path; avoids installing a C++ toolchain. Add an early plan task: verify `npm install better-sqlite3` succeeds and `new Database()` opens before building features.
+   - **RESOLVED:** Incorporated into 01-01 Task 1 — switch to Node 22/24 LTS before install + smoke-test `require('better-sqlite3')(':memory:')`.
 
 2. **`generate` + `migrate` vs `push` for this solo project?**
    - What we know: CLAUDE.md allows either; Success Criterion 4 says "verified by a passing migration".
    - Recommendation: **`generate` + programmatic `migrate()`** — produces a committed, reviewable `drizzle/*.sql` artifact that *is* the "passing migration" evidence. Keep `push` only for throwaway local experiments.
+   - **RESOLVED:** Incorporated into 01-01 Task 3 — `db:generate` + programmatic `src/db/migrate.ts` (NOT push); committed `drizzle/*.sql` is the SC-4 evidence.
 
 3. **SQLite `foreign_keys` PRAGMA** is OFF by default per-connection — must be enabled (`pragma('foreign_keys = ON')`) for FK enforcement to actually protect references. Included in `db/index.ts` above; confirm it's set on the migrate connection too.
+   - **RESOLVED:** Incorporated into 01-01 Task 3 (and Task 2's `db/index.ts`) — `pragma('foreign_keys = ON')` set on both the app singleton and the migrate connection.
 
 ## Environment Availability
 
