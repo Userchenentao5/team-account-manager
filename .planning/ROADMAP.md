@@ -30,7 +30,10 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. User can add, rename, and remove payment channels via stable id-based references; a channel already referenced by a space cannot be hard-deleted (it is soft-deleted or the deletion is blocked).
   3. User can view the list of supported currencies available for selection when creating spaces.
   4. The schema stores money as integer minor units (currency-aware exponent) and every space row reserves FX-snapshot and structured-period columns, verified by a passing migration.
-**Plans**: TBD
+**Plans**: 3 plans
+- [ ] 01-01-PLAN.md — Scaffold locked stack + full Drizzle schema + migration & 6-currency seed (Wave 1)
+- [ ] 01-02-PLAN.md — Left-sidebar nav shell + read-only currency list (REF-02 display, Wave 2)
+- [ ] 01-03-PLAN.md — Payment-channel maintenance: add/rename/soft-delete/reactivate (REF-01, Wave 2)
 **UI hint**: yes
 
 ### Phase 2: Exchange-Rate Layer
@@ -90,7 +93,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundations, Schema & Reference Data | 0/TBD | Not started | - |
+| 1. Foundations, Schema & Reference Data | 0/3 | Not started | - |
 | 2. Exchange-Rate Layer | 0/TBD | Not started | - |
 | 3. Spaces (Expiry + USD Snapshot) | 0/TBD | Not started | - |
 | 4. Child Accounts & Cascade Delete | 0/TBD | Not started | - |
