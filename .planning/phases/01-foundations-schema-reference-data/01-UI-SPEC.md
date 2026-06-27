@@ -1,7 +1,8 @@
 ---
 phase: 1
 slug: foundations-schema-reference-data
-status: draft
+status: approved
+reviewed_at: 2026-06-27
 shadcn_initialized: false
 preset: "shadcn init during scaffold — style: new-york, base color: neutral, CSS variables: true"
 created: 2026-06-27
