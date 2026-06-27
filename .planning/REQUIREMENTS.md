@@ -75,30 +75,30 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SPACE-01 | TBD | Pending |
-| SPACE-02 | TBD | Pending |
-| SPACE-03 | TBD | Pending |
-| SPACE-04 | TBD | Pending |
-| SPACE-05 | TBD | Pending |
-| ACCT-01 | TBD | Pending |
-| ACCT-02 | TBD | Pending |
-| ACCT-03 | TBD | Pending |
-| REF-01 | TBD | Pending |
-| REF-02 | TBD | Pending |
-| FX-01 | TBD | Pending |
-| FX-02 | TBD | Pending |
-| FX-03 | TBD | Pending |
-| EXP-01 | TBD | Pending |
-| DASH-01 | TBD | Pending |
-| DASH-02 | TBD | Pending |
-| DASH-03 | TBD | Pending |
-| DASH-04 | TBD | Pending |
+| SPACE-01 | Phase 3 | Pending |
+| SPACE-02 | Phase 3 | Pending |
+| SPACE-03 | Phase 3 | Pending |
+| SPACE-04 | Phase 3 | Pending |
+| SPACE-05 | Phase 4 | Pending |
+| ACCT-01 | Phase 3 | Pending |
+| ACCT-02 | Phase 4 | Pending |
+| ACCT-03 | Phase 4 | Pending |
+| REF-01 | Phase 1 | Pending |
+| REF-02 | Phase 1 | Pending |
+| FX-01 | Phase 2 | Pending |
+| FX-02 | Phase 3 | Pending |
+| FX-03 | Phase 2 | Pending |
+| EXP-01 | Phase 3 | Pending |
+| DASH-01 | Phase 5 | Pending |
+| DASH-02 | Phase 5 | Pending |
+| DASH-03 | Phase 5 | Pending |
+| DASH-04 | Phase 5 | Pending |
 
 **Coverage:**
 - v1 requirements: 18 total
-- Mapped to phases: 0 (pending roadmap)
-- Unmapped: 18 ⚠️
+- Mapped to phases: 18 ✓
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-06-27*
-*Last updated: 2026-06-27 after initial definition*
+*Last updated: 2026-06-27 after roadmap creation (traceability filled)*
