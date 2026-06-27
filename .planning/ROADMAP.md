@@ -34,10 +34,10 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. User can view the list of supported currencies available for selection when creating spaces.
   4. The schema stores money as integer minor units (currency-aware exponent) and every space row reserves FX-snapshot and structured-period columns, verified by a passing migration.
 
-**Plans**: 3 plans
+**Plans**: 1/3 plans executed
 **Wave 1**
 
-- [ ] 01-01-PLAN.md — Scaffold locked stack + full Drizzle schema + migration & 6-currency seed (Wave 1)
+- [x] 01-01-PLAN.md — Scaffold locked stack + full Drizzle schema + migration & 6-currency seed (Wave 1)
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
@@ -115,7 +115,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundations, Schema & Reference Data | 0/3 | Not started | - |
+| 1. Foundations, Schema & Reference Data | 1/3 | In Progress|  |
 | 2. Exchange-Rate Layer | 0/TBD | Not started | - |
 | 3. Spaces (Expiry + USD Snapshot) | 0/TBD | Not started | - |
 | 4. Child Accounts & Cascade Delete | 0/TBD | Not started | - |

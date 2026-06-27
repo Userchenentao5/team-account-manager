@@ -23,8 +23,8 @@
 
 ### 参考数据 (REF)
 
-- [ ] **REF-01**: 用户可以手动维护支付渠道枚举(新增/编辑/删除),引用基于稳定 id;删除被占用的渠道时受保护(软删除或阻止)
-- [ ] **REF-02**: 系统提供币种列表供创建/编辑空间时选择
+- [x] **REF-01**: 用户可以手动维护支付渠道枚举(新增/编辑/删除),引用基于稳定 id;删除被占用的渠道时受保护(软删除或阻止)
+- [x] **REF-02**: 系统提供币种列表供创建/编辑空间时选择
 
 ### 汇率折算 (FX)
 
@@ -83,8 +83,8 @@
 | ACCT-01 | Phase 3 | Pending |
 | ACCT-02 | Phase 4 | Pending |
 | ACCT-03 | Phase 4 | Pending |
-| REF-01 | Phase 1 | Pending |
-| REF-02 | Phase 1 | Pending |
+| REF-01 | Phase 1 | Complete |
+| REF-02 | Phase 1 | Complete |
 | FX-01 | Phase 2 | Pending |
 | FX-02 | Phase 3 | Pending |
 | FX-03 | Phase 2 | Pending |
@@ -95,6 +95,7 @@
 | DASH-04 | Phase 5 | Pending |
 
 **Coverage:**
+
 - v1 requirements: 18 total
 - Mapped to phases: 18 ✓
 - Unmapped: 0
