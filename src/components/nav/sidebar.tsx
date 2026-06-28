@@ -8,6 +8,7 @@ import {
   Database,
   CreditCard,
   Coins,
+  Banknote,
 } from "lucide-react";
 
 import {
@@ -32,6 +33,7 @@ const topLevel = [
 const referenceChildren = [
   { label: "支付渠道", href: "/reference-data/channels", icon: CreditCard },
   { label: "币种", href: "/reference-data/currencies", icon: Coins },
+  { label: "汇率", href: "/reference-data/rates", icon: Banknote },
 ] as const;
 
 const activeClasses =
