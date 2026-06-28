@@ -443,22 +443,27 @@ This is a greenfield additive phase (new table + new files), not a rename/refact
 
 **If empty:** Not empty — five low-risk assumptions, all within explicitly-granted discretion areas. Confirm A1 and A2 during planning/discussion as they touch displayed data and money precision.
 
-## Open Questions
+## Open Questions (RESOLVED)
+
+*All three resolved during plan-phase and encoded in PLAN 02-02 / 02-03 (2026-06-28).*
 
 1. **"Rates as of" = fetch time or publication date?** (A1)
    - What we know: D-05 locks the label to `fetched_at`. Frankfurter also returns a publication `date`.
    - What's unclear: whether to surface the truer publication date.
    - Recommendation: store `fetched_at` (wall clock) per D-05; optionally add `rate_date` and display it. Pick in planning.
+   - **RESOLVED:** display `fetched_at` per D-05; `rate_date` left optional under explicitly-granted Claude's Discretion (not required this phase).
 
 2. **Inverted-rate precision.** (A2)
    - What we know: rate is a decimal string; Phase 3 multiplies by it.
    - What's unclear: exact significant-figure count.
    - Recommendation: `toPrecision(12)`, trimmed; document in PLAN.
+   - **RESOLVED:** `toPrecision(12)`, trimmed — locked in PLAN 02-02 (`invertToUsd`).
 
 3. **Empty-cache + first-fetch-fails UX.** (Pitfall 5)
    - What we know: page must not crash, must not show fake zeros.
    - What's unclear: stale banner vs a distinct "rates unavailable" empty state.
    - Recommendation: distinct empty-state message when `rates.length === 0`; stale banner only when falling back to a *non-empty* cache.
+   - **RESOLVED:** distinct empty-state message when `rates.length === 0`; stale banner only when falling back to a non-empty cache — locked in PLAN 02-02 / 02-03.
 
 ## Environment Availability
 
