@@ -4,17 +4,17 @@ milestone: v1.0
 milestone_name: milestone
 current_phase: 02
 current_phase_name: exchange-rate-layer
-status: executing
+status: verifying
 stopped_at: Completed 02-01-PLAN.md
-last_updated: "2026-06-28T01:11:34.340Z"
+last_updated: "2026-06-28T01:19:20.892Z"
 last_activity: 2026-06-28
 last_activity_desc: Phase 02 execution started
 progress:
   total_phases: 5
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 6
-  completed_plans: 5
-  percent: 20
+  completed_plans: 6
+  percent: 40
 ---
 
 # Project State
@@ -30,7 +30,7 @@ See: .planning/PROJECT.md (updated 2026-06-27)
 
 Phase: 02 (exchange-rate-layer) — EXECUTING
 Plan: 3 of 3
-Status: Ready to execute
+Status: Phase complete — ready for verification
 Last activity: 2026-06-28 — Phase 02 execution started
 
 Progress: [░░░░░░░░░░] 0%
@@ -60,6 +60,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 01 P03 | 15min | 3 tasks | 9 files |
 | Phase 02 P01 | 3min | 3 tasks | 4 files |
 | Phase 02 P02 | 3min | 2 tasks | 3 files |
+| Phase 02 P03 | 3min | 2 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -80,6 +81,7 @@ Load-bearing decisions affecting upcoming work:
 - [Phase 02]: Omitted optional rateDate column (A1) — additive in Plan 02 if Frankfurter publication date is needed.
 - [Phase 02]: FX anti-corruption service: frankfurter.ts is the sole Frankfurter caller (fetch+Zod+invert+atomic upsert); stale is request-scoped (failed-refresh only), never a column, decoupled from D-07 cache age.
 - [Phase 02]: invertToUsd = (1/usdToX).toPrecision(12) trimmed decimal string (A2); 4s fetch timeout (A3); empty-cache+fail returns stale:false as a distinct empty state.
+- [Phase ?]: [Phase 02]: refreshRates Server Action takes zero client input (Pitfall 6) — trust boundary is the service-side Zod parse; revalidatePath only. Rates screen is force-dynamic RSC + client refresh with two distinct negative states (stale banner vs empty state, never fake zeros).
 
 ### Pending Todos
 
@@ -100,6 +102,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-06-28T01:10:46.119Z
+Last session: 2026-06-28T01:18:54.033Z
 Stopped at: Completed 02-01-PLAN.md
 Resume file: None

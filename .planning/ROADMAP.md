@@ -14,7 +14,7 @@ This single-user web app tracks Codex/ChatGPT team-subscription "spaces" and sur
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundations, Schema & Reference Data** - App scaffold, locked money/FX/period schema, and payment-channel + currency reference data (completed 2026-06-27)
-- [ ] **Phase 2: Exchange-Rate Layer** - Cached, refreshable, fallback-resilient USD rates from the external FX API
+- [x] **Phase 2: Exchange-Rate Layer** - Cached, refreshable, fallback-resilient USD rates from the external FX API (completed 2026-06-28)
 - [ ] **Phase 3: Spaces (Expiry + USD Snapshot)** - Full space CRUD with mother account, auto expiry, and frozen USD amount
 - [ ] **Phase 4: Child Accounts & Cascade Delete** - Codex/ChatGPT child-account management and safe cascading space deletion
 - [ ] **Phase 5: Dashboard & Overview** - Expiry alerts, total USD spend, distribution, and count overviews
@@ -58,7 +58,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. User can trigger a manual "refresh rates" action and see the updated "rates as of &lt;date&gt;".
   3. When the FX API is unavailable, the app falls back to the last cached rates and visibly flags the data as stale, never failing the page or writing `0`/`NULL` rates.
 
-**Plans**: 2/3 plans executed
+**Plans**: 3/3 plans complete
 
 **Wave 1**
 
@@ -70,7 +70,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 **Wave 3** *(blocked on Wave 2)*
 
-- [ ] 02-03-PLAN.md — refreshRates Server Action + 参考数据 → 汇率 screen (table, as-of label, stale banner, empty state, sidebar entry) (FX-01, FX-03, Wave 3)
+- [x] 02-03-PLAN.md — refreshRates Server Action + 参考数据 → 汇率 screen (table, as-of label, stale banner, empty state, sidebar entry) (FX-01, FX-03, Wave 3)
 
 **UI hint**: yes
 
@@ -129,7 +129,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundations, Schema & Reference Data | 3/3 | Complete    | 2026-06-27 |
-| 2. Exchange-Rate Layer | 2/3 | In Progress|  |
+| 2. Exchange-Rate Layer | 3/3 | Complete   | 2026-06-28 |
 | 3. Spaces (Expiry + USD Snapshot) | 0/TBD | Not started | - |
 | 4. Child Accounts & Cascade Delete | 0/TBD | Not started | - |
 | 5. Dashboard & Overview | 0/TBD | Not started | - |
