@@ -97,7 +97,7 @@ Use the existing neutral OKLCH palette from `globals.css`. This phase adds no br
 
 Accent reserved for:
 - `新增子账号` primary button.
-- `保存` submit button in add/edit and mother seat dialogs.
+- `保存子账号` submit button in child add/edit dialogs and `保存母账号席位` submit button in mother seat dialogs.
 - Checked state of the mother-account `can_change_seat_type` switch.
 - Existing active sidebar/nav state only. Do not add a child-account nav item.
 
@@ -120,13 +120,15 @@ Language: zh-CN. Keep English product labels as `codex`, `chatgpt`, `USD`, and `
 | Child table empty state body | `在当前空间下新增 codex 或 chatgpt 子账号，只记录邮箱/登录名和席位信息，不保存密码或凭据。` |
 | Child add dialog title | `新增子账号` |
 | Child edit dialog title | `编辑子账号` |
-| Child form submit | `保存` |
-| Child form pending submit | `保存中...` |
+| Child form submit | `保存子账号` |
+| Child form pending submit | `正在保存子账号...` |
 | Child delete title | `删除子账号` |
 | Child delete body | `将删除子账号 {email}。此操作不会删除空间或母账号。` |
-| Child delete confirm | `删除` |
+| Child delete confirm | `删除子账号` |
 | Mother seat section title | `母账号席位` |
 | Mother seat edit title | `编辑母账号席位` |
+| Mother seat form submit | `保存母账号席位` |
+| Mother seat form pending submit | `正在保存母账号席位...` |
 | Mother seat helper | `母账号也作为一个席位记录。只能编辑席位类型和是否可变更席位类型。` |
 | CNY estimate label | `当前 CNY 参考` |
 | CNY fallback | `暂无 CNY 参考` |
@@ -157,6 +159,7 @@ Credential prohibition copy:
 | Interaction | Contract |
 |-------------|----------|
 | Child account placement | Child accounts are managed only on `/spaces/[id]` inside the existing space detail page. No sidebar item, no `/child-accounts` route, no global list. |
+| Space detail visual focal point | On `/spaces/[id]`, the primary visual anchor is the child account table section. `新增子账号` is the only primary button in that section. |
 | Child account table | Use existing `Table` primitives with columns: type, email/login, note/label, joined date, monthly price, frozen monthly USD, monthly payment day, actions. |
 | Child row actions | Use lucide icon buttons with tooltips: `Pencil` for edit and `Trash2` for delete. Buttons are `variant="ghost"`, `size="icon"`, `className="size-11"`, and include `aria-label`. |
 | Add/edit child | Open a dialog from `新增子账号` or row edit. Use `react-hook-form`, `zodResolver`, server-side re-parse, `useTransition`, inline field errors, and sonner toasts. |
