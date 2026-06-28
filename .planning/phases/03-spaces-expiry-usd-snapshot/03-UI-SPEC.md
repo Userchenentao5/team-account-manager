@@ -1,10 +1,11 @@
 ---
 phase: 3
 slug: spaces-expiry-usd-snapshot
-status: draft
+status: approved
 shadcn_initialized: true
 preset: radix-nova
 created: 2026-06-28
+reviewed_at: 2026-06-28
 ---
 
 # Phase 3 — UI Design Contract
