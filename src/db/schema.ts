@@ -30,6 +30,25 @@ export const paymentChannel = sqliteTable("payment_channel", {
 });
 
 /**
+ * FX-01 — exchange-rate cache (Phase 2, D-01/D-02/D-03).
+ *
+ * One row per currency (`currencyCode` text PK, FK → `currency.code`) so the
+ * cache is limited to the 6 seeded currencies. `rateToUsd` is the X→USD value
+ * as a decimal STRING — never a float column (D-02). `fetchedAt` is the ISO
+ * wall-clock of the successful fetch and drives both the "rates as of" label
+ * (D-05) and the staleness age check (D-07). Staleness itself is computed
+ * per-request in Plan 02 (Pattern 3) and is intentionally NOT persisted here.
+ */
+export const fxRate = sqliteTable("fx_rate", {
+  currencyCode: text("currency_code")
+    .primaryKey() // one row per currency (D-01)
+    .references(() => currency.code), // FK to the seeded currency list
+  rateToUsd: text("rate_to_usd").notNull(), // X→USD decimal STRING, never float (D-02)
+  fetchedAt: text("fetched_at").notNull(), // ISO wall-clock of successful fetch (D-05/D-07)
+});
+export type FxRateRow = typeof fxRate.$inferSelect;
+
+/**
  * Phase 3 entity — DECLARED NOW (Pattern 2) so the money/FX-snapshot/period
  * columns never require a backfill migration over live data. All FX/period
  * columns are nullable until Phase 3 populates them.
