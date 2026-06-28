@@ -87,7 +87,25 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. User can view a space's detail (mother account, expiry date, original amount, frozen USD amount) and edit its information.
   4. User can view the space list and sort it by expiry time and filter by country / payment channel.
 
-**Plans**: TBD
+**Plans**: 5 plans
+
+**Wave 1**
+
+- [ ] 03-01-PLAN.md — `mother_account` 1:1 table + [BLOCKING] migration (ACCT-01, Wave 1)
+- [ ] 03-02-PLAN.md — Pure helpers (TDD): `addPeriod`/`expiryStatus` + `freezeUsdMinor` (EXP-01, FX-02, Wave 1)
+
+**Wave 2** *(blocked on Wave 1)*
+
+- [ ] 03-03-PLAN.md — Validation schema + parameterized data layer (atomic write, sort/filter, detail join) + DB test (SPACE-02, SPACE-03, ACCT-01, Wave 2)
+
+**Wave 3** *(blocked on Wave 2)*
+
+- [ ] 03-04-PLAN.md — `createSpace`/`updateSpace` FX-02 freeze pipeline + integration tests (SPACE-01, SPACE-04, FX-02, ACCT-01, Wave 3)
+
+**Wave 4** *(blocked on Wave 3)*
+
+- [ ] 03-05-PLAN.md — Space UI: list (sort/filter/badge) + create-edit form + detail page + human verify (SPACE-01..04, Wave 4)
+
 **UI hint**: yes
 
 ### Phase 4: Child Accounts & Cascade Delete
@@ -130,6 +148,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 |-------|----------------|--------|-----------|
 | 1. Foundations, Schema & Reference Data | 3/3 | Complete    | 2026-06-27 |
 | 2. Exchange-Rate Layer | 3/3 | Complete    | 2026-06-28 |
-| 3. Spaces (Expiry + USD Snapshot) | 0/TBD | Not started | - |
+| 3. Spaces (Expiry + USD Snapshot) | 0/5 | Not started | - |
 | 4. Child Accounts & Cascade Delete | 0/TBD | Not started | - |
 | 5. Dashboard & Overview | 0/TBD | Not started | - |
