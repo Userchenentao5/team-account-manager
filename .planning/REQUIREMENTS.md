@@ -28,7 +28,7 @@
 
 ### 汇率折算 (FX)
 
-- [ ] **FX-01**: 系统自动从外部汇率 API 抓取汇率并缓存到本地
+- [x] **FX-01**: 系统自动从外部汇率 API 抓取汇率并缓存到本地
 - [ ] **FX-02**: 创建/记录支付时,按当时汇率快照折算成 USD,并将所用汇率与 USD 金额冻结保存在该空间记录上
 - [ ] **FX-03**: 汇率 API 不可用时降级使用上次缓存汇率,并标记数据陈旧
 
@@ -85,7 +85,7 @@
 | ACCT-03 | Phase 4 | Pending |
 | REF-01 | Phase 1 | Complete |
 | REF-02 | Phase 1 | Complete |
-| FX-01 | Phase 2 | Pending |
+| FX-01 | Phase 2 | Complete |
 | FX-02 | Phase 3 | Pending |
 | FX-03 | Phase 2 | Pending |
 | EXP-01 | Phase 3 | Pending |
