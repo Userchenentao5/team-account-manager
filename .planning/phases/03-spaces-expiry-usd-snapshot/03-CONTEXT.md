@@ -17,21 +17,21 @@
 ## Implementation Decisions
 
 ### FX 快照取数(FX-02)
-- **D-01**: 保存空间时调用 `ensureFreshRates()` 确保汇率新鲜,然后从 `fx_rate` 缓存读取该币种现值:`rate_to_usd` → `rate_used`,缓存的 `fetched_at` → `rate_as_of`,`rate_source = 'frankfurter'`。
-- **D-02**: 若该币种在缓存中**没有汇率**(空缓存且刷新失败),**阻止保存**并提示用户先去"汇率"页刷新汇率 —— 绝不写入 `0`/`NULL` 的 `amount_usd`。USD 本位币始终视为 1。
-- **D-03**: `amount_usd` 在保存时一次性计算并冻结(`amount_minor × rate_used`,按 USD minor units 取整存整数)。编辑空间时,除非用户改了金额/币种,否则不重算历史快照(冻结语义)。
+- **D-01:** 保存空间时调用 `ensureFreshRates()` 确保汇率新鲜,然后从 `fx_rate` 缓存读取该币种现值:`rate_to_usd` → `rate_used`,缓存的 `fetched_at` → `rate_as_of`,`rate_source = 'frankfurter'`。
+- **D-02:** 若该币种在缓存中**没有汇率**(空缓存且刷新失败),**阻止保存**并提示用户先去"汇率"页刷新汇率 —— 绝不写入 `0`/`NULL` 的 `amount_usd`。USD 本位币始终视为 1。
+- **D-03:** `amount_usd` 在保存时一次性计算并冻结(`amount_minor × rate_used`,按 USD minor units 取整存整数)。编辑空间时,除非用户改了金额/币种,否则不重算历史快照(冻结语义)。
 
 ### 母账号建模(ACCT-01)
-- **D-04**: 新建独立 `mother_account` 表,与 `space` 建立 **1:1** 关系(FK `space_id`),为 Phase 4 的子账号建模与 SPACE-05 级联删除统一铺路 —— 不把母账号做成 `space` 行上的列。
-- **D-05**: 母账号字段仅 email / 登录名(沿用项目约束:不存储密码等敏感凭据)。
+- **D-04:** 新建独立 `mother_account` 表,与 `space` 建立 **1:1** 关系(FK `space_id`),为 Phase 4 的子账号建模与 SPACE-05 级联删除统一铺路 —— 不把母账号做成 `space` 行上的列。
+- **D-05:** 母账号字段仅 email / 登录名(沿用项目约束:不存储密码等敏感凭据)。
 
 ### 到期状态与列表呈现(SPACE-02, EXP-01)
-- **D-06**: 列表默认按**到期日升序**排序(最快到期在最前),支持按国家、支付渠道筛选。
-- **D-07**: 到期状态三态用颜色标记:**已过期** / **即将到期(≤7 天)** / **正常**。"即将到期"阈值 = 7 天。
+- **D-06:** 列表默认按**到期日升序**排序(最快到期在最前),支持按国家、支付渠道筛选。
+- **D-07:** 到期状态三态用颜色标记:**已过期** / **即将到期(≤7 天)** / **正常**。"即将到期"阈值 = 7 天。
 
 ### 日历到期算法(EXP-01)
-- **D-08**: 用 date-fns `addMonths`/`addQuarters`/`addYears` 计算到期日,采用其**默认月末钳制**行为(如 1/31 + 1 月 = 2/28,闰年得 2/29),正确处理月末与闰年。
-- **D-09**: 订阅周期单位限定为 **月 / 季 / 年**(对应 `period_unit` ∈ {month, quarter, year}),结构化存 `{unit, count}`。
+- **D-08:** 用 date-fns `addMonths`/`addQuarters`/`addYears` 计算到期日,采用其**默认月末钳制**行为(如 1/31 + 1 月 = 2/28,闰年得 2/29),正确处理月末与闰年。
+- **D-09:** 订阅周期单位限定为 **月 / 季 / 年**(对应 `period_unit` ∈ {month, quarter, year}),结构化存 `{unit, count}`。
 
 ### Claude's Discretion
 - 金额输入 UI(用户填主单位如 19.99 → 转 minor units 存储)、表单校验(Zod + RHF)、空间详情/编辑页布局、列表分页与否等实现细节,按现有 shadcn/ui + Server Actions 模式自行决定。
