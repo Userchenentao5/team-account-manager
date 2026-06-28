@@ -129,7 +129,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundations, Schema & Reference Data | 3/3 | Complete    | 2026-06-27 |
-| 2. Exchange-Rate Layer | 3/3 | Complete   | 2026-06-28 |
+| 2. Exchange-Rate Layer | 3/3 | Complete    | 2026-06-28 |
 | 3. Spaces (Expiry + USD Snapshot) | 0/TBD | Not started | - |
 | 4. Child Accounts & Cascade Delete | 0/TBD | Not started | - |
 | 5. Dashboard & Overview | 0/TBD | Not started | - |

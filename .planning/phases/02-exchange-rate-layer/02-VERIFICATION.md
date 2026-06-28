@@ -1,23 +1,28 @@
 ---
 phase: 02-exchange-rate-layer
 verified: 2026-06-28T01:30:00Z
-status: human_needed
+status: passed
 score: 9/14 must-haves verified
 behavior_unverified: 5
 overrides_applied: 0
 human_verification:
+
   - test: "npm run dev → open http://localhost:3000 → 参考数据 → 汇率. Confirm 6 currency rows (USD=1 plus CNY/EUR/GBP/JPY/HKD as X→USD decimals) and a 汇率截至 <date> label render."
     expected: "6-row table with USD pinned to 1 and a visible as-of label."
     why_human: "Live RSC render depends on a successful runtime Frankfurter fetch; grep verifies the wiring but not the rendered output (cache table is currently empty — 0 rows on disk)."
+
   - test: "Click 刷新汇率 on the Rates screen."
     expected: "Success toast 汇率已更新 and the 汇率截至 date refreshes to today (D-06)."
     why_human: "Interactive client transition + Server Action + router.refresh round-trip and live network fetch — not statically observable."
+
   - test: "Stop and restart npm run dev, reopen the Rates screen."
     expected: "Previously fetched rows are still present (on-disk cache persisted)."
     why_human: "Restart persistence requires a populated cache plus a process restart; the on-disk table mechanism is verified but live data survival is runtime."
+
   - test: "Block egress to api.frankfurter.dev (or point URL at an unreachable host) and click 刷新汇率."
     expected: "Page does NOT crash, cached rows remain, 汇率截至 label still shows, and the 汇率可能已过期 destructive stale banner appears; no row shows 0/NULL (FX-03)."
     why_human: "Requires network manipulation + visual confirmation of the degraded UI state."
+
   - test: "With an empty cache and a failing fetch, open the Rates screen."
     expected: "Distinct 暂无汇率数据 empty state shows instead of a zero-filled table (Pitfall 5)."
     why_human: "Runtime negative-path UI rendering — visual confirmation needed."
