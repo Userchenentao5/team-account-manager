@@ -58,7 +58,20 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. User can trigger a manual "refresh rates" action and see the updated "rates as of &lt;date&gt;".
   3. When the FX API is unavailable, the app falls back to the last cached rates and visibly flags the data as stale, never failing the page or writing `0`/`NULL` rates.
 
-**Plans**: TBD
+**Plans**: 3 plans
+
+**Wave 1**
+
+- [ ] 02-01-PLAN.md — fx_rate cache table + migration + query module (atomic upsert, X→USD decimal strings) (FX-01, Wave 1)
+
+**Wave 2** *(blocked on Wave 1)*
+
+- [ ] 02-02-PLAN.md — Frankfurter anti-corruption service: fetch + Zod validate + invert + cache-fallback/stale (FX-01, FX-03, Wave 2)
+
+**Wave 3** *(blocked on Wave 2)*
+
+- [ ] 02-03-PLAN.md — refreshRates Server Action + 参考数据 → 汇率 screen (table, as-of label, stale banner, empty state, sidebar entry) (FX-01, FX-03, Wave 3)
+
 **UI hint**: yes
 
 ### Phase 3: Spaces (Expiry + USD Snapshot)
@@ -116,7 +129,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundations, Schema & Reference Data | 3/3 | Complete    | 2026-06-27 |
-| 2. Exchange-Rate Layer | 0/TBD | Not started | - |
+| 2. Exchange-Rate Layer | 0/3 | Not started | - |
 | 3. Spaces (Expiry + USD Snapshot) | 0/TBD | Not started | - |
 | 4. Child Accounts & Cascade Delete | 0/TBD | Not started | - |
 | 5. Dashboard & Overview | 0/TBD | Not started | - |
