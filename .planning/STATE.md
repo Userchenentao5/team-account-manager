@@ -6,14 +6,14 @@ current_phase: 02
 current_phase_name: exchange-rate-layer
 status: executing
 stopped_at: Completed 02-01-PLAN.md
-last_updated: "2026-06-28T01:04:16.223Z"
+last_updated: "2026-06-28T01:11:34.340Z"
 last_activity: 2026-06-28
 last_activity_desc: Phase 02 execution started
 progress:
   total_phases: 5
   completed_phases: 1
   total_plans: 6
-  completed_plans: 4
+  completed_plans: 5
   percent: 20
 ---
 
@@ -29,7 +29,7 @@ See: .planning/PROJECT.md (updated 2026-06-27)
 ## Current Position
 
 Phase: 02 (exchange-rate-layer) — EXECUTING
-Plan: 2 of 3
+Plan: 3 of 3
 Status: Ready to execute
 Last activity: 2026-06-28 — Phase 02 execution started
 
@@ -59,6 +59,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 01 P02 | 15min | 3 tasks | 5 files |
 | Phase 01 P03 | 15min | 3 tasks | 9 files |
 | Phase 02 P01 | 3min | 3 tasks | 4 files |
+| Phase 02 P02 | 3min | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -77,6 +78,8 @@ Load-bearing decisions affecting upcoming work:
 - [Phase 01]: generate + programmatic migrate() (not push) — committed drizzle/*.sql is Success Criterion 4 evidence
 - [Phase 02]: fx_rate stores X->USD as decimal STRING (USD pinned to '1'); atomic multi-row upsert via drizzle db.transaction + onConflictDoUpdate — never a partial cache write.
 - [Phase 02]: Omitted optional rateDate column (A1) — additive in Plan 02 if Frankfurter publication date is needed.
+- [Phase 02]: FX anti-corruption service: frankfurter.ts is the sole Frankfurter caller (fetch+Zod+invert+atomic upsert); stale is request-scoped (failed-refresh only), never a column, decoupled from D-07 cache age.
+- [Phase 02]: invertToUsd = (1/usdToX).toPrecision(12) trimmed decimal string (A2); 4s fetch timeout (A3); empty-cache+fail returns stale:false as a distinct empty state.
 
 ### Pending Todos
 
@@ -97,6 +100,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-06-28T01:03:57.385Z
+Last session: 2026-06-28T01:10:46.119Z
 Stopped at: Completed 02-01-PLAN.md
 Resume file: None
