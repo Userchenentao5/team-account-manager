@@ -1,0 +1,92 @@
+{
+  "version": "1.0",
+  "timestamp": "2026-06-30T16:20:44.235Z",
+  "phase": "05",
+  "phase_name": "dashboard-overview",
+  "phase_dir": ".planning/phases/05-dashboard-overview",
+  "plan": 1,
+  "task": 1,
+  "total_tasks": 6,
+  "status": "paused",
+  "completed_tasks": [
+    {
+      "id": "planning",
+      "name": "Phase 5 plan artifacts created and validated",
+      "status": "done",
+      "details": "Created 05-01-PLAN.md, 05-02-PLAN.md, and 05-03-PLAN.md. All three passed frontmatter.validate --schema plan and verify.plan-structure."
+    }
+  ],
+  "remaining_tasks": [
+    {
+      "id": "05-01-01",
+      "name": "Write failing dashboard aggregate tests for DASH-01 through DASH-04",
+      "status": "not_started"
+    },
+    {
+      "id": "05-01-02",
+      "name": "Implement getDashboardOverview with stored-field aggregation",
+      "status": "not_started"
+    },
+    {
+      "id": "05-02-01",
+      "name": "Build the root dashboard metrics and renewal-risk slice",
+      "status": "not_started"
+    },
+    {
+      "id": "05-02-02",
+      "name": "Add spend distributions and secondary count overview",
+      "status": "not_started"
+    },
+    {
+      "id": "05-03-01",
+      "name": "Run final automated and source backstop gates",
+      "status": "not_started"
+    },
+    {
+      "id": "05-03-02",
+      "name": "Verify the dashboard visually in browser",
+      "status": "not_started"
+    }
+  ],
+  "blockers": [],
+  "async_jobs": [],
+  "human_actions_pending": [
+    {
+      "action": "Approve the final dashboard visual checkpoint in Plan 05-03 Task 2 after implementation and automated gates pass.",
+      "context": "The UI contract requires desktop/mobile browser inspection for first-viewport hierarchy, compact operations layout, CSS bar distributions, and absence of mutation controls.",
+      "blocking": false
+    }
+  ],
+  "decisions": [
+    {
+      "decision": "Phase 5 execution is split into three sequential waves: aggregate TDD, dashboard UI, final verification.",
+      "rationale": "The aggregate contract is the load-bearing boundary for DASH-01 through DASH-04; the root UI depends on it; final visual verification depends on both.",
+      "phase": "05"
+    },
+    {
+      "decision": "No schema push or migration task is planned for Phase 5.",
+      "rationale": "The plan set modifies only dashboard query/UI files and final verification artifacts; it does not modify src/db/schema.ts, drizzle/*.sql, or drizzle/meta/*.json.",
+      "phase": "05"
+    },
+    {
+      "decision": "Dashboard totals use stored derived fields only.",
+      "rationale": "Phase 3 froze USD snapshots at payment time. Phase 5 must aggregate space.amountUsd and childAccount.monthlyAmountUsd without live FX recomputation.",
+      "phase": "05"
+    },
+    {
+      "decision": "No chart package or new dependency is planned.",
+      "rationale": "05-UI-SPEC requires existing shadcn/Radix primitives and CSS bar lists for distributions.",
+      "phase": "05"
+    }
+  ],
+  "uncommitted_files": [
+    ".planning/phases/05-dashboard-overview/05-01-PLAN.md",
+    ".planning/phases/05-dashboard-overview/05-02-PLAN.md",
+    ".planning/phases/05-dashboard-overview/05-03-PLAN.md",
+    ".planning/phases/05-dashboard-overview/05-PATTERNS.md",
+    ".planning/phases/05-dashboard-overview/05-VALIDATION.md",
+    "Many pre-existing modified/untracked files from earlier phases are present; run git status before editing and do not revert unrelated changes."
+  ],
+  "next_action": "Run $gsd-execute-phase 05. If executing manually, start with .planning/phases/05-dashboard-overview/05-01-PLAN.md Task 1.",
+  "context_notes": "Phase 5 is planned but not executed. The root dashboard should be built over getDashboardOverview(db, today?) with stored-field aggregation, not live FX recomputation. The checkout is dirty from prior phase work; treat unrelated changes as user/workflow-owned."
+}
