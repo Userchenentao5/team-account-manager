@@ -1,5 +1,6 @@
 import { eq } from "drizzle-orm";
 import type { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
+import { differenceInCalendarDays } from "date-fns";
 import { expiryStatus } from "@/lib/expiry";
 import { childAccount, currency, paymentChannel, space } from "./schema";
 
@@ -13,8 +14,10 @@ export type DashboardExpiringSpaceRow = {
   country: string;
   paymentChannelName: string;
   expiryDate: string;
+  daysUntilExpiry: number;
   status: Exclude<ExpiryStatus, "normal">;
   amountUsdMinor: number;
+  childAccountCount: number;
 };
 
 export type DashboardSpendBucket = {
@@ -66,6 +69,7 @@ type SpaceDashboardRow = {
 };
 
 type ChildDashboardRow = {
+  spaceId: number;
   seatType: string;
   monthlyCurrencyCode: string;
   monthlyAmountUsd: number;
@@ -119,6 +123,15 @@ function statusWeight(status: ExpiryStatus) {
   return 2;
 }
 
+function localDateFromIsoDate(value: string): Date {
+  const [year, month, day] = value.split("-").map(Number);
+  return new Date(year, month - 1, day);
+}
+
+function daysUntilExpiry(expiryDate: string, today: Date): number {
+  return differenceInCalendarDays(localDateFromIsoDate(expiryDate), today);
+}
+
 /**
  * DASH-01..04 — read-only aggregate facade for the root dashboard.
  *
@@ -147,6 +160,7 @@ export function getDashboardOverview(
 
   const childRows: ChildDashboardRow[] = db
     .select({
+      spaceId: childAccount.spaceId,
       seatType: childAccount.seatType,
       monthlyCurrencyCode: childAccount.monthlyCurrencyCode,
       monthlyAmountUsd: childAccount.monthlyAmountUsd,
@@ -173,6 +187,14 @@ export function getDashboardOverview(
   const countryBuckets = new Map<string, BucketSeed>();
   const currencyBuckets = new Map<string, BucketSeed>();
   const paymentChannelBuckets = new Map<string, BucketSeed>();
+  const childCountBySpace = new Map<number, number>();
+
+  for (const row of childRows) {
+    childCountBySpace.set(
+      row.spaceId,
+      (childCountBySpace.get(row.spaceId) ?? 0) + 1,
+    );
+  }
 
   let spacePaymentUsdMinor = 0;
   const expiringSpaces: DashboardExpiringSpaceRow[] = [];
@@ -203,8 +225,10 @@ export function getDashboardOverview(
         country: row.country,
         paymentChannelName: row.paymentChannelName,
         expiryDate: row.expiryDate,
+        daysUntilExpiry: daysUntilExpiry(row.expiryDate, today),
         status,
         amountUsdMinor,
+        childAccountCount: childCountBySpace.get(row.id) ?? 0,
       });
     }
   }
