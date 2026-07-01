@@ -21,7 +21,7 @@ export default function DashboardPage() {
 
   return (
     <div className="flex flex-col gap-6 p-6">
-      <div className="flex flex-wrap items-start justify-between gap-4">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div className="space-y-2">
           <h1 className="text-2xl font-semibold leading-tight">仪表盘</h1>
           <p className="text-sm text-muted-foreground">
@@ -29,7 +29,7 @@ export default function DashboardPage() {
           </p>
         </div>
         {totals.renewalRiskSpaces > 0 ? (
-          <Button asChild>
+          <Button asChild className="w-fit">
             <a href="#renewal-risk">查看到期空间</a>
           </Button>
         ) : null}
