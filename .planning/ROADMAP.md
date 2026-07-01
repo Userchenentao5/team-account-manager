@@ -15,9 +15,9 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundations, Schema & Reference Data** - App scaffold, locked money/FX/period schema, and payment-channel + currency reference data (completed 2026-06-27)
 - [x] **Phase 2: Exchange-Rate Layer** - Cached, refreshable, fallback-resilient USD rates from the external FX API (completed 2026-06-28)
-- [ ] **Phase 3: Spaces (Expiry + USD Snapshot)** - Full space CRUD with mother account, auto expiry, and frozen USD amount
-- [ ] **Phase 4: Child Accounts & Cascade Delete** - Codex/ChatGPT child-account management and safe cascading space deletion
-- [ ] **Phase 5: Dashboard & Overview** - Expiry alerts, total USD spend, distribution, and count overviews
+- [x] **Phase 3: Spaces (Expiry + USD Snapshot)** - Full space CRUD with mother account, auto expiry, and frozen USD amount (completed 2026-06-28)
+- [x] **Phase 4: Child Accounts & Cascade Delete** - Codex/ChatGPT child-account management and safe cascading space deletion (completed 2026-06-30)
+- [x] **Phase 5: Dashboard & Overview** - Expiry alerts, total USD spend, distribution, and count overviews (completed 2026-07-01)
 
 ## Phase Details
 
@@ -76,7 +76,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 ### Phase 3: Spaces (Expiry + USD Snapshot)
 
-**Goal**: Let the user fully manage subscription spaces and each space's single mother account, with the expiry date and frozen USD amount computed and stored on write — using calendar-aware date math and the FX rate snapshot taken at payment time.
+**Goal**: As a team subscription manager, I want to fully manage subscription spaces and each space's mother account with expiry dates and frozen USD cost snapshots computed at payment time, so that I can see which spaces need renewal and understand their normalized USD cost without recomputing historical rates.
 **Mode:** mvp
 **Depends on**: Phase 1, Phase 2
 **Requirements**: SPACE-01, SPACE-02, SPACE-03, SPACE-04, ACCT-01, EXP-01, FX-02
@@ -87,24 +87,24 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. User can view a space's detail (mother account, expiry date, original amount, frozen USD amount) and edit its information.
   4. User can view the space list and sort it by expiry time and filter by country / payment channel.
 
-**Plans**: 5 plans
+**Plans**: 5/5 plans complete
 
 **Wave 1**
 
-- [ ] 03-01-PLAN.md — `mother_account` 1:1 table + [BLOCKING] migration (ACCT-01, Wave 1)
-- [ ] 03-02-PLAN.md — Pure helpers (TDD): `addPeriod`/`expiryStatus` + `freezeUsdMinor` (EXP-01, FX-02, Wave 1)
+- [x] 03-01-PLAN.md — `mother_account` 1:1 table + [BLOCKING] migration (ACCT-01, Wave 1)
+- [x] 03-02-PLAN.md — Pure helpers (TDD): `addPeriod`/`expiryStatus` + `freezeUsdMinor` (EXP-01, FX-02, Wave 1)
 
 **Wave 2** *(blocked on Wave 1)*
 
-- [ ] 03-03-PLAN.md — Validation schema + parameterized data layer (atomic write, sort/filter, detail join) + DB test (SPACE-02, SPACE-03, ACCT-01, Wave 2)
+- [x] 03-03-PLAN.md — Validation schema + parameterized data layer (atomic write, sort/filter, detail join) + DB test (SPACE-02, SPACE-03, ACCT-01, Wave 2)
 
 **Wave 3** *(blocked on Wave 2)*
 
-- [ ] 03-04-PLAN.md — `createSpace`/`updateSpace` FX-02 freeze pipeline + integration tests (SPACE-01, SPACE-04, FX-02, ACCT-01, Wave 3)
+- [x] 03-04-PLAN.md — `createSpace`/`updateSpace` FX-02 freeze pipeline + integration tests (SPACE-01, SPACE-04, FX-02, ACCT-01, Wave 3)
 
 **Wave 4** *(blocked on Wave 3)*
 
-- [ ] 03-05-PLAN.md — Space UI: list (sort/filter/badge) + create-edit form + detail page + human verify (SPACE-01..04, Wave 4)
+- [x] 03-05-PLAN.md — Space UI: list (sort/filter/badge) + create-edit form + detail page + human verify (SPACE-01..04, Wave 4)
 
 **UI hint**: yes
 
@@ -120,7 +120,28 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. User can edit and delete individual child accounts.
   3. User can delete a space and its mother account and all child accounts are removed together in one confirmed transaction, leaving no orphaned records.
 
-**Plans**: TBD
+**Plans**: 5 planned
+
+**Wave 1**
+
+- [x] 04-01-PLAN.md - Child-account schema, mother-seat metadata, generated migration, and DB cascade tests (ACCT-02, ACCT-03, SPACE-05, Wave 1)
+
+**Wave 2** *(blocked on Wave 1)*
+
+- [x] 04-02-PLAN.md - Child account Server Actions, mother-seat action, validation, no-rate, and snapshot-preservation tests (ACCT-02, ACCT-03, Wave 2)
+
+**Wave 3** *(blocked on Wave 2)*
+
+- [x] 04-03-PLAN.md - Space detail child-account table/dialogs and mother-seat editor (ACCT-02, ACCT-03, Wave 3)
+
+**Wave 4** *(blocked on Wave 3)*
+
+- [x] 04-04-PLAN.md - Exact-name transactional cascade delete workflow and tests (SPACE-05, Wave 4)
+
+**Wave 5** *(blocked on Wave 4)*
+
+- [x] 04-05-PLAN.md - Display-only current CNY reference and final automated verification (SPACE-05 supporting display decisions, Wave 5)
+
 **UI hint**: yes
 
 ### Phase 5: Dashboard & Overview
@@ -136,7 +157,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. User can see spend distribution broken down by country, currency, and payment channel.
   4. User can see count overviews such as number of spaces and number of child accounts.
 
-**Plans**: TBD
+**Plans**: 3/3 plans complete
+
+- [x] 05-01-PLAN.md
+- [x] 05-02-PLAN.md
+- [x] 05-03-PLAN.md
+
 **UI hint**: yes
 
 ## Progress
@@ -148,6 +174,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 |-------|----------------|--------|-----------|
 | 1. Foundations, Schema & Reference Data | 3/3 | Complete    | 2026-06-27 |
 | 2. Exchange-Rate Layer | 3/3 | Complete    | 2026-06-28 |
-| 3. Spaces (Expiry + USD Snapshot) | 0/5 | Not started | - |
-| 4. Child Accounts & Cascade Delete | 0/TBD | Not started | - |
-| 5. Dashboard & Overview | 0/TBD | Not started | - |
+| 3. Spaces (Expiry + USD Snapshot) | 6/6 | Complete    | 2026-06-28 |
+| 4. Child Accounts & Cascade Delete | 5/5 | Complete    | 2026-06-30 |
+| 5. Dashboard & Overview | 3/3 | Complete    | 2026-07-01 |

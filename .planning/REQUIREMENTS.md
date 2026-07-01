@@ -9,17 +9,17 @@
 
 ### 空间管理 (SPACE)
 
-- [ ] **SPACE-01**: 用户可以创建空间,填写归属国家、支付渠道、原始金额+币种、开通(支付)时间、订阅周期
-- [ ] **SPACE-02**: 用户可以查看空间列表,支持按到期时间排序、按国家/支付渠道筛选
-- [ ] **SPACE-03**: 用户可以查看单个空间详情(含母账号、子账号、到期日、USD 折算金额)
-- [ ] **SPACE-04**: 用户可以编辑空间信息
-- [ ] **SPACE-05**: 用户可以删除空间,并级联删除其下母账号与子账号
+- [x] **SPACE-01**: 用户可以创建空间,填写归属国家、支付渠道、原始金额+币种、开通(支付)时间、订阅周期
+- [x] **SPACE-02**: 用户可以查看空间列表,支持按到期时间排序、按国家/支付渠道筛选
+- [x] **SPACE-03**: 用户可以查看单个空间详情(含母账号、子账号、到期日、USD 折算金额)
+- [x] **SPACE-04**: 用户可以编辑空间信息
+- [x] **SPACE-05**: 用户可以删除空间,并级联删除其下母账号与子账号
 
 ### 账号管理 (ACCT)
 
-- [ ] **ACCT-01**: 每个空间一对一记录一个母账号(开通者邮箱/登录名)
-- [ ] **ACCT-02**: 用户可以在空间下新增子账号,选择类型(codex / chatgpt)并填写邮箱/登录名
-- [ ] **ACCT-03**: 用户可以编辑和删除子账号
+- [x] **ACCT-01**: 每个空间一对一记录一个母账号(开通者邮箱/登录名)
+- [x] **ACCT-02**: 用户可以在空间下新增子账号,选择类型(codex / chatgpt)并填写邮箱/登录名
+- [x] **ACCT-03**: 用户可以编辑和删除子账号
 
 ### 参考数据 (REF)
 
@@ -29,19 +29,19 @@
 ### 汇率折算 (FX)
 
 - [x] **FX-01**: 系统自动从外部汇率 API 抓取汇率并缓存到本地
-- [ ] **FX-02**: 创建/记录支付时,按当时汇率快照折算成 USD,并将所用汇率与 USD 金额冻结保存在该空间记录上
+- [x] **FX-02**: 创建/记录支付时,按当时汇率快照折算成 USD,并将所用汇率与 USD 金额冻结保存在该空间记录上
 - [x] **FX-03**: 汇率 API 不可用时降级使用上次缓存汇率,并标记数据陈旧
 
 ### 到期计算 (EXP)
 
-- [ ] **EXP-01**: 系统根据 开通时间 + 所选订阅周期 自动计算到期日(日历感知,正确处理月末/闰年)
+- [x] **EXP-01**: 系统根据 开通时间 + 所选订阅周期 自动计算到期日(日历感知,正确处理月末/闰年)
 
 ### 仪表盘 (DASH)
 
-- [ ] **DASH-01**: 仪表盘高亮显示即将到期 / 已过期的空间
-- [ ] **DASH-02**: 仪表盘显示总支出(按 USD 折算)
-- [ ] **DASH-03**: 仪表盘显示按国家 / 币种 / 支付渠道的支出分布
-- [ ] **DASH-04**: 仪表盘显示空间数、子账号数等数量统计
+- [x] **DASH-01**: 仪表盘高亮显示即将到期 / 已过期的空间
+- [x] **DASH-02**: 仪表盘显示总支出(按 USD 折算)
+- [x] **DASH-03**: 仪表盘显示按国家 / 币种 / 支付渠道的支出分布
+- [x] **DASH-04**: 仪表盘显示空间数、子账号数等数量统计
 
 ## v2 Requirements
 
@@ -75,24 +75,24 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SPACE-01 | Phase 3 | Pending |
-| SPACE-02 | Phase 3 | Pending |
-| SPACE-03 | Phase 3 | Pending |
-| SPACE-04 | Phase 3 | Pending |
-| SPACE-05 | Phase 4 | Pending |
-| ACCT-01 | Phase 3 | Pending |
-| ACCT-02 | Phase 4 | Pending |
-| ACCT-03 | Phase 4 | Pending |
+| SPACE-01 | Phase 3 | Complete |
+| SPACE-02 | Phase 3 | Complete |
+| SPACE-03 | Phase 3 | Complete |
+| SPACE-04 | Phase 3 | Complete |
+| SPACE-05 | Phase 4 | Complete |
+| ACCT-01 | Phase 3 | Complete |
+| ACCT-02 | Phase 4 | Complete |
+| ACCT-03 | Phase 4 | Complete |
 | REF-01 | Phase 1 | Complete |
 | REF-02 | Phase 1 | Complete |
 | FX-01 | Phase 2 | Complete |
-| FX-02 | Phase 3 | Pending |
+| FX-02 | Phase 3 | Complete |
 | FX-03 | Phase 2 | Complete |
-| EXP-01 | Phase 3 | Pending |
-| DASH-01 | Phase 5 | Pending |
-| DASH-02 | Phase 5 | Pending |
-| DASH-03 | Phase 5 | Pending |
-| DASH-04 | Phase 5 | Pending |
+| EXP-01 | Phase 3 | Complete |
+| DASH-01 | Phase 5 | Complete |
+| DASH-02 | Phase 5 | Complete |
+| DASH-03 | Phase 5 | Complete |
+| DASH-04 | Phase 5 | Complete |
 
 **Coverage:**
 
