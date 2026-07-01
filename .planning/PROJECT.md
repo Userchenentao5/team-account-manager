@@ -14,23 +14,17 @@
 
 <!-- Shipped and confirmed valuable. -->
 
-(None yet — ship to validate)
+- [x] 参考数据维护:支付渠道与币种列表已在 Phase 1 验证。
+- [x] 汇率折算:外部 FX 抓取、本地缓存、失败降级已在 Phase 2 验证。
+- [x] 空间管理:空间 CRUD、母账号、到期计算与冻结 USD 快照已在 Phase 3 验证。
+- [x] 子账号管理:codex/chatgpt 子账号 CRUD 与空间级联删除已在 Phase 4 验证。
+- [x] 仪表盘概览:到期风险、冻结 USD 总支出、支出分布与数量统计已在 Phase 5 验证。
 
 ### Active
 
 <!-- Current scope. Building toward these. 全部为待验证假设。 -->
 
-- [ ] 空间的增删改查:创建、查看、编辑、删除团队空间
-- [ ] 空间字段:归属国家、支付渠道、原始金额+币种、开通时间(支付时间)、订阅周期
-- [ ] 母账号:每个空间一对一记录一个母账号(开通者)
-- [ ] 子账号管理:每个空间下挂多个 codex / chatgpt 子账号,记录类型(codex/chatgpt)与邮箱/登录名,可增删改查
-- [ ] 支付渠道枚举:用户可手动维护支付渠道列表(增删)
-- [ ] 到期自动计算:根据 开通时间 + 所选订阅周期(月/季/年等)自动算出到期日
-- [ ] 多币种与汇率:记录原始金额+币种,系统自动抓取实时汇率,折算成本位币 USD
-- [ ] 仪表盘 · 到期提醒:高亮显示即将到期 / 已过期的空间
-- [ ] 仪表盘 · 总支出:按本位币 USD 折算的总支出
-- [ ] 仪表盘 · 支出分布:按国家 / 币种 / 支付渠道的支出分布
-- [ ] 仪表盘 · 数量统计:空间数、子账号数等数量概览
+(None — v1 milestone requirements are validated. v2 reminders and collaboration remain deferred in REQUIREMENTS.md.)
 
 ### Out of Scope
 
@@ -63,13 +57,13 @@
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| 单人网页应用,不做多人/权限 | 定位为个人内部记账工具,降低复杂度 | — Pending |
-| 数据层级:一空间→一母账号→多子账号 | 贴合真实开通结构,母账号是开通者 | — Pending |
-| 子账号只记邮箱/登录名,不存凭据 | 规避明文凭据存储的安全风险 | — Pending |
-| 支付渠道用可手动维护的枚举 | 渠道会变化,交由用户维护更灵活 | — Pending |
-| 到期 = 开通时间 + 所选订阅周期(自动算) | 减少手填错误,周期可选 | — Pending |
-| 本位币 USD + 自动抓取实时汇率折算 | 跨国多币种需统一口径做成本汇总 | — Pending |
-| 续费提醒 v1 仅做仪表盘高亮 | 单人工具进入即看,无需邮件/IM 推送 | — Pending |
+| 单人网页应用,不做多人/权限 | 定位为个人内部记账工具,降低复杂度 | Validated through v1 |
+| 数据层级:一空间→一母账号→多子账号 | 贴合真实开通结构,母账号是开通者 | Validated in Phase 3 and Phase 4 |
+| 子账号只记邮箱/登录名,不存凭据 | 规避明文凭据存储的安全风险 | Validated in Phase 4 |
+| 支付渠道用可手动维护的枚举 | 渠道会变化,交由用户维护更灵活 | Validated in Phase 1 |
+| 到期 = 开通时间 + 所选订阅周期(自动算) | 减少手填错误,周期可选 | Validated in Phase 3 |
+| 本位币 USD + 自动抓取实时汇率折算 | 跨国多币种需统一口径做成本汇总 | Validated in Phase 2, Phase 3, and Phase 5 |
+| 续费提醒 v1 仅做仪表盘高亮 | 单人工具进入即看,无需邮件/IM 推送 | Validated in Phase 5 |
 
 ## Evolution
 
@@ -89,4 +83,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-06-27 after initialization*
+*Last updated: 2026-07-01 after Phase 5 dashboard validation*
