@@ -16,14 +16,41 @@ import { revalidatePath } from "next/cache";
 import { createTestDb } from "@/test/db-harness";
 import { refreshRates } from "@/actions/fx";
 import { listRates, upsertRates } from "@/db/fxRates";
-import { seedCurrencies } from "@/db/seed";
+import { CURRENCY_SEED, seedCurrencies } from "@/db/seed";
+
+const FIXED_USD_RATES: Record<string, number> = {
+  CNY: 6.7982,
+  EUR: 0.87712,
+  JPY: 161.65,
+};
+
+const USD_RATES = Object.fromEntries(
+  CURRENCY_SEED.filter((currency) => currency.code !== "USD").map(
+    (currency, index) => [
+      currency.code,
+      FIXED_USD_RATES[currency.code] ?? 1.2 + index / 10,
+    ],
+  ),
+);
 
 /** Verified Frankfurter v1 response shape (USD→X), USD not echoed in `rates`. */
 const VALID_RESPONSE = {
   amount: 1.0,
   base: "USD",
   date: "2026-06-26",
-  rates: { CNY: 6.7982, EUR: 0.87712, GBP: 0.75654, HKD: 7.8421, JPY: 161.65 },
+  rates: USD_RATES,
+};
+
+const CNY_TO_USD = 1 / VALID_RESPONSE.rates.CNY;
+const VALID_CNY_RESPONSE = {
+  amount: 1.0,
+  base: "CNY",
+  date: "2026-06-26",
+  rates: Object.fromEntries(
+    Object.entries({ ...VALID_RESPONSE.rates, USD: 1 })
+      .filter(([code]) => code !== "CNY")
+      .map(([code, usdToCode]) => [code, CNY_TO_USD * usdToCode]),
+  ),
 };
 
 function okFetch(body: unknown) {
@@ -32,14 +59,14 @@ function okFetch(body: unknown) {
 
 /** Pre-populate a non-empty cache so the stale-fallback test has something to fall back to. */
 function seedCache(db: TestDb, fetchedAt: string) {
-  upsertRates(db, [
-    { currencyCode: "USD", rateToUsd: "1", fetchedAt },
-    { currencyCode: "CNY", rateToUsd: "0.14000", fetchedAt },
-    { currencyCode: "EUR", rateToUsd: "1.1000", fetchedAt },
-    { currencyCode: "GBP", rateToUsd: "1.3000", fetchedAt },
-    { currencyCode: "JPY", rateToUsd: "0.0065", fetchedAt },
-    { currencyCode: "HKD", rateToUsd: "0.1280", fetchedAt },
-  ]);
+  upsertRates(
+    db,
+    CURRENCY_SEED.map((currency) => ({
+      currencyCode: currency.code,
+      rateToUsd: currency.code === "USD" ? "1" : "0.14000",
+      fetchedAt,
+    })),
+  );
 }
 
 describe("refreshRates server action (FX-01 / FX-03)", () => {
@@ -58,7 +85,7 @@ describe("refreshRates server action (FX-01 / FX-03)", () => {
     vi.clearAllMocks();
   });
 
-  it("success: persists the 6 inverted rows and returns { ok, stale:false }, revalidating the route", async () => {
+  it("success: persists inverted rows for default currencies and returns { ok, stale:false }, revalidating the route", async () => {
     vi.stubGlobal("fetch", okFetch(VALID_RESPONSE));
 
     const res = await refreshRates();
@@ -67,13 +94,45 @@ describe("refreshRates server action (FX-01 / FX-03)", () => {
     if (res.ok) {
       expect(res.stale).toBe(false);
       expect(res.fetchedAt).toBeTypeOf("string");
+      expect(res.base).toBe("USD");
     }
     // rows were persisted by the service
     const rows = listRates(ctx.db);
-    expect(rows).toHaveLength(6);
-    expect(rows.find((r) => r.currencyCode === "USD")?.rateToUsd).toBe("1");
+    expect(rows).toHaveLength(CURRENCY_SEED.length);
+    expect(rows.find(({ rate }) => rate.currencyCode === "USD")?.rate.rateToUsd).toBe("1");
     // revalidatePath was called for the rates route
     expect(revalidatePath).toHaveBeenCalledWith("/reference-data/rates");
+  });
+
+  it("success: accepts CNY as a refresh base and still persists X→USD rows", async () => {
+    const fetchSpy = okFetch(VALID_CNY_RESPONSE);
+    vi.stubGlobal("fetch", fetchSpy);
+
+    const res = await refreshRates("CNY");
+
+    expect(res.ok).toBe(true);
+    if (res.ok) {
+      expect(res.base).toBe("CNY");
+      expect(res.stale).toBe(false);
+    }
+    const rows = listRates(ctx.db);
+    expect(rows.find(({ rate }) => rate.currencyCode === "USD")?.rate.rateToUsd).toBe("1");
+    expect(
+      Number(rows.find(({ rate }) => rate.currencyCode === "CNY")?.rate.rateToUsd),
+    ).toBeCloseTo(1 / 6.7982, 8);
+    expect(String(fetchSpy.mock.calls[0]?.[0])).toContain("base=CNY");
+    expect(revalidatePath).toHaveBeenCalledWith("/reference-data/rates");
+  });
+
+  it("rejects an unsupported refresh base before fetching", async () => {
+    const fetchSpy = okFetch(VALID_RESPONSE);
+    vi.stubGlobal("fetch", fetchSpy);
+
+    const res = await refreshRates("EUR");
+
+    expect(res).toEqual({ ok: false, error: "无效的汇率基准。" });
+    expect(fetchSpy).not.toHaveBeenCalled();
+    expect(revalidatePath).not.toHaveBeenCalled();
   });
 
   it("stale fallback: failed fetch with a non-empty cache returns { ok, stale:true } and writes nothing", async () => {

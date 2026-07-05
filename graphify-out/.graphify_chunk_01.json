@@ -1,0 +1,1124 @@
+{
+  "nodes": [
+    {
+      "id": "phase3_spaces_expiry_usd_snapshot",
+      "label": "Phase 3 Spaces Expiry USD Snapshot",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-CONTEXT.md",
+      "source_location": "Phase Boundary",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase3_plan01_mother_account_schema",
+      "label": "Plan 01 Mother Account Schema",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-01-PLAN.md",
+      "source_location": "frontmatter",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase3_plan02_expiry_money_helpers",
+      "label": "Plan 02 Expiry And Money Helpers",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-02-PLAN.md",
+      "source_location": "frontmatter",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase3_plan03_validation_data_layer",
+      "label": "Plan 03 Validation And Data Layer",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-03-PLAN.md",
+      "source_location": "frontmatter",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase3_plan04_space_actions",
+      "label": "Plan 04 Space Server Actions",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-04-PLAN.md",
+      "source_location": "frontmatter",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase3_plan05_space_ui",
+      "label": "Plan 05 Space UI",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-05-PLAN.md",
+      "source_location": "frontmatter",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase3_plan06_mvp_metadata_closure",
+      "label": "Plan 06 MVP Metadata Closure",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-06-PLAN.md",
+      "source_location": "frontmatter",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase3_discussion_decisions",
+      "label": "Phase 3 Discussion Decisions",
+      "file_type": "rationale",
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-DISCUSSION-LOG.md",
+      "source_location": "Areas Discussed",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase3_pattern_map",
+      "label": "Phase 3 Pattern Map",
+      "file_type": "rationale",
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-PATTERNS.md",
+      "source_location": "Pattern Assignments",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase3_research_architecture",
+      "label": "Phase 3 Research Architecture",
+      "file_type": "rationale",
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-RESEARCH.md",
+      "source_location": "Architecture Patterns",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase3_ui_spec",
+      "label": "Phase 3 UI Design Contract",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-UI-SPEC.md",
+      "source_location": "Interaction Contract",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase3_uat",
+      "label": "Phase 3 UAT",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-UAT.md",
+      "source_location": "Tests",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase3_validation_strategy",
+      "label": "Phase 3 Validation Strategy Draft",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-VALIDATION.md",
+      "source_location": "Validation Strategy",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase3_verification_passed",
+      "label": "Phase 3 Verification Passed",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-VERIFICATION.md",
+      "source_location": "Goal Achievement",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "mother_account_table",
+      "label": "mother_account Table",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-01-SUMMARY.md",
+      "source_location": "key-decisions",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "space_table",
+      "label": "space Table",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-01-PLAN.md",
+      "source_location": "must_haves.key_links",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "add_period_helper",
+      "label": "addPeriod Helper",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-02-SUMMARY.md",
+      "source_location": "provides",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "expiry_status_helper",
+      "label": "expiryStatus Helper",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-02-SUMMARY.md",
+      "source_location": "provides",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "freeze_usd_minor_helper",
+      "label": "freezeUsdMinor Helper",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-02-SUMMARY.md",
+      "source_location": "provides",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "space_form_schema",
+      "label": "spaceFormSchema",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-03-SUMMARY.md",
+      "source_location": "provides",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "insert_space_with_mother",
+      "label": "insertSpaceWithMother",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-03-PLAN.md",
+      "source_location": "must_haves.artifacts",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "list_spaces_helper",
+      "label": "listSpaces Helper",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-03-PLAN.md",
+      "source_location": "must_haves.key_links",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "get_space_detail_helper",
+      "label": "getSpaceDetail Helper",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-03-PLAN.md",
+      "source_location": "must_haves.truths",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "update_space_row_helper",
+      "label": "updateSpaceRow Helper",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-03-PLAN.md",
+      "source_location": "must_haves.artifacts",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "get_rate_helper",
+      "label": "getRate Helper",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-03-SUMMARY.md",
+      "source_location": "provides",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "get_currency_minor_unit_helper",
+      "label": "getCurrencyMinorUnit Helper",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-03-SUMMARY.md",
+      "source_location": "provides",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "create_space_action",
+      "label": "createSpace Server Action",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-04-SUMMARY.md",
+      "source_location": "provides",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "update_space_action",
+      "label": "updateSpace Server Action",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-04-SUMMARY.md",
+      "source_location": "provides",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "ensure_fresh_rates_service",
+      "label": "ensureFreshRates Service",
+      "file_type": "rationale",
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-RESEARCH.md",
+      "source_location": "Pattern 2",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "space_form_component",
+      "label": "SpaceForm Component",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-05-SUMMARY.md",
+      "source_location": "key-files.created",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "space_table_component",
+      "label": "SpaceTable Component",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-05-SUMMARY.md",
+      "source_location": "key-files.created",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "expiry_badge_component",
+      "label": "ExpiryBadge Component",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-05-SUMMARY.md",
+      "source_location": "key-files.created",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "spaces_page_route",
+      "label": "/spaces Route",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-05-SUMMARY.md",
+      "source_location": "coverage.D1",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "space_detail_route",
+      "label": "/spaces/[id] Route",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-05-SUMMARY.md",
+      "source_location": "coverage.D3",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "no_rate_block",
+      "label": "No Cached Rate Save Block",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-UAT.md",
+      "source_location": "No-rate block",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "alert_dialog_component_suite",
+      "label": "AlertDialog Component Suite",
+      "file_type": "code",
+      "source_file": "src\\components\\ui\\alert-dialog.tsx",
+      "source_location": "exports",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "alert_dialog_content",
+      "label": "AlertDialogContent",
+      "file_type": "code",
+      "source_file": "src\\components\\ui\\alert-dialog.tsx",
+      "source_location": "function AlertDialogContent",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "alert_dialog_action",
+      "label": "AlertDialogAction",
+      "file_type": "code",
+      "source_file": "src\\components\\ui\\alert-dialog.tsx",
+      "source_location": "function AlertDialogAction",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "alert_dialog_cancel",
+      "label": "AlertDialogCancel",
+      "file_type": "code",
+      "source_file": "src\\components\\ui\\alert-dialog.tsx",
+      "source_location": "function AlertDialogCancel",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "button_component",
+      "label": "Button Component",
+      "file_type": "code",
+      "source_file": "src\\components\\ui\\alert-dialog.tsx",
+      "source_location": "import",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "cn_utility",
+      "label": "cn Utility",
+      "file_type": "code",
+      "source_file": "src\\components\\ui\\alert.tsx",
+      "source_location": "import",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "alert_component_suite",
+      "label": "Alert Component Suite",
+      "file_type": "code",
+      "source_file": "src\\components\\ui\\alert.tsx",
+      "source_location": "exports",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "alert_variants",
+      "label": "alertVariants CVA",
+      "file_type": "code",
+      "source_file": "src\\components\\ui\\alert.tsx",
+      "source_location": "const alertVariants",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "alert_function",
+      "label": "Alert Function",
+      "file_type": "code",
+      "source_file": "src\\components\\ui\\alert.tsx",
+      "source_location": "function Alert",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "phase3_spaces_expiry_usd_snapshot",
+      "target": "phase3_plan01_mother_account_schema",
+      "relation": "contains_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-CONTEXT.md",
+      "source_location": "Phase Boundary",
+      "weight": 1.0
+    },
+    {
+      "source": "phase3_spaces_expiry_usd_snapshot",
+      "target": "phase3_plan02_expiry_money_helpers",
+      "relation": "contains_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-CONTEXT.md",
+      "source_location": "Implementation Decisions",
+      "weight": 1.0
+    },
+    {
+      "source": "phase3_spaces_expiry_usd_snapshot",
+      "target": "phase3_plan03_validation_data_layer",
+      "relation": "contains_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-CONTEXT.md",
+      "source_location": "Canonical References",
+      "weight": 1.0
+    },
+    {
+      "source": "phase3_spaces_expiry_usd_snapshot",
+      "target": "phase3_plan04_space_actions",
+      "relation": "contains_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-CONTEXT.md",
+      "source_location": "Specific Ideas",
+      "weight": 1.0
+    },
+    {
+      "source": "phase3_spaces_expiry_usd_snapshot",
+      "target": "phase3_plan05_space_ui",
+      "relation": "contains_plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-CONTEXT.md",
+      "source_location": "Phase Boundary",
+      "weight": 1.0
+    },
+    {
+      "source": "phase3_plan03_validation_data_layer",
+      "target": "phase3_plan01_mother_account_schema",
+      "relation": "depends_on",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-03-PLAN.md",
+      "source_location": "frontmatter.depends_on",
+      "weight": 1.0
+    },
+    {
+      "source": "phase3_plan04_space_actions",
+      "target": "phase3_plan02_expiry_money_helpers",
+      "relation": "depends_on",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-04-PLAN.md",
+      "source_location": "frontmatter.depends_on",
+      "weight": 1.0
+    },
+    {
+      "source": "phase3_plan04_space_actions",
+      "target": "phase3_plan03_validation_data_layer",
+      "relation": "depends_on",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-04-PLAN.md",
+      "source_location": "frontmatter.depends_on",
+      "weight": 1.0
+    },
+    {
+      "source": "phase3_plan05_space_ui",
+      "target": "phase3_plan03_validation_data_layer",
+      "relation": "depends_on",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-05-PLAN.md",
+      "source_location": "frontmatter.depends_on",
+      "weight": 1.0
+    },
+    {
+      "source": "phase3_plan05_space_ui",
+      "target": "phase3_plan04_space_actions",
+      "relation": "depends_on",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-05-PLAN.md",
+      "source_location": "frontmatter.depends_on",
+      "weight": 1.0
+    },
+    {
+      "source": "phase3_plan06_mvp_metadata_closure",
+      "target": "phase3_plan05_space_ui",
+      "relation": "depends_on",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-06-PLAN.md",
+      "source_location": "frontmatter.depends_on",
+      "weight": 1.0
+    },
+    {
+      "source": "phase3_discussion_decisions",
+      "target": "phase3_spaces_expiry_usd_snapshot",
+      "relation": "defines_decisions_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-DISCUSSION-LOG.md",
+      "source_location": "Areas Discussed",
+      "weight": 1.0
+    },
+    {
+      "source": "phase3_pattern_map",
+      "target": "phase3_plan05_space_ui",
+      "relation": "maps_implementation_patterns_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-PATTERNS.md",
+      "source_location": "Pattern Assignments",
+      "weight": 1.0
+    },
+    {
+      "source": "phase3_research_architecture",
+      "target": "phase3_spaces_expiry_usd_snapshot",
+      "relation": "provides_architecture_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-RESEARCH.md",
+      "source_location": "Summary",
+      "weight": 1.0
+    },
+    {
+      "source": "phase3_ui_spec",
+      "target": "phase3_plan05_space_ui",
+      "relation": "constrains_ui",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-UI-SPEC.md",
+      "source_location": "Interaction Contract",
+      "weight": 1.0
+    },
+    {
+      "source": "phase3_uat",
+      "target": "phase3_plan05_space_ui",
+      "relation": "validates",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-UAT.md",
+      "source_location": "Summary",
+      "weight": 1.0
+    },
+    {
+      "source": "phase3_verification_passed",
+      "target": "phase3_spaces_expiry_usd_snapshot",
+      "relation": "verifies",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-VERIFICATION.md",
+      "source_location": "Goal Achievement",
+      "weight": 1.0
+    },
+    {
+      "source": "phase3_validation_strategy",
+      "target": "phase3_research_architecture",
+      "relation": "is_validation_template_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-VALIDATION.md",
+      "source_location": "Validation Strategy",
+      "weight": 1.0
+    },
+    {
+      "source": "phase3_plan01_mother_account_schema",
+      "target": "mother_account_table",
+      "relation": "produces",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-01-SUMMARY.md",
+      "source_location": "provides",
+      "weight": 1.0
+    },
+    {
+      "source": "mother_account_table",
+      "target": "space_table",
+      "relation": "db_fk_unique_cascade_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-01-PLAN.md",
+      "source_location": "must_haves.key_links",
+      "weight": 1.0
+    },
+    {
+      "source": "phase3_plan02_expiry_money_helpers",
+      "target": "add_period_helper",
+      "relation": "produces",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-02-SUMMARY.md",
+      "source_location": "provides",
+      "weight": 1.0
+    },
+    {
+      "source": "phase3_plan02_expiry_money_helpers",
+      "target": "expiry_status_helper",
+      "relation": "produces",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-02-SUMMARY.md",
+      "source_location": "provides",
+      "weight": 1.0
+    },
+    {
+      "source": "phase3_plan02_expiry_money_helpers",
+      "target": "freeze_usd_minor_helper",
+      "relation": "produces",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-02-SUMMARY.md",
+      "source_location": "provides",
+      "weight": 1.0
+    },
+    {
+      "source": "phase3_plan03_validation_data_layer",
+      "target": "space_form_schema",
+      "relation": "produces",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-03-SUMMARY.md",
+      "source_location": "provides",
+      "weight": 1.0
+    },
+    {
+      "source": "phase3_plan03_validation_data_layer",
+      "target": "insert_space_with_mother",
+      "relation": "produces",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-03-SUMMARY.md",
+      "source_location": "provides",
+      "weight": 1.0
+    },
+    {
+      "source": "insert_space_with_mother",
+      "target": "mother_account_table",
+      "relation": "writes",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-03-PLAN.md",
+      "source_location": "must_haves.truths",
+      "weight": 1.0
+    },
+    {
+      "source": "insert_space_with_mother",
+      "target": "space_table",
+      "relation": "writes",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-03-PLAN.md",
+      "source_location": "must_haves.truths",
+      "weight": 1.0
+    },
+    {
+      "source": "list_spaces_helper",
+      "target": "space_table",
+      "relation": "reads_sorted_filtered",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-03-PLAN.md",
+      "source_location": "must_haves.key_links",
+      "weight": 1.0
+    },
+    {
+      "source": "get_space_detail_helper",
+      "target": "mother_account_table",
+      "relation": "joins",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-03-SUMMARY.md",
+      "source_location": "patterns-established",
+      "weight": 1.0
+    },
+    {
+      "source": "create_space_action",
+      "target": "space_form_schema",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-04-PLAN.md",
+      "source_location": "must_haves.truths",
+      "weight": 1.0
+    },
+    {
+      "source": "create_space_action",
+      "target": "ensure_fresh_rates_service",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-04-PLAN.md",
+      "source_location": "must_haves.key_links",
+      "weight": 1.0
+    },
+    {
+      "source": "create_space_action",
+      "target": "get_rate_helper",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-04-PLAN.md",
+      "source_location": "must_haves.truths",
+      "weight": 1.0
+    },
+    {
+      "source": "create_space_action",
+      "target": "get_currency_minor_unit_helper",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-04-PLAN.md",
+      "source_location": "must_haves.key_links",
+      "weight": 1.0
+    },
+    {
+      "source": "create_space_action",
+      "target": "add_period_helper",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-04-PLAN.md",
+      "source_location": "objective",
+      "weight": 1.0
+    },
+    {
+      "source": "create_space_action",
+      "target": "freeze_usd_minor_helper",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-04-PLAN.md",
+      "source_location": "must_haves.key_links",
+      "weight": 1.0
+    },
+    {
+      "source": "create_space_action",
+      "target": "insert_space_with_mother",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-04-PLAN.md",
+      "source_location": "action.Task1",
+      "weight": 1.0
+    },
+    {
+      "source": "create_space_action",
+      "target": "no_rate_block",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-04-SUMMARY.md",
+      "source_location": "coverage.D1",
+      "weight": 1.0
+    },
+    {
+      "source": "update_space_action",
+      "target": "get_space_detail_helper",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-04-PLAN.md",
+      "source_location": "action.Task1",
+      "weight": 1.0
+    },
+    {
+      "source": "update_space_action",
+      "target": "update_space_row_helper",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-04-PLAN.md",
+      "source_location": "action.Task1",
+      "weight": 1.0
+    },
+    {
+      "source": "update_space_action",
+      "target": "freeze_usd_minor_helper",
+      "relation": "calls_conditionally_when_amount_or_currency_changed",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-04-SUMMARY.md",
+      "source_location": "key-decisions",
+      "weight": 1.0
+    },
+    {
+      "source": "space_form_component",
+      "target": "create_space_action",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-05-PLAN.md",
+      "source_location": "must_haves.key_links",
+      "weight": 1.0
+    },
+    {
+      "source": "space_form_component",
+      "target": "update_space_action",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-05-PLAN.md",
+      "source_location": "must_haves.truths",
+      "weight": 1.0
+    },
+    {
+      "source": "spaces_page_route",
+      "target": "list_spaces_helper",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-05-PLAN.md",
+      "source_location": "Task 2",
+      "weight": 1.0
+    },
+    {
+      "source": "space_detail_route",
+      "target": "get_space_detail_helper",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-05-PLAN.md",
+      "source_location": "Task 3",
+      "weight": 1.0
+    },
+    {
+      "source": "space_table_component",
+      "target": "spaces_page_route",
+      "relation": "updates_url_filters_for_rsc_reread",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-UI-SPEC.md",
+      "source_location": "Interaction Contract",
+      "weight": 1.0
+    },
+    {
+      "source": "expiry_badge_component",
+      "target": "expiry_status_helper",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-05-PLAN.md",
+      "source_location": "Task 1",
+      "weight": 1.0
+    },
+    {
+      "source": "phase3_uat",
+      "target": "no_rate_block",
+      "relation": "passes_test_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-UAT.md",
+      "source_location": "No-rate block",
+      "weight": 1.0
+    },
+    {
+      "source": "phase3_plan06_mvp_metadata_closure",
+      "target": "phase3_verification_passed",
+      "relation": "refreshes",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-06-SUMMARY.md",
+      "source_location": "provides",
+      "weight": 1.0
+    },
+    {
+      "source": "alert_dialog_component_suite",
+      "target": "alert_dialog_content",
+      "relation": "exports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\ui\\alert-dialog.tsx",
+      "source_location": "export block",
+      "weight": 1.0
+    },
+    {
+      "source": "alert_dialog_component_suite",
+      "target": "alert_dialog_action",
+      "relation": "exports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\ui\\alert-dialog.tsx",
+      "source_location": "export block",
+      "weight": 1.0
+    },
+    {
+      "source": "alert_dialog_component_suite",
+      "target": "alert_dialog_cancel",
+      "relation": "exports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\ui\\alert-dialog.tsx",
+      "source_location": "export block",
+      "weight": 1.0
+    },
+    {
+      "source": "alert_dialog_content",
+      "target": "cn_utility",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\ui\\alert-dialog.tsx",
+      "source_location": "function AlertDialogContent",
+      "weight": 1.0
+    },
+    {
+      "source": "alert_dialog_action",
+      "target": "button_component",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\ui\\alert-dialog.tsx",
+      "source_location": "function AlertDialogAction",
+      "weight": 1.0
+    },
+    {
+      "source": "alert_dialog_cancel",
+      "target": "button_component",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\ui\\alert-dialog.tsx",
+      "source_location": "function AlertDialogCancel",
+      "weight": 1.0
+    },
+    {
+      "source": "alert_component_suite",
+      "target": "alert_function",
+      "relation": "exports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\ui\\alert.tsx",
+      "source_location": "export block",
+      "weight": 1.0
+    },
+    {
+      "source": "alert_function",
+      "target": "alert_variants",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\ui\\alert.tsx",
+      "source_location": "function Alert",
+      "weight": 1.0
+    },
+    {
+      "source": "alert_function",
+      "target": "cn_utility",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\ui\\alert.tsx",
+      "source_location": "function Alert",
+      "weight": 1.0
+    },
+    {
+      "source": "alert_variants",
+      "target": "alert_component_suite",
+      "relation": "defines_default_and_destructive_variants_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\ui\\alert.tsx",
+      "source_location": "const alertVariants",
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "phase3_save_pipeline_flow",
+      "label": "Space Save Pipeline",
+      "nodes": [
+        "space_form_component",
+        "create_space_action",
+        "space_form_schema",
+        "ensure_fresh_rates_service",
+        "get_rate_helper",
+        "get_currency_minor_unit_helper",
+        "add_period_helper",
+        "freeze_usd_minor_helper",
+        "insert_space_with_mother",
+        "mother_account_table"
+      ],
+      "relation": "validated_form_to_frozen_snapshot_atomic_write",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-RESEARCH.md"
+    },
+    {
+      "id": "phase3_space_read_ui_flow",
+      "label": "Space Read UI Flow",
+      "nodes": [
+        "spaces_page_route",
+        "list_spaces_helper",
+        "space_table_component",
+        "space_detail_route",
+        "get_space_detail_helper",
+        "expiry_badge_component"
+      ],
+      "relation": "rsc_reads_db_and_client_components_render_filterable_detail_ui",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-UI-SPEC.md"
+    },
+    {
+      "id": "phase3_closeout_evidence_flow",
+      "label": "Phase 3 Closeout Evidence",
+      "nodes": [
+        "phase3_uat",
+        "phase3_verification_passed",
+        "phase3_plan06_mvp_metadata_closure",
+        "phase3_spaces_expiry_usd_snapshot"
+      ],
+      "relation": "uat_and_metadata_validation_support_final_passed_verification",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\03-spaces-expiry-usd-snapshot\\03-06-SUMMARY.md"
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

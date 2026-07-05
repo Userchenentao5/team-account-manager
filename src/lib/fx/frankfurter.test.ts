@@ -13,14 +13,41 @@ vi.mock("@/db", () => ({
 import { createTestDb } from "@/test/db-harness";
 import { refreshFromApi, ensureFreshRates } from "@/lib/fx/frankfurter";
 import { listRates, upsertRates } from "@/db/fxRates";
-import { seedCurrencies } from "@/db/seed";
+import { CURRENCY_SEED, seedCurrencies } from "@/db/seed";
+
+const FIXED_USD_RATES: Record<string, number> = {
+  CNY: 6.7982,
+  EUR: 0.87712,
+  JPY: 161.65,
+};
 
 /** Verified Frankfurter v1 response shape (USD→X), USD not echoed in `rates`. */
+const USD_RATES = Object.fromEntries(
+  CURRENCY_SEED.filter((currency) => currency.code !== "USD").map(
+    (currency, index) => [
+      currency.code,
+      FIXED_USD_RATES[currency.code] ?? 1.2 + index / 10,
+    ],
+  ),
+);
+
 const VALID_RESPONSE = {
   amount: 1.0,
   base: "USD",
   date: "2026-06-26",
-  rates: { CNY: 6.7982, EUR: 0.87712, GBP: 0.75654, HKD: 7.8421, JPY: 161.65 },
+  rates: USD_RATES,
+};
+
+const CNY_TO_USD = 1 / VALID_RESPONSE.rates.CNY;
+const VALID_CNY_RESPONSE = {
+  amount: 1.0,
+  base: "CNY",
+  date: "2026-06-26",
+  rates: Object.fromEntries(
+    Object.entries({ ...VALID_RESPONSE.rates, USD: 1 })
+      .filter(([code]) => code !== "CNY")
+      .map(([code, usdToCode]) => [code, CNY_TO_USD * usdToCode]),
+  ),
 };
 
 function okFetch(body: unknown) {
@@ -29,14 +56,14 @@ function okFetch(body: unknown) {
 
 /** Pre-populate a non-empty cache so fallback tests have something to fall back to. */
 function seedCache(db: TestDb, fetchedAt: string) {
-  upsertRates(db, [
-    { currencyCode: "USD", rateToUsd: "1", fetchedAt },
-    { currencyCode: "CNY", rateToUsd: "0.14000", fetchedAt },
-    { currencyCode: "EUR", rateToUsd: "1.1000", fetchedAt },
-    { currencyCode: "GBP", rateToUsd: "1.3000", fetchedAt },
-    { currencyCode: "JPY", rateToUsd: "0.0065", fetchedAt },
-    { currencyCode: "HKD", rateToUsd: "0.1280", fetchedAt },
-  ]);
+  upsertRates(
+    db,
+    CURRENCY_SEED.map((currency) => ({
+      currencyCode: currency.code,
+      rateToUsd: currency.code === "USD" ? "1" : "0.14000",
+      fetchedAt,
+    })),
+  );
 }
 
 describe("frankfurter FX service (FX-01 / FX-03)", () => {
@@ -64,12 +91,12 @@ describe("frankfurter FX service (FX-01 / FX-03)", () => {
     expect(result.fetchedAt).toBeTypeOf("string");
 
     const rows = listRates(ctx.db);
-    expect(rows).toHaveLength(6);
-    expect(rows.find((r) => r.currencyCode === "USD")?.rateToUsd).toBe("1");
+    expect(rows).toHaveLength(CURRENCY_SEED.length);
+    expect(rows.find(({ rate }) => rate.currencyCode === "USD")?.rate.rateToUsd).toBe("1");
     // every cached rate is a positive finite decimal string (no 0/NULL/NaN)
-    for (const r of rows) {
-      expect(Number(r.rateToUsd)).toBeGreaterThan(0);
-      expect(Number.isFinite(Number(r.rateToUsd))).toBe(true);
+    for (const { rate } of rows) {
+      expect(Number(rate.rateToUsd)).toBeGreaterThan(0);
+      expect(Number.isFinite(Number(rate.rateToUsd))).toBe(true);
     }
   });
 
@@ -79,12 +106,31 @@ describe("frankfurter FX service (FX-01 / FX-03)", () => {
     await refreshFromApi();
     const rows = listRates(ctx.db);
 
-    const cny = rows.find((r) => r.currencyCode === "CNY")!;
-    const jpy = rows.find((r) => r.currencyCode === "JPY")!;
+    const cny = rows.find(({ rate }) => rate.currencyCode === "CNY")!.rate;
+    const jpy = rows.find(({ rate }) => rate.currencyCode === "JPY")!.rate;
     expect(Number(cny.rateToUsd)).toBeCloseTo(1 / 6.7982, 8);
     expect(Number(jpy.rateToUsd)).toBeCloseTo(1 / 161.65, 8);
     // decimal string, not full float noise — bounded significant figures
     expect(cny.rateToUsd.replace(/[-.]/g, "").replace(/^0+/, "").length).toBeLessThanOrEqual(12);
+  });
+
+  it("CNY base response → normalizes back to X→USD rows", async () => {
+    const fetchSpy = okFetch(VALID_CNY_RESPONSE);
+    vi.stubGlobal("fetch", fetchSpy);
+
+    await refreshFromApi("CNY");
+    const rows = listRates(ctx.db);
+
+    const usd = rows.find(({ rate }) => rate.currencyCode === "USD")!.rate;
+    const cny = rows.find(({ rate }) => rate.currencyCode === "CNY")!.rate;
+    const jpy = rows.find(({ rate }) => rate.currencyCode === "JPY")!.rate;
+    expect(usd.rateToUsd).toBe("1");
+    expect(Number(cny.rateToUsd)).toBeCloseTo(1 / 6.7982, 8);
+    expect(Number(jpy.rateToUsd)).toBeCloseTo(1 / 161.65, 8);
+
+    const calledUrl = String(fetchSpy.mock.calls[0]?.[0]);
+    expect(calledUrl).toContain("base=CNY");
+    expect(calledUrl).toContain("USD");
   });
 
   it("fetch throws/times out → returns last cache + stale:true, DB unchanged (FX-03)", async () => {
@@ -98,7 +144,7 @@ describe("frankfurter FX service (FX-01 / FX-03)", () => {
     const result = await refreshFromApi();
 
     expect(result.stale).toBe(true);
-    expect(result.rates).toHaveLength(6);
+    expect(result.rates).toHaveLength(CURRENCY_SEED.length);
     expect(result.fetchedAt).toBe("2026-06-20T00:00:00.000Z");
     // DB untouched — the failed fetch wrote nothing.
     expect(listRates(ctx.db)).toEqual(before);
@@ -132,7 +178,7 @@ describe("frankfurter FX service (FX-01 / FX-03)", () => {
     expect(result.stale).toBe(true);
     // nothing poisoned — CNY still the cached value, never 0
     expect(listRates(ctx.db)).toEqual(before);
-    expect(listRates(ctx.db).find((r) => r.currencyCode === "CNY")?.rateToUsd).toBe("0.14000");
+    expect(listRates(ctx.db).find(({ rate }) => rate.currencyCode === "CNY")?.rate.rateToUsd).toBe("0.14000");
   });
 
   it("empty cache + failed fetch → rates:[], no crash, no fake zeros (Pitfall 5)", async () => {
@@ -155,7 +201,7 @@ describe("frankfurter FX service (FX-01 / FX-03)", () => {
 
     expect(fetchSpy).not.toHaveBeenCalled();
     expect(result.stale).toBe(false);
-    expect(result.rates).toHaveLength(6);
+    expect(result.rates).toHaveLength(CURRENCY_SEED.length);
   });
 
   it("ensureFreshRates: stale-by-age cache (>~1 day) triggers a refresh (D-07)", async () => {
@@ -168,7 +214,7 @@ describe("frankfurter FX service (FX-01 / FX-03)", () => {
     expect(fetchSpy).toHaveBeenCalledTimes(1);
     expect(result.stale).toBe(false);
     // refreshed CNY now reflects the inverted live rate, not the old cached 0.14000
-    expect(Number(result.rates.find((r) => r.currencyCode === "CNY")!.rateToUsd)).toBeCloseTo(
+    expect(Number(result.rates.find(({ rate }) => rate.currencyCode === "CNY")!.rate.rateToUsd)).toBeCloseTo(
       1 / 6.7982,
       8,
     );
@@ -181,7 +227,7 @@ describe("frankfurter FX service (FX-01 / FX-03)", () => {
     const result = await ensureFreshRates();
 
     expect(fetchSpy).toHaveBeenCalledTimes(1);
-    expect(result.rates).toHaveLength(6);
+    expect(result.rates).toHaveLength(CURRENCY_SEED.length);
   });
 
   it("only frankfurter.ts calls the Frankfurter URL (anti-corruption boundary)", async () => {

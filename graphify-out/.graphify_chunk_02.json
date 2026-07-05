@@ -1,0 +1,963 @@
+{
+  "nodes": [
+    {
+      "id": "src/components/ui/badge.tsx::Badge",
+      "label": "Badge polymorphic status label",
+      "file_type": "code",
+      "source_file": "src\\components\\ui\\badge.tsx",
+      "source_location": "Badge",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "src/components/ui/badge.tsx::badgeVariants",
+      "label": "Badge variant styling contract",
+      "file_type": "code",
+      "source_file": "src\\components\\ui\\badge.tsx",
+      "source_location": "badgeVariants",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "src/components/ui/button.tsx::Button",
+      "label": "Button polymorphic command component",
+      "file_type": "code",
+      "source_file": "src\\components\\ui\\button.tsx",
+      "source_location": "Button",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "src/components/ui/button.tsx::buttonVariants",
+      "label": "Button variant and size styling contract",
+      "file_type": "code",
+      "source_file": "src\\components\\ui\\button.tsx",
+      "source_location": "buttonVariants",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "src/components/ui/card.tsx::CardSuite",
+      "label": "Card composition suite",
+      "file_type": "code",
+      "source_file": "src\\components\\ui\\card.tsx",
+      "source_location": "Card exports",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "src/components/ui/dialog.tsx::DialogContent",
+      "label": "Dialog content with overlay and close action",
+      "file_type": "code",
+      "source_file": "src\\components\\ui\\dialog.tsx",
+      "source_location": "DialogContent",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "src/components/ui/dialog.tsx::DialogFooter",
+      "label": "Dialog footer optional close button",
+      "file_type": "code",
+      "source_file": "src\\components\\ui\\dialog.tsx",
+      "source_location": "DialogFooter",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "src/components/ui/dialog.tsx::RadixDialogPrimitive",
+      "label": "Radix dialog primitive wrapper contract",
+      "file_type": "code",
+      "source_file": "src\\components\\ui\\dialog.tsx",
+      "source_location": "Dialog primitive wrappers",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "src/components/ui/form.tsx::FormField",
+      "label": "React Hook Form controller field provider",
+      "file_type": "code",
+      "source_file": "src\\components\\ui\\form.tsx",
+      "source_location": "FormField",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "src/components/ui/form.tsx::useFormField",
+      "label": "Form field context and validation state hook",
+      "file_type": "code",
+      "source_file": "src\\components\\ui\\form.tsx",
+      "source_location": "useFormField",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "src/components/ui/form.tsx::FormAccessibilitySuite",
+      "label": "Form label control description message accessibility contract",
+      "file_type": "code",
+      "source_file": "src\\components\\ui\\form.tsx",
+      "source_location": "FormLabel/FormControl/FormDescription/FormMessage",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "src/components/ui/input.tsx::Input",
+      "label": "Input field visual and invalid-state contract",
+      "file_type": "code",
+      "source_file": "src\\components\\ui\\input.tsx",
+      "source_location": "Input",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "src/components/ui/label.tsx::Label",
+      "label": "Radix label primitive wrapper",
+      "file_type": "code",
+      "source_file": "src\\components\\ui\\label.tsx",
+      "source_location": "Label",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "src/components/ui/select.tsx::SelectSuite",
+      "label": "Select primitive suite with trigger content item and scroll controls",
+      "file_type": "code",
+      "source_file": "src\\components\\ui\\select.tsx",
+      "source_location": "Select exports",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "src/components/ui/select.tsx::SelectContent",
+      "label": "Select content portal with viewport and scroll buttons",
+      "file_type": "code",
+      "source_file": "src\\components\\ui\\select.tsx",
+      "source_location": "SelectContent",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "src/components/ui/select.tsx::SelectItem",
+      "label": "Select item with check indicator",
+      "file_type": "code",
+      "source_file": "src\\components\\ui\\select.tsx",
+      "source_location": "SelectItem",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "src/components/ui/separator.tsx::Separator",
+      "label": "Radix separator orientation wrapper",
+      "file_type": "code",
+      "source_file": "src\\components\\ui\\separator.tsx",
+      "source_location": "Separator",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "src/components/ui/sheet.tsx::SheetContent",
+      "label": "Sheet side panel content with overlay and close action",
+      "file_type": "code",
+      "source_file": "src\\components\\ui\\sheet.tsx",
+      "source_location": "SheetContent",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "src/components/ui/sheet.tsx::RadixSheetPrimitive",
+      "label": "Sheet built on Radix dialog primitive",
+      "file_type": "code",
+      "source_file": "src\\components\\ui\\sheet.tsx",
+      "source_location": "Sheet primitive wrappers",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "src/components/ui/sidebar.tsx::SidebarProvider",
+      "label": "Sidebar provider state cookie and keyboard shortcut controller",
+      "file_type": "code",
+      "source_file": "src\\components\\ui\\sidebar.tsx",
+      "source_location": "SidebarProvider",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "src/components/ui/sidebar.tsx::useSidebar",
+      "label": "Sidebar context hook",
+      "file_type": "code",
+      "source_file": "src\\components\\ui\\sidebar.tsx",
+      "source_location": "useSidebar",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "src/components/ui/sidebar.tsx::Sidebar",
+      "label": "Responsive sidebar renderer",
+      "file_type": "code",
+      "source_file": "src\\components\\ui\\sidebar.tsx",
+      "source_location": "Sidebar",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "src/components/ui/sidebar.tsx::SidebarTrigger",
+      "label": "Sidebar trigger button",
+      "file_type": "code",
+      "source_file": "src\\components\\ui\\sidebar.tsx",
+      "source_location": "SidebarTrigger",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "src/components/ui/sidebar.tsx::SidebarMenuButton",
+      "label": "Sidebar menu button with collapsed tooltip",
+      "file_type": "code",
+      "source_file": "src\\components\\ui\\sidebar.tsx",
+      "source_location": "SidebarMenuButton",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "src/components/ui/sidebar.tsx::SidebarMenuSkeleton",
+      "label": "Sidebar menu loading skeleton with randomized width",
+      "file_type": "code",
+      "source_file": "src\\components\\ui\\sidebar.tsx",
+      "source_location": "SidebarMenuSkeleton",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "src/components/ui/skeleton.tsx::Skeleton",
+      "label": "Generic pulse loading placeholder",
+      "file_type": "code",
+      "source_file": "src\\components\\ui\\skeleton.tsx",
+      "source_location": "Skeleton",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "src/components/ui/sonner.tsx::Toaster",
+      "label": "Theme-aware Sonner toaster with lucide status icons",
+      "file_type": "code",
+      "source_file": "src\\components\\ui\\sonner.tsx",
+      "source_location": "Toaster",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "src/components/ui/switch.tsx::Switch",
+      "label": "Radix switch with size variants and checked state styling",
+      "file_type": "code",
+      "source_file": "src\\components\\ui\\switch.tsx",
+      "source_location": "Switch",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "src/components/ui/table.tsx::TableSuite",
+      "label": "Table suite with overflow container and row states",
+      "file_type": "code",
+      "source_file": "src\\components\\ui\\table.tsx",
+      "source_location": "Table exports",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "src/components/ui/tooltip.tsx::TooltipSuite",
+      "label": "Tooltip suite with zero delay provider and arrow content",
+      "file_type": "code",
+      "source_file": "src\\components\\ui\\tooltip.tsx",
+      "source_location": "Tooltip exports",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": ".planning/phases/04-child-accounts-cascade-delete/04-01-PLAN.md::Plan01PersistenceFoundation",
+      "label": "Phase 04 Plan 01 child account persistence foundation",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\04-child-accounts-cascade-delete\\04-01-PLAN.md",
+      "source_location": "objective",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": ".planning/phases/04-child-accounts-cascade-delete/04-01-PLAN.md::ChildAccountSchemaContract",
+      "label": "Child account schema contract without credentials",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\04-child-accounts-cascade-delete\\04-01-PLAN.md",
+      "source_location": "Task 1: Add child-account and mother-seat schema contracts",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": ".planning/phases/04-child-accounts-cascade-delete/04-01-PLAN.md::MotherSeatMetadataDefaults",
+      "label": "Mother seat metadata defaults",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\04-child-accounts-cascade-delete\\04-01-PLAN.md",
+      "source_location": "Task 1: Add child-account and mother-seat schema contracts",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": ".planning/phases/04-child-accounts-cascade-delete/04-01-PLAN.md::CascadeDeletePersistence",
+      "label": "SQLite cascade delete for child and mother rows",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\04-child-accounts-cascade-delete\\04-01-PLAN.md",
+      "source_location": "Task 3: Add child-account DB helpers and cascade tests",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": ".planning/phases/04-child-accounts-cascade-delete/04-01-SUMMARY.md::Plan01Completed",
+      "label": "Completed Phase 04 Plan 01 database slice",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\04-child-accounts-cascade-delete\\04-01-SUMMARY.md",
+      "source_location": "Accomplishments",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": ".planning/phases/04-child-accounts-cascade-delete/04-02-PLAN.md::Plan02ServerActions",
+      "label": "Phase 04 Plan 02 child account Server Actions",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\04-child-accounts-cascade-delete\\04-02-PLAN.md",
+      "source_location": "objective",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": ".planning/phases/04-child-accounts-cascade-delete/04-02-PLAN.md::ChildValidationContracts",
+      "label": "Child and mother Zod validation contracts",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\04-child-accounts-cascade-delete\\04-02-PLAN.md",
+      "source_location": "Task 1: Define child and mother validation contracts",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": ".planning/phases/04-child-accounts-cascade-delete/04-02-PLAN.md::MonthlyUsdSnapshotFlow",
+      "label": "Child monthly USD snapshot freeze preserve refreeze flow",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\04-child-accounts-cascade-delete\\04-02-PLAN.md",
+      "source_location": "Task 2: Implement child CRUD and mother-seat Server Actions",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": ".planning/phases/04-child-accounts-cascade-delete/04-02-PLAN.md::NoRateWriteBlock",
+      "label": "No-rate child save block",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\04-child-accounts-cascade-delete\\04-02-PLAN.md",
+      "source_location": "Task 2: Implement child CRUD and mother-seat Server Actions",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": ".planning/phases/04-child-accounts-cascade-delete/04-02-SUMMARY.md::Plan02Completed",
+      "label": "Completed Phase 04 Plan 02 actions slice",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\04-child-accounts-cascade-delete\\04-02-SUMMARY.md",
+      "source_location": "Accomplishments",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": ".planning/phases/04-child-accounts-cascade-delete/04-03-PLAN.md::Plan03DetailPageUI",
+      "label": "Phase 04 Plan 03 detail-page child account UI",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\04-child-accounts-cascade-delete\\04-03-PLAN.md",
+      "source_location": "objective",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": ".planning/phases/04-child-accounts-cascade-delete/04-03-PLAN.md::ChildAccountTableAndDialogs",
+      "label": "Child account table add edit delete dialogs",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\04-child-accounts-cascade-delete\\04-03-PLAN.md",
+      "source_location": "Task 1: Build child-account table, form, and delete dialog",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": ".planning/phases/04-child-accounts-cascade-delete/04-03-PLAN.md::DetailPageOnlyManagement",
+      "label": "Detail-page-only child account management",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\04-child-accounts-cascade-delete\\04-03-PLAN.md",
+      "source_location": "must_haves truths",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": ".planning/phases/04-child-accounts-cascade-delete/04-03-PLAN.md::MotherSeatCardIntegration",
+      "label": "Mother seat card detail-page integration",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\04-child-accounts-cascade-delete\\04-03-PLAN.md",
+      "source_location": "Task 2: Wire child management and mother-seat editing into the detail page",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": ".planning/phases/04-child-accounts-cascade-delete/04-03-SUMMARY.md::Plan03Completed",
+      "label": "Completed Phase 04 Plan 03 UI slice",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\04-child-accounts-cascade-delete\\04-03-SUMMARY.md",
+      "source_location": "Accomplishments",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "src/components/ui/badge.tsx::Badge",
+      "target": "src/components/ui/badge.tsx::badgeVariants",
+      "relation": "calls styling variants",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\ui\\badge.tsx",
+      "source_location": "Badge",
+      "weight": 1
+    },
+    {
+      "source": "src/components/ui/button.tsx::Button",
+      "target": "src/components/ui/button.tsx::buttonVariants",
+      "relation": "calls styling variants",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\ui\\button.tsx",
+      "source_location": "Button",
+      "weight": 1
+    },
+    {
+      "source": "src/components/ui/dialog.tsx::DialogContent",
+      "target": "src/components/ui/dialog.tsx::RadixDialogPrimitive",
+      "relation": "wraps portal overlay content and close primitives",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\ui\\dialog.tsx",
+      "source_location": "DialogContent",
+      "weight": 1
+    },
+    {
+      "source": "src/components/ui/dialog.tsx::DialogContent",
+      "target": "src/components/ui/button.tsx::Button",
+      "relation": "calls close button component",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\ui\\dialog.tsx",
+      "source_location": "DialogContent",
+      "weight": 1
+    },
+    {
+      "source": "src/components/ui/dialog.tsx::DialogFooter",
+      "target": "src/components/ui/button.tsx::Button",
+      "relation": "calls optional footer close button",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\ui\\dialog.tsx",
+      "source_location": "DialogFooter",
+      "weight": 1
+    },
+    {
+      "source": "src/components/ui/form.tsx::FormField",
+      "target": "src/components/ui/form.tsx::useFormField",
+      "relation": "provides field name context consumed by hook",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\ui\\form.tsx",
+      "source_location": "FormField/useFormField",
+      "weight": 1
+    },
+    {
+      "source": "src/components/ui/form.tsx::FormAccessibilitySuite",
+      "target": "src/components/ui/form.tsx::useFormField",
+      "relation": "calls hook to derive ids error and aria state",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\ui\\form.tsx",
+      "source_location": "FormLabel/FormControl/FormDescription/FormMessage",
+      "weight": 1
+    },
+    {
+      "source": "src/components/ui/form.tsx::FormAccessibilitySuite",
+      "target": "src/components/ui/label.tsx::Label",
+      "relation": "calls label wrapper for field label",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\ui\\form.tsx",
+      "source_location": "FormLabel",
+      "weight": 1
+    },
+    {
+      "source": "src/components/ui/input.tsx::Input",
+      "target": "src/components/ui/form.tsx::FormAccessibilitySuite",
+      "relation": "shares aria-invalid styling contract with form control",
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "source_file": "src\\components\\ui\\input.tsx",
+      "source_location": "Input",
+      "weight": 1
+    },
+    {
+      "source": "src/components/ui/select.tsx::SelectContent",
+      "target": "src/components/ui/select.tsx::SelectSuite",
+      "relation": "calls select portal viewport and primitive content",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\ui\\select.tsx",
+      "source_location": "SelectContent",
+      "weight": 1
+    },
+    {
+      "source": "src/components/ui/select.tsx::SelectContent",
+      "target": "src/components/ui/select.tsx::SelectItem",
+      "relation": "contains item children in viewport",
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "source_file": "src\\components\\ui\\select.tsx",
+      "source_location": "SelectContent",
+      "weight": 1
+    },
+    {
+      "source": "src/components/ui/sheet.tsx::SheetContent",
+      "target": "src/components/ui/sheet.tsx::RadixSheetPrimitive",
+      "relation": "wraps dialog primitive as side sheet",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\ui\\sheet.tsx",
+      "source_location": "SheetContent",
+      "weight": 1
+    },
+    {
+      "source": "src/components/ui/sheet.tsx::SheetContent",
+      "target": "src/components/ui/button.tsx::Button",
+      "relation": "calls close button component",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\ui\\sheet.tsx",
+      "source_location": "SheetContent",
+      "weight": 1
+    },
+    {
+      "source": "src/components/ui/sidebar.tsx::SidebarProvider",
+      "target": "src/components/ui/sidebar.tsx::useSidebar",
+      "relation": "provides context consumed by hook",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\ui\\sidebar.tsx",
+      "source_location": "SidebarProvider/useSidebar",
+      "weight": 1
+    },
+    {
+      "source": "src/components/ui/sidebar.tsx::SidebarProvider",
+      "target": "src/components/ui/sidebar.tsx::Sidebar",
+      "relation": "supplies expanded collapsed mobile state",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\ui\\sidebar.tsx",
+      "source_location": "SidebarProvider/Sidebar",
+      "weight": 1
+    },
+    {
+      "source": "src/components/ui/sidebar.tsx::Sidebar",
+      "target": "src/components/ui/sheet.tsx::SheetContent",
+      "relation": "calls mobile sheet content for sidebar on mobile",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\ui\\sidebar.tsx",
+      "source_location": "Sidebar",
+      "weight": 1
+    },
+    {
+      "source": "src/components/ui/sidebar.tsx::SidebarTrigger",
+      "target": "src/components/ui/sidebar.tsx::useSidebar",
+      "relation": "calls hook to toggle sidebar",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\ui\\sidebar.tsx",
+      "source_location": "SidebarTrigger",
+      "weight": 1
+    },
+    {
+      "source": "src/components/ui/sidebar.tsx::SidebarTrigger",
+      "target": "src/components/ui/button.tsx::Button",
+      "relation": "calls ghost icon button component",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\ui\\sidebar.tsx",
+      "source_location": "SidebarTrigger",
+      "weight": 1
+    },
+    {
+      "source": "src/components/ui/sidebar.tsx::SidebarMenuButton",
+      "target": "src/components/ui/sidebar.tsx::useSidebar",
+      "relation": "calls hook to hide tooltip unless collapsed desktop",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\ui\\sidebar.tsx",
+      "source_location": "SidebarMenuButton",
+      "weight": 1
+    },
+    {
+      "source": "src/components/ui/sidebar.tsx::SidebarMenuButton",
+      "target": "src/components/ui/tooltip.tsx::TooltipSuite",
+      "relation": "calls tooltip components for collapsed menu labels",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\ui\\sidebar.tsx",
+      "source_location": "SidebarMenuButton",
+      "weight": 1
+    },
+    {
+      "source": "src/components/ui/sidebar.tsx::SidebarMenuSkeleton",
+      "target": "src/components/ui/skeleton.tsx::Skeleton",
+      "relation": "calls skeleton placeholders for menu loading",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\ui\\sidebar.tsx",
+      "source_location": "SidebarMenuSkeleton",
+      "weight": 1
+    },
+    {
+      "source": "src/components/ui/sonner.tsx::Toaster",
+      "target": "src/components/ui/button.tsx::Button",
+      "relation": "shares command feedback styling ecosystem",
+      "confidence": "INFERRED",
+      "confidence_score": 0.6,
+      "source_file": "src\\components\\ui\\sonner.tsx",
+      "source_location": "Toaster",
+      "weight": 1
+    },
+    {
+      "source": ".planning/phases/04-child-accounts-cascade-delete/04-01-PLAN.md::Plan01PersistenceFoundation",
+      "target": ".planning/phases/04-child-accounts-cascade-delete/04-01-PLAN.md::ChildAccountSchemaContract",
+      "relation": "requires schema contract",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\04-child-accounts-cascade-delete\\04-01-PLAN.md",
+      "source_location": "Task 1",
+      "weight": 1
+    },
+    {
+      "source": ".planning/phases/04-child-accounts-cascade-delete/04-01-PLAN.md::Plan01PersistenceFoundation",
+      "target": ".planning/phases/04-child-accounts-cascade-delete/04-01-PLAN.md::MotherSeatMetadataDefaults",
+      "relation": "requires mother seat metadata defaults",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\04-child-accounts-cascade-delete\\04-01-PLAN.md",
+      "source_location": "Task 1",
+      "weight": 1
+    },
+    {
+      "source": ".planning/phases/04-child-accounts-cascade-delete/04-01-PLAN.md::Plan01PersistenceFoundation",
+      "target": ".planning/phases/04-child-accounts-cascade-delete/04-01-PLAN.md::CascadeDeletePersistence",
+      "relation": "requires no-orphan cascade test evidence",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\04-child-accounts-cascade-delete\\04-01-PLAN.md",
+      "source_location": "Task 3",
+      "weight": 1
+    },
+    {
+      "source": ".planning/phases/04-child-accounts-cascade-delete/04-01-SUMMARY.md::Plan01Completed",
+      "target": ".planning/phases/04-child-accounts-cascade-delete/04-01-PLAN.md::Plan01PersistenceFoundation",
+      "relation": "summarizes completed plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\04-child-accounts-cascade-delete\\04-01-SUMMARY.md",
+      "source_location": "Accomplishments",
+      "weight": 1
+    },
+    {
+      "source": ".planning/phases/04-child-accounts-cascade-delete/04-02-PLAN.md::Plan02ServerActions",
+      "target": ".planning/phases/04-child-accounts-cascade-delete/04-01-SUMMARY.md::Plan01Completed",
+      "relation": "depends on child account table and DB helpers",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\04-child-accounts-cascade-delete\\04-02-PLAN.md",
+      "source_location": "depends_on/context",
+      "weight": 1
+    },
+    {
+      "source": ".planning/phases/04-child-accounts-cascade-delete/04-02-PLAN.md::Plan02ServerActions",
+      "target": ".planning/phases/04-child-accounts-cascade-delete/04-02-PLAN.md::ChildValidationContracts",
+      "relation": "requires narrow Zod schemas before actions",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\04-child-accounts-cascade-delete\\04-02-PLAN.md",
+      "source_location": "Task 1",
+      "weight": 1
+    },
+    {
+      "source": ".planning/phases/04-child-accounts-cascade-delete/04-02-PLAN.md::Plan02ServerActions",
+      "target": ".planning/phases/04-child-accounts-cascade-delete/04-02-PLAN.md::MonthlyUsdSnapshotFlow",
+      "relation": "implements create update snapshot semantics",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\04-child-accounts-cascade-delete\\04-02-PLAN.md",
+      "source_location": "Task 2 behavior",
+      "weight": 1
+    },
+    {
+      "source": ".planning/phases/04-child-accounts-cascade-delete/04-02-PLAN.md::NoRateWriteBlock",
+      "target": ".planning/phases/04-child-accounts-cascade-delete/04-02-PLAN.md::MonthlyUsdSnapshotFlow",
+      "relation": "guards snapshot writes when cached FX rate is missing",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\04-child-accounts-cascade-delete\\04-02-PLAN.md",
+      "source_location": "Task 2 behavior",
+      "weight": 1
+    },
+    {
+      "source": ".planning/phases/04-child-accounts-cascade-delete/04-02-SUMMARY.md::Plan02Completed",
+      "target": ".planning/phases/04-child-accounts-cascade-delete/04-02-PLAN.md::Plan02ServerActions",
+      "relation": "summarizes completed plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\04-child-accounts-cascade-delete\\04-02-SUMMARY.md",
+      "source_location": "Accomplishments",
+      "weight": 1
+    },
+    {
+      "source": ".planning/phases/04-child-accounts-cascade-delete/04-03-PLAN.md::Plan03DetailPageUI",
+      "target": ".planning/phases/04-child-accounts-cascade-delete/04-02-SUMMARY.md::Plan02Completed",
+      "relation": "depends on child account actions and validation",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\04-child-accounts-cascade-delete\\04-03-PLAN.md",
+      "source_location": "depends_on/context",
+      "weight": 1
+    },
+    {
+      "source": ".planning/phases/04-child-accounts-cascade-delete/04-03-PLAN.md::Plan03DetailPageUI",
+      "target": ".planning/phases/04-child-accounts-cascade-delete/04-03-PLAN.md::ChildAccountTableAndDialogs",
+      "relation": "requires child account table and dialogs",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\04-child-accounts-cascade-delete\\04-03-PLAN.md",
+      "source_location": "Task 1",
+      "weight": 1
+    },
+    {
+      "source": ".planning/phases/04-child-accounts-cascade-delete/04-03-PLAN.md::Plan03DetailPageUI",
+      "target": ".planning/phases/04-child-accounts-cascade-delete/04-03-PLAN.md::DetailPageOnlyManagement",
+      "relation": "constrains child management to /spaces/[id]",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\04-child-accounts-cascade-delete\\04-03-PLAN.md",
+      "source_location": "must_haves truths",
+      "weight": 1
+    },
+    {
+      "source": ".planning/phases/04-child-accounts-cascade-delete/04-03-PLAN.md::Plan03DetailPageUI",
+      "target": ".planning/phases/04-child-accounts-cascade-delete/04-03-PLAN.md::MotherSeatCardIntegration",
+      "relation": "requires mother seat card on detail page",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\04-child-accounts-cascade-delete\\04-03-PLAN.md",
+      "source_location": "Task 2",
+      "weight": 1
+    },
+    {
+      "source": ".planning/phases/04-child-accounts-cascade-delete/04-03-PLAN.md::ChildAccountTableAndDialogs",
+      "target": "src/components/ui/table.tsx::TableSuite",
+      "relation": "plans to use table interaction style",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": ".planning\\phases\\04-child-accounts-cascade-delete\\04-03-PLAN.md",
+      "source_location": "Task 1 action",
+      "weight": 1
+    },
+    {
+      "source": ".planning/phases/04-child-accounts-cascade-delete/04-03-PLAN.md::ChildAccountTableAndDialogs",
+      "target": "src/components/ui/dialog.tsx::DialogContent",
+      "relation": "plans add edit dialogs",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\04-child-accounts-cascade-delete\\04-03-PLAN.md",
+      "source_location": "Task 1 action",
+      "weight": 1
+    },
+    {
+      "source": ".planning/phases/04-child-accounts-cascade-delete/04-03-PLAN.md::ChildAccountTableAndDialogs",
+      "target": ".planning/phases/04-child-accounts-cascade-delete/04-02-PLAN.md::ChildValidationContracts",
+      "relation": "uses shared validation schema in form",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\04-child-accounts-cascade-delete\\04-03-PLAN.md",
+      "source_location": "Task 1 action/read_first",
+      "weight": 1
+    },
+    {
+      "source": ".planning/phases/04-child-accounts-cascade-delete/04-03-PLAN.md::ChildAccountTableAndDialogs",
+      "target": ".planning/phases/04-child-accounts-cascade-delete/04-02-PLAN.md::MonthlyUsdSnapshotFlow",
+      "relation": "displays frozen USD fields read-only instead of editing them",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\04-child-accounts-cascade-delete\\04-03-PLAN.md",
+      "source_location": "Task 1 action",
+      "weight": 1
+    },
+    {
+      "source": ".planning/phases/04-child-accounts-cascade-delete/04-03-SUMMARY.md::Plan03Completed",
+      "target": ".planning/phases/04-child-accounts-cascade-delete/04-03-PLAN.md::Plan03DetailPageUI",
+      "relation": "summarizes completed plan",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\04-child-accounts-cascade-delete\\04-03-SUMMARY.md",
+      "source_location": "Accomplishments",
+      "weight": 1
+    },
+    {
+      "source": ".planning/phases/04-child-accounts-cascade-delete/04-03-SUMMARY.md::Plan03Completed",
+      "target": ".planning/phases/04-child-accounts-cascade-delete/04-03-PLAN.md::DetailPageOnlyManagement",
+      "relation": "confirms no global child account route",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\04-child-accounts-cascade-delete\\04-03-SUMMARY.md",
+      "source_location": "Verification",
+      "weight": 1
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "hyperedge::form-field-accessibility-flow",
+      "label": "React Hook Form accessibility wiring",
+      "nodes": [
+        "src/components/ui/form.tsx::FormField",
+        "src/components/ui/form.tsx::useFormField",
+        "src/components/ui/form.tsx::FormAccessibilitySuite",
+        "src/components/ui/label.tsx::Label",
+        "src/components/ui/input.tsx::Input"
+      ],
+      "relation": "field name and item id flow into label htmlFor aria-describedby aria-invalid and error message rendering",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\ui\\form.tsx"
+    },
+    {
+      "id": "hyperedge::responsive-sidebar-composition",
+      "label": "Responsive sidebar composition",
+      "nodes": [
+        "src/components/ui/sidebar.tsx::SidebarProvider",
+        "src/components/ui/sidebar.tsx::Sidebar",
+        "src/components/ui/sheet.tsx::SheetContent",
+        "src/components/ui/sidebar.tsx::SidebarMenuButton",
+        "src/components/ui/tooltip.tsx::TooltipSuite",
+        "src/components/ui/sidebar.tsx::SidebarMenuSkeleton",
+        "src/components/ui/skeleton.tsx::Skeleton"
+      ],
+      "relation": "provider state drives desktop collapsed sidebar mobile sheet tooltip labels and skeleton loading states",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\ui\\sidebar.tsx"
+    },
+    {
+      "id": "hyperedge::phase04-child-account-delivery-chain",
+      "label": "Phase 04 child account delivery chain",
+      "nodes": [
+        ".planning/phases/04-child-accounts-cascade-delete/04-01-PLAN.md::Plan01PersistenceFoundation",
+        ".planning/phases/04-child-accounts-cascade-delete/04-01-SUMMARY.md::Plan01Completed",
+        ".planning/phases/04-child-accounts-cascade-delete/04-02-PLAN.md::Plan02ServerActions",
+        ".planning/phases/04-child-accounts-cascade-delete/04-02-SUMMARY.md::Plan02Completed",
+        ".planning/phases/04-child-accounts-cascade-delete/04-03-PLAN.md::Plan03DetailPageUI",
+        ".planning/phases/04-child-accounts-cascade-delete/04-03-SUMMARY.md::Plan03Completed"
+      ],
+      "relation": "database schema and cascade evidence enable actions and validation, which enable detail-page UI",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\04-child-accounts-cascade-delete\\04-03-SUMMARY.md"
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

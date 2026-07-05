@@ -13,9 +13,9 @@ export default async function ChannelsPage({
   const { archived } = await searchParams;
   const showArchived = archived === "1";
 
-  // Active-only by default (is_active = 1); include archived rows only when the
-  // show-archived switch drives ?archived=1. Filtering lives in listChannels.
-  const channels = listChannels(db, showArchived);
+  // Fetch all rows once so the client-side name/status filters can switch
+  // instantly while the archived URL param still controls the initial view.
+  const channels = listChannels(db, true);
 
   return <ChannelTable channels={channels} showArchived={showArchived} />;
 }

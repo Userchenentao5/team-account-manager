@@ -1,8 +1,9 @@
 import { db } from "@/db";
+import { listCurrencies } from "@/db/currencies";
 import { listRates, upsertRates, getMostRecentFetchedAt } from "@/db/fxRates";
-import type { FxRateRow } from "@/db/fxRates";
+import type { FxRateListRow } from "@/db/fxRates";
+import { DEFAULT_RATE_BASE, type RateBase } from "@/lib/fx/base";
 import { frankfurterResponseSchema } from "@/lib/validation/fx";
-import { CURRENCY_SEED } from "@/db/seed";
 
 /**
  * FX-01 / FX-03 — anti-corruption Frankfurter service (T-02-01..03, T-02-09).
@@ -19,16 +20,19 @@ import { CURRENCY_SEED } from "@/db/seed";
  */
 
 const FRANKFURTER_URL = "https://api.frankfurter.dev/v1/latest";
-/** The 5 non-USD seeded currencies; USD is the base and is injected as "1" (D-03). */
-const SYMBOLS = CURRENCY_SEED.map((c) => c.code).filter((c) => c !== "USD");
 const TIMEOUT_MS = 4000; // D-09 blocking budget (~3–5s discretion)
 const ONE_DAY_MS = 24 * 60 * 60 * 1000; // D-07 lazy-refresh age gate
 
 export type FxResult = {
-  rates: FxRateRow[];
+  rates: FxRateListRow[];
   fetchedAt: string | null;
   stale: boolean;
 };
+
+function toSignificantDecimal(value: number): string {
+  if (!Number.isFinite(value) || value <= 0) throw new Error("bad rate");
+  return value.toPrecision(12).replace(/\.?0+$/, ""); // 12 sig-figs, trimmed (A2)
+}
 
 /**
  * 1 USD = `usdToX` units of X → 1 X = (1 / usdToX) USD, as a fixed-precision
@@ -36,8 +40,26 @@ export type FxResult = {
  * so a 0/negative/Infinity rate can never poison Phase 3 USD math (T-02-03).
  */
 export function invertToUsd(usdToX: number): string {
-  if (!Number.isFinite(usdToX) || usdToX <= 0) throw new Error("bad rate");
-  return (1 / usdToX).toPrecision(12).replace(/\.?0+$/, ""); // 12 sig-figs, trimmed (A2)
+  return toSignificantDecimal(1 / usdToX);
+}
+
+function rateToUsdFromBase(
+  code: string,
+  base: RateBase,
+  rates: Record<string, number>,
+): string {
+  if (code === "USD") return "1";
+
+  const baseToUsd = base === "USD" ? 1 : rates.USD;
+  if (!Number.isFinite(baseToUsd) || baseToUsd <= 0) throw new Error("bad rate");
+
+  if (code === base) {
+    return toSignificantDecimal(baseToUsd);
+  }
+
+  const baseToCode = rates[code];
+  if (!Number.isFinite(baseToCode) || baseToCode <= 0) throw new Error("bad rate");
+  return toSignificantDecimal(baseToUsd / baseToCode);
 }
 
 /** Snapshot the current cache as the stale-fallback result (writes nothing). */
@@ -56,9 +78,26 @@ function fallbackToCache(): FxResult {
  * stale:false (a successful fetch is never stale, regardless of age — D-04).
  * On any throw: fall back to cache, write nothing.
  */
-export async function refreshFromApi(): Promise<FxResult> {
+export async function refreshFromApi(
+  base: RateBase = DEFAULT_RATE_BASE,
+): Promise<FxResult> {
   try {
-    const url = `${FRANKFURTER_URL}?base=USD&symbols=${SYMBOLS.join(",")}`;
+    const currencyCodes = listCurrencies(db).map((currency) => currency.code);
+    const symbols = Array.from(
+      new Set(
+        [...currencyCodes.filter((code) => code !== base), "USD"].filter(
+          (code) => code !== base,
+        ),
+      ),
+    );
+
+    if (symbols.length === 0) {
+      const fetchedAt = new Date().toISOString();
+      upsertRates(db, [{ currencyCode: "USD", rateToUsd: "1", fetchedAt }]);
+      return { rates: listRates(db), fetchedAt, stale: false };
+    }
+
+    const url = `${FRANKFURTER_URL}?base=${base}&symbols=${symbols.join(",")}`;
     const res = await fetch(url, {
       signal: AbortSignal.timeout(TIMEOUT_MS),
       cache: "no-store",
@@ -66,16 +105,20 @@ export async function refreshFromApi(): Promise<FxResult> {
     if (!res.ok) throw new Error(`Frankfurter ${res.status}`);
 
     const data = frankfurterResponseSchema.parse(await res.json()); // throws → caught below
+    if (data.base !== base) {
+      throw new Error(`Frankfurter response base mismatch: ${data.base}`);
+    }
+    const missing = symbols.filter((code) => data.rates[code] === undefined);
+    if (missing.length > 0) {
+      throw new Error(`Frankfurter response missing rates: ${missing.join(",")}`);
+    }
 
     const fetchedAt = new Date().toISOString();
-    const rows = [
-      { currencyCode: "USD", rateToUsd: "1", fetchedAt }, // D-03
-      ...Object.entries(data.rates).map(([code, usdToX]) => ({
-        currencyCode: code,
-        rateToUsd: invertToUsd(usdToX), // D-02/D-03
-        fetchedAt,
-      })),
-    ];
+    const rows = currencyCodes.map((code) => ({
+      currencyCode: code,
+      rateToUsd: rateToUsdFromBase(code, base, data.rates), // D-02/D-03
+      fetchedAt,
+    }));
     upsertRates(db, rows); // atomic all-or-nothing write (Pitfall 1)
 
     return { rates: listRates(db), fetchedAt, stale: false };
@@ -91,7 +134,9 @@ export async function refreshFromApi(): Promise<FxResult> {
  * stale flag, D-04). If the cache is empty or older, attempt a refresh (which
  * may itself fall back to cache on failure).
  */
-export async function ensureFreshRates(): Promise<FxResult> {
+export async function ensureFreshRates(
+  base: RateBase = DEFAULT_RATE_BASE,
+): Promise<FxResult> {
   const fetchedAt = getMostRecentFetchedAt(db);
   const isFresh =
     fetchedAt != null && new Date(fetchedAt).getTime() > Date.now() - ONE_DAY_MS;
@@ -99,5 +144,5 @@ export async function ensureFreshRates(): Promise<FxResult> {
   if (isFresh) {
     return { rates: listRates(db), fetchedAt, stale: false };
   }
-  return refreshFromApi();
+  return refreshFromApi(base);
 }

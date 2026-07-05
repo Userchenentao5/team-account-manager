@@ -20,6 +20,7 @@ import { ExpiryBadge } from "@/components/spaces/expiry-badge";
 
 type ExpiringSpaceTableProps = {
   spaces: DashboardExpiringSpaceRow[];
+  soonDays: number;
 };
 
 function formatDays(daysUntilExpiry: number) {
@@ -32,13 +33,16 @@ function formatDays(daysUntilExpiry: number) {
   return `${daysUntilExpiry} 天后到期`;
 }
 
-export function ExpiringSpaceTable({ spaces }: ExpiringSpaceTableProps) {
+export function ExpiringSpaceTable({
+  spaces,
+  soonDays,
+}: ExpiringSpaceTableProps) {
   if (spaces.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center gap-4 rounded-lg border border-dashed py-12 text-center">
         <h2 className="text-base font-semibold">暂无到期风险</h2>
         <p className="max-w-md text-sm text-muted-foreground">
-          当前没有已过期或 7 天内到期的空间。
+          当前没有已过期或 {soonDays} 天内到期的空间。
         </p>
       </div>
     );
@@ -68,13 +72,13 @@ export function ExpiringSpaceTable({ spaces }: ExpiringSpaceTableProps) {
         {spaces.map((row) => (
           <TableRow key={row.id}>
             <TableCell>
-              <ExpiryBadge expiryDate={row.expiryDate} />
+              <ExpiryBadge expiryDate={row.expiryDate} soonDays={soonDays} />
             </TableCell>
             <TableCell className="font-medium">
               <Link href={`/spaces/${row.id}`} className="hover:underline">
                 {row.name}
               </Link>
-              <div className="mt-1 font-mono text-xs text-muted-foreground">
+              <div className="mt-1 text-xs text-muted-foreground">
                 {row.country}
               </div>
             </TableCell>

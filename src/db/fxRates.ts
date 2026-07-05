@@ -1,6 +1,6 @@
-import { desc } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 import type { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
-import { fxRate } from "./schema";
+import { currency, fxRate } from "./schema";
 
 /**
  * FX-01 — parameterized exchange-rate cache access (T-02-01 / T-02-04).
@@ -17,10 +17,31 @@ type Db = BetterSQLite3Database<Record<string, unknown>>;
 
 export type FxRateRow = typeof fxRate.$inferSelect;
 export type FxRateInsert = typeof fxRate.$inferInsert;
+export type FxRateListRow = {
+  rate: FxRateRow;
+  currency: typeof currency.$inferSelect;
+};
 
 /** All cached rates, ordered by currency code. */
-export function listRates(db: Db): FxRateRow[] {
-  return db.select().from(fxRate).orderBy(fxRate.currencyCode).all();
+export function listRates(db: Db): FxRateListRow[] {
+  return db
+    .select({
+      rate: fxRate,
+      currency,
+    })
+    .from(fxRate)
+    .innerJoin(currency, eq(currency.code, fxRate.currencyCode))
+    .orderBy(fxRate.currencyCode)
+    .all();
+}
+
+/** Read one currency's cached X->USD rate for the freeze pipeline. */
+export function getRate(db: Db, currencyCode: string): FxRateRow | undefined {
+  return db
+    .select()
+    .from(fxRate)
+    .where(eq(fxRate.currencyCode, currencyCode))
+    .get();
 }
 
 /** Latest `fetched_at` across all rows, or null on an empty table (D-05/D-07). */

@@ -1,0 +1,1 @@
+ALTER TABLE `child_account` ADD `contact` text DEFAULT '' NOT NULL;

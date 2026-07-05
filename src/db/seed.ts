@@ -1,16 +1,10 @@
 import { pathToFileURL } from "node:url";
 import type { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
+import { CURRENCIES } from "@/lib/currencies";
 import { currency } from "./schema";
 
-/** Curated 6-currency seed set with authoritative minor-unit exponents (D-02/D-03). */
-export const CURRENCY_SEED = [
-  { code: "USD", name: "US Dollar", minorUnit: 2 },
-  { code: "CNY", name: "Chinese Yuan", minorUnit: 2 },
-  { code: "EUR", name: "Euro", minorUnit: 2 },
-  { code: "GBP", name: "Pound Sterling", minorUnit: 2 },
-  { code: "JPY", name: "Japanese Yen", minorUnit: 0 }, // 0 decimals — exponent matters
-  { code: "HKD", name: "Hong Kong Dollar", minorUnit: 2 },
-] as const;
+/** Default currency seed set with authoritative minor-unit exponents (D-02/D-03). */
+export const CURRENCY_SEED = CURRENCIES;
 
 /**
  * Idempotent currency seed. `onConflictDoNothing` keyed on the `code` PK means
@@ -20,7 +14,17 @@ export function seedCurrencies<TSchema extends Record<string, unknown>>(
   database: BetterSQLite3Database<TSchema>,
 ): void {
   for (const row of CURRENCY_SEED) {
-    database.insert(currency).values(row).onConflictDoNothing().run();
+    database
+      .insert(currency)
+      .values(row)
+      .onConflictDoUpdate({
+        target: currency.code,
+        set: {
+          countryCode: row.countryCode,
+          countryName: row.countryName,
+        },
+      })
+      .run();
   }
 }
 

@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { RATE_BASES } from "@/lib/fx/base";
 
 /**
  * FX-01 / FX-03 — Frankfurter response validation (T-02-01, ASVS V5).
@@ -15,7 +16,7 @@ const positiveRate = z.number().finite().positive(); // rejects 0, negative, NaN
 
 export const frankfurterResponseSchema = z.object({
   amount: z.literal(1).or(z.number().positive()),
-  base: z.literal("USD"),
+  base: z.enum(RATE_BASES),
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   rates: z.record(z.string().length(3), positiveRate),
 });

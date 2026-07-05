@@ -9,6 +9,7 @@ import {
   CreditCard,
   Coins,
   Banknote,
+  Settings,
 } from "lucide-react";
 
 import {
@@ -28,6 +29,7 @@ import {
 const topLevel = [
   { label: "仪表盘", href: "/", icon: LayoutDashboard },
   { label: "空间", href: "/spaces", icon: Boxes },
+  { label: "设置", href: "/settings", icon: Settings },
 ] as const;
 
 const referenceChildren = [

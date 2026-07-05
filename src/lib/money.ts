@@ -45,3 +45,113 @@ export function parseToMinor(input: string, exponent: number): number {
   const value = Number(`${whole}${frac}`);
   return sign === "-" ? -value : value;
 }
+
+/**
+ * Freeze an original amount into USD minor units using an X→USD decimal string.
+ *
+ * Formula: round(amountMinor * rateToUsd * 10^(usdExp - srcExp)).
+ * All scaling is done with BigInt so currency conversion never uses floats.
+ */
+export function freezeUsdMinor(
+  amountMinor: number,
+  srcExp: number,
+  rateToUsd: string,
+  usdExp = 2,
+): number {
+  if (!Number.isInteger(amountMinor)) {
+    throw new Error(`amountMinor must be an integer, got: ${amountMinor}`);
+  }
+  if (!Number.isInteger(srcExp) || srcExp < 0) {
+    throw new Error(`srcExp must be a non-negative integer, got: ${srcExp}`);
+  }
+  if (!Number.isInteger(usdExp) || usdExp < 0) {
+    throw new Error(`usdExp must be a non-negative integer, got: ${usdExp}`);
+  }
+
+  const trimmed = rateToUsd.trim();
+  const match = /^(\d+)(?:\.(\d+))?$/.exec(trimmed);
+  if (!match) {
+    throw new Error(`Invalid USD rate: "${rateToUsd}"`);
+  }
+
+  const [, whole, frac = ""] = match;
+  const zero = BigInt(0);
+  const one = BigInt(1);
+  const two = BigInt(2);
+  const ten = BigInt(10);
+  const rateInt = BigInt(`${whole}${frac}`);
+  if (rateInt <= zero) {
+    throw new Error(`USD rate must be positive, got: "${rateToUsd}"`);
+  }
+
+  let num = BigInt(Math.abs(amountMinor)) * rateInt;
+  let den = ten ** BigInt(frac.length);
+  const exponentDelta = usdExp - srcExp;
+
+  if (exponentDelta >= 0) {
+    num *= ten ** BigInt(exponentDelta);
+  } else {
+    den *= ten ** BigInt(-exponentDelta);
+  }
+
+  const quotient = num / den;
+  const remainder = num % den;
+  const rounded = remainder * two >= den ? quotient + one : quotient;
+  return amountMinor < 0 ? -Number(rounded) : Number(rounded);
+}
+
+/**
+ * Convert frozen USD minor units into a target currency's minor units.
+ *
+ * `rateToUsd` is the target currency's X→USD rate. To show CNY from USD, divide
+ * by CNY→USD, then scale from USD exponent to the target exponent.
+ */
+export function convertUsdMinorToCurrencyMinor(
+  usdMinor: number,
+  targetExp: number,
+  rateToUsd: string,
+  usdExp = 2,
+): number {
+  if (!Number.isInteger(usdMinor)) {
+    throw new Error(`usdMinor must be an integer, got: ${usdMinor}`);
+  }
+  if (!Number.isInteger(targetExp) || targetExp < 0) {
+    throw new Error(
+      `targetExp must be a non-negative integer, got: ${targetExp}`,
+    );
+  }
+  if (!Number.isInteger(usdExp) || usdExp < 0) {
+    throw new Error(`usdExp must be a non-negative integer, got: ${usdExp}`);
+  }
+
+  const trimmed = rateToUsd.trim();
+  const match = /^(\d+)(?:\.(\d+))?$/.exec(trimmed);
+  if (!match) {
+    throw new Error(`Invalid target rate: "${rateToUsd}"`);
+  }
+
+  const [, whole, frac = ""] = match;
+  const zero = BigInt(0);
+  const one = BigInt(1);
+  const two = BigInt(2);
+  const ten = BigInt(10);
+  const rateInt = BigInt(`${whole}${frac}`);
+  if (rateInt <= zero) {
+    throw new Error(`Target rate must be positive, got: "${rateToUsd}"`);
+  }
+
+  let num = BigInt(Math.abs(usdMinor)) * (ten ** BigInt(frac.length));
+  let den = rateInt;
+  const exponentDelta = targetExp - usdExp;
+
+  if (exponentDelta >= 0) {
+    num *= ten ** BigInt(exponentDelta);
+  } else {
+    den *= ten ** BigInt(-exponentDelta);
+  }
+
+  const quotient = num / den;
+  const remainder = num % den;
+  const rounded = remainder * two >= den ? quotient + one : quotient;
+  return usdMinor < 0 ? -Number(rounded) : Number(rounded);
+}

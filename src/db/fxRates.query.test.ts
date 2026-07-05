@@ -6,17 +6,41 @@ import {
   getMostRecentFetchedAt,
 } from "@/db/fxRates";
 import { fxRate } from "@/db/schema";
-import { seedCurrencies, CURRENCY_SEED } from "@/db/seed";
+import { CURRENCY_SEED, seedCurrencies } from "@/db/seed";
 
-/** All 6 seeded currencies as X→USD decimal-string rows; USD pinned to "1" (D-03). */
-function sixRateRows(fetchedAt: string) {
+/** Seeded currencies as X→USD decimal-string rows; USD pinned to "1" (D-03). */
+function defaultRateRows(fetchedAt: string) {
   const rateByCode: Record<string, string> = {
+    AUD: "0.6535",
+    BRL: "0.1800",
+    CAD: "0.7300",
+    CHF: "1.2500",
     USD: "1",
     CNY: "0.14709",
+    CZK: "0.0460",
+    DKK: "0.1450",
     EUR: "1.0832",
     GBP: "1.2654",
+    HUF: "0.0028",
+    IDR: "0.000061",
+    ILS: "0.2700",
+    INR: "0.0120",
+    ISK: "0.0080",
     JPY: "0.0064",
     HKD: "0.1282",
+    KRW: "0.00072",
+    MXN: "0.0540",
+    MYR: "0.2100",
+    NOK: "0.0950",
+    NZD: "0.6100",
+    PHP: "0.0170",
+    PLN: "0.2500",
+    RON: "0.2200",
+    SEK: "0.0960",
+    SGD: "0.7812",
+    THB: "0.0307",
+    TRY: "0.0300",
+    ZAR: "0.0550",
   };
   return CURRENCY_SEED.map((c) => ({
     currencyCode: c.code,
@@ -38,25 +62,25 @@ describe("fx_rate queries (FX-01 / D-01..D-03)", () => {
     ctx.sqlite.close();
   });
 
-  it("upsertRates writes all 6 rows; USD is stored as the literal string '1' (D-03)", () => {
-    upsertRates(ctx.db, sixRateRows("2026-06-28T00:00:00Z"));
+  it("upsertRates writes all seeded rows; USD is stored as the literal string '1' (D-03)", () => {
+    upsertRates(ctx.db, defaultRateRows("2026-06-28T00:00:00Z"));
 
     const rows = ctx.db.select().from(fxRate).all();
-    expect(rows).toHaveLength(6);
+    expect(rows).toHaveLength(CURRENCY_SEED.length);
 
     const usd = rows.find((r) => r.currencyCode === "USD");
     expect(usd?.rateToUsd).toBe("1");
   });
 
   it("re-running upsertRates with the same currencyCode updates in place, never duplicates (D-01 PK conflict)", () => {
-    upsertRates(ctx.db, sixRateRows("2026-06-28T00:00:00Z"));
+    upsertRates(ctx.db, defaultRateRows("2026-06-28T00:00:00Z"));
     upsertRates(ctx.db, [
       { currencyCode: "CNY", rateToUsd: "0.13999", fetchedAt: "2026-06-28T06:00:00Z" },
     ]);
 
     const rows = ctx.db.select().from(fxRate).all();
-    // Still 6 rows — the conflict updated the existing CNY row, no duplicate.
-    expect(rows).toHaveLength(6);
+    // Still one row per seeded currency — the conflict updated CNY, no duplicate.
+    expect(rows).toHaveLength(CURRENCY_SEED.length);
 
     const cny = rows.find((r) => r.currencyCode === "CNY");
     expect(cny?.rateToUsd).toBe("0.13999");
@@ -64,9 +88,9 @@ describe("fx_rate queries (FX-01 / D-01..D-03)", () => {
   });
 
   it("listRates returns rows ordered by currencyCode", () => {
-    upsertRates(ctx.db, sixRateRows("2026-06-28T00:00:00Z"));
+    upsertRates(ctx.db, defaultRateRows("2026-06-28T00:00:00Z"));
 
-    const codes = listRates(ctx.db).map((r) => r.currencyCode);
+    const codes = listRates(ctx.db).map(({ rate }) => rate.currencyCode);
     expect(codes).toEqual([...codes].sort());
   });
 

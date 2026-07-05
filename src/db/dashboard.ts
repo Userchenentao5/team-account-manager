@@ -1,7 +1,9 @@
 import { eq } from "drizzle-orm";
 import type { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
 import { differenceInCalendarDays } from "date-fns";
+import { formatCountryLabel } from "@/lib/countries";
 import { expiryStatus } from "@/lib/expiry";
+import { getStatusThresholds, type StatusThresholds } from "./settings";
 import { childAccount, currency, paymentChannel, space } from "./schema";
 
 type Db = BetterSQLite3Database<Record<string, unknown>>;
@@ -55,6 +57,7 @@ export type DashboardOverview = {
     byPaymentChannel: DashboardSpendBucket[];
   };
   counts: DashboardCountSummary;
+  thresholds: StatusThresholds;
 };
 
 type SpaceDashboardRow = {
@@ -142,6 +145,7 @@ export function getDashboardOverview(
   db: Db,
   today = new Date(),
 ): DashboardOverview {
+  const thresholds = getStatusThresholds(db);
   const spaceRows: SpaceDashboardRow[] = db
     .select({
       id: space.id,
@@ -202,7 +206,12 @@ export function getDashboardOverview(
   for (const row of spaceRows) {
     const amountUsdMinor = row.amountUsd ?? 0;
     spacePaymentUsdMinor += amountUsdMinor;
-    addBucket(countryBuckets, row.country, row.country, amountUsdMinor);
+    addBucket(
+      countryBuckets,
+      row.country,
+      formatCountryLabel(row.country),
+      amountUsdMinor,
+    );
     addBucket(currencyBuckets, row.currencyCode, row.currencyCode, amountUsdMinor);
     addBucket(
       paymentChannelBuckets,
@@ -216,13 +225,13 @@ export function getDashboardOverview(
       continue;
     }
 
-    const status = expiryStatus(row.expiryDate, today);
+    const status = expiryStatus(row.expiryDate, today, thresholds.spaceSoonDays);
     counts.spacesByExpiryStatus[status] += 1;
     if (status !== "normal") {
       expiringSpaces.push({
         id: row.id,
         name: row.name,
-        country: row.country,
+        country: formatCountryLabel(row.country),
         paymentChannelName: row.paymentChannelName,
         expiryDate: row.expiryDate,
         daysUntilExpiry: daysUntilExpiry(row.expiryDate, today),
@@ -236,7 +245,12 @@ export function getDashboardOverview(
   let childMonthlyUsdMinor = 0;
   for (const row of childRows) {
     childMonthlyUsdMinor += row.monthlyAmountUsd;
-    addBucket(countryBuckets, row.spaceCountry, row.spaceCountry, row.monthlyAmountUsd);
+    addBucket(
+      countryBuckets,
+      row.spaceCountry,
+      formatCountryLabel(row.spaceCountry),
+      row.monthlyAmountUsd,
+    );
     addBucket(
       currencyBuckets,
       row.monthlyCurrencyCode,
@@ -281,5 +295,6 @@ export function getDashboardOverview(
       byPaymentChannel: toBuckets(paymentChannelBuckets, totalUsdMinor),
     },
     counts,
+    thresholds,
   };
 }

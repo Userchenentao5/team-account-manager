@@ -3,6 +3,7 @@ import { insertChannel } from "@/db/channels";
 import { insertChildAccount } from "@/db/childAccounts";
 import { getDashboardOverview } from "@/db/dashboard";
 import { seedCurrencies } from "@/db/seed";
+import { setStatusThresholds } from "@/db/settings";
 import { space } from "@/db/schema";
 import { insertSpaceWithMother } from "@/db/spaces";
 import { createTestDb } from "@/test/db-harness";
@@ -109,6 +110,10 @@ describe("dashboard overview aggregates (DASH-01 / DASH-02 / DASH-03 / DASH-04)"
       "expired",
       "soon",
     ]);
+    expect(overview.expiringSpaces.map((item) => item.country)).toEqual([
+      "美国",
+      "中国",
+    ]);
   });
 
   it("DASH-02 and DASH-03 reconcile stored USD totals without parent-child double counting", () => {
@@ -164,9 +169,9 @@ describe("dashboard overview aggregates (DASH-01 / DASH-02 / DASH-03 / DASH-04)"
     expect(bucketTotal(overview.distributions.byCurrency)).toBe(30000);
     expect(bucketTotal(overview.distributions.byPaymentChannel)).toBe(30000);
     expect(overview.distributions.byCountry).toEqual([
-      { key: "US", label: "US", usdMinor: 15000, percentage: 50 },
-      { key: "CN", label: "CN", usdMinor: 12000, percentage: 40 },
-      { key: "JP", label: "JP", usdMinor: 3000, percentage: 10 },
+      { key: "US", label: "美国", usdMinor: 15000, percentage: 50 },
+      { key: "CN", label: "中国", usdMinor: 12000, percentage: 40 },
+      { key: "JP", label: "日本", usdMinor: 3000, percentage: 10 },
     ]);
     expect(overview.distributions.byCurrency).toEqual([
       { key: "CNY", label: "CNY", usdMinor: 15000, percentage: 50 },
@@ -221,6 +226,28 @@ describe("dashboard overview aggregates (DASH-01 / DASH-02 / DASH-03 / DASH-04)"
       codex: 1,
       chatgpt: 2,
     });
+  });
+
+  it("uses the configured space expiry threshold", () => {
+    makeSpace({
+      name: "Threshold Space",
+      expiryDate: "2026-07-10",
+    });
+
+    const defaultOverview = getDashboardOverview(ctx.db, new Date(2026, 6, 1));
+    expect(defaultOverview.totals.renewalRiskSpaces).toBe(0);
+
+    setStatusThresholds(ctx.db, {
+      spaceSoonDays: 9,
+      childAccountSoonDays: 7,
+    });
+    const configuredOverview = getDashboardOverview(
+      ctx.db,
+      new Date(2026, 6, 1),
+    );
+
+    expect(configuredOverview.totals.renewalRiskSpaces).toBe(1);
+    expect(configuredOverview.thresholds.spaceSoonDays).toBe(9);
   });
 
   it("returns stable zero totals and empty lists for an empty dashboard", () => {

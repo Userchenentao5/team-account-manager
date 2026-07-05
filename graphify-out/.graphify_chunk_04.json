@@ -1,0 +1,1162 @@
+{
+  "nodes": [
+    {
+      "id": "schema.currency",
+      "label": "currency reference table",
+      "file_type": "code",
+      "source_file": "src\\db\\schema.ts",
+      "source_location": "line 10",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema.paymentChannel",
+      "label": "payment channel table",
+      "file_type": "code",
+      "source_file": "src\\db\\schema.ts",
+      "source_location": "line 26",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema.fxRate",
+      "label": "fx_rate cache table",
+      "file_type": "code",
+      "source_file": "src\\db\\schema.ts",
+      "source_location": "line 45",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema.space",
+      "label": "space subscription table",
+      "file_type": "code",
+      "source_file": "src\\db\\schema.ts",
+      "source_location": "line 59",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema.motherAccount",
+      "label": "mother account table",
+      "file_type": "code",
+      "source_file": "src\\db\\schema.ts",
+      "source_location": "line 84",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema.childAccount",
+      "label": "child account table",
+      "file_type": "code",
+      "source_file": "src\\db\\schema.ts",
+      "source_location": "line 98",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "seed.CURRENCY_SEED",
+      "label": "currency seed data",
+      "file_type": "code",
+      "source_file": "src\\db\\seed.ts",
+      "source_location": "line 7",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "seed.seedCurrencies",
+      "label": "seedCurrencies idempotent upsert",
+      "file_type": "code",
+      "source_file": "src\\db\\seed.ts",
+      "source_location": "line 13",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "test.seed.currencySeedContract",
+      "label": "currency seed reference-data contract tests",
+      "file_type": "code",
+      "source_file": "src\\db\\seed.test.ts",
+      "source_location": "describe currency seed",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "spaces.insertSpaceWithMother",
+      "label": "insert space with mother account transaction",
+      "file_type": "code",
+      "source_file": "src\\db\\spaces.ts",
+      "source_location": "line 35",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "spaces.listSpaces",
+      "label": "list spaces ordered by expiry",
+      "file_type": "code",
+      "source_file": "src\\db\\spaces.ts",
+      "source_location": "line 47",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "spaces.listSpaceDetails",
+      "label": "list space details with child counts",
+      "file_type": "code",
+      "source_file": "src\\db\\spaces.ts",
+      "source_location": "line 66",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "spaces.getSpaceDetail",
+      "label": "get joined space detail",
+      "file_type": "code",
+      "source_file": "src\\db\\spaces.ts",
+      "source_location": "line 113",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "spaces.updateSpaceRow",
+      "label": "update space row",
+      "file_type": "code",
+      "source_file": "src\\db\\spaces.ts",
+      "source_location": "line 129",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "spaces.updateMotherAccountEmail",
+      "label": "update mother account email",
+      "file_type": "code",
+      "source_file": "src\\db\\spaces.ts",
+      "source_location": "line 137",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "spaces.deleteSpaceCascade",
+      "label": "name-confirmed space cascade delete",
+      "file_type": "code",
+      "source_file": "src\\db\\spaces.ts",
+      "source_location": "line 148",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "test.spaces.spaceQueryContract",
+      "label": "space query and cascade behavior tests",
+      "file_type": "code",
+      "source_file": "src\\db\\spaces.query.test.ts",
+      "source_location": "describe space queries",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase2.fxCacheFoundationPlan",
+      "label": "Phase 2 Plan 01 FX cache persistence foundation",
+      "file_type": "rationale",
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-01-PLAN.md",
+      "source_location": "frontmatter and objective",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase2.fxCacheFoundationSummary",
+      "label": "Phase 2 Plan 01 completed FX cache foundation",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-01-SUMMARY.md",
+      "source_location": "summary frontmatter",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase2.antiCorruptionPlan",
+      "label": "Phase 2 Plan 02 Frankfurter anti-corruption service",
+      "file_type": "rationale",
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-02-PLAN.md",
+      "source_location": "frontmatter and objective",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase2.antiCorruptionSummary",
+      "label": "Phase 2 Plan 02 completed Frankfurter service",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-02-SUMMARY.md",
+      "source_location": "summary frontmatter",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase2.ratesScreenPlan",
+      "label": "Phase 2 Plan 03 rates screen and refresh action",
+      "file_type": "rationale",
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-03-PLAN.md",
+      "source_location": "frontmatter and objective",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase2.ratesScreenSummary",
+      "label": "Phase 2 Plan 03 completed rates screen",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-03-SUMMARY.md",
+      "source_location": "summary frontmatter",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase2.contextDecisions",
+      "label": "Phase 2 FX decision set D-01 through D-11",
+      "file_type": "rationale",
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-CONTEXT.md",
+      "source_location": "Implementation Decisions",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase2.discussionChoices",
+      "label": "Phase 2 selected design choices",
+      "file_type": "rationale",
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-DISCUSSION-LOG.md",
+      "source_location": "Cache table shape through rates screen choice",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase2.patternsMap",
+      "label": "Phase 2 implementation pattern map",
+      "file_type": "rationale",
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-PATTERNS.md",
+      "source_location": "Implementation Patterns",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase2.researchArchitecture",
+      "label": "Phase 2 FX architecture research",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-RESEARCH.md",
+      "source_location": "Summary and Architectural Responsibility Map",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase2.reviewWarnings",
+      "label": "Phase 2 code review warnings",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-REVIEW.md",
+      "source_location": "Warnings",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase2.uatPassed",
+      "label": "Phase 2 UAT passed for rates screen",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-UAT.md",
+      "source_location": "Tests and Summary",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase2.uiSpecRatesScreen",
+      "label": "Phase 2 rates screen UI contract",
+      "file_type": "rationale",
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-UI-SPEC.md",
+      "source_location": "Rates screen component and interaction contract",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase2.validationStrategy",
+      "label": "Phase 2 validation strategy",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-VALIDATION.md",
+      "source_location": "Per-Task Verification Map",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase2.verificationReport",
+      "label": "Phase 2 verification report",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-VERIFICATION.md",
+      "source_location": "Verification Report",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase5.dashboardHandoff",
+      "label": "Phase 5 dashboard paused handoff",
+      "file_type": "document",
+      "source_file": ".planning\\phases\\05-dashboard-overview\\.continue-here.md",
+      "source_location": "Current State and Critical Context",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "phase5.dashboardAggregatePlan",
+      "label": "Phase 5 Plan 01 dashboard aggregate contract",
+      "file_type": "rationale",
+      "source_file": ".planning\\phases\\05-dashboard-overview\\05-01-PLAN.md",
+      "source_location": "Phase Goal and tasks",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "schema.fxRate",
+      "target": "schema.currency",
+      "relation": "foreign_key_currencyCode_references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\db\\schema.ts",
+      "source_location": "line 47",
+      "weight": 1.0
+    },
+    {
+      "source": "schema.space",
+      "target": "schema.paymentChannel",
+      "relation": "foreign_key_paymentChannelId_references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\db\\schema.ts",
+      "source_location": "line 62",
+      "weight": 1.0
+    },
+    {
+      "source": "schema.space",
+      "target": "schema.currency",
+      "relation": "foreign_key_currencyCode_references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\db\\schema.ts",
+      "source_location": "line 65",
+      "weight": 1.0
+    },
+    {
+      "source": "schema.motherAccount",
+      "target": "schema.space",
+      "relation": "foreign_key_cascade_on_delete",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\db\\schema.ts",
+      "source_location": "line 86",
+      "weight": 1.0
+    },
+    {
+      "source": "schema.childAccount",
+      "target": "schema.space",
+      "relation": "foreign_key_cascade_on_delete",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\db\\schema.ts",
+      "source_location": "line 100",
+      "weight": 1.0
+    },
+    {
+      "source": "schema.childAccount",
+      "target": "schema.currency",
+      "relation": "foreign_key_monthlyCurrencyCode_references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\db\\schema.ts",
+      "source_location": "line 109",
+      "weight": 1.0
+    },
+    {
+      "source": "seed.CURRENCY_SEED",
+      "target": "schema.currency",
+      "relation": "provides_reference_rows_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\db\\seed.ts",
+      "source_location": "line 7",
+      "weight": 1.0
+    },
+    {
+      "source": "seed.seedCurrencies",
+      "target": "seed.CURRENCY_SEED",
+      "relation": "reads_seed_rows",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\db\\seed.ts",
+      "source_location": "line 15",
+      "weight": 1.0
+    },
+    {
+      "source": "seed.seedCurrencies",
+      "target": "schema.currency",
+      "relation": "upserts_country_metadata",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\db\\seed.ts",
+      "source_location": "line 17",
+      "weight": 1.0
+    },
+    {
+      "source": "test.seed.currencySeedContract",
+      "target": "seed.seedCurrencies",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\db\\seed.test.ts",
+      "source_location": "lines 18-143",
+      "weight": 1.0
+    },
+    {
+      "source": "test.seed.currencySeedContract",
+      "target": "schema.currency",
+      "relation": "asserts_reference_data_shape",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\db\\seed.test.ts",
+      "source_location": "describe currency seed",
+      "weight": 1.0
+    },
+    {
+      "source": "spaces.insertSpaceWithMother",
+      "target": "schema.space",
+      "relation": "writes_parent_space",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\db\\spaces.ts",
+      "source_location": "line 41",
+      "weight": 1.0
+    },
+    {
+      "source": "spaces.insertSpaceWithMother",
+      "target": "schema.motherAccount",
+      "relation": "writes_mother_account",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\db\\spaces.ts",
+      "source_location": "line 42",
+      "weight": 1.0
+    },
+    {
+      "source": "spaces.listSpaces",
+      "target": "schema.space",
+      "relation": "reads_filters_orders_by_expiry",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\db\\spaces.ts",
+      "source_location": "lines 51-63",
+      "weight": 1.0
+    },
+    {
+      "source": "spaces.listSpaceDetails",
+      "target": "schema.space",
+      "relation": "reads_join_root",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\db\\spaces.ts",
+      "source_location": "line 77",
+      "weight": 1.0
+    },
+    {
+      "source": "spaces.listSpaceDetails",
+      "target": "schema.motherAccount",
+      "relation": "inner_joins",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\db\\spaces.ts",
+      "source_location": "line 78",
+      "weight": 1.0
+    },
+    {
+      "source": "spaces.listSpaceDetails",
+      "target": "schema.paymentChannel",
+      "relation": "inner_joins",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\db\\spaces.ts",
+      "source_location": "line 79",
+      "weight": 1.0
+    },
+    {
+      "source": "spaces.listSpaceDetails",
+      "target": "schema.currency",
+      "relation": "inner_joins",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\db\\spaces.ts",
+      "source_location": "line 80",
+      "weight": 1.0
+    },
+    {
+      "source": "spaces.listSpaceDetails",
+      "target": "schema.childAccount",
+      "relation": "aggregates_child_count_by_space",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\db\\spaces.ts",
+      "source_location": "lines 95-109",
+      "weight": 1.0
+    },
+    {
+      "source": "spaces.getSpaceDetail",
+      "target": "schema.space",
+      "relation": "reads_single_space_detail",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\db\\spaces.ts",
+      "source_location": "lines 113-126",
+      "weight": 1.0
+    },
+    {
+      "source": "spaces.getSpaceDetail",
+      "target": "schema.motherAccount",
+      "relation": "inner_joins",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\db\\spaces.ts",
+      "source_location": "line 122",
+      "weight": 1.0
+    },
+    {
+      "source": "spaces.getSpaceDetail",
+      "target": "schema.paymentChannel",
+      "relation": "inner_joins",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\db\\spaces.ts",
+      "source_location": "line 123",
+      "weight": 1.0
+    },
+    {
+      "source": "spaces.getSpaceDetail",
+      "target": "schema.currency",
+      "relation": "inner_joins",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\db\\spaces.ts",
+      "source_location": "line 124",
+      "weight": 1.0
+    },
+    {
+      "source": "spaces.updateSpaceRow",
+      "target": "schema.space",
+      "relation": "updates_by_id",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\db\\spaces.ts",
+      "source_location": "line 134",
+      "weight": 1.0
+    },
+    {
+      "source": "spaces.updateMotherAccountEmail",
+      "target": "schema.motherAccount",
+      "relation": "updates_by_space_id",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\db\\spaces.ts",
+      "source_location": "lines 142-144",
+      "weight": 1.0
+    },
+    {
+      "source": "spaces.deleteSpaceCascade",
+      "target": "schema.space",
+      "relation": "checks_name_then_deletes",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\db\\spaces.ts",
+      "source_location": "lines 153-166",
+      "weight": 1.0
+    },
+    {
+      "source": "spaces.deleteSpaceCascade",
+      "target": "schema.motherAccount",
+      "relation": "relies_on_schema_cascade_delete",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "src\\db\\spaces.ts",
+      "source_location": "line 166",
+      "weight": 0.85
+    },
+    {
+      "source": "spaces.deleteSpaceCascade",
+      "target": "schema.childAccount",
+      "relation": "relies_on_schema_cascade_delete",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "src\\db\\spaces.ts",
+      "source_location": "line 166",
+      "weight": 0.85
+    },
+    {
+      "source": "test.spaces.spaceQueryContract",
+      "target": "spaces.insertSpaceWithMother",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\db\\spaces.query.test.ts",
+      "source_location": "line 36",
+      "weight": 1.0
+    },
+    {
+      "source": "test.spaces.spaceQueryContract",
+      "target": "spaces.listSpaces",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\db\\spaces.query.test.ts",
+      "source_location": "lines 82-95",
+      "weight": 1.0
+    },
+    {
+      "source": "test.spaces.spaceQueryContract",
+      "target": "spaces.getSpaceDetail",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\db\\spaces.query.test.ts",
+      "source_location": "line 113",
+      "weight": 1.0
+    },
+    {
+      "source": "test.spaces.spaceQueryContract",
+      "target": "spaces.listSpaceDetails",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\db\\spaces.query.test.ts",
+      "source_location": "line 165",
+      "weight": 1.0
+    },
+    {
+      "source": "test.spaces.spaceQueryContract",
+      "target": "spaces.deleteSpaceCascade",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\db\\spaces.query.test.ts",
+      "source_location": "lines 212 and 241",
+      "weight": 1.0
+    },
+    {
+      "source": "test.spaces.spaceQueryContract",
+      "target": "schema.fxRate",
+      "relation": "verifies_cached_rates_feed_freeze_pipeline",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\db\\spaces.query.test.ts",
+      "source_location": "line 253",
+      "weight": 1.0
+    },
+    {
+      "source": "phase2.fxCacheFoundationPlan",
+      "target": "schema.fxRate",
+      "relation": "specifies_table_shape",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-01-PLAN.md",
+      "source_location": "lines 54-58",
+      "weight": 1.0
+    },
+    {
+      "source": "phase2.fxCacheFoundationPlan",
+      "target": "schema.currency",
+      "relation": "requires_fk_to_seeded_currency",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-01-PLAN.md",
+      "source_location": "line 81",
+      "weight": 1.0
+    },
+    {
+      "source": "phase2.fxCacheFoundationSummary",
+      "target": "phase2.fxCacheFoundationPlan",
+      "relation": "completes",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-01-SUMMARY.md",
+      "source_location": "status complete",
+      "weight": 1.0
+    },
+    {
+      "source": "phase2.fxCacheFoundationSummary",
+      "target": "schema.fxRate",
+      "relation": "records_completed_migration_and_table",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-01-SUMMARY.md",
+      "source_location": "Accomplishments",
+      "weight": 1.0
+    },
+    {
+      "source": "phase2.antiCorruptionPlan",
+      "target": "phase2.fxCacheFoundationSummary",
+      "relation": "depends_on",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-02-PLAN.md",
+      "source_location": "frontmatter depends_on",
+      "weight": 1.0
+    },
+    {
+      "source": "phase2.antiCorruptionPlan",
+      "target": "schema.fxRate",
+      "relation": "writes_validated_inverted_rates_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-02-PLAN.md",
+      "source_location": "objective and Task 2",
+      "weight": 1.0
+    },
+    {
+      "source": "phase2.antiCorruptionPlan",
+      "target": "seed.CURRENCY_SEED",
+      "relation": "derives_frankfurter_symbols_from",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-02-PLAN.md",
+      "source_location": "Task 2 action",
+      "weight": 1.0
+    },
+    {
+      "source": "phase2.antiCorruptionSummary",
+      "target": "phase2.antiCorruptionPlan",
+      "relation": "completes",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-02-SUMMARY.md",
+      "source_location": "status complete",
+      "weight": 1.0
+    },
+    {
+      "source": "phase2.antiCorruptionSummary",
+      "target": "schema.fxRate",
+      "relation": "confirms_atomic_cache_fallback_contract",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-02-SUMMARY.md",
+      "source_location": "key decisions and coverage",
+      "weight": 1.0
+    },
+    {
+      "source": "phase2.ratesScreenPlan",
+      "target": "phase2.antiCorruptionSummary",
+      "relation": "depends_on_fx_result_contract",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-03-PLAN.md",
+      "source_location": "context and key_links",
+      "weight": 1.0
+    },
+    {
+      "source": "phase2.ratesScreenPlan",
+      "target": "schema.fxRate",
+      "relation": "reads_cache_for_reference_data_rates_screen",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-03-PLAN.md",
+      "source_location": "must_haves",
+      "weight": 1.0
+    },
+    {
+      "source": "phase2.ratesScreenSummary",
+      "target": "phase2.ratesScreenPlan",
+      "relation": "completes",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-03-SUMMARY.md",
+      "source_location": "status complete",
+      "weight": 1.0
+    },
+    {
+      "source": "phase2.ratesScreenSummary",
+      "target": "phase2.antiCorruptionSummary",
+      "relation": "delegates_fetch_and_fallback_to_service",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-03-SUMMARY.md",
+      "source_location": "Next Phase Readiness",
+      "weight": 1.0
+    },
+    {
+      "source": "phase2.contextDecisions",
+      "target": "schema.fxRate",
+      "relation": "decides_one_row_per_currency_decimal_string_cache",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-CONTEXT.md",
+      "source_location": "D-01 through D-03",
+      "weight": 1.0
+    },
+    {
+      "source": "phase2.contextDecisions",
+      "target": "phase2.antiCorruptionPlan",
+      "relation": "sets_staleness_and_fallback_rules_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-CONTEXT.md",
+      "source_location": "D-04 through D-10",
+      "weight": 1.0
+    },
+    {
+      "source": "phase2.contextDecisions",
+      "target": "phase2.ratesScreenPlan",
+      "relation": "places_rates_screen_under_reference_data",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-CONTEXT.md",
+      "source_location": "D-11",
+      "weight": 1.0
+    },
+    {
+      "source": "phase2.discussionChoices",
+      "target": "phase2.contextDecisions",
+      "relation": "records_user_selected_options_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-DISCUSSION-LOG.md",
+      "source_location": "User's choice rows",
+      "weight": 1.0
+    },
+    {
+      "source": "phase2.patternsMap",
+      "target": "phase2.antiCorruptionPlan",
+      "relation": "provides_service_validation_and_fetch_patterns",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-PATTERNS.md",
+      "source_location": "frankfurter.ts section",
+      "weight": 1.0
+    },
+    {
+      "source": "phase2.patternsMap",
+      "target": "phase2.ratesScreenPlan",
+      "relation": "provides_rsc_client_table_action_patterns",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-PATTERNS.md",
+      "source_location": "rates/page.tsx and rate-table.tsx sections",
+      "weight": 1.0
+    },
+    {
+      "source": "phase2.researchArchitecture",
+      "target": "phase2.contextDecisions",
+      "relation": "expands_decisions_into_architecture",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-RESEARCH.md",
+      "source_location": "Summary",
+      "weight": 1.0
+    },
+    {
+      "source": "phase2.researchArchitecture",
+      "target": "schema.fxRate",
+      "relation": "positions_sqlite_as_cache",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-RESEARCH.md",
+      "source_location": "Architectural Responsibility Map",
+      "weight": 1.0
+    },
+    {
+      "source": "phase2.reviewWarnings",
+      "target": "phase2.antiCorruptionSummary",
+      "relation": "reviews_and_flags_partial_response_risk",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-REVIEW.md",
+      "source_location": "WR-01",
+      "weight": 1.0
+    },
+    {
+      "source": "phase2.reviewWarnings",
+      "target": "phase2.ratesScreenSummary",
+      "relation": "reviews_action_result_and_timestamp_ui_contract",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-REVIEW.md",
+      "source_location": "WR-02 and IN-03",
+      "weight": 1.0
+    },
+    {
+      "source": "phase2.uiSpecRatesScreen",
+      "target": "phase2.ratesScreenPlan",
+      "relation": "defines_copy_states_and_interactions",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-UI-SPEC.md",
+      "source_location": "copywriting and interaction notes",
+      "weight": 1.0
+    },
+    {
+      "source": "phase2.validationStrategy",
+      "target": "phase2.antiCorruptionPlan",
+      "relation": "maps_automated_tests_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-VALIDATION.md",
+      "source_location": "Per-Task Verification Map",
+      "weight": 1.0
+    },
+    {
+      "source": "phase2.validationStrategy",
+      "target": "phase2.ratesScreenPlan",
+      "relation": "maps_manual_uat_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-VALIDATION.md",
+      "source_location": "Manual-Only Verifications",
+      "weight": 1.0
+    },
+    {
+      "source": "phase2.verificationReport",
+      "target": "phase2.fxCacheFoundationSummary",
+      "relation": "verifies_code_level_truths",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-VERIFICATION.md",
+      "source_location": "Truth-by-truth verification",
+      "weight": 1.0
+    },
+    {
+      "source": "phase2.verificationReport",
+      "target": "phase2.antiCorruptionSummary",
+      "relation": "verifies_service_level_truths",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-VERIFICATION.md",
+      "source_location": "Truth-by-truth verification",
+      "weight": 1.0
+    },
+    {
+      "source": "phase2.verificationReport",
+      "target": "phase2.ratesScreenSummary",
+      "relation": "identifies_user_visible_runtime_checks",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-VERIFICATION.md",
+      "source_location": "Human Verification Required",
+      "weight": 1.0
+    },
+    {
+      "source": "phase2.uatPassed",
+      "target": "phase2.ratesScreenSummary",
+      "relation": "passes_runtime_rates_screen_acceptance",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-UAT.md",
+      "source_location": "Tests 1-5",
+      "weight": 1.0
+    },
+    {
+      "source": "phase5.dashboardHandoff",
+      "target": "phase5.dashboardAggregatePlan",
+      "relation": "points_next_action_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\05-dashboard-overview\\.continue-here.md",
+      "source_location": "next_action",
+      "weight": 1.0
+    },
+    {
+      "source": "phase5.dashboardHandoff",
+      "target": "schema.space",
+      "relation": "declares_stored_amountUsd_as_authoritative",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\05-dashboard-overview\\.continue-here.md",
+      "source_location": "Critical Context",
+      "weight": 1.0
+    },
+    {
+      "source": "phase5.dashboardHandoff",
+      "target": "schema.childAccount",
+      "relation": "declares_monthlyAmountUsd_as_authoritative",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\05-dashboard-overview\\.continue-here.md",
+      "source_location": "Critical Context",
+      "weight": 1.0
+    },
+    {
+      "source": "phase5.dashboardAggregatePlan",
+      "target": "schema.space",
+      "relation": "plans_aggregate_reads_over",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\05-dashboard-overview\\05-01-PLAN.md",
+      "source_location": "key_links and Task 2",
+      "weight": 1.0
+    },
+    {
+      "source": "phase5.dashboardAggregatePlan",
+      "target": "schema.childAccount",
+      "relation": "plans_aggregate_reads_over",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\05-dashboard-overview\\05-01-PLAN.md",
+      "source_location": "key_links and Task 2",
+      "weight": 1.0
+    },
+    {
+      "source": "phase5.dashboardAggregatePlan",
+      "target": "schema.paymentChannel",
+      "relation": "plans_payment_channel_distribution_buckets",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\05-dashboard-overview\\05-01-PLAN.md",
+      "source_location": "DASH-03 and Task 2",
+      "weight": 1.0
+    },
+    {
+      "source": "phase5.dashboardAggregatePlan",
+      "target": "schema.currency",
+      "relation": "plans_currency_distribution_buckets",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\05-dashboard-overview\\05-01-PLAN.md",
+      "source_location": "DASH-03 and Task 2",
+      "weight": 1.0
+    },
+    {
+      "source": "phase5.dashboardAggregatePlan",
+      "target": "schema.fxRate",
+      "relation": "explicitly_excludes_live_fx_recomputation",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\05-dashboard-overview\\05-01-PLAN.md",
+      "source_location": "must_haves and Task 2",
+      "weight": 1.0
+    },
+    {
+      "source": "phase5.dashboardAggregatePlan",
+      "target": "spaces.listSpaceDetails",
+      "relation": "uses_existing_space_detail_patterns_as_context",
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "source_file": ".planning\\phases\\05-dashboard-overview\\05-01-PLAN.md",
+      "source_location": "context includes src/db/spaces.ts and spaces.query.test.ts",
+      "weight": 0.7
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "hyperedge.fx_refresh_cache_flow",
+      "label": "Frankfurter refresh to local FX cache",
+      "nodes": [
+        "phase2.contextDecisions",
+        "phase2.antiCorruptionPlan",
+        "seed.CURRENCY_SEED",
+        "schema.fxRate",
+        "phase2.ratesScreenPlan"
+      ],
+      "relation": "fetch_validate_invert_upsert_then_display",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\02-exchange-rate-layer\\02-RESEARCH.md"
+    },
+    {
+      "id": "hyperedge.space_detail_read_model",
+      "label": "Space detail read model joins",
+      "nodes": [
+        "spaces.listSpaceDetails",
+        "schema.space",
+        "schema.motherAccount",
+        "schema.paymentChannel",
+        "schema.currency",
+        "schema.childAccount"
+      ],
+      "relation": "join_space_metadata_and_aggregate_child_count",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\db\\spaces.ts"
+    },
+    {
+      "id": "hyperedge.dashboard_stored_usd_aggregation",
+      "label": "Dashboard stored USD aggregation contract",
+      "nodes": [
+        "phase5.dashboardHandoff",
+        "phase5.dashboardAggregatePlan",
+        "schema.space",
+        "schema.childAccount",
+        "schema.paymentChannel",
+        "schema.currency",
+        "schema.fxRate"
+      ],
+      "relation": "aggregate_stored_usd_fields_without_live_fx_recomputation",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".planning\\phases\\05-dashboard-overview\\05-01-PLAN.md"
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

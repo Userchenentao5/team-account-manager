@@ -212,7 +212,7 @@ export const childAccount = sqliteTable("child_account", {
 ### Pattern 2: Mother Seat Metadata Migration
 
 **What:** Extend `mother_account` with `seat_type` and `can_change_seat_type`. [VERIFIED: `04-CONTEXT.md`]  
-**Migration strategy:** use not-null defaults so existing Phase 03 mother rows migrate without manual backfill. [VERIFIED: live schema has existing `mother_account.email`; VERIFIED: `src/db/schema.ts`] Recommended defaults are `seat_type = 'codex'` and `can_change_seat_type = true`; if that default is semantically wrong for existing data, planner must add a Wave 0 human checkpoint before migration. [ASSUMED]
+**Migration strategy:** use not-null defaults so existing Phase 03 mother rows migrate without manual backfill. [VERIFIED: live schema has existing `mother_account.email`; VERIFIED: `src/db/schema.ts`] Existing mother accounts default to `seat_type = 'codex'` and `can_change_seat_type = true`, because the columns are immediately editable from the space detail page and this is the least disruptive additive migration default. [RESOLVED]
 
 ### Pattern 3: Reusable USD Snapshot Helper
 
@@ -340,15 +340,15 @@ it("deleting a space cascades mother and child accounts", () => {
 
 | # | Claim | Section | Risk if Wrong |
 |---|-------|---------|---------------|
-| A1 | Defaulting existing mother accounts to `seat_type = 'codex'` and `can_change_seat_type = true` is acceptable. | Mother Seat Metadata Migration | Existing live rows may need different metadata; planner should add a quick human/default confirmation if data already matters. |
+| A1 | Existing mother accounts default to `seat_type = 'codex'` and `can_change_seat_type = true`; users can immediately edit both fields from the space detail page. | Mother Seat Metadata Migration | RESOLVED: least disruptive additive migration default. |
 | A2 | Drizzle SQLite CHECK constraints are worth adding only if convenient in current schema/migration flow. | Child Account Schema | If DB-level enum enforcement is required, planner must include a schema/migration check task rather than relying only on Zod. |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **What defaults should existing mother accounts receive?**
    - What we know: new columns need defaults to migrate existing rows safely. [VERIFIED: `src/db/schema.ts`]
-   - What's unclear: whether old mother seats are mostly Codex or ChatGPT. [ASSUMED]
-   - Recommendation: default to `codex` unless user confirms otherwise; make it editable from detail page immediately. [ASSUMED]
+   - Decision: existing mother accounts default to `seat_type = 'codex'` and `can_change_seat_type = true`.
+   - Rationale: the columns are immediately editable from the space detail page and this is the least disruptive additive migration default.
 
 ## Environment Availability
 

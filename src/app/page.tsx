@@ -17,7 +17,7 @@ function usd(amountMinor: number) {
 
 export default function DashboardPage() {
   const overview = getDashboardOverview(db);
-  const { totals, counts, distributions } = overview;
+  const { totals, counts, distributions, thresholds } = overview;
 
   return (
     <div className="flex flex-col gap-6 p-6">
@@ -54,7 +54,8 @@ export default function DashboardPage() {
               tone={totals.renewalRiskSpaces > 0 ? "risk" : "default"}
               description={
                 <>
-                  已过期 {counts.spacesByExpiryStatus.expired} / 7 天内{" "}
+                  已过期 {counts.spacesByExpiryStatus.expired} /{" "}
+                  {thresholds.spaceSoonDays} 天内{" "}
                   {counts.spacesByExpiryStatus.soon}
                 </>
               }
@@ -86,10 +87,13 @@ export default function DashboardPage() {
             <div>
               <h2 className="text-base font-semibold">到期风险空间</h2>
               <p className="mt-1 text-sm text-muted-foreground">
-                已过期和 7 天内到期的空间优先显示。
+                已过期和 {thresholds.spaceSoonDays} 天内到期的空间优先显示。
               </p>
             </div>
-            <ExpiringSpaceTable spaces={overview.expiringSpaces} />
+            <ExpiringSpaceTable
+              spaces={overview.expiringSpaces}
+              soonDays={thresholds.spaceSoonDays}
+            />
           </section>
 
           <section className="space-y-4">
@@ -148,7 +152,9 @@ export default function DashboardPage() {
                 </p>
               </div>
               <div>
-                <p className="text-xs text-muted-foreground">7 天内到期</p>
+                <p className="text-xs text-muted-foreground">
+                  {thresholds.spaceSoonDays} 天内到期
+                </p>
                 <p className="font-mono text-2xl font-semibold">
                   {counts.spacesByExpiryStatus.soon}
                 </p>
@@ -167,11 +173,11 @@ export default function DashboardPage() {
               </div>
               <div>
                 <p className="text-xs text-muted-foreground">席位类型</p>
-                <p className="font-mono text-sm">
-                  codex {counts.childAccountsBySeatType.codex}
+                <div className="font-mono text-sm">
+                  <p>codex {counts.childAccountsBySeatType.codex}</p>
                   <Separator className="my-2" />
-                  chatgpt {counts.childAccountsBySeatType.chatgpt}
-                </p>
+                  <p>chatgpt {counts.childAccountsBySeatType.chatgpt}</p>
+                </div>
               </div>
             </div>
           </section>

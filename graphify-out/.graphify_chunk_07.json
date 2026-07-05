@@ -1,0 +1,893 @@
+{
+  "nodes": [
+    {
+      "id": "action:createSpace",
+      "label": "createSpace server action",
+      "file_type": "code",
+      "source_file": "src\\actions\\spaces.ts",
+      "source_location": "createSpace",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "action:updateSpace",
+      "label": "updateSpace server action",
+      "file_type": "code",
+      "source_file": "src\\actions\\spaces.ts",
+      "source_location": "updateSpace",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "action:renewSpace",
+      "label": "renewSpace server action",
+      "file_type": "code",
+      "source_file": "src\\actions\\spaces.ts",
+      "source_location": "renewSpace",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "action:deleteSpace",
+      "label": "deleteSpace server action",
+      "file_type": "code",
+      "source_file": "src\\actions\\spaces.ts",
+      "source_location": "deleteSpace",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "helper:spaceReferenceValidation",
+      "label": "Space reference validation",
+      "file_type": "code",
+      "source_file": "src\\actions\\spaces.ts",
+      "source_location": "validateReferences",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "helper:spaceFrozenUsdSnapshot",
+      "label": "Frozen USD snapshot computation",
+      "file_type": "code",
+      "source_file": "src\\actions\\spaces.ts",
+      "source_location": "computeSnapshot",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "helper:spacePathRevalidation",
+      "label": "Space path revalidation",
+      "file_type": "code",
+      "source_file": "src\\actions\\spaces.ts",
+      "source_location": "revalidateSpace",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "test:spaceActionsLifecycleSpec",
+      "label": "Space action lifecycle tests",
+      "file_type": "code",
+      "source_file": "src\\actions\\spaces.test.ts",
+      "source_location": "describe space server actions",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "ui:SpaceForm",
+      "label": "Space add/edit form",
+      "file_type": "code",
+      "source_file": "src\\components\\spaces\\space-form.tsx",
+      "source_location": "SpaceForm and SpaceEditorForm",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "ui:ChildAccountForm",
+      "label": "Child account dialog form",
+      "file_type": "code",
+      "source_file": "src\\components\\spaces\\child-account-form.tsx",
+      "source_location": "ChildAccountForm",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "ui:ChildAccountDeleteDialog",
+      "label": "Child account delete dialog",
+      "file_type": "code",
+      "source_file": "src\\components\\spaces\\child-account-delete-dialog.tsx",
+      "source_location": "ChildAccountDeleteDialog",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "ui:ChildAccountTable",
+      "label": "Inline child account table",
+      "file_type": "code",
+      "source_file": "src\\components\\spaces\\child-account-table.tsx",
+      "source_location": "ChildAccountTable and InlineChildAccountRow",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "ui:ExpiryBadge",
+      "label": "Expiry status badge",
+      "file_type": "code",
+      "source_file": "src\\components\\spaces\\expiry-badge.tsx",
+      "source_location": "ExpiryBadge",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "ui:MotherSeatCard",
+      "label": "Mother seat card",
+      "file_type": "code",
+      "source_file": "src\\components\\spaces\\mother-seat-card.tsx",
+      "source_location": "MotherSeatCard",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "ui:SpaceDeleteDialog",
+      "label": "Space delete confirmation dialog",
+      "file_type": "code",
+      "source_file": "src\\components\\spaces\\space-delete-dialog.tsx",
+      "source_location": "SpaceDeleteDialog",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "ui:SpaceDetailActions",
+      "label": "Space detail action bar",
+      "file_type": "code",
+      "source_file": "src\\components\\spaces\\space-detail-actions.tsx",
+      "source_location": "SpaceDetailActions",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "ui:SpaceTable",
+      "label": "Space list table",
+      "file_type": "code",
+      "source_file": "src\\components\\spaces\\space-table.tsx",
+      "source_location": "SpaceTable",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "lib:countryOptionsFromCurrencies",
+      "label": "Country options from currency metadata",
+      "file_type": "code",
+      "source_file": "src\\lib\\countries.ts",
+      "source_location": "countryOptionsFromCurrencies",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "lib:formatCountryLabel",
+      "label": "Country label formatter",
+      "file_type": "code",
+      "source_file": "src\\lib\\countries.ts",
+      "source_location": "formatCountryLabel",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "test:countryOptionsSpec",
+      "label": "Country option derivation tests",
+      "file_type": "code",
+      "source_file": "src\\lib\\countries.test.ts",
+      "source_location": "describe country options",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "lib:rateSupportedCurrencyMetadata",
+      "label": "Rate-supported currency metadata",
+      "file_type": "code",
+      "source_file": "src\\lib\\currencies.ts",
+      "source_location": "RATE_SUPPORTED_CURRENCIES",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "lib:currencyLookupAndFormatting",
+      "label": "Currency lookup and display formatting",
+      "file_type": "code",
+      "source_file": "src\\lib\\currencies.ts",
+      "source_location": "findRateSupportedCurrency, findRateSupportedCurrencyByCountry, formatCurrencyMinor",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema:0000_spaceCurrencyChannel",
+      "label": "Initial space currency channel schema",
+      "file_type": "document",
+      "source_file": "drizzle\\meta\\0000_snapshot.json",
+      "source_location": "tables currency, payment_channel, space",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema:0001_fxRate",
+      "label": "FX rate schema",
+      "file_type": "document",
+      "source_file": "drizzle\\meta\\0001_snapshot.json",
+      "source_location": "table fx_rate",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema:0002_motherAccount",
+      "label": "Mother account schema",
+      "file_type": "document",
+      "source_file": "drizzle\\meta\\0002_snapshot.json",
+      "source_location": "table mother_account",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema:0003_currencySymbol",
+      "label": "Currency symbol schema",
+      "file_type": "document",
+      "source_file": "drizzle\\meta\\0003_snapshot.json",
+      "source_location": "currency.symbol",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema:0004_childAccountsMotherSeat",
+      "label": "Child accounts and mother seat schema",
+      "file_type": "document",
+      "source_file": "drizzle\\meta\\0004_snapshot.json",
+      "source_location": "tables child_account and mother_account",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema:0005_currencyCountryMetadata",
+      "label": "Currency country metadata schema",
+      "file_type": "document",
+      "source_file": "drizzle\\meta\\0005_snapshot.json",
+      "source_location": "currency.country_code and currency.country_name",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema:0006_currentPeriodStart",
+      "label": "Current period start date schema",
+      "file_type": "document",
+      "source_file": "drizzle\\meta\\0006_snapshot.json",
+      "source_location": "space.current_period_start_date",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema:migrationJournal",
+      "label": "Drizzle migration journal",
+      "file_type": "document",
+      "source_file": "drizzle\\meta\\_journal.json",
+      "source_location": "entries",
+      "source_url": null,
+      "captured_at": "2026-07-04T00:00:00+08:00",
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "action:createSpace",
+      "target": "helper:spaceReferenceValidation",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\actions\\spaces.ts",
+      "source_location": "createSpace",
+      "weight": 1.0
+    },
+    {
+      "source": "action:createSpace",
+      "target": "helper:spaceFrozenUsdSnapshot",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\actions\\spaces.ts",
+      "source_location": "createSpace",
+      "weight": 1.0
+    },
+    {
+      "source": "action:createSpace",
+      "target": "helper:spacePathRevalidation",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\actions\\spaces.ts",
+      "source_location": "createSpace",
+      "weight": 1.0
+    },
+    {
+      "source": "action:updateSpace",
+      "target": "helper:spaceReferenceValidation",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\actions\\spaces.ts",
+      "source_location": "updateSpace",
+      "weight": 1.0
+    },
+    {
+      "source": "action:updateSpace",
+      "target": "helper:spaceFrozenUsdSnapshot",
+      "relation": "conditionally calls when amount or currency changes",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\actions\\spaces.ts",
+      "source_location": "updateSpace",
+      "weight": 1.0
+    },
+    {
+      "source": "action:updateSpace",
+      "target": "helper:spacePathRevalidation",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\actions\\spaces.ts",
+      "source_location": "updateSpace",
+      "weight": 1.0
+    },
+    {
+      "source": "action:renewSpace",
+      "target": "helper:spaceFrozenUsdSnapshot",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\actions\\spaces.ts",
+      "source_location": "renewSpace",
+      "weight": 1.0
+    },
+    {
+      "source": "action:renewSpace",
+      "target": "helper:spacePathRevalidation",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\actions\\spaces.ts",
+      "source_location": "renewSpace",
+      "weight": 1.0
+    },
+    {
+      "source": "action:deleteSpace",
+      "target": "helper:spacePathRevalidation",
+      "relation": "calls after successful cascade delete",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\actions\\spaces.ts",
+      "source_location": "deleteSpace",
+      "weight": 1.0
+    },
+    {
+      "source": "helper:spaceReferenceValidation",
+      "target": "schema:0000_spaceCurrencyChannel",
+      "relation": "validates payment_channel and currency references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "src\\actions\\spaces.ts",
+      "source_location": "validateReferences",
+      "weight": 0.85
+    },
+    {
+      "source": "helper:spaceFrozenUsdSnapshot",
+      "target": "schema:0001_fxRate",
+      "relation": "depends on cached rate_to_usd rows",
+      "confidence": "INFERRED",
+      "confidence_score": 0.88,
+      "source_file": "src\\actions\\spaces.ts",
+      "source_location": "computeSnapshot",
+      "weight": 0.88
+    },
+    {
+      "source": "action:createSpace",
+      "target": "schema:0002_motherAccount",
+      "relation": "creates associated mother account",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\actions\\spaces.ts",
+      "source_location": "createSpace",
+      "weight": 1.0
+    },
+    {
+      "source": "action:updateSpace",
+      "target": "schema:0006_currentPeriodStart",
+      "relation": "updates current period start and expiry fields",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\actions\\spaces.ts",
+      "source_location": "updateSpace",
+      "weight": 1.0
+    },
+    {
+      "source": "action:renewSpace",
+      "target": "schema:0006_currentPeriodStart",
+      "relation": "advances period using current period start and expiry",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\actions\\spaces.ts",
+      "source_location": "renewSpace",
+      "weight": 1.0
+    },
+    {
+      "source": "test:spaceActionsLifecycleSpec",
+      "target": "action:createSpace",
+      "relation": "tests frozen snapshot creation and no-rate blocking",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\actions\\spaces.test.ts",
+      "source_location": "creates space and mother account",
+      "weight": 1.0
+    },
+    {
+      "source": "test:spaceActionsLifecycleSpec",
+      "target": "action:updateSpace",
+      "relation": "tests snapshot preservation and refreeze on amount or currency change",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\actions\\spaces.test.ts",
+      "source_location": "preserves frozen snapshot; re-freezes snapshot",
+      "weight": 1.0
+    },
+    {
+      "source": "test:spaceActionsLifecycleSpec",
+      "target": "action:renewSpace",
+      "relation": "tests renewal from current expiry and refreshed snapshot",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\actions\\spaces.test.ts",
+      "source_location": "renews a space from its current expiry",
+      "weight": 1.0
+    },
+    {
+      "source": "test:spaceActionsLifecycleSpec",
+      "target": "action:deleteSpace",
+      "relation": "tests exact-name confirmation and cascade deletion",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\actions\\spaces.test.ts",
+      "source_location": "rejects delete name mismatch; deletes space by exact name",
+      "weight": 1.0
+    },
+    {
+      "source": "ui:SpaceForm",
+      "target": "action:createSpace",
+      "relation": "calls in add mode",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\spaces\\space-form.tsx",
+      "source_location": "onSubmit",
+      "weight": 1.0
+    },
+    {
+      "source": "ui:SpaceForm",
+      "target": "action:updateSpace",
+      "relation": "calls in edit mode",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\spaces\\space-form.tsx",
+      "source_location": "onSubmit",
+      "weight": 1.0
+    },
+    {
+      "source": "ui:SpaceForm",
+      "target": "lib:rateSupportedCurrencyMetadata",
+      "relation": "uses CurrencyRow metadata for country currency pairing and minor units",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "src\\components\\spaces\\space-form.tsx",
+      "source_location": "countryOptions, setCountryAndCurrency, setCurrencyAndCountry",
+      "weight": 0.8
+    },
+    {
+      "source": "ui:ChildAccountForm",
+      "target": "schema:0004_childAccountsMotherSeat",
+      "relation": "edits child_account fields including monthly currency and payment day",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\spaces\\child-account-form.tsx",
+      "source_location": "ChildAccountForm",
+      "weight": 1.0
+    },
+    {
+      "source": "ui:ChildAccountDeleteDialog",
+      "target": "schema:0004_childAccountsMotherSeat",
+      "relation": "deletes a child account without deleting the parent space or mother account",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\spaces\\child-account-delete-dialog.tsx",
+      "source_location": "AlertDialogDescription and onConfirm",
+      "weight": 1.0
+    },
+    {
+      "source": "ui:ChildAccountTable",
+      "target": "ui:ChildAccountDeleteDialog",
+      "relation": "renders",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\spaces\\child-account-table.tsx",
+      "source_location": "ChildAccountTable",
+      "weight": 1.0
+    },
+    {
+      "source": "ui:ChildAccountTable",
+      "target": "schema:0004_childAccountsMotherSeat",
+      "relation": "inline creates and edits child account rows",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\spaces\\child-account-table.tsx",
+      "source_location": "InlineChildAccountRow",
+      "weight": 1.0
+    },
+    {
+      "source": "ui:ChildAccountTable",
+      "target": "lib:currencyLookupAndFormatting",
+      "relation": "formats monthly original and frozen USD amounts",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\spaces\\child-account-table.tsx",
+      "source_location": "TableCell amount renderers",
+      "weight": 1.0
+    },
+    {
+      "source": "ui:ExpiryBadge",
+      "target": "schema:0006_currentPeriodStart",
+      "relation": "displays status for expiry date maintained by period lifecycle",
+      "confidence": "INFERRED",
+      "confidence_score": 0.78,
+      "source_file": "src\\components\\spaces\\expiry-badge.tsx",
+      "source_location": "ExpiryBadge",
+      "weight": 0.78
+    },
+    {
+      "source": "ui:MotherSeatCard",
+      "target": "schema:0004_childAccountsMotherSeat",
+      "relation": "edits mother_account seat_type and can_change_seat_type",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\spaces\\mother-seat-card.tsx",
+      "source_location": "MotherSeatCard",
+      "weight": 1.0
+    },
+    {
+      "source": "ui:SpaceDeleteDialog",
+      "target": "action:deleteSpace",
+      "relation": "calls after exact name confirmation",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\spaces\\space-delete-dialog.tsx",
+      "source_location": "onConfirm",
+      "weight": 1.0
+    },
+    {
+      "source": "ui:SpaceDeleteDialog",
+      "target": "schema:0004_childAccountsMotherSeat",
+      "relation": "warns that space deletion cascades to mother and child accounts",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\spaces\\space-delete-dialog.tsx",
+      "source_location": "AlertDialogDescription",
+      "weight": 1.0
+    },
+    {
+      "source": "ui:SpaceDetailActions",
+      "target": "action:renewSpace",
+      "relation": "calls from renewal confirmation dialog",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\spaces\\space-detail-actions.tsx",
+      "source_location": "onRenew",
+      "weight": 1.0
+    },
+    {
+      "source": "ui:SpaceDetailActions",
+      "target": "ui:SpaceDeleteDialog",
+      "relation": "renders",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\spaces\\space-detail-actions.tsx",
+      "source_location": "SpaceDetailActions",
+      "weight": 1.0
+    },
+    {
+      "source": "ui:SpaceTable",
+      "target": "ui:SpaceForm",
+      "relation": "renders for add and edit workflows",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\spaces\\space-table.tsx",
+      "source_location": "SpaceTable",
+      "weight": 1.0
+    },
+    {
+      "source": "ui:SpaceTable",
+      "target": "ui:SpaceDeleteDialog",
+      "relation": "renders for list-row deletion",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\spaces\\space-table.tsx",
+      "source_location": "SpaceTable",
+      "weight": 1.0
+    },
+    {
+      "source": "ui:SpaceTable",
+      "target": "ui:ExpiryBadge",
+      "relation": "renders expiry status",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\spaces\\space-table.tsx",
+      "source_location": "TableCell expiryDate",
+      "weight": 1.0
+    },
+    {
+      "source": "ui:SpaceTable",
+      "target": "lib:countryOptionsFromCurrencies",
+      "relation": "calls to build country filter options",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\spaces\\space-table.tsx",
+      "source_location": "countryOptions",
+      "weight": 1.0
+    },
+    {
+      "source": "ui:SpaceTable",
+      "target": "lib:formatCountryLabel",
+      "relation": "calls to display stored country code",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\spaces\\space-table.tsx",
+      "source_location": "TableCell country",
+      "weight": 1.0
+    },
+    {
+      "source": "ui:SpaceTable",
+      "target": "lib:currencyLookupAndFormatting",
+      "relation": "formats original and USD amounts",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\spaces\\space-table.tsx",
+      "source_location": "amount TableCells",
+      "weight": 1.0
+    },
+    {
+      "source": "lib:countryOptionsFromCurrencies",
+      "target": "schema:0005_currencyCountryMetadata",
+      "relation": "requires currency country_code and country_name metadata",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": "src\\lib\\countries.ts",
+      "source_location": "countryOptionsFromCurrencies",
+      "weight": 0.9
+    },
+    {
+      "source": "test:countryOptionsSpec",
+      "target": "lib:countryOptionsFromCurrencies",
+      "relation": "tests derivation and deduplication",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\lib\\countries.test.ts",
+      "source_location": "country options tests",
+      "weight": 1.0
+    },
+    {
+      "source": "lib:currencyLookupAndFormatting",
+      "target": "lib:rateSupportedCurrencyMetadata",
+      "relation": "searches and formats metadata entries",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\lib\\currencies.ts",
+      "source_location": "findRateSupportedCurrency and formatCurrencyMinor",
+      "weight": 1.0
+    },
+    {
+      "source": "lib:rateSupportedCurrencyMetadata",
+      "target": "schema:0005_currencyCountryMetadata",
+      "relation": "provides code, symbol, minor unit, country code, and country name values for seeded currency rows",
+      "confidence": "INFERRED",
+      "confidence_score": 0.86,
+      "source_file": "src\\lib\\currencies.ts",
+      "source_location": "RATE_SUPPORTED_CURRENCIES",
+      "weight": 0.86
+    },
+    {
+      "source": "schema:migrationJournal",
+      "target": "schema:0000_spaceCurrencyChannel",
+      "relation": "orders migration entry 0000_sudden_tony_stark",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "drizzle\\meta\\_journal.json",
+      "source_location": "entries[0]",
+      "weight": 1.0
+    },
+    {
+      "source": "schema:migrationJournal",
+      "target": "schema:0006_currentPeriodStart",
+      "relation": "orders migration entry 0006_cuddly_karen_page",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "drizzle\\meta\\_journal.json",
+      "source_location": "entries[6]",
+      "weight": 1.0
+    },
+    {
+      "source": "schema:0000_spaceCurrencyChannel",
+      "target": "schema:0001_fxRate",
+      "relation": "evolves_to with fx_rate table added",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "drizzle\\meta\\0001_snapshot.json",
+      "source_location": "tables.fx_rate",
+      "weight": 1.0
+    },
+    {
+      "source": "schema:0001_fxRate",
+      "target": "schema:0002_motherAccount",
+      "relation": "evolves_to with mother_account table added",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "drizzle\\meta\\0002_snapshot.json",
+      "source_location": "tables.mother_account",
+      "weight": 1.0
+    },
+    {
+      "source": "schema:0002_motherAccount",
+      "target": "schema:0003_currencySymbol",
+      "relation": "evolves_to with currency symbol added",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "drizzle\\meta\\0003_snapshot.json",
+      "source_location": "currency.symbol",
+      "weight": 1.0
+    },
+    {
+      "source": "schema:0003_currencySymbol",
+      "target": "schema:0004_childAccountsMotherSeat",
+      "relation": "evolves_to with child_account and mother seat fields added",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "drizzle\\meta\\0004_snapshot.json",
+      "source_location": "tables.child_account and mother_account",
+      "weight": 1.0
+    },
+    {
+      "source": "schema:0004_childAccountsMotherSeat",
+      "target": "schema:0005_currencyCountryMetadata",
+      "relation": "evolves_to with currency country metadata added",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "drizzle\\meta\\0005_snapshot.json",
+      "source_location": "currency.country_code and currency.country_name",
+      "weight": 1.0
+    },
+    {
+      "source": "schema:0005_currencyCountryMetadata",
+      "target": "schema:0006_currentPeriodStart",
+      "relation": "evolves_to with current_period_start_date added to space",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "drizzle\\meta\\0006_snapshot.json",
+      "source_location": "space.current_period_start_date",
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "hyperedge:spaceLifecycleFrozenCost",
+      "label": "Space lifecycle frozen cost flow",
+      "nodes": [
+        "ui:SpaceForm",
+        "ui:SpaceDetailActions",
+        "ui:SpaceDeleteDialog",
+        "action:createSpace",
+        "action:updateSpace",
+        "action:renewSpace",
+        "action:deleteSpace",
+        "helper:spaceReferenceValidation",
+        "helper:spaceFrozenUsdSnapshot",
+        "schema:0006_currentPeriodStart"
+      ],
+      "relation": "Space create, edit, renew, and delete workflows share server-side validation, reference checks, expiry period state, frozen USD snapshots, and path revalidation.",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\actions\\spaces.ts"
+    },
+    {
+      "id": "hyperedge:childAccountManagement",
+      "label": "Child account management flow",
+      "nodes": [
+        "ui:ChildAccountForm",
+        "ui:ChildAccountTable",
+        "ui:ChildAccountDeleteDialog",
+        "ui:MotherSeatCard",
+        "schema:0004_childAccountsMotherSeat",
+        "lib:currencyLookupAndFormatting"
+      ],
+      "relation": "Child account UI manages seat type, email, labels, monthly cost, frozen USD display, deletion, and mother-seat metadata against the child_account and mother_account schema.",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src\\components\\spaces\\child-account-table.tsx"
+    },
+    {
+      "id": "hyperedge:currencyCountryMetadataContract",
+      "label": "Currency country metadata contract",
+      "nodes": [
+        "lib:rateSupportedCurrencyMetadata",
+        "lib:currencyLookupAndFormatting",
+        "lib:countryOptionsFromCurrencies",
+        "ui:SpaceForm",
+        "ui:SpaceTable",
+        "schema:0005_currencyCountryMetadata",
+        "test:countryOptionsSpec"
+      ],
+      "relation": "Currency metadata is the source for country options, country-currency auto-fill, display formatting, and tests that selectable countries derive from currency metadata.",
+      "confidence": "INFERRED",
+      "confidence_score": 0.88,
+      "source_file": "src\\lib\\currencies.ts"
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

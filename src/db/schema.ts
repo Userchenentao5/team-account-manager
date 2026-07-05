@@ -8,8 +8,11 @@ import { sql } from "drizzle-orm";
  * drives all integer-minor-unit money math downstream.
  */
 export const currency = sqliteTable("currency", {
-  code: text("code").primaryKey(), // 'USD','CNY','EUR','GBP','JPY','HKD'
+  code: text("code").primaryKey(), // ISO-4217 code, e.g. USD/CNY/THB/SGD
   name: text("name").notNull(),
+  symbol: text("symbol").notNull().default(""),
+  countryCode: text("country_code").notNull().default(""),
+  countryName: text("country_name").notNull().default(""),
   minorUnit: integer("minor_unit").notNull(), // JPY=0, others=2 — money authority
   isActive: integer("is_active", { mode: "boolean" }).notNull().default(true),
 });
@@ -33,7 +36,7 @@ export const paymentChannel = sqliteTable("payment_channel", {
  * FX-01 — exchange-rate cache (Phase 2, D-01/D-02/D-03).
  *
  * One row per currency (`currencyCode` text PK, FK → `currency.code`) so the
- * cache is limited to the 6 seeded currencies. `rateToUsd` is the X→USD value
+ * cache is limited to locally enabled currencies. `rateToUsd` is the X→USD value
  * as a decimal STRING — never a float column (D-02). `fetchedAt` is the ISO
  * wall-clock of the successful fetch and drives both the "rates as of" label
  * (D-05) and the staleness age check (D-07). Staleness itself is computed
@@ -47,6 +50,12 @@ export const fxRate = sqliteTable("fx_rate", {
   fetchedAt: text("fetched_at").notNull(), // ISO wall-clock of successful fetch (D-05/D-07)
 });
 export type FxRateRow = typeof fxRate.$inferSelect;
+
+export const appSetting = sqliteTable("app_setting", {
+  key: text("key").primaryKey(),
+  value: text("value").notNull(),
+});
+export type AppSettingRow = typeof appSetting.$inferSelect;
 
 /**
  * Phase 3 entity — DECLARED NOW (Pattern 2) so the money/FX-snapshot/period
@@ -73,6 +82,49 @@ export const space = sqliteTable("space", {
   rateAsOf: text("rate_as_of"),
   rateSource: text("rate_source"),
   amountUsd: integer("amount_usd"), // USD minor units, frozen at payment
-  openingDate: text("opening_date"), // YYYY-MM-DD
-  expiryDate: text("expiry_date"), // derived + stored Phase 3
+  openingDate: text("opening_date"), // first activation date, YYYY-MM-DD
+  currentPeriodStartDate: text("current_period_start_date"), // current paid period start, YYYY-MM-DD
+  expiryDate: text("expiry_date"), // derived from currentPeriodStartDate + period
 });
+
+export const motherAccount = sqliteTable("mother_account", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  spaceId: integer("space_id")
+    .notNull()
+    .unique()
+    .references(() => space.id, { onDelete: "cascade" }),
+  email: text("email").notNull(),
+  seatType: text("seat_type").notNull().default("codex"),
+  canChangeSeatType: integer("can_change_seat_type", { mode: "boolean" })
+    .notNull()
+    .default(true),
+});
+export type MotherAccountRow = typeof motherAccount.$inferSelect;
+
+export const childAccount = sqliteTable("child_account", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  spaceId: integer("space_id")
+    .notNull()
+    .references(() => space.id, { onDelete: "cascade" }),
+  seatType: text("seat_type").notNull().default("codex"),
+  email: text("email").notNull(),
+  contact: text("contact").notNull().default(""),
+  label: text("label").notNull().default(""),
+  joinedDate: text("joined_date").notNull(),
+  monthlyAmountMinor: integer("monthly_amount_minor").notNull(),
+  monthlyCurrencyCode: text("monthly_currency_code")
+    .notNull()
+    .references(() => currency.code),
+  monthlyRateUsed: text("monthly_rate_used").notNull(),
+  monthlyRateAsOf: text("monthly_rate_as_of").notNull(),
+  monthlyRateSource: text("monthly_rate_source").notNull(),
+  monthlyAmountUsd: integer("monthly_amount_usd").notNull(),
+  monthlyPaymentDay: integer("monthly_payment_day").notNull(),
+  createdAt: text("created_at")
+    .notNull()
+    .default(sql`(CURRENT_TIMESTAMP)`),
+  updatedAt: text("updated_at")
+    .notNull()
+    .default(sql`(CURRENT_TIMESTAMP)`),
+});
+export type ChildAccountRow = typeof childAccount.$inferSelect;
