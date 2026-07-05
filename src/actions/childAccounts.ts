@@ -12,6 +12,10 @@ import {
 import { getCurrencyMinorUnit } from "@/db/currencies";
 import { getRate } from "@/db/fxRates";
 import { getSpaceDetail } from "@/db/spaces";
+import {
+  nextMonthlyPaymentDueDate,
+  renewMonthlyPaymentDueDate,
+} from "@/lib/expiry";
 import { ensureFreshRates } from "@/lib/fx/frankfurter";
 import { freezeUsdMinor } from "@/lib/money";
 import {
@@ -33,6 +37,7 @@ import { spaceIdSchema } from "@/lib/validation/space";
 const SPACES_PATH = "/spaces";
 const NO_RATE_ERROR =
   "该币种暂无汇率，无法折算 USD。请先到「汇率」页刷新汇率后重试。";
+const SELF_USE_RATE_SOURCE = "self-use";
 
 export type ChildAccountActionResult =
   | { ok: true }
@@ -47,6 +52,17 @@ function revalidateSpace(spaceId: number): void {
   revalidatePath(`${SPACES_PATH}/${spaceId}`);
 }
 
+function validateContactForStatus(
+  contact: string,
+  monthlyRateSource: string,
+): ChildAccountActionResult {
+  if (monthlyRateSource !== SELF_USE_RATE_SOURCE && !contact) {
+    return { ok: false, error: "非自用子账号请输入联系方式。" };
+  }
+
+  return { ok: true };
+}
+
 async function computeMonthlySnapshot(input: {
   monthlyAmountMinor: number;
   monthlyCurrencyCode: string;
@@ -55,21 +71,31 @@ async function computeMonthlySnapshot(input: {
       ok: true;
       monthlyRateUsed: string;
       monthlyRateAsOf: string;
-      monthlyRateSource: "frankfurter";
+      monthlyRateSource: string;
       monthlyAmountUsd: number;
     }
   | { ok: false; error: string }
 > {
+  const srcExp = getCurrencyMinorUnit(db, input.monthlyCurrencyCode);
+  if (srcExp === undefined) {
+    return { ok: false, error: "请选择有效的币种。" };
+  }
+
+  if (input.monthlyAmountMinor === 0) {
+    return {
+      ok: true,
+      monthlyRateUsed: "1",
+      monthlyRateAsOf: new Date().toISOString(),
+      monthlyRateSource: SELF_USE_RATE_SOURCE,
+      monthlyAmountUsd: 0,
+    };
+  }
+
   await ensureFreshRates();
 
   const rate = getRate(db, input.monthlyCurrencyCode);
   if (!rate) {
     return { ok: false, error: NO_RATE_ERROR };
-  }
-
-  const srcExp = getCurrencyMinorUnit(db, input.monthlyCurrencyCode);
-  if (srcExp === undefined) {
-    return { ok: false, error: "请选择有效的币种。" };
   }
 
   return {
@@ -94,6 +120,7 @@ function toChildValues(
     monthlyRateSource: string;
     monthlyAmountUsd: number;
   },
+  nextPaymentDate: string | null,
 ) {
   return {
     spaceId,
@@ -109,6 +136,7 @@ function toChildValues(
     monthlyRateSource: snapshot.monthlyRateSource,
     monthlyAmountUsd: snapshot.monthlyAmountUsd,
     monthlyPaymentDay: data.monthlyPaymentDay,
+    nextPaymentDate,
   };
 }
 
@@ -133,10 +161,23 @@ export async function createChildAccount(
 
   const snapshot = await computeMonthlySnapshot(parsed.data);
   if (!snapshot.ok) return snapshot;
+  const contactCheck = validateContactForStatus(
+    parsed.data.contact,
+    snapshot.monthlyRateSource,
+  );
+  if (!contactCheck.ok) return contactCheck;
 
   insertChildAccount(
     db,
-    toChildValues(parsedSpaceId.data.id, parsed.data, snapshot),
+    toChildValues(
+      parsedSpaceId.data.id,
+      parsed.data,
+      snapshot,
+      nextMonthlyPaymentDueDate(
+        parsed.data.monthlyPaymentDay,
+        parsed.data.joinedDate,
+      ),
+    ),
   );
   revalidateSpace(parsedSpaceId.data.id);
   return { ok: true };
@@ -165,6 +206,11 @@ export async function updateChildAccount(
   const shouldRefreeze =
     data.monthlyAmountMinor !== existing.monthlyAmountMinor ||
     data.monthlyCurrencyCode !== existing.monthlyCurrencyCode;
+  const nextPaymentDate =
+    data.joinedDate !== existing.joinedDate ||
+    data.monthlyPaymentDay !== existing.monthlyPaymentDay
+      ? nextMonthlyPaymentDueDate(data.monthlyPaymentDay, data.joinedDate)
+      : existing.nextPaymentDate;
 
   const snapshot = shouldRefreeze
     ? await computeMonthlySnapshot(data)
@@ -176,12 +222,40 @@ export async function updateChildAccount(
         monthlyAmountUsd: existing.monthlyAmountUsd,
       };
   if (!snapshot.ok) return snapshot;
+  const contactCheck = validateContactForStatus(
+    data.contact,
+    snapshot.monthlyRateSource,
+  );
+  if (!contactCheck.ok) return contactCheck;
 
   updateChildAccountRow(
     db,
     parsedId.data.id,
-    toChildValues(existing.spaceId, data, snapshot),
+    toChildValues(existing.spaceId, data, snapshot, nextPaymentDate),
   );
+  revalidateSpace(existing.spaceId);
+  return { ok: true };
+}
+
+export async function renewChildAccount(
+  id: number,
+): Promise<ChildAccountActionResult> {
+  const parsedId = childAccountIdSchema.safeParse({ id });
+  if (!parsedId.success) {
+    return { ok: false, error: "无效的子账号。" };
+  }
+
+  const existing = getChildAccount(db, parsedId.data.id);
+  if (!existing) {
+    return { ok: false, error: "子账号不存在。" };
+  }
+
+  updateChildAccountRow(db, parsedId.data.id, {
+    nextPaymentDate: renewMonthlyPaymentDueDate(
+      existing.monthlyPaymentDay,
+      existing.nextPaymentDate,
+    ),
+  });
   revalidateSpace(existing.spaceId);
   return { ok: true };
 }

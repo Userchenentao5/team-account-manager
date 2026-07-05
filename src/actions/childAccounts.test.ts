@@ -17,11 +17,16 @@ vi.mock("@/lib/fx/frankfurter", () => ({
 import {
   createChildAccount,
   deleteChildAccount,
+  renewChildAccount,
   updateChildAccount,
   updateMotherSeat,
 } from "@/actions/childAccounts";
 import { insertChannel } from "@/db/channels";
-import { getChildAccount, insertChildAccount } from "@/db/childAccounts";
+import {
+  getChildAccount,
+  insertChildAccount,
+  updateChildAccount as updateChildAccountRow,
+} from "@/db/childAccounts";
 import { upsertRates } from "@/db/fxRates";
 import { seedCurrencies } from "@/db/seed";
 import { childAccount, motherAccount, space } from "@/db/schema";
@@ -64,6 +69,7 @@ describe("child account server actions (ACCT-02 / ACCT-03)", () => {
   });
 
   afterEach(() => {
+    vi.useRealTimers();
     vi.clearAllMocks();
     ctx.sqlite.close();
   });
@@ -128,7 +134,54 @@ describe("child account server actions (ACCT-02 / ACCT-03)", () => {
       monthlyRateSource: "frankfurter",
       monthlyAmountUsd: 2000,
       monthlyPaymentDay: 12,
+      nextPaymentDate: "2026-02-12",
     });
+  });
+
+  it("treats a child account joined on its payment day as already paid", async () => {
+    seedUsdRate();
+
+    const res = await createChildAccount(
+      spaceId,
+      validInput({ joinedDate: "2026-02-12", monthlyPaymentDay: 12 }),
+    );
+    const row = ctx.db.select().from(childAccount).get();
+
+    expect(res.ok).toBe(true);
+    expect(row?.nextPaymentDate).toBe("2026-03-12");
+  });
+
+  it("creates a zero-price child account without requiring an FX rate", async () => {
+    const res = await createChildAccount(
+      spaceId,
+      validInput({ contact: "", monthlyAmountMinor: 0 }),
+    );
+    const row = ctx.db.select().from(childAccount).get();
+
+    expect(res.ok).toBe(true);
+    expect(fxMock.ensureFreshRates).not.toHaveBeenCalled();
+    expect(row).toMatchObject({
+      monthlyAmountMinor: 0,
+      monthlyAmountUsd: 0,
+      monthlyRateUsed: "1",
+      monthlyRateSource: "self-use",
+    });
+  });
+
+  it("requires contact for paid child accounts", async () => {
+    seedUsdRate();
+
+    const res = await createChildAccount(
+      spaceId,
+      validInput({ contact: "", monthlyAmountMinor: 2000 }),
+    );
+
+    expect(res).toEqual({
+      ok: false,
+      error: "非自用子账号请输入联系方式。",
+    });
+    expect(fxMock.ensureFreshRates).toHaveBeenCalledOnce();
+    expect(ctx.db.select().from(childAccount).all()).toHaveLength(0);
   });
 
   it("blocks no-rate child create and writes no row", async () => {
@@ -197,6 +250,24 @@ describe("child account server actions (ACCT-02 / ACCT-03)", () => {
     expect(updated?.monthlyRateUsed).toBe("0.0064");
     expect(updated?.monthlyRateAsOf).toBe("2026-06-29T00:00:00.000Z");
     expect(updated?.monthlyAmountUsd).toBe(640);
+  });
+
+  it("renews a child account into the next billing cycle", async () => {
+    const row = seedChild();
+    updateChildAccountRow(
+      ctx.db,
+      row.id,
+      { nextPaymentDate: "2026-07-12" },
+    );
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date(2026, 6, 5));
+
+    const res = await renewChildAccount(row.id);
+    const updated = getChildAccount(ctx.db, row.id);
+
+    expect(res.ok).toBe(true);
+    expect(updated?.nextPaymentDate).toBe("2026-08-12");
+    vi.useRealTimers();
   });
 
   it("deletes only the requested child account", async () => {

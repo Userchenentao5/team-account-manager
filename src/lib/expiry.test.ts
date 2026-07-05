@@ -1,5 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { addPeriod, expiryStatus, monthlyPaymentDueDate } from "@/lib/expiry";
+import {
+  addPeriod,
+  expiryStatus,
+  monthlyPaymentDueDate,
+  nextMonthlyPaymentDueDate,
+  renewMonthlyPaymentDueDate,
+} from "@/lib/expiry";
 
 describe("expiry helpers", () => {
   it.each([
@@ -35,5 +41,19 @@ describe("expiry helpers", () => {
   it("turns a monthly payment day into this month's due date", () => {
     expect(monthlyPaymentDueDate(29, new Date(2026, 5, 28))).toBe("2026-06-29");
     expect(monthlyPaymentDueDate(31, new Date(2026, 1, 1))).toBe("2026-02-28");
+  });
+
+  it("treats the start date as already paid for that day", () => {
+    expect(nextMonthlyPaymentDueDate(5, "2026-07-05")).toBe("2026-08-05");
+    expect(nextMonthlyPaymentDueDate(10, "2026-07-05")).toBe("2026-07-10");
+  });
+
+  it("renews to the next billing cycle", () => {
+    expect(renewMonthlyPaymentDueDate(10, "2026-07-10", new Date(2026, 6, 5))).toBe(
+      "2026-08-10",
+    );
+    expect(renewMonthlyPaymentDueDate(1, "2026-07-01", new Date(2026, 6, 5))).toBe(
+      "2026-08-01",
+    );
   });
 });

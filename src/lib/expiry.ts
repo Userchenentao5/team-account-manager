@@ -55,3 +55,27 @@ export function monthlyPaymentDueDate(
   const day = Math.min(paymentDay, lastDay);
   return format(new Date(today.getFullYear(), today.getMonth(), day), "yyyy-MM-dd");
 }
+
+export function nextMonthlyPaymentDueDate(
+  paymentDay: number,
+  from: string | Date = new Date(),
+): string {
+  const base = typeof from === "string" ? localDateFromIsoDate(from) : from;
+  const dueThisMonth = localDateFromIsoDate(monthlyPaymentDueDate(paymentDay, base));
+  const due =
+    differenceInCalendarDays(dueThisMonth, base) <= 0
+      ? localDateFromIsoDate(monthlyPaymentDueDate(paymentDay, addMonths(base, 1)))
+      : dueThisMonth;
+
+  return format(due, "yyyy-MM-dd");
+}
+
+export function renewMonthlyPaymentDueDate(
+  paymentDay: number,
+  currentDueDate?: string | null,
+  today = new Date(),
+): string {
+  const todayIso = format(today, "yyyy-MM-dd");
+  const base = currentDueDate && currentDueDate > todayIso ? currentDueDate : today;
+  return nextMonthlyPaymentDueDate(paymentDay, base);
+}

@@ -115,7 +115,7 @@ export function ChildAccountForm({
     let monthlyAmountMinor: number;
     try {
       monthlyAmountMinor = parseToMinor(amountInput, currency.minorUnit);
-      if (monthlyAmountMinor <= 0) throw new Error("non-positive amount");
+      if (monthlyAmountMinor < 0) throw new Error("negative amount");
     } catch {
       form.setError("monthlyAmountMinor", { message: "请输入有效金额。" });
       return;
@@ -246,7 +246,7 @@ export function ChildAccountForm({
                       value={amountInput}
                       onChange={(event) => {
                         setAmountInput(event.target.value);
-                        field.onChange(Math.max(field.value, 1));
+                        field.onChange(Math.max(field.value, 0));
                       }}
                     />
                   </FormControl>

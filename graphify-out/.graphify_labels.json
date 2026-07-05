@@ -35,7 +35,7 @@
   "33": "Drizzle migrate function",
   "34": "mother_account Table",
   "35": "Dependency-driven phase roadmap",
-  "36": "spaces.test.ts",
+  "36": "expiry.ts",
   "37": "paymentChannel table usage",
   "38": "fxRate table usage",
   "39": "Form label control description message accessibility contract",
@@ -136,7 +136,6 @@
   "134": "Common Pitfalls",
   "135": "Common Pitfalls",
   "136": "Phase 04: Child Accounts & Cascade Delete Verification Report",
-  "137": "sidebar.tsx",
   "138": "Common Pitfalls",
   "139": "Common Pitfalls",
   "140": "05-01-PLAN.md",
@@ -550,9 +549,5 @@
   "548": "updateSpace Server Action",
   "549": "updateSpaceRow Helper",
   "550": "Atomic FX rate upsert transaction",
-  "551": "countries.ts",
-  "552": "sheet.tsx",
-  "553": "index.ts",
-  "554": "react",
   "555": "expiry-badge.tsx"
 }

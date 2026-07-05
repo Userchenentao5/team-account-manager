@@ -2,16 +2,17 @@
 
 import { useMemo, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { Check, Pencil, Plus, Trash2, X } from "lucide-react";
+import { Check, Pencil, Plus, RefreshCw, Trash2, X } from "lucide-react";
 import { toast } from "sonner";
 import {
   createChildAccount,
+  renewChildAccount,
   updateChildAccount,
 } from "@/actions/childAccounts";
 import type { ChildAccountListRow } from "@/db/childAccounts";
 import type { CurrencyRow } from "@/db/currencies";
 import { formatCurrencyMinor } from "@/lib/currencies";
-import { monthlyPaymentDueDate } from "@/lib/expiry";
+import { monthlyPaymentDueDate, nextMonthlyPaymentDueDate } from "@/lib/expiry";
 import { formatMinor, parseToMinor } from "@/lib/money";
 import {
   childAccountFormSchema,
@@ -50,6 +51,8 @@ type ChildAccountTableProps = {
   childAccountSoonDays: number;
 };
 
+const CONTACT_REQUIRED_ERROR = "非自用子账号请输入联系方式。";
+
 type ChildAccountFormValue = ChildAccountFormInput & {
   id?: number;
 };
@@ -70,7 +73,7 @@ function defaultFormValue(currencies: readonly CurrencyRow[]): ChildAccountFormV
     email: "",
     contact: "",
     label: "",
-    joinedDate: new Date().toISOString().slice(0, 10),
+    joinedDate: localIsoDate(),
     monthlyAmountMinor: 1,
     monthlyCurrencyCode:
       currencies.find((currency) => currency.code === "USD")?.code ??
@@ -78,6 +81,13 @@ function defaultFormValue(currencies: readonly CurrencyRow[]): ChildAccountFormV
       "USD",
     monthlyPaymentDay: 1,
   };
+}
+
+function localIsoDate(date = new Date()): string {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
 }
 
 function toFormValue(row: ChildAccountListRow): ChildAccountFormValue {
@@ -93,6 +103,24 @@ function toFormValue(row: ChildAccountListRow): ChildAccountFormValue {
     monthlyCurrencyCode: child.monthlyCurrencyCode,
     monthlyPaymentDay: child.monthlyPaymentDay,
   };
+}
+
+function childExpiryDate(child: ChildAccountListRow["childAccount"]): string {
+  return child.nextPaymentDate ?? monthlyPaymentDueDate(child.monthlyPaymentDay);
+}
+
+function childDisplayStatus(
+  child: ChildAccountListRow["childAccount"],
+): "self" | undefined {
+  return child.monthlyRateSource === "self-use" ? "self" : undefined;
+}
+
+function draftExpiryDate(draft: ChildAccountFormValue): string | null {
+  return Number.isInteger(draft.monthlyPaymentDay) &&
+    draft.monthlyPaymentDay >= 1 &&
+    draft.monthlyPaymentDay <= 31
+    ? nextMonthlyPaymentDueDate(draft.monthlyPaymentDay, draft.joinedDate)
+    : null;
 }
 
 function InlineChildAccountRow({
@@ -126,6 +154,14 @@ function InlineChildAccountRow({
     () => currencies.find((currency) => currency.code === draft.monthlyCurrencyCode),
     [currencies, draft.monthlyCurrencyCode],
   );
+  const draftAmountMinor = useMemo(() => {
+    if (!selectedCurrency || amountInput.trim() === "") return draft.monthlyAmountMinor;
+    try {
+      return parseToMinor(amountInput, selectedCurrency.minorUnit);
+    } catch {
+      return draft.monthlyAmountMinor;
+    }
+  }, [amountInput, draft.monthlyAmountMinor, selectedCurrency]);
 
   function updateDraft<Key extends keyof ChildAccountFormInput>(
     key: Key,
@@ -145,7 +181,7 @@ function InlineChildAccountRow({
     let monthlyAmountMinor: number;
     try {
       monthlyAmountMinor = parseToMinor(amountInput, currency.minorUnit);
-      if (monthlyAmountMinor <= 0) throw new Error("non-positive amount");
+      if (monthlyAmountMinor < 0) throw new Error("negative amount");
     } catch {
       setError({ field: "monthlyAmountMinor", message: "请输入有效的月度金额。" });
       return;
@@ -180,7 +216,10 @@ function InlineChildAccountRow({
           onSaved();
           router.refresh();
         } else {
-          setError({ message: res.error });
+          setError({
+            field: res.error === CONTACT_REQUIRED_ERROR ? "contact" : undefined,
+            message: res.error,
+          });
           toast.error(res.error);
         }
       } catch {
@@ -221,20 +260,18 @@ function InlineChildAccountRow({
           />
         </TableCell>
         <TableCell className="min-w-48">
-          <Input
-            value={draft.contact}
-            onChange={(event) => updateDraft("contact", event.target.value)}
-            placeholder="微信/手机号"
-            disabled={isPending}
-          />
-        </TableCell>
-        <TableCell className="min-w-48">
-          <Input
-            value={draft.label}
-            onChange={(event) => updateDraft("label", event.target.value)}
-            placeholder="备注"
-            disabled={isPending}
-          />
+          <div className="space-y-1">
+            <Input
+              value={draft.contact}
+              onChange={(event) => updateDraft("contact", event.target.value)}
+              placeholder="微信/手机号"
+              disabled={isPending}
+              aria-invalid={error?.field === "contact"}
+            />
+            {error?.field === "contact" ? (
+              <p className="text-xs text-destructive">{error.message}</p>
+            ) : null}
+          </div>
         </TableCell>
         <TableCell className="min-w-40">
           <Input
@@ -246,7 +283,7 @@ function InlineChildAccountRow({
           />
         </TableCell>
         <TableCell className="min-w-56">
-          <div className="flex justify-end gap-2">
+          <div className="flex justify-center gap-2">
             <Input
               inputMode="decimal"
               value={amountInput}
@@ -297,14 +334,18 @@ function InlineChildAccountRow({
             ) : null}
           </div>
         </TableCell>
+        <TableCell className="font-mono">
+          {draftAmountMinor === 0 ? "-" : draftExpiryDate(draft)}
+        </TableCell>
         <TableCell>
           <ExpiryBadge
-            expiryDate={monthlyPaymentDueDate(draft.monthlyPaymentDay)}
+            expiryDate={draftExpiryDate(draft)}
             soonDays={childAccountSoonDays}
+            displayStatus={draftAmountMinor === 0 ? "self" : undefined}
           />
         </TableCell>
         <TableCell className="text-right">
-          <div className="flex justify-end gap-1">
+          <div className="flex justify-center gap-1">
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button
@@ -339,7 +380,7 @@ function InlineChildAccountRow({
           </div>
         </TableCell>
       </TableRow>
-      {error && error.field !== "monthlyPaymentDay" ? (
+      {error && !error.field ? (
         <TableRow className="bg-muted/30 hover:bg-muted/30">
           <TableCell colSpan={9} className="pt-0 text-sm text-destructive">
             {error.message}
@@ -365,8 +406,26 @@ export function ChildAccountTable({
   const [deleteTarget, setDeleteTarget] = useState<
     ChildAccountListRow["childAccount"] | null
   >(null);
+  const router = useRouter();
+  const [isRenewPending, startRenewTransition] = useTransition();
   const isEditingRow = formState !== null;
   const shouldShowTable = accounts.length > 0 || formState?.mode === "add";
+
+  function onRenew(child: ChildAccountListRow["childAccount"]) {
+    startRenewTransition(async () => {
+      try {
+        const res = await renewChildAccount(child.id);
+        if (res.ok) {
+          toast.success("已续费，状态已恢复正常");
+          router.refresh();
+        } else {
+          toast.error(res.error);
+        }
+      } catch {
+        toast.error("续费失败，请重试。");
+      }
+    });
+  }
 
   return (
     <div className="flex flex-col gap-4">
@@ -387,18 +446,18 @@ export function ChildAccountTable({
       </div>
 
       {shouldShowTable ? (
-        <Table>
+        <Table className="[&_td]:text-center [&_th]:text-center">
           <TableHeader>
             <TableRow>
               <TableHead scope="col">类型</TableHead>
               <TableHead scope="col">邮箱/登录名</TableHead>
               <TableHead scope="col">联系方式</TableHead>
-              <TableHead scope="col">备注</TableHead>
               <TableHead scope="col">加入日期</TableHead>
               <TableHead scope="col" className="text-right">
                 月度原价
               </TableHead>
               <TableHead scope="col">月付日</TableHead>
+              <TableHead scope="col">到期日</TableHead>
               <TableHead scope="col">状态</TableHead>
               <TableHead scope="col" className="text-right">
                 操作
@@ -420,6 +479,8 @@ export function ChildAccountTable({
             ) : null}
             {accounts.map((row) => {
               const child = row.childAccount;
+              const displayStatus = childDisplayStatus(child);
+              const isSelfUse = displayStatus === "self";
               const isEditingCurrent =
                 formState?.mode === "edit" && formState.child.id === child.id;
 
@@ -449,22 +510,42 @@ export function ChildAccountTable({
                   </TableCell>
                   <TableCell className="font-mono">{child.email}</TableCell>
                   <TableCell>{child.contact || "-"}</TableCell>
-                  <TableCell>{child.label || "-"}</TableCell>
                   <TableCell className="font-mono">{child.joinedDate}</TableCell>
                   <TableCell className="text-right font-mono">
                     {formatCurrencyMinor(child.monthlyAmountMinor, row.currency)}
                   </TableCell>
                   <TableCell className="font-mono">
-                    每月 {child.monthlyPaymentDay} 日
+                    {isSelfUse ? "-" : `每月 ${child.monthlyPaymentDay} 日`}
+                  </TableCell>
+                  <TableCell className="font-mono">
+                    {isSelfUse ? "-" : childExpiryDate(child)}
                   </TableCell>
                   <TableCell>
                     <ExpiryBadge
-                      expiryDate={monthlyPaymentDueDate(child.monthlyPaymentDay)}
+                      expiryDate={childExpiryDate(child)}
                       soonDays={childAccountSoonDays}
+                      displayStatus={displayStatus}
                     />
                   </TableCell>
                   <TableCell className="text-right">
-                    <div className="flex justify-end gap-1">
+                    <div className="flex justify-center gap-1">
+                      {isSelfUse ? null : (
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="size-11"
+                              aria-label={`续费 ${child.email}`}
+                              onClick={() => onRenew(child)}
+                              disabled={isEditingRow || isRenewPending}
+                            >
+                              <RefreshCw className="size-4" />
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>续费</TooltipContent>
+                        </Tooltip>
+                      )}
                       <Tooltip>
                         <TooltipTrigger asChild>
                           <Button

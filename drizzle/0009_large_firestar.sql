@@ -1,0 +1,1 @@
+ALTER TABLE `child_account` ADD `next_payment_date` text;

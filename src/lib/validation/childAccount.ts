@@ -8,7 +8,7 @@ export const childAccountFormSchema = z.object({
   contact: z.string().trim(),
   label: z.string().trim(),
   joinedDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
-  monthlyAmountMinor: z.number().int().positive("请输入有效的月度金额。"),
+  monthlyAmountMinor: z.number().int().nonnegative("请输入有效的月度金额。"),
   monthlyCurrencyCode: z.string().length(3, "请选择有效的月度币种。"),
   monthlyPaymentDay: z
     .number()

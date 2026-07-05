@@ -120,6 +120,7 @@ export const childAccount = sqliteTable("child_account", {
   monthlyRateSource: text("monthly_rate_source").notNull(),
   monthlyAmountUsd: integer("monthly_amount_usd").notNull(),
   monthlyPaymentDay: integer("monthly_payment_day").notNull(),
+  nextPaymentDate: text("next_payment_date"),
   createdAt: text("created_at")
     .notNull()
     .default(sql`(CURRENT_TIMESTAMP)`),
