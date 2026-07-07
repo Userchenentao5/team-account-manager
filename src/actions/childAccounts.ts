@@ -13,8 +13,9 @@ import { getCurrencyMinorUnit } from "@/db/currencies";
 import { getRate } from "@/db/fxRates";
 import { getSpaceDetail } from "@/db/spaces";
 import {
-  nextMonthlyPaymentDueDate,
-  renewMonthlyPaymentDueDate,
+  nextPaymentDueDate,
+  renewPaymentDueDate,
+  type Period,
 } from "@/lib/expiry";
 import { ensureFreshRates } from "@/lib/fx/frankfurter";
 import { freezeUsdMinor } from "@/lib/money";
@@ -136,7 +137,19 @@ function toChildValues(
     monthlyRateSource: snapshot.monthlyRateSource,
     monthlyAmountUsd: snapshot.monthlyAmountUsd,
     monthlyPaymentDay: data.monthlyPaymentDay,
+    billingPeriodUnit: data.billingPeriodUnit,
+    billingPeriodCount: data.billingPeriodCount,
     nextPaymentDate,
+  };
+}
+
+function childBillingPeriod(data: Pick<
+  ChildAccountFormInput,
+  "billingPeriodUnit" | "billingPeriodCount"
+>): Period {
+  return {
+    unit: data.billingPeriodUnit,
+    count: data.billingPeriodCount,
   };
 }
 
@@ -173,8 +186,9 @@ export async function createChildAccount(
       parsedSpaceId.data.id,
       parsed.data,
       snapshot,
-      nextMonthlyPaymentDueDate(
+      nextPaymentDueDate(
         parsed.data.monthlyPaymentDay,
+        childBillingPeriod(parsed.data),
         parsed.data.joinedDate,
       ),
     ),
@@ -208,8 +222,14 @@ export async function updateChildAccount(
     data.monthlyCurrencyCode !== existing.monthlyCurrencyCode;
   const nextPaymentDate =
     data.joinedDate !== existing.joinedDate ||
-    data.monthlyPaymentDay !== existing.monthlyPaymentDay
-      ? nextMonthlyPaymentDueDate(data.monthlyPaymentDay, data.joinedDate)
+    data.monthlyPaymentDay !== existing.monthlyPaymentDay ||
+    data.billingPeriodUnit !== existing.billingPeriodUnit ||
+    data.billingPeriodCount !== existing.billingPeriodCount
+      ? nextPaymentDueDate(
+          data.monthlyPaymentDay,
+          childBillingPeriod(data),
+          data.joinedDate,
+        )
       : existing.nextPaymentDate;
 
   const snapshot = shouldRefreeze
@@ -251,8 +271,12 @@ export async function renewChildAccount(
   }
 
   updateChildAccountRow(db, parsedId.data.id, {
-    nextPaymentDate: renewMonthlyPaymentDueDate(
+    nextPaymentDate: renewPaymentDueDate(
       existing.monthlyPaymentDay,
+      {
+        unit: existing.billingPeriodUnit as Period["unit"],
+        count: existing.billingPeriodCount,
+      },
       existing.nextPaymentDate,
     ),
   });

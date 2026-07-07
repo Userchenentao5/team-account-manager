@@ -71,6 +71,13 @@
       "when": 1783262865748,
       "tag": "0009_large_firestar",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "6",
+      "when": 1783343137255,
+      "tag": "0010_outgoing_thunderbolt_ross",
+      "breakpoints": true
     }
   ]
 }

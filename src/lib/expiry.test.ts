@@ -38,6 +38,16 @@ describe("expiry helpers", () => {
     );
   });
 
+  it("can split due today from already expired", () => {
+    expect(expiryStatus("2026-06-28", new Date(2026, 5, 28), 7)).toBe("soon");
+    expect(expiryStatus("2026-06-28", new Date(2026, 5, 28), 7, true)).toBe(
+      "due",
+    );
+    expect(expiryStatus("2026-06-27", new Date(2026, 5, 28), 7, true)).toBe(
+      "expired",
+    );
+  });
+
   it("turns a monthly payment day into this month's due date", () => {
     expect(monthlyPaymentDueDate(29, new Date(2026, 5, 28))).toBe("2026-06-29");
     expect(monthlyPaymentDueDate(31, new Date(2026, 1, 1))).toBe("2026-02-28");

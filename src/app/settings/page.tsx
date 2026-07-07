@@ -1,5 +1,8 @@
 import { db } from "@/db";
-import { getStatusThresholds } from "@/db/settings";
+import {
+  getSpaceEmailReminderSettings,
+  getStatusThresholds,
+} from "@/db/settings";
 import { StatusThresholdForm } from "@/components/settings/status-threshold-form";
 
 // better-sqlite3 is a native module - keep this RSC on the Node runtime.
@@ -7,6 +10,7 @@ export const dynamic = "force-dynamic";
 
 export default function SettingsPage() {
   const thresholds = getStatusThresholds(db);
+  const emailReminder = getSpaceEmailReminderSettings(db);
 
   return (
     <div className="flex flex-col gap-6 p-6">
@@ -15,7 +19,10 @@ export default function SettingsPage() {
         <p className="text-sm text-muted-foreground">配置空间和子账号状态规则。</p>
       </div>
 
-      <StatusThresholdForm thresholds={thresholds} />
+      <StatusThresholdForm
+        thresholds={thresholds}
+        emailReminder={emailReminder}
+      />
     </div>
   );
 }

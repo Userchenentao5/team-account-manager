@@ -2,10 +2,17 @@
 
 import type { FormEvent } from "react";
 import { useState, useTransition } from "react";
-import { Save } from "lucide-react";
+import { Save, Send } from "lucide-react";
 import { toast } from "sonner";
-import { updateStatusThresholds } from "@/actions/settings";
-import type { StatusThresholds } from "@/db/settings";
+import {
+  sendSpaceExpiryReminderEmails,
+  updateSpaceEmailReminderSettings,
+  updateStatusThresholds,
+} from "@/actions/settings";
+import type {
+  SpaceEmailReminderSettings,
+  StatusThresholds,
+} from "@/db/settings";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -16,105 +23,243 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 
 type StatusThresholdFormProps = {
   thresholds: StatusThresholds;
+  emailReminder: SpaceEmailReminderSettings;
 };
 
 export function StatusThresholdForm({
   thresholds,
+  emailReminder,
 }: StatusThresholdFormProps) {
-  const [isPending, startTransition] = useTransition();
-  const [error, setError] = useState<string | null>(null);
-  const [draft, setDraft] = useState({
+  const [isThresholdPending, startThresholdTransition] = useTransition();
+  const [isEmailPending, startEmailTransition] = useTransition();
+  const [isSendPending, startSendTransition] = useTransition();
+  const [thresholdError, setThresholdError] = useState<string | null>(null);
+  const [emailError, setEmailError] = useState<string | null>(null);
+  const [thresholdDraft, setThresholdDraft] = useState({
     spaceSoonDays: String(thresholds.spaceSoonDays),
     childAccountSoonDays: String(thresholds.childAccountSoonDays),
   });
+  const [emailDraft, setEmailDraft] = useState({
+    enabled: emailReminder.enabled,
+    recipientEmail: emailReminder.recipientEmail,
+  });
 
-  function updateDraft(key: keyof typeof draft, value: string) {
-    setDraft((current) => ({ ...current, [key]: value }));
-    setError(null);
+  function updateThresholdDraft(
+    key: keyof typeof thresholdDraft,
+    value: string,
+  ) {
+    setThresholdDraft((current) => ({ ...current, [key]: value }));
+    setThresholdError(null);
   }
 
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
+  function updateEmailDraft(key: keyof typeof emailDraft, value: boolean | string) {
+    setEmailDraft((current) => ({ ...current, [key]: value }));
+    setEmailError(null);
+  }
+
+  function onThresholdSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!draft.spaceSoonDays.trim() || !draft.childAccountSoonDays.trim()) {
-      setError("请输入状态阈值。");
+    if (
+      !thresholdDraft.spaceSoonDays.trim() ||
+      !thresholdDraft.childAccountSoonDays.trim()
+    ) {
+      setThresholdError("请输入状态阈值。");
       return;
     }
 
-    startTransition(async () => {
+    startThresholdTransition(async () => {
       const res = await updateStatusThresholds({
-        spaceSoonDays: Number(draft.spaceSoonDays),
-        childAccountSoonDays: Number(draft.childAccountSoonDays),
+        spaceSoonDays: Number(thresholdDraft.spaceSoonDays),
+        childAccountSoonDays: Number(thresholdDraft.childAccountSoonDays),
       });
 
       if (res.ok) {
         toast.success("已保存状态阈值");
       } else {
-        setError(res.error);
+        setThresholdError(res.error);
+        toast.error(res.error);
+      }
+    });
+  }
+
+  function onEmailSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    startEmailTransition(async () => {
+      const res = await updateSpaceEmailReminderSettings(emailDraft);
+
+      if (res.ok) {
+        toast.success("已保存空间邮件提醒");
+      } else {
+        setEmailError(res.error);
+        toast.error(res.error);
+      }
+    });
+  }
+
+  function onSendReminder() {
+    startSendTransition(async () => {
+      const saveRes = await updateSpaceEmailReminderSettings(emailDraft);
+      if (!saveRes.ok) {
+        setEmailError(saveRes.error);
+        toast.error(saveRes.error);
+        return;
+      }
+
+      const res = await sendSpaceExpiryReminderEmails();
+
+      if (res.ok) {
+        toast.success(
+          res.sent === 0
+            ? "当前没有需要提醒的空间"
+            : `已发送 ${res.sent} 封空间到期提醒`,
+        );
+      } else {
+        setEmailError(res.error);
         toast.error(res.error);
       }
     });
   }
 
   return (
-    <Card className="max-w-2xl">
-      <CardHeader className="border-b">
-        <CardTitle>状态阈值</CardTitle>
-        <CardDescription>空间和子账号分别计算即将到期状态。</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={onSubmit} className="space-y-5">
-          <div className="grid gap-5 sm:grid-cols-2">
-            <div className="space-y-2">
-              <Label htmlFor="spaceSoonDays">空间阈值</Label>
-              <div className="flex items-center gap-2">
-                <Input
-                  id="spaceSoonDays"
-                  type="number"
-                  min={0}
-                  max={365}
-                  step={1}
-                  value={draft.spaceSoonDays}
-                  onChange={(event) =>
-                    updateDraft("spaceSoonDays", event.target.value)
-                  }
-                  disabled={isPending}
-                  className="font-mono"
-                />
-                <span className="shrink-0 text-sm text-muted-foreground">天</span>
+    <div className="grid max-w-2xl gap-4">
+      <Card>
+        <CardHeader className="border-b">
+          <CardTitle>状态阈值</CardTitle>
+          <CardDescription>空间和子账号分别计算即将到期状态。</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={onThresholdSubmit} className="space-y-5">
+            <div className="grid gap-5 sm:grid-cols-2">
+              <div className="space-y-2">
+                <Label htmlFor="spaceSoonDays">空间阈值</Label>
+                <div className="flex items-center gap-2">
+                  <Input
+                    id="spaceSoonDays"
+                    type="number"
+                    min={0}
+                    max={365}
+                    step={1}
+                    value={thresholdDraft.spaceSoonDays}
+                    onChange={(event) =>
+                      updateThresholdDraft("spaceSoonDays", event.target.value)
+                    }
+                    disabled={isThresholdPending}
+                    className="font-mono"
+                  />
+                  <span className="shrink-0 text-sm text-muted-foreground">
+                    天
+                  </span>
+                </div>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="childAccountSoonDays">子账号阈值</Label>
+                <div className="flex items-center gap-2">
+                  <Input
+                    id="childAccountSoonDays"
+                    type="number"
+                    min={0}
+                    max={365}
+                    step={1}
+                    value={thresholdDraft.childAccountSoonDays}
+                    onChange={(event) =>
+                      updateThresholdDraft(
+                        "childAccountSoonDays",
+                        event.target.value,
+                      )
+                    }
+                    disabled={isThresholdPending}
+                    className="font-mono"
+                  />
+                  <span className="shrink-0 text-sm text-muted-foreground">
+                    天
+                  </span>
+                </div>
               </div>
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="childAccountSoonDays">子账号阈值</Label>
-              <div className="flex items-center gap-2">
-                <Input
-                  id="childAccountSoonDays"
-                  type="number"
-                  min={0}
-                  max={365}
-                  step={1}
-                  value={draft.childAccountSoonDays}
-                  onChange={(event) =>
-                    updateDraft("childAccountSoonDays", event.target.value)
-                  }
-                  disabled={isPending}
-                  className="font-mono"
-                />
-                <span className="shrink-0 text-sm text-muted-foreground">天</span>
+
+            {thresholdError ? (
+              <p className="text-sm text-destructive">{thresholdError}</p>
+            ) : null}
+
+            <Button type="submit" disabled={isThresholdPending}>
+              <Save className="size-4" />
+              保存设置
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader className="border-b">
+          <CardTitle>空间邮件提醒</CardTitle>
+          <CardDescription>按空间阈值发送到期付款提醒。</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={onEmailSubmit} className="space-y-5">
+            <div className="flex items-center justify-between gap-4 rounded-md border px-4 py-3">
+              <div className="space-y-1">
+                <Label htmlFor="spaceEmailReminderEnabled">
+                  开启空间邮件提醒
+                </Label>
+                <p className="text-sm text-muted-foreground">
+                  仅提醒未过期且进入空间阈值的空间。
+                </p>
               </div>
+              <Switch
+                id="spaceEmailReminderEnabled"
+                checked={emailDraft.enabled}
+                onCheckedChange={(checked) =>
+                  updateEmailDraft("enabled", checked)
+                }
+                disabled={isEmailPending}
+              />
             </div>
-          </div>
 
-          {error ? <p className="text-sm text-destructive">{error}</p> : null}
+            <div className="space-y-2">
+              <Label htmlFor="spaceEmailRecipient">接收邮箱</Label>
+              <Input
+                id="spaceEmailRecipient"
+                type="email"
+                value={emailDraft.recipientEmail}
+                onChange={(event) =>
+                  updateEmailDraft("recipientEmail", event.target.value)
+                }
+                disabled={!emailDraft.enabled || isEmailPending}
+                placeholder="name@example.com"
+              />
+            </div>
 
-          <Button type="submit" disabled={isPending}>
-            <Save className="size-4" />
-            保存设置
-          </Button>
-        </form>
-      </CardContent>
-    </Card>
+            {emailError ? (
+              <p className="text-sm text-destructive">{emailError}</p>
+            ) : null}
+
+            <div className="flex flex-wrap gap-2">
+              <Button type="submit" disabled={isEmailPending}>
+                <Save className="size-4" />
+                保存提醒设置
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                disabled={
+                  isSendPending ||
+                  !emailDraft.enabled ||
+                  !emailDraft.recipientEmail.trim()
+                }
+                onClick={onSendReminder}
+              >
+                <Send className="size-4" />
+                发送到期提醒
+              </Button>
+            </div>
+          </form>
+        </CardContent>
+      </Card>
+    </div>
   );
 }

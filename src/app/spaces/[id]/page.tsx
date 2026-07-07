@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
+import { ArrowLeft } from "lucide-react";
 import { db } from "@/db";
 import { listChildAccounts } from "@/db/childAccounts";
 import { listChannels } from "@/db/channels";
@@ -133,23 +134,23 @@ export default async function SpaceDetailPage({
 
   return (
     <div className="flex flex-col gap-6 p-6">
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-semibold leading-tight">{space.name}</h1>
-          <p className="text-sm text-muted-foreground">
-            {formatCountryLabel(space.country)} · {paymentChannel.name}
-          </p>
-        </div>
-        <div className="flex items-center gap-2">
+      <div className="sticky top-0 z-20 -mx-6 -mt-6 grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-4 border-b bg-background/95 px-6 py-4 backdrop-blur sm:relative">
+        <Button asChild variant="outline" className="h-10 gap-2 px-4">
+          <Link href="/spaces">
+            <ArrowLeft aria-hidden="true" className="size-4" />
+            返回列表
+          </Link>
+        </Button>
+        <h1 className="min-w-0 truncate text-center text-2xl font-semibold leading-tight sm:absolute sm:left-1/2 sm:max-w-[52vw] sm:-translate-x-1/2">
+          {space.name}
+        </h1>
+        <div className="flex items-center gap-2 justify-self-end">
           <SpaceDetailActions
             space={formValue}
             childCount={childAccounts.length}
             isEditing={isEditing}
             editFormId={editFormId}
           />
-          <Button asChild variant="outline">
-            <Link href="/spaces">返回列表</Link>
-          </Button>
         </div>
       </div>
 

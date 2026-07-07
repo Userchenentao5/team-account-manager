@@ -11,4 +11,26 @@ export const statusThresholdSchema = z.object({
   childAccountSoonDays: thresholdDays,
 });
 
+const emailAddress = z.string().email();
+
+export const spaceEmailReminderSchema = z
+  .object({
+    enabled: z.boolean(),
+    recipientEmail: z
+      .string()
+      .trim()
+      .max(254, "邮箱长度不能超过 254 个字符。")
+      .refine(
+        (value) => value === "" || emailAddress.safeParse(value).success,
+        "请输入有效的接收邮箱。",
+      ),
+  })
+  .refine((value) => !value.enabled || value.recipientEmail.length > 0, {
+    path: ["recipientEmail"],
+    message: "开启空间邮件提醒后请输入接收邮箱。",
+  });
+
 export type StatusThresholdInput = z.infer<typeof statusThresholdSchema>;
+export type SpaceEmailReminderInput = z.infer<
+  typeof spaceEmailReminderSchema
+>;

@@ -82,6 +82,8 @@ describe("child account server actions (ACCT-02 / ACCT-03)", () => {
     joinedDate: "2026-02-01",
     monthlyAmountMinor: 2000,
     monthlyCurrencyCode: "USD",
+    billingPeriodUnit: "month" as "month" | "quarter" | "year",
+    billingPeriodCount: 1,
     monthlyPaymentDay: 12,
   };
 
@@ -113,6 +115,8 @@ describe("child account server actions (ACCT-02 / ACCT-03)", () => {
       monthlyRateAsOf: "2026-06-28T00:00:00.000Z",
       monthlyRateSource: "frankfurter",
       monthlyAmountUsd: 2000,
+      billingPeriodUnit: "month",
+      billingPeriodCount: 1,
       monthlyPaymentDay: 12,
     });
   }
@@ -133,6 +137,8 @@ describe("child account server actions (ACCT-02 / ACCT-03)", () => {
       monthlyRateAsOf: "2026-06-28T00:00:00.000Z",
       monthlyRateSource: "frankfurter",
       monthlyAmountUsd: 2000,
+      billingPeriodUnit: "month",
+      billingPeriodCount: 1,
       monthlyPaymentDay: 12,
       nextPaymentDate: "2026-02-12",
     });
@@ -207,6 +213,8 @@ describe("child account server actions (ACCT-02 / ACCT-03)", () => {
         label: "Renamed",
         seatType: "chatgpt",
         monthlyPaymentDay: 21,
+        billingPeriodUnit: "month",
+        billingPeriodCount: 6,
       }),
     );
     const updated = getChildAccount(ctx.db, row.id);
@@ -219,6 +227,8 @@ describe("child account server actions (ACCT-02 / ACCT-03)", () => {
       label: "Renamed",
       seatType: "chatgpt",
       monthlyPaymentDay: 21,
+      billingPeriodUnit: "month",
+      billingPeriodCount: 6,
       monthlyRateUsed: "1",
       monthlyRateAsOf: "2026-06-28T00:00:00.000Z",
       monthlyAmountUsd: 2000,
@@ -270,6 +280,24 @@ describe("child account server actions (ACCT-02 / ACCT-03)", () => {
     vi.useRealTimers();
   });
 
+  it("renews a child account by its configured billing period", async () => {
+    const row = seedChild();
+    updateChildAccountRow(ctx.db, row.id, {
+      nextPaymentDate: "2026-07-12",
+      billingPeriodUnit: "quarter",
+      billingPeriodCount: 1,
+    });
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date(2026, 6, 5));
+
+    const res = await renewChildAccount(row.id);
+    const updated = getChildAccount(ctx.db, row.id);
+
+    expect(res.ok).toBe(true);
+    expect(updated?.nextPaymentDate).toBe("2026-10-12");
+    vi.useRealTimers();
+  });
+
   it("deletes only the requested child account", async () => {
     const first = seedChild();
     const second = insertChildAccount(ctx.db, {
@@ -284,6 +312,8 @@ describe("child account server actions (ACCT-02 / ACCT-03)", () => {
       monthlyRateAsOf: "2026-06-28T00:00:00.000Z",
       monthlyRateSource: "frankfurter",
       monthlyAmountUsd: 3000,
+      billingPeriodUnit: "month",
+      billingPeriodCount: 1,
       monthlyPaymentDay: 20,
     });
 

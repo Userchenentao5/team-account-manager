@@ -12,7 +12,7 @@ import {
 import type { ChildAccountListRow } from "@/db/childAccounts";
 import type { CurrencyRow } from "@/db/currencies";
 import { formatCurrencyMinor } from "@/lib/currencies";
-import { monthlyPaymentDueDate, nextMonthlyPaymentDueDate } from "@/lib/expiry";
+import { nextPaymentDueDate, type Period } from "@/lib/expiry";
 import { formatMinor, parseToMinor } from "@/lib/money";
 import {
   childAccountFormSchema,
@@ -21,6 +21,15 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import {
   Select,
   SelectContent,
@@ -53,8 +62,20 @@ type ChildAccountTableProps = {
 
 const CONTACT_REQUIRED_ERROR = "非自用子账号请输入联系方式。";
 
+const BILLING_PERIOD_OPTIONS = [
+  { label: "月", unit: "month", count: 1 },
+  { label: "季", unit: "quarter", count: 1 },
+  { label: "半年", unit: "month", count: 6 },
+  { label: "年", unit: "year", count: 1 },
+] as const;
+
 type ChildAccountFormValue = ChildAccountFormInput & {
   id?: number;
+};
+
+type BillingPeriodValue = {
+  billingPeriodUnit: string;
+  billingPeriodCount: number;
 };
 
 type InlineChildAccountRowProps = {
@@ -68,18 +89,21 @@ type InlineChildAccountRowProps = {
 };
 
 function defaultFormValue(currencies: readonly CurrencyRow[]): ChildAccountFormValue {
+  const today = new Date();
   return {
     seatType: "codex",
     email: "",
     contact: "",
     label: "",
-    joinedDate: localIsoDate(),
+    joinedDate: localIsoDate(today),
     monthlyAmountMinor: 1,
     monthlyCurrencyCode:
-      currencies.find((currency) => currency.code === "USD")?.code ??
+      currencies.find((currency) => currency.code === "CNY")?.code ??
       currencies[0]?.code ??
-      "USD",
-    monthlyPaymentDay: 1,
+      "CNY",
+    billingPeriodUnit: "month",
+    billingPeriodCount: 1,
+    monthlyPaymentDay: today.getDate(),
   };
 }
 
@@ -101,12 +125,18 @@ function toFormValue(row: ChildAccountListRow): ChildAccountFormValue {
     joinedDate: child.joinedDate,
     monthlyAmountMinor: child.monthlyAmountMinor,
     monthlyCurrencyCode: child.monthlyCurrencyCode,
+    billingPeriodUnit:
+      child.billingPeriodUnit as ChildAccountFormValue["billingPeriodUnit"],
+    billingPeriodCount: child.billingPeriodCount,
     monthlyPaymentDay: child.monthlyPaymentDay,
   };
 }
 
 function childExpiryDate(child: ChildAccountListRow["childAccount"]): string {
-  return child.nextPaymentDate ?? monthlyPaymentDueDate(child.monthlyPaymentDay);
+  return (
+    child.nextPaymentDate ??
+    nextPaymentDueDate(child.monthlyPaymentDay, childBillingPeriod(child))
+  );
 }
 
 function childDisplayStatus(
@@ -119,8 +149,40 @@ function draftExpiryDate(draft: ChildAccountFormValue): string | null {
   return Number.isInteger(draft.monthlyPaymentDay) &&
     draft.monthlyPaymentDay >= 1 &&
     draft.monthlyPaymentDay <= 31
-    ? nextMonthlyPaymentDueDate(draft.monthlyPaymentDay, draft.joinedDate)
+    ? nextPaymentDueDate(
+        draft.monthlyPaymentDay,
+        childBillingPeriod(draft),
+        draft.joinedDate,
+      )
     : null;
+}
+
+function childBillingPeriod(value: BillingPeriodValue): Period {
+  return {
+    unit: value.billingPeriodUnit as Period["unit"],
+    count: value.billingPeriodCount,
+  };
+}
+
+function billingPeriodValue(value: BillingPeriodValue): string {
+  return `${value.billingPeriodUnit}:${value.billingPeriodCount}`;
+}
+
+function billingPeriodLabel(value: BillingPeriodValue): string {
+  return (
+    BILLING_PERIOD_OPTIONS.find(
+      (option) =>
+        option.unit === value.billingPeriodUnit &&
+        option.count === value.billingPeriodCount,
+    )?.label ?? "月"
+  );
+}
+
+function parseBillingPeriod(value: string) {
+  const option = BILLING_PERIOD_OPTIONS.find(
+    (item) => `${item.unit}:${item.count}` === value,
+  );
+  return option ?? BILLING_PERIOD_OPTIONS[0];
 }
 
 function InlineChildAccountRow({
@@ -301,10 +363,10 @@ function InlineChildAccountRow({
                 updateDraft("monthlyCurrencyCode", value)
               }
             >
-              <SelectTrigger className="w-24" aria-label="月度币种">
+              <SelectTrigger className="w-24" aria-label="订阅币种">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="max-h-64" position="popper">
                 {currencies.map((currency) => (
                   <SelectItem key={currency.code} value={currency.code}>
                     {currency.symbol} {currency.code}
@@ -314,22 +376,51 @@ function InlineChildAccountRow({
             </Select>
           </div>
         </TableCell>
-        <TableCell className="min-w-28">
+        <TableCell className="min-w-44">
           <div className="space-y-1">
-            <Input
-              type="number"
-              min={1}
-              max={31}
-              value={draft.monthlyPaymentDay}
-              onChange={(event) =>
-                updateDraft("monthlyPaymentDay", Number(event.target.value))
-              }
-              disabled={isPending}
-              className="w-20 font-mono"
-              aria-label="月付日"
-              aria-invalid={error?.field === "monthlyPaymentDay"}
-            />
-            {error?.field === "monthlyPaymentDay" ? (
+            <div className="flex justify-center gap-2">
+              <Select
+                value={billingPeriodValue(draft)}
+                onValueChange={(value) => {
+                  const period = parseBillingPeriod(value);
+                  setDraft((current) => ({
+                    ...current,
+                    billingPeriodUnit: period.unit,
+                    billingPeriodCount: period.count,
+                  }));
+                  setError(null);
+                }}
+              >
+                <SelectTrigger className="w-20" aria-label="订阅周期">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {BILLING_PERIOD_OPTIONS.map((option) => (
+                    <SelectItem
+                      key={`${option.unit}:${option.count}`}
+                      value={`${option.unit}:${option.count}`}
+                    >
+                      {option.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <Input
+                type="number"
+                min={1}
+                max={31}
+                value={draft.monthlyPaymentDay}
+                onChange={(event) =>
+                  updateDraft("monthlyPaymentDay", Number(event.target.value))
+                }
+                disabled={isPending}
+                className="w-16 font-mono"
+                aria-label="付款日"
+                aria-invalid={error?.field === "monthlyPaymentDay"}
+              />
+            </div>
+            {error?.field === "monthlyPaymentDay" ||
+            error?.field === "billingPeriodCount" ? (
               <p className="text-xs text-destructive">{error.message}</p>
             ) : null}
           </div>
@@ -342,6 +433,7 @@ function InlineChildAccountRow({
             expiryDate={draftExpiryDate(draft)}
             soonDays={childAccountSoonDays}
             displayStatus={draftAmountMinor === 0 ? "self" : undefined}
+            expireOnDate
           />
         </TableCell>
         <TableCell className="text-right">
@@ -406,17 +498,25 @@ export function ChildAccountTable({
   const [deleteTarget, setDeleteTarget] = useState<
     ChildAccountListRow["childAccount"] | null
   >(null);
+  const [renewTarget, setRenewTarget] = useState<
+    ChildAccountListRow["childAccount"] | null
+  >(null);
+  const [renewAmount, setRenewAmount] = useState("");
   const router = useRouter();
   const [isRenewPending, startRenewTransition] = useTransition();
   const isEditingRow = formState !== null;
   const shouldShowTable = accounts.length > 0 || formState?.mode === "add";
 
-  function onRenew(child: ChildAccountListRow["childAccount"]) {
+  function onRenew() {
+    if (!renewTarget || renewAmount.trim() === "") return;
+
     startRenewTransition(async () => {
       try {
-        const res = await renewChildAccount(child.id);
+        const res = await renewChildAccount(renewTarget.id);
         if (res.ok) {
           toast.success("已续费，状态已恢复正常");
+          setRenewTarget(null);
+          setRenewAmount("");
           router.refresh();
         } else {
           toast.error(res.error);
@@ -454,9 +554,9 @@ export function ChildAccountTable({
               <TableHead scope="col">联系方式</TableHead>
               <TableHead scope="col">加入日期</TableHead>
               <TableHead scope="col" className="text-right">
-                月度原价
+                订阅原价
               </TableHead>
-              <TableHead scope="col">月付日</TableHead>
+              <TableHead scope="col">周期 / 付款日</TableHead>
               <TableHead scope="col">到期日</TableHead>
               <TableHead scope="col">状态</TableHead>
               <TableHead scope="col" className="text-right">
@@ -515,7 +615,9 @@ export function ChildAccountTable({
                     {formatCurrencyMinor(child.monthlyAmountMinor, row.currency)}
                   </TableCell>
                   <TableCell className="font-mono">
-                    {isSelfUse ? "-" : `每月 ${child.monthlyPaymentDay} 日`}
+                    {isSelfUse
+                      ? "-"
+                      : `${billingPeriodLabel(child)} / ${child.monthlyPaymentDay} 日`}
                   </TableCell>
                   <TableCell className="font-mono">
                     {isSelfUse ? "-" : childExpiryDate(child)}
@@ -525,6 +627,7 @@ export function ChildAccountTable({
                       expiryDate={childExpiryDate(child)}
                       soonDays={childAccountSoonDays}
                       displayStatus={displayStatus}
+                      expireOnDate
                     />
                   </TableCell>
                   <TableCell className="text-right">
@@ -537,7 +640,7 @@ export function ChildAccountTable({
                               size="icon"
                               className="size-11"
                               aria-label={`续费 ${child.email}`}
-                              onClick={() => onRenew(child)}
+                              onClick={() => setRenewTarget(child)}
                               disabled={isEditingRow || isRenewPending}
                             >
                               <RefreshCw className="size-4" />
@@ -603,6 +706,46 @@ export function ChildAccountTable({
           if (!open) setDeleteTarget(null);
         }}
       />
+      <AlertDialog
+        open={renewTarget !== null}
+        onOpenChange={(open) => {
+          if (!open) {
+            setRenewTarget(null);
+            setRenewAmount("");
+          }
+        }}
+      >
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>确认子账号续费</AlertDialogTitle>
+            <AlertDialogDescription>
+              请输入对方交钱的数额，留空无法续费。
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <div className="space-y-2">
+            <label htmlFor="child-renew-amount" className="text-sm font-medium">
+              对方交钱数额
+            </label>
+            <Input
+              id="child-renew-amount"
+              inputMode="decimal"
+              value={renewAmount}
+              onChange={(event) => setRenewAmount(event.target.value)}
+              placeholder="例如：20.00"
+              disabled={isRenewPending}
+            />
+          </div>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={isRenewPending}>取消</AlertDialogCancel>
+            <Button
+              onClick={onRenew}
+              disabled={isRenewPending || renewAmount.trim() === ""}
+            >
+              {isRenewPending ? "续费中..." : "确认续费"}
+            </Button>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }

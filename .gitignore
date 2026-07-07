@@ -18,6 +18,12 @@
 *.db
 *.db-shm
 *.db-wal
+*.sqlite
+*.sqlite3
+*.sqlite-shm
+*.sqlite-wal
+*.sqlite3-shm
+*.sqlite3-wal
 
 # next.js
 /.next/

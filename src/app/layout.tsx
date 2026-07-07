@@ -40,11 +40,11 @@ export default function RootLayout({
         <TooltipProvider>
           <SidebarProvider>
             <AppSidebar />
-            <SidebarInset>
-              <header className="flex h-12 items-center gap-2 border-b px-4">
+            <SidebarInset className="bg-transparent">
+              <header className="sticky top-0 z-20 flex h-14 items-center gap-2 border-b bg-background/78 px-4 backdrop-blur-xl">
                 <SidebarTrigger aria-label="切换侧边栏" />
               </header>
-              <main className="flex flex-1 flex-col">{children}</main>
+              <main className="flex min-w-0 flex-1 flex-col">{children}</main>
             </SidebarInset>
           </SidebarProvider>
         </TooltipProvider>

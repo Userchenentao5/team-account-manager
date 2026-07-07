@@ -54,17 +54,42 @@ type ChildAccountFormProps = {
   onOpenChange: (open: boolean) => void;
 };
 
+const BILLING_PERIOD_OPTIONS = [
+  { label: "月", unit: "month", count: 1 },
+  { label: "季", unit: "quarter", count: 1 },
+  { label: "半年", unit: "month", count: 6 },
+  { label: "年", unit: "year", count: 1 },
+] as const;
+
 function defaultValues(): ChildAccountFormInput {
+  const today = new Date();
   return {
     seatType: "codex",
     email: "",
     contact: "",
     label: "",
-    joinedDate: new Date().toISOString().slice(0, 10),
+    joinedDate: localIsoDate(today),
     monthlyAmountMinor: 1,
-    monthlyCurrencyCode: "USD",
-    monthlyPaymentDay: 1,
+    monthlyCurrencyCode: "CNY",
+    billingPeriodUnit: "month",
+    billingPeriodCount: 1,
+    monthlyPaymentDay: today.getDate(),
   };
+}
+
+function localIsoDate(date: Date): string {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function parseBillingPeriod(value: string) {
+  return (
+    BILLING_PERIOD_OPTIONS.find(
+      (item) => `${item.unit}:${item.count}` === value,
+    ) ?? BILLING_PERIOD_OPTIONS[0]
+  );
 }
 
 export function ChildAccountForm({
@@ -97,6 +122,14 @@ export function ChildAccountForm({
   const selectedCurrency = useWatch({
     control: form.control,
     name: "monthlyCurrencyCode",
+  });
+  const billingPeriodUnit = useWatch({
+    control: form.control,
+    name: "billingPeriodUnit",
+  });
+  const billingPeriodCount = useWatch({
+    control: form.control,
+    name: "billingPeriodCount",
   });
   const selectedCurrencyMeta = useMemo(
     () => currencies.find((currency) => currency.code === selectedCurrency),
@@ -238,7 +271,7 @@ export function ChildAccountForm({
               name="monthlyAmountMinor"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>月度金额</FormLabel>
+                  <FormLabel>订阅金额</FormLabel>
                   <FormControl>
                     <Input
                       inputMode="decimal"
@@ -264,14 +297,14 @@ export function ChildAccountForm({
               name="monthlyCurrencyCode"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>月度币种</FormLabel>
+                  <FormLabel>订阅币种</FormLabel>
                   <Select value={field.value} onValueChange={field.onChange}>
                     <FormControl>
                       <SelectTrigger className="w-full">
                         <SelectValue />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent>
+                    <SelectContent className="max-h-64" position="popper">
                       {currencies.map((currency) => (
                         <SelectItem key={currency.code} value={currency.code}>
                           {currency.symbol} {currency.code}
@@ -285,10 +318,50 @@ export function ChildAccountForm({
             />
             <FormField
               control={form.control}
+              name="billingPeriodCount"
+              render={() => (
+                <FormItem>
+                  <FormLabel>订阅周期</FormLabel>
+                  <Select
+                    value={`${billingPeriodUnit}:${billingPeriodCount}`}
+                    onValueChange={(value) => {
+                      const period = parseBillingPeriod(value);
+                      form.setValue("billingPeriodUnit", period.unit, {
+                        shouldDirty: true,
+                        shouldValidate: true,
+                      });
+                      form.setValue("billingPeriodCount", period.count, {
+                        shouldDirty: true,
+                        shouldValidate: true,
+                      });
+                    }}
+                  >
+                    <FormControl>
+                      <SelectTrigger className="w-full">
+                        <SelectValue />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {BILLING_PERIOD_OPTIONS.map((option) => (
+                        <SelectItem
+                          key={`${option.unit}:${option.count}`}
+                          value={`${option.unit}:${option.count}`}
+                        >
+                          {option.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
               name="monthlyPaymentDay"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>月付日</FormLabel>
+                  <FormLabel>付款日</FormLabel>
                   <FormControl>
                     <Input
                       type="number"

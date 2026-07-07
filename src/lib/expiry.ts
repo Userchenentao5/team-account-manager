@@ -19,6 +19,9 @@ export type Period = {
   count: number;
 };
 
+export type ExpiryStatus = "expired" | "soon" | "normal";
+export type ExpiryStatusWithDue = ExpiryStatus | "due";
+
 function localDateFromIsoDate(value: string): Date {
   const [year, month, day] = value.split("-").map(Number);
   return new Date(year, month - 1, day);
@@ -38,11 +41,31 @@ export function addPeriod(openingDate: string, period: Period): string {
 
 export function expiryStatus(
   expiry: string,
+  today?: Date,
+  soonDays?: number,
+  expireOnDate?: false,
+): ExpiryStatus;
+export function expiryStatus(
+  expiry: string,
+  today: Date | undefined,
+  soonDays: number | undefined,
+  expireOnDate: true,
+): ExpiryStatusWithDue;
+export function expiryStatus(
+  expiry: string,
+  today: Date | undefined,
+  soonDays: number | undefined,
+  expireOnDate: boolean,
+): ExpiryStatusWithDue;
+export function expiryStatus(
+  expiry: string,
   today = new Date(),
   soonDays = 7,
-): "expired" | "soon" | "normal" {
+  expireOnDate = false,
+): ExpiryStatusWithDue {
   const days = differenceInCalendarDays(localDateFromIsoDate(expiry), today);
   if (days < 0) return "expired";
+  if (expireOnDate && days === 0) return "due";
   if (days <= soonDays) return "soon";
   return "normal";
 }
@@ -51,20 +74,40 @@ export function monthlyPaymentDueDate(
   paymentDay: number,
   today = new Date(),
 ): string {
-  const lastDay = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
-  const day = Math.min(paymentDay, lastDay);
-  return format(new Date(today.getFullYear(), today.getMonth(), day), "yyyy-MM-dd");
+  return format(paymentDateInMonth(today, paymentDay), "yyyy-MM-dd");
 }
 
 export function nextMonthlyPaymentDueDate(
   paymentDay: number,
   from: string | Date = new Date(),
 ): string {
+  return nextPaymentDueDate(paymentDay, { unit: "month", count: 1 }, from);
+}
+
+function addPeriodToDate(base: Date, period: Period): Date {
+  return period.unit === "month"
+    ? addMonths(base, period.count)
+    : period.unit === "quarter"
+      ? addQuarters(base, period.count)
+      : addYears(base, period.count);
+}
+
+function paymentDateInMonth(base: Date, paymentDay: number): Date {
+  const lastDay = new Date(base.getFullYear(), base.getMonth() + 1, 0).getDate();
+  const day = Math.min(paymentDay, lastDay);
+  return new Date(base.getFullYear(), base.getMonth(), day);
+}
+
+export function nextPaymentDueDate(
+  paymentDay: number,
+  period: Period,
+  from: string | Date = new Date(),
+): string {
   const base = typeof from === "string" ? localDateFromIsoDate(from) : from;
-  const dueThisMonth = localDateFromIsoDate(monthlyPaymentDueDate(paymentDay, base));
+  const dueThisMonth = paymentDateInMonth(base, paymentDay);
   const due =
     differenceInCalendarDays(dueThisMonth, base) <= 0
-      ? localDateFromIsoDate(monthlyPaymentDueDate(paymentDay, addMonths(base, 1)))
+      ? paymentDateInMonth(addPeriodToDate(dueThisMonth, period), paymentDay)
       : dueThisMonth;
 
   return format(due, "yyyy-MM-dd");
@@ -75,7 +118,21 @@ export function renewMonthlyPaymentDueDate(
   currentDueDate?: string | null,
   today = new Date(),
 ): string {
+  return renewPaymentDueDate(
+    paymentDay,
+    { unit: "month", count: 1 },
+    currentDueDate,
+    today,
+  );
+}
+
+export function renewPaymentDueDate(
+  paymentDay: number,
+  period: Period,
+  currentDueDate?: string | null,
+  today = new Date(),
+): string {
   const todayIso = format(today, "yyyy-MM-dd");
   const base = currentDueDate && currentDueDate > todayIso ? currentDueDate : today;
-  return nextMonthlyPaymentDueDate(paymentDay, base);
+  return nextPaymentDueDate(paymentDay, period, base);
 }

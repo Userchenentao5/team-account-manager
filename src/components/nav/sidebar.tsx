@@ -39,14 +39,14 @@ const referenceChildren = [
 ] as const;
 
 const activeClasses =
-  "data-[active=true]:bg-primary/10 data-[active=true]:text-primary data-[active=true]:font-semibold";
+  "data-[active=true]:bg-primary/12 data-[active=true]:text-primary data-[active=true]:font-semibold data-[active=true]:shadow-inner";
 
 export function AppSidebar() {
   const pathname = usePathname();
 
   return (
-    <Sidebar collapsible="icon">
-      <SidebarHeader className="px-4 py-3 text-base font-semibold">
+    <Sidebar collapsible="icon" className="border-r bg-sidebar/90 backdrop-blur-xl">
+      <SidebarHeader className="px-4 py-4 text-base font-semibold tracking-tight">
         团队空间管理
       </SidebarHeader>
       <SidebarContent>

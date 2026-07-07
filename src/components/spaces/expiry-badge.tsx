@@ -5,11 +5,17 @@ type ExpiryBadgeProps = {
   expiryDate: string | null;
   soonDays?: number;
   displayStatus?: "self";
+  expireOnDate?: boolean;
 };
 
 const STATUS_BADGE = {
   expired: {
-    label: "已过期",
+    label: "过期",
+    className:
+      "border-[#fed7aa] bg-[#ffedd5] text-[#ea580c] hover:bg-[#ffedd5] dark:border-[#9a3412] dark:bg-[#431407] dark:text-[#fdba74]",
+  },
+  due: {
+    label: "已到期",
     className:
       "border-[#fecaca] bg-[#fee2e2] text-[#dc2626] hover:bg-[#fee2e2] dark:border-[#7f1d1d] dark:bg-[#450a0a] dark:text-[#fca5a5]",
   },
@@ -39,6 +45,7 @@ export function ExpiryBadge({
   expiryDate,
   soonDays = 7,
   displayStatus,
+  expireOnDate = false,
 }: ExpiryBadgeProps) {
   if (displayStatus) {
     const badge = STATUS_BADGE[displayStatus];
@@ -50,7 +57,11 @@ export function ExpiryBadge({
     return <Badge className={unknown.className}>{unknown.label}</Badge>;
   }
 
-  const status = expiryStatus(expiryDate, new Date(), soonDays);
+  const status = expiryStatus(expiryDate, new Date(), soonDays, expireOnDate);
   const badge = STATUS_BADGE[status];
-  return <Badge className={badge.className}>{badge.label}</Badge>;
+  const className =
+    expireOnDate && status === "expired"
+      ? STATUS_BADGE.due.className
+      : badge.className;
+  return <Badge className={className}>{badge.label}</Badge>;
 }

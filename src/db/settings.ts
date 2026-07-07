@@ -13,8 +13,16 @@ export type StatusThresholds = {
   childAccountSoonDays: number;
 };
 
+export type SpaceEmailReminderSettings = {
+  enabled: boolean;
+  recipientEmail: string;
+};
+
 const SPACE_SOON_DAYS_KEY = "space.status.soonDays";
 const CHILD_ACCOUNT_SOON_DAYS_KEY = "childAccount.status.soonDays";
+const SPACE_EMAIL_REMINDER_ENABLED_KEY = "space.emailReminder.enabled";
+const SPACE_EMAIL_REMINDER_RECIPIENT_EMAIL_KEY =
+  "space.emailReminder.recipientEmail";
 
 function normalizeDays(value: string | undefined, fallback: number): number {
   if (value === undefined) return fallback;
@@ -54,6 +62,41 @@ export function setStatusThresholds(
       .onConflictDoUpdate({
         target: appSetting.key,
         set: { value: String(value) },
+      })
+      .run();
+  }
+}
+
+export function getSpaceEmailReminderSettings(
+  db: Db,
+): SpaceEmailReminderSettings {
+  const rows = db.select().from(appSetting).all();
+  const values = Object.fromEntries(rows.map((row) => [row.key, row.value]));
+
+  return {
+    enabled: values[SPACE_EMAIL_REMINDER_ENABLED_KEY] === "true",
+    recipientEmail: values[SPACE_EMAIL_REMINDER_RECIPIENT_EMAIL_KEY] ?? "",
+  };
+}
+
+export function setSpaceEmailReminderSettings(
+  db: Db,
+  settings: SpaceEmailReminderSettings,
+): void {
+  const rows = [
+    [SPACE_EMAIL_REMINDER_ENABLED_KEY, settings.enabled ? "true" : "false"],
+    [
+      SPACE_EMAIL_REMINDER_RECIPIENT_EMAIL_KEY,
+      settings.recipientEmail.trim(),
+    ],
+  ] as const;
+
+  for (const [key, value] of rows) {
+    db.insert(appSetting)
+      .values({ key, value })
+      .onConflictDoUpdate({
+        target: appSetting.key,
+        set: { value },
       })
       .run();
   }
