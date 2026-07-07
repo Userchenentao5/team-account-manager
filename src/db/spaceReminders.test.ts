@@ -2,7 +2,11 @@ import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { insertChannel } from "@/db/channels";
 import { seedCurrencies } from "@/db/seed";
 import { insertSpaceWithMother } from "@/db/spaces";
-import { listSpaceExpiryReminderCandidates } from "@/db/spaceReminders";
+import {
+  listDueSpaceExpiryReminders,
+  listSpaceExpiryReminderCandidates,
+  recordSpaceExpiryReminderSent,
+} from "@/db/spaceReminders";
 import { createTestDb } from "@/test/db-harness";
 
 describe("space expiry reminder queries", () => {
@@ -61,5 +65,28 @@ describe("space expiry reminder queries", () => {
       paymentChannelName: "Visa",
       amountUsdMinor: 2000,
     });
+  });
+
+  it("returns threshold-day reminders and excludes already sent spaces", () => {
+    const dueOnThreshold = makeSpace("Threshold Day", "2026-07-14");
+    makeSpace("Inside Window", "2026-07-10");
+
+    expect(
+      listDueSpaceExpiryReminders(ctx.db, 7, new Date(2026, 6, 7)).map(
+        (row) => row.id,
+      ),
+    ).toEqual([dueOnThreshold.id]);
+
+    recordSpaceExpiryReminderSent(ctx.db, {
+      spaceId: dueOnThreshold.id,
+      expiryDate: "2026-07-14",
+      thresholdDays: 7,
+      recipientEmail: "billing@example.com",
+      sentAt: new Date(2026, 6, 7, 9, 0),
+    });
+
+    expect(
+      listDueSpaceExpiryReminders(ctx.db, 7, new Date(2026, 6, 7)),
+    ).toEqual([]);
   });
 });

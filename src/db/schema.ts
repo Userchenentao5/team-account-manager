@@ -1,4 +1,9 @@
-import { sqliteTable, integer, text } from "drizzle-orm/sqlite-core";
+import {
+  integer,
+  sqliteTable,
+  text,
+  uniqueIndex,
+} from "drizzle-orm/sqlite-core";
 import { sql } from "drizzle-orm";
 
 /**
@@ -131,3 +136,26 @@ export const childAccount = sqliteTable("child_account", {
     .default(sql`(CURRENT_TIMESTAMP)`),
 });
 export type ChildAccountRow = typeof childAccount.$inferSelect;
+
+export const spaceExpiryReminderLog = sqliteTable(
+  "space_expiry_reminder_log",
+  {
+    id: integer("id").primaryKey({ autoIncrement: true }),
+    spaceId: integer("space_id")
+      .notNull()
+      .references(() => space.id, { onDelete: "cascade" }),
+    expiryDate: text("expiry_date").notNull(),
+    thresholdDays: integer("threshold_days").notNull(),
+    recipientEmail: text("recipient_email").notNull(),
+    sentAt: text("sent_at").notNull(),
+  },
+  (table) => [
+    uniqueIndex("space_expiry_reminder_log_once_idx").on(
+      table.spaceId,
+      table.expiryDate,
+      table.thresholdDays,
+    ),
+  ],
+);
+export type SpaceExpiryReminderLogRow =
+  typeof spaceExpiryReminderLog.$inferSelect;

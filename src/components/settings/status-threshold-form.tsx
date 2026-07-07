@@ -2,10 +2,9 @@
 
 import type { FormEvent } from "react";
 import { useState, useTransition } from "react";
-import { Save, Send } from "lucide-react";
+import { Clock, Eye, Pencil, Save } from "lucide-react";
 import { toast } from "sonner";
 import {
-  sendSpaceExpiryReminderEmails,
   updateSpaceEmailReminderSettings,
   updateStatusThresholds,
 } from "@/actions/settings";
@@ -36,9 +35,10 @@ export function StatusThresholdForm({
 }: StatusThresholdFormProps) {
   const [isThresholdPending, startThresholdTransition] = useTransition();
   const [isEmailPending, startEmailTransition] = useTransition();
-  const [isSendPending, startSendTransition] = useTransition();
   const [thresholdError, setThresholdError] = useState<string | null>(null);
   const [emailError, setEmailError] = useState<string | null>(null);
+  const [showPreview, setShowPreview] = useState(false);
+  const [isEditingTemplate, setIsEditingTemplate] = useState(false);
   const [thresholdDraft, setThresholdDraft] = useState({
     spaceSoonDays: String(thresholds.spaceSoonDays),
     childAccountSoonDays: String(thresholds.childAccountSoonDays),
@@ -46,6 +46,11 @@ export function StatusThresholdForm({
   const [emailDraft, setEmailDraft] = useState({
     enabled: emailReminder.enabled,
     recipientEmail: emailReminder.recipientEmail,
+    sendTime: emailReminder.sendTime,
+    smtpUrl: emailReminder.smtpUrl,
+    smtpFrom: emailReminder.smtpFrom,
+    templateSubject: emailReminder.templateSubject,
+    templateBody: emailReminder.templateBody,
   });
 
   function updateThresholdDraft(
@@ -101,29 +106,7 @@ export function StatusThresholdForm({
     });
   }
 
-  function onSendReminder() {
-    startSendTransition(async () => {
-      const saveRes = await updateSpaceEmailReminderSettings(emailDraft);
-      if (!saveRes.ok) {
-        setEmailError(saveRes.error);
-        toast.error(saveRes.error);
-        return;
-      }
-
-      const res = await sendSpaceExpiryReminderEmails();
-
-      if (res.ok) {
-        toast.success(
-          res.sent === 0
-            ? "当前没有需要提醒的空间"
-            : `已发送 ${res.sent} 封空间到期提醒`,
-        );
-      } else {
-        setEmailError(res.error);
-        toast.error(res.error);
-      }
-    });
-  }
+  const preview = renderPreview(emailDraft, thresholdDraft.spaceSoonDays);
 
   return (
     <div className="grid max-w-2xl gap-4">
@@ -197,7 +180,7 @@ export function StatusThresholdForm({
       <Card>
         <CardHeader className="border-b">
           <CardTitle>空间邮件提醒</CardTitle>
-          <CardDescription>按空间阈值发送到期付款提醒。</CardDescription>
+          <CardDescription>到达空间阈值当天按指定时间自动发送。</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={onEmailSubmit} className="space-y-5">
@@ -207,7 +190,7 @@ export function StatusThresholdForm({
                   开启空间邮件提醒
                 </Label>
                 <p className="text-sm text-muted-foreground">
-                  仅提醒未过期且进入空间阈值的空间。
+                  仅在空间剩余天数等于空间阈值当天发送一次。
                 </p>
               </div>
               <Switch
@@ -220,19 +203,154 @@ export function StatusThresholdForm({
               />
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="spaceEmailRecipient">接收邮箱</Label>
-              <Input
-                id="spaceEmailRecipient"
-                type="email"
-                value={emailDraft.recipientEmail}
-                onChange={(event) =>
-                  updateEmailDraft("recipientEmail", event.target.value)
-                }
-                disabled={!emailDraft.enabled || isEmailPending}
-                placeholder="name@example.com"
-              />
-            </div>
+            {emailDraft.enabled ? (
+              <>
+                <div className="space-y-2">
+                  <Label htmlFor="spaceEmailRecipient">接收邮箱</Label>
+                  <Input
+                    id="spaceEmailRecipient"
+                    type="email"
+                    value={emailDraft.recipientEmail}
+                    onChange={(event) =>
+                      updateEmailDraft("recipientEmail", event.target.value)
+                    }
+                    disabled={isEmailPending}
+                    placeholder="name@example.com"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="spaceEmailSendTime">发送时间</Label>
+                  <div className="flex items-center gap-2">
+                    <Clock className="size-4 text-muted-foreground" />
+                    <Input
+                      id="spaceEmailSendTime"
+                      type="time"
+                      value={emailDraft.sendTime}
+                      onChange={(event) =>
+                        updateEmailDraft("sendTime", event.target.value)
+                      }
+                      disabled={isEmailPending}
+                      className="max-w-40 font-mono"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <div className="space-y-1">
+                    <Label htmlFor="spaceEmailSmtpUrl">SMTP URL</Label>
+                    <Input
+                      id="spaceEmailSmtpUrl"
+                      type="password"
+                      value={emailDraft.smtpUrl}
+                      onChange={(event) =>
+                        updateEmailDraft("smtpUrl", event.target.value)
+                      }
+                      disabled={isEmailPending}
+                      placeholder="smtp://user:pass@smtp.example.com:587"
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <Label htmlFor="spaceEmailSmtpFrom">发件邮箱</Label>
+                    <Input
+                      id="spaceEmailSmtpFrom"
+                      type="email"
+                      value={emailDraft.smtpFrom}
+                      onChange={(event) =>
+                        updateEmailDraft("smtpFrom", event.target.value)
+                      }
+                      disabled={isEmailPending}
+                      placeholder="billing@example.com"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-3 rounded-md border px-4 py-3">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <div className="space-y-1">
+                      <Label>空间提醒邮件模板</Label>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        onClick={() =>
+                          setIsEditingTemplate((current) => !current)
+                        }
+                      >
+                        <Pencil className="size-4" />
+                        {isEditingTemplate ? "收起编辑" : "编辑模板"}
+                      </Button>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setShowPreview((current) => !current)}
+                      >
+                        <Eye className="size-4" />
+                        {showPreview ? "收起预览" : "预览模板"}
+                      </Button>
+                    </div>
+                  </div>
+
+                  {isEditingTemplate ? (
+                    <div className="space-y-3">
+                      <div className="space-y-1">
+                        <Label htmlFor="spaceEmailTemplateSubject">
+                          邮件标题模板
+                        </Label>
+                        <Input
+                          id="spaceEmailTemplateSubject"
+                          value={emailDraft.templateSubject}
+                          onChange={(event) =>
+                            updateEmailDraft(
+                              "templateSubject",
+                              event.target.value,
+                            )
+                          }
+                          disabled={isEmailPending}
+                        />
+                      </div>
+
+                      <div className="space-y-1">
+                        <Label htmlFor="spaceEmailTemplateBody">
+                          邮件正文模板
+                        </Label>
+                        <textarea
+                          id="spaceEmailTemplateBody"
+                          value={emailDraft.templateBody}
+                          onChange={(event) =>
+                            updateEmailDraft(
+                              "templateBody",
+                              event.target.value,
+                            )
+                          }
+                          disabled={isEmailPending}
+                          rows={5}
+                          className="min-h-28 w-full resize-y rounded-md border border-input bg-transparent px-3 py-2 text-sm outline-none transition-colors placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50"
+                        />
+                      </div>
+
+                      <p className="text-xs text-muted-foreground">
+                        占位符：{"{spaceName}"} {"{daysUntilExpiry}"}{" "}
+                        {"{paymentChannelName}"} {"{amountUsd}"}{" "}
+                        {"{expiryDate}"}
+                      </p>
+                    </div>
+                  ) : null}
+
+                  {showPreview ? (
+                    <div className="rounded-md bg-muted/60 p-3 text-sm">
+                      <p className="font-medium">{preview.subject}</p>
+                      <p className="mt-2 whitespace-pre-wrap text-muted-foreground">
+                        {preview.body}
+                      </p>
+                    </div>
+                  ) : null}
+                </div>
+              </>
+            ) : null}
 
             {emailError ? (
               <p className="text-sm text-destructive">{emailError}</p>
@@ -243,23 +361,32 @@ export function StatusThresholdForm({
                 <Save className="size-4" />
                 保存提醒设置
               </Button>
-              <Button
-                type="button"
-                variant="outline"
-                disabled={
-                  isSendPending ||
-                  !emailDraft.enabled ||
-                  !emailDraft.recipientEmail.trim()
-                }
-                onClick={onSendReminder}
-              >
-                <Send className="size-4" />
-                发送到期提醒
-              </Button>
             </div>
           </form>
         </CardContent>
       </Card>
     </div>
   );
+}
+
+function renderPreview(
+  draft: {
+    templateSubject: string;
+    templateBody: string;
+  },
+  thresholdDays: string,
+) {
+  const values: Record<string, string> = {
+    amountUsd: "25.99",
+    daysUntilExpiry: thresholdDays.trim() || "7",
+    expiryDate: "2026-07-14",
+    paymentChannelName: "Visa",
+    spaceName: "US Team",
+  };
+  const replaceToken = (_match: string, key: string) => values[key] ?? `{${key}}`;
+
+  return {
+    subject: draft.templateSubject.replace(/\{(\w+)\}/g, replaceToken),
+    body: draft.templateBody.replace(/\{(\w+)\}/g, replaceToken),
+  };
 }

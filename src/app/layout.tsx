@@ -10,6 +10,9 @@ import {
 } from "@/components/ui/sidebar";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { startSpaceExpiryReminderScheduler } from "@/lib/reminders/space-expiry-reminder-scheduler";
+
+startSpaceExpiryReminderScheduler();
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

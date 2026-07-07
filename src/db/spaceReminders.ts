@@ -1,7 +1,7 @@
-import { asc, eq } from "drizzle-orm";
+import { and, asc, eq } from "drizzle-orm";
 import type { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
 import { differenceInCalendarDays } from "date-fns";
-import { paymentChannel, space } from "./schema";
+import { paymentChannel, space, spaceExpiryReminderLog } from "./schema";
 
 type Db = BetterSQLite3Database<Record<string, unknown>>;
 
@@ -55,4 +55,64 @@ export function listSpaceExpiryReminderCandidates(
         },
       ];
     });
+}
+
+export function listDueSpaceExpiryReminders(
+  db: Db,
+  thresholdDays: number,
+  today = new Date(),
+): SpaceExpiryReminderRow[] {
+  return listSpaceExpiryReminderCandidates(db, thresholdDays, today).filter(
+    (row) =>
+      row.daysUntilExpiry === thresholdDays &&
+      !wasSpaceExpiryReminderSent(
+        db,
+        row.id,
+        row.expiryDate,
+        thresholdDays,
+      ),
+  );
+}
+
+export function wasSpaceExpiryReminderSent(
+  db: Db,
+  spaceId: number,
+  expiryDate: string,
+  thresholdDays: number,
+): boolean {
+  const row = db
+    .select({ id: spaceExpiryReminderLog.id })
+    .from(spaceExpiryReminderLog)
+    .where(
+      and(
+        eq(spaceExpiryReminderLog.spaceId, spaceId),
+        eq(spaceExpiryReminderLog.expiryDate, expiryDate),
+        eq(spaceExpiryReminderLog.thresholdDays, thresholdDays),
+      ),
+    )
+    .get();
+
+  return row !== undefined;
+}
+
+export function recordSpaceExpiryReminderSent(
+  db: Db,
+  input: {
+    spaceId: number;
+    expiryDate: string;
+    thresholdDays: number;
+    recipientEmail: string;
+    sentAt: Date;
+  },
+): void {
+  db.insert(spaceExpiryReminderLog)
+    .values({
+      spaceId: input.spaceId,
+      expiryDate: input.expiryDate,
+      thresholdDays: input.thresholdDays,
+      recipientEmail: input.recipientEmail,
+      sentAt: input.sentAt.toISOString(),
+    })
+    .onConflictDoNothing()
+    .run();
 }
