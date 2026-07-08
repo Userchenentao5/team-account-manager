@@ -1,3 +1,4 @@
+import { runChildAccountPaymentReminderJob } from "@/lib/reminders/child-account-payment-reminder-job";
 import { runSpaceExpiryReminderJob } from "@/lib/reminders/space-expiry-reminder-job";
 
 const CHECK_INTERVAL_MS = 60_000;
@@ -21,9 +22,14 @@ export function startSpaceExpiryReminderScheduler(): void {
 
   const tick = () => {
     import("@/db")
-      .then(({ db }) => runSpaceExpiryReminderJob(db))
+      .then(({ db }) =>
+        Promise.all([
+          runSpaceExpiryReminderJob(db),
+          runChildAccountPaymentReminderJob(db),
+        ]),
+      )
       .catch((error) => {
-        console.error("space expiry reminder job failed", error);
+        console.error("reminder scheduler failed", error);
       });
   };
 

@@ -107,6 +107,12 @@ Items acknowledged and carried forward from previous milestone close:
 |----------|------|--------|-------------|
 | *(none)* | | | |
 
+## Quick Tasks
+
+| Date | ID | Task | Status |
+|------|----|------|--------|
+| 2026-07-08 | 260708-x2b | Child account email reminders | Complete |
+
 ## Session Continuity
 
 Last session: 2026-07-01T13:16:20.253Z

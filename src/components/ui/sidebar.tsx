@@ -26,7 +26,9 @@ import { PanelLeftIcon } from "lucide-react"
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
-const SIDEBAR_WIDTH = "16rem"
+const SIDEBAR_WIDTH = 256
+const SIDEBAR_WIDTH_MIN = 192
+const SIDEBAR_WIDTH_MAX = 420
 const SIDEBAR_WIDTH_MOBILE = "18rem"
 const SIDEBAR_WIDTH_ICON = "3rem"
 const SIDEBAR_KEYBOARD_SHORTCUT = "b"
@@ -38,6 +40,8 @@ type SidebarContextProps = {
   openMobile: boolean
   setOpenMobile: (open: boolean) => void
   isMobile: boolean
+  sidebarWidth: number
+  setSidebarWidth: (width: number) => void
   toggleSidebar: () => void
 }
 
@@ -67,6 +71,7 @@ function SidebarProvider({
 }) {
   const isMobile = useIsMobile()
   const [openMobile, setOpenMobile] = React.useState(false)
+  const [sidebarWidth, _setSidebarWidth] = React.useState(SIDEBAR_WIDTH)
 
   // This is the internal state of the sidebar.
   // We use openProp and setOpenProp for control from outside the component.
@@ -91,6 +96,14 @@ function SidebarProvider({
   const toggleSidebar = React.useCallback(() => {
     return isMobile ? setOpenMobile((open) => !open) : setOpen((open) => !open)
   }, [isMobile, setOpen, setOpenMobile])
+
+  const setSidebarWidth = React.useCallback((width: number) => {
+    const next = Math.min(
+      SIDEBAR_WIDTH_MAX,
+      Math.max(SIDEBAR_WIDTH_MIN, Math.round(width))
+    )
+    _setSidebarWidth(next)
+  }, [])
 
   // Adds a keyboard shortcut to toggle the sidebar.
   React.useEffect(() => {
@@ -120,9 +133,21 @@ function SidebarProvider({
       isMobile,
       openMobile,
       setOpenMobile,
+      sidebarWidth,
+      setSidebarWidth,
       toggleSidebar,
     }),
-    [state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar]
+    [
+      state,
+      open,
+      setOpen,
+      isMobile,
+      openMobile,
+      setOpenMobile,
+      sidebarWidth,
+      setSidebarWidth,
+      toggleSidebar,
+    ]
   )
 
   return (
@@ -131,7 +156,7 @@ function SidebarProvider({
         data-slot="sidebar-wrapper"
         style={
           {
-            "--sidebar-width": SIDEBAR_WIDTH,
+            "--sidebar-width": `${sidebarWidth}px`,
             "--sidebar-width-icon": SIDEBAR_WIDTH_ICON,
             ...style,
           } as React.CSSProperties
@@ -161,7 +186,39 @@ function Sidebar({
   variant?: "sidebar" | "floating" | "inset"
   collapsible?: "offcanvas" | "icon" | "none"
 }) {
-  const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
+  const {
+    isMobile,
+    state,
+    openMobile,
+    setOpenMobile,
+    sidebarWidth,
+    setSidebarWidth,
+  } = useSidebar()
+
+  const startResize = React.useCallback(
+    (event: React.PointerEvent<HTMLDivElement>) => {
+      event.preventDefault()
+      const startX = event.clientX
+      const startWidth = sidebarWidth
+      document.body.style.cursor = "col-resize"
+      document.body.style.userSelect = "none"
+
+      const onMove = (moveEvent: PointerEvent) => {
+        const delta = moveEvent.clientX - startX
+        setSidebarWidth(side === "left" ? startWidth + delta : startWidth - delta)
+      }
+      const onUp = () => {
+        document.body.style.cursor = ""
+        document.body.style.userSelect = ""
+        window.removeEventListener("pointermove", onMove)
+        window.removeEventListener("pointerup", onUp)
+      }
+
+      window.addEventListener("pointermove", onMove)
+      window.addEventListener("pointerup", onUp)
+    },
+    [side, sidebarWidth, setSidebarWidth]
+  )
 
   if (collapsible === "none") {
     return (
@@ -245,6 +302,29 @@ function Sidebar({
         >
           {children}
         </div>
+        {state === "expanded" ? (
+          <div
+            role="separator"
+            aria-orientation="vertical"
+            aria-label="调整侧边栏宽度"
+            tabIndex={0}
+            onPointerDown={startResize}
+            onKeyDown={(event) => {
+              if (event.key === "ArrowLeft") {
+                event.preventDefault()
+                setSidebarWidth(side === "left" ? sidebarWidth - 12 : sidebarWidth + 12)
+              }
+              if (event.key === "ArrowRight") {
+                event.preventDefault()
+                setSidebarWidth(side === "left" ? sidebarWidth + 12 : sidebarWidth - 12)
+              }
+            }}
+            className={cn(
+              "absolute inset-y-0 z-20 hidden w-2 cursor-col-resize touch-none outline-none after:absolute after:inset-y-0 after:left-1/2 after:w-px after:-translate-x-1/2 after:bg-sidebar-border hover:after:w-0.5 hover:after:bg-sidebar-ring focus-visible:after:w-0.5 focus-visible:after:bg-sidebar-ring md:block",
+              side === "left" ? "-right-1" : "-left-1"
+            )}
+          />
+        ) : null}
       </div>
     </div>
   )

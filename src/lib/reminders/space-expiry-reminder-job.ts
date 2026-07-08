@@ -68,6 +68,7 @@ export async function runSpaceExpiryReminderJob(
       to: emailSettings.recipientEmail,
       subject: message.subject,
       text: message.text,
+      html: message.html,
     });
     recordSpaceExpiryReminderSent(db, {
       spaceId: candidate.id,

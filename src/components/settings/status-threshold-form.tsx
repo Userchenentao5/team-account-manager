@@ -1,10 +1,23 @@
 "use client";
 
-import type { FormEvent } from "react";
-import { useState, useTransition } from "react";
-import { Clock, Eye, Pencil, Save } from "lucide-react";
+import type { ClipboardEvent, FormEvent } from "react";
+import { useRef, useState, useTransition } from "react";
+import {
+  Bold,
+  Clock,
+  Eye,
+  EyeOff,
+  Italic,
+  List,
+  ListOrdered,
+  Mail,
+  Pencil,
+  Save,
+  Underline,
+} from "lucide-react";
 import { toast } from "sonner";
 import {
+  sendSpaceEmailReminderTest,
   updateSpaceEmailReminderSettings,
   updateStatusThresholds,
 } from "@/actions/settings";
@@ -23,6 +36,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
+import {
+  renderRichTextTemplateBody,
+  renderTemplateText,
+  sanitizeRichTextHtml,
+} from "@/lib/email/rich-text";
 
 type StatusThresholdFormProps = {
   thresholds: StatusThresholds;
@@ -37,7 +55,9 @@ export function StatusThresholdForm({
   const [isEmailPending, startEmailTransition] = useTransition();
   const [thresholdError, setThresholdError] = useState<string | null>(null);
   const [emailError, setEmailError] = useState<string | null>(null);
+  const templateBodyRef = useRef<HTMLDivElement>(null);
   const [showPreview, setShowPreview] = useState(false);
+  const [showSmtpUrl, setShowSmtpUrl] = useState(false);
   const [isEditingTemplate, setIsEditingTemplate] = useState(false);
   const [thresholdDraft, setThresholdDraft] = useState({
     spaceSoonDays: String(thresholds.spaceSoonDays),
@@ -64,6 +84,22 @@ export function StatusThresholdForm({
   function updateEmailDraft(key: keyof typeof emailDraft, value: boolean | string) {
     setEmailDraft((current) => ({ ...current, [key]: value }));
     setEmailError(null);
+  }
+
+  function onTemplateBodyInput() {
+    updateEmailDraft("templateBody", templateBodyRef.current?.innerHTML ?? "");
+  }
+
+  function runTemplateCommand(command: string) {
+    templateBodyRef.current?.focus();
+    document.execCommand(command);
+    onTemplateBodyInput();
+  }
+
+  function onTemplatePaste(event: ClipboardEvent<HTMLDivElement>) {
+    event.preventDefault();
+    document.execCommand("insertText", false, event.clipboardData.getData("text/plain"));
+    onTemplateBodyInput();
   }
 
   function onThresholdSubmit(event: FormEvent<HTMLFormElement>) {
@@ -99,6 +135,19 @@ export function StatusThresholdForm({
 
       if (res.ok) {
         toast.success("已保存空间邮件提醒");
+      } else {
+        setEmailError(res.error);
+        toast.error(res.error);
+      }
+    });
+  }
+
+  function onTestEmail() {
+    startEmailTransition(async () => {
+      const res = await sendSpaceEmailReminderTest(emailDraft);
+
+      if (res.ok) {
+        toast.success("测试邮件已发送");
       } else {
         setEmailError(res.error);
         toast.error(res.error);
@@ -239,16 +288,35 @@ export function StatusThresholdForm({
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div className="space-y-1">
                     <Label htmlFor="spaceEmailSmtpUrl">SMTP URL</Label>
-                    <Input
-                      id="spaceEmailSmtpUrl"
-                      type="password"
-                      value={emailDraft.smtpUrl}
-                      onChange={(event) =>
-                        updateEmailDraft("smtpUrl", event.target.value)
-                      }
-                      disabled={isEmailPending}
-                      placeholder="smtp://user:pass@smtp.example.com:587"
-                    />
+                    <div className="relative">
+                      <Input
+                        id="spaceEmailSmtpUrl"
+                        type={showSmtpUrl ? "text" : "password"}
+                        value={emailDraft.smtpUrl}
+                        onChange={(event) =>
+                          updateEmailDraft("smtpUrl", event.target.value)
+                        }
+                        disabled={isEmailPending}
+                        placeholder="smtp://user:pass@smtp.example.com:587"
+                        className="pr-9"
+                      />
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="icon-sm"
+                        className="absolute right-0.5 top-0.5"
+                        onClick={() => setShowSmtpUrl((current) => !current)}
+                        disabled={isEmailPending}
+                        aria-label={showSmtpUrl ? "隐藏 SMTP URL" : "查看 SMTP URL"}
+                        title={showSmtpUrl ? "隐藏 SMTP URL" : "查看 SMTP URL"}
+                      >
+                        {showSmtpUrl ? (
+                          <EyeOff className="size-4" />
+                        ) : (
+                          <Eye className="size-4" />
+                        )}
+                      </Button>
+                    </div>
                   </div>
                   <div className="space-y-1">
                     <Label htmlFor="spaceEmailSmtpFrom">发件邮箱</Label>
@@ -317,19 +385,86 @@ export function StatusThresholdForm({
                         <Label htmlFor="spaceEmailTemplateBody">
                           邮件正文模板
                         </Label>
-                        <textarea
-                          id="spaceEmailTemplateBody"
-                          value={emailDraft.templateBody}
-                          onChange={(event) =>
-                            updateEmailDraft(
-                              "templateBody",
-                              event.target.value,
-                            )
-                          }
-                          disabled={isEmailPending}
-                          rows={5}
-                          className="min-h-28 w-full resize-y rounded-md border border-input bg-transparent px-3 py-2 text-sm outline-none transition-colors placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50"
-                        />
+                        <div className="rounded-md border border-input">
+                          <div className="flex flex-wrap gap-1 border-b p-1">
+                            <Button
+                              type="button"
+                              variant="ghost"
+                              size="icon-sm"
+                              onClick={() => runTemplateCommand("bold")}
+                              disabled={isEmailPending}
+                              title="加粗"
+                              aria-label="加粗"
+                            >
+                              <Bold className="size-4" />
+                            </Button>
+                            <Button
+                              type="button"
+                              variant="ghost"
+                              size="icon-sm"
+                              onClick={() => runTemplateCommand("italic")}
+                              disabled={isEmailPending}
+                              title="斜体"
+                              aria-label="斜体"
+                            >
+                              <Italic className="size-4" />
+                            </Button>
+                            <Button
+                              type="button"
+                              variant="ghost"
+                              size="icon-sm"
+                              onClick={() => runTemplateCommand("underline")}
+                              disabled={isEmailPending}
+                              title="下划线"
+                              aria-label="下划线"
+                            >
+                              <Underline className="size-4" />
+                            </Button>
+                            <Button
+                              type="button"
+                              variant="ghost"
+                              size="icon-sm"
+                              onClick={() =>
+                                runTemplateCommand("insertUnorderedList")
+                              }
+                              disabled={isEmailPending}
+                              title="项目列表"
+                              aria-label="项目列表"
+                            >
+                              <List className="size-4" />
+                            </Button>
+                            <Button
+                              type="button"
+                              variant="ghost"
+                              size="icon-sm"
+                              onClick={() =>
+                                runTemplateCommand("insertOrderedList")
+                              }
+                              disabled={isEmailPending}
+                              title="编号列表"
+                              aria-label="编号列表"
+                            >
+                              <ListOrdered className="size-4" />
+                            </Button>
+                          </div>
+                          <div
+                            ref={templateBodyRef}
+                            id="spaceEmailTemplateBody"
+                            role="textbox"
+                            aria-multiline="true"
+                            contentEditable={!isEmailPending}
+                            suppressContentEditableWarning
+                            onInput={onTemplateBodyInput}
+                            onPaste={onTemplatePaste}
+                            className="min-h-28 w-full rounded-b-md bg-transparent px-3 py-2 text-sm outline-none transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 data-[disabled=true]:cursor-not-allowed data-[disabled=true]:opacity-50"
+                            data-disabled={isEmailPending}
+                            dangerouslySetInnerHTML={{
+                              __html: sanitizeRichTextHtml(
+                                emailDraft.templateBody,
+                              ),
+                            }}
+                          />
+                        </div>
                       </div>
 
                       <p className="text-xs text-muted-foreground">
@@ -343,9 +478,10 @@ export function StatusThresholdForm({
                   {showPreview ? (
                     <div className="rounded-md bg-muted/60 p-3 text-sm">
                       <p className="font-medium">{preview.subject}</p>
-                      <p className="mt-2 whitespace-pre-wrap text-muted-foreground">
-                        {preview.body}
-                      </p>
+                      <div
+                        className="mt-2 text-muted-foreground [&_ol]:ml-5 [&_ol]:list-decimal [&_p]:mb-2 [&_p:last-child]:mb-0 [&_ul]:ml-5 [&_ul]:list-disc"
+                        dangerouslySetInnerHTML={{ __html: preview.html }}
+                      />
                     </div>
                   ) : null}
                 </div>
@@ -361,6 +497,17 @@ export function StatusThresholdForm({
                 <Save className="size-4" />
                 保存提醒设置
               </Button>
+              {emailDraft.enabled ? (
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={onTestEmail}
+                  disabled={isEmailPending}
+                >
+                  <Mail className="size-4" />
+                  发送测试邮件
+                </Button>
+              ) : null}
             </div>
           </form>
         </CardContent>
@@ -383,10 +530,10 @@ function renderPreview(
     paymentChannelName: "Visa",
     spaceName: "US Team",
   };
-  const replaceToken = (_match: string, key: string) => values[key] ?? `{${key}}`;
+  const body = renderRichTextTemplateBody(draft.templateBody, values);
 
   return {
-    subject: draft.templateSubject.replace(/\{(\w+)\}/g, replaceToken),
-    body: draft.templateBody.replace(/\{(\w+)\}/g, replaceToken),
+    subject: renderTemplateText(draft.templateSubject, values),
+    html: body.html,
   };
 }

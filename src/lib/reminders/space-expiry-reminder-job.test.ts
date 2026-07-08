@@ -91,6 +91,7 @@ describe("space expiry reminder job", () => {
       to: "billing@example.com",
       subject: "Threshold Team 自动提醒",
       text: "Threshold Team 还有 7 天到期，Visa 支付 25.99 USD。",
+      html: "<p>Threshold Team 还有 7 天到期，Visa 支付 25.99 USD。</p>",
     });
 
     await expect(

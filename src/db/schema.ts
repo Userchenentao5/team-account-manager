@@ -137,6 +137,52 @@ export const childAccount = sqliteTable("child_account", {
 });
 export type ChildAccountRow = typeof childAccount.$inferSelect;
 
+export const childAccountReminderSubscription = sqliteTable(
+  "child_account_reminder_subscription",
+  {
+    id: integer("id").primaryKey({ autoIncrement: true }),
+    childAccountId: integer("child_account_id")
+      .notNull()
+      .references(() => childAccount.id, { onDelete: "cascade" }),
+    email: text("email").notNull(),
+    createdAt: text("created_at")
+      .notNull()
+      .default(sql`(CURRENT_TIMESTAMP)`),
+    updatedAt: text("updated_at")
+      .notNull()
+      .default(sql`(CURRENT_TIMESTAMP)`),
+  },
+  (table) => [
+    uniqueIndex("child_account_reminder_subscription_once_idx").on(
+      table.childAccountId,
+    ),
+  ],
+);
+export type ChildAccountReminderSubscriptionRow =
+  typeof childAccountReminderSubscription.$inferSelect;
+
+export const childAccountReminderLog = sqliteTable(
+  "child_account_reminder_log",
+  {
+    id: integer("id").primaryKey({ autoIncrement: true }),
+    childAccountId: integer("child_account_id")
+      .notNull()
+      .references(() => childAccount.id, { onDelete: "cascade" }),
+    nextPaymentDate: text("next_payment_date").notNull(),
+    recipientEmail: text("recipient_email").notNull(),
+    sentAt: text("sent_at").notNull(),
+  },
+  (table) => [
+    uniqueIndex("child_account_reminder_log_once_idx").on(
+      table.childAccountId,
+      table.nextPaymentDate,
+      table.recipientEmail,
+    ),
+  ],
+);
+export type ChildAccountReminderLogRow =
+  typeof childAccountReminderLog.$inferSelect;
+
 export const spaceExpiryReminderLog = sqliteTable(
   "space_expiry_reminder_log",
   {

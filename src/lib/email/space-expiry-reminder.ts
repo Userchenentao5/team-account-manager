@@ -3,11 +3,16 @@ import {
   DEFAULT_SPACE_EMAIL_TEMPLATE_BODY,
   DEFAULT_SPACE_EMAIL_TEMPLATE_SUBJECT,
 } from "@/db/settings";
+import {
+  renderRichTextTemplateBody,
+  renderTemplateText,
+} from "@/lib/email/rich-text";
 import { formatMinor } from "@/lib/money";
 
 export type SpaceExpiryReminderEmail = {
   subject: string;
   text: string;
+  html: string;
 };
 
 export type SpaceExpiryReminderTemplate = {
@@ -30,11 +35,12 @@ export function renderSpaceExpiryReminderTemplate(
   row: SpaceExpiryReminderRow,
 ): SpaceExpiryReminderEmail {
   const values = templateValues(row);
-  const replaceToken = (_match: string, key: string) => values[key] ?? `{${key}}`;
+  const body = renderRichTextTemplateBody(template.body, values);
 
   return {
-    subject: template.subject.replace(/\{(\w+)\}/g, replaceToken),
-    text: template.body.replace(/\{(\w+)\}/g, replaceToken),
+    subject: renderTemplateText(template.subject, values),
+    text: body.text,
+    html: body.html,
   };
 }
 
