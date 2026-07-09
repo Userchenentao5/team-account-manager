@@ -15,6 +15,7 @@ export type ChildAccountReminderOption = {
   childAccountId: number;
   spaceName: string;
   childAccountEmail: string;
+  childAccountContact: string;
   childAccountLabel: string;
 };
 
@@ -43,6 +44,7 @@ export function listChildAccountReminderOptions(
       childAccountId: childAccount.id,
       spaceName: space.name,
       childAccountEmail: childAccount.email,
+      childAccountContact: childAccount.contact,
       childAccountLabel: childAccount.label,
     })
     .from(childAccount)
@@ -59,6 +61,7 @@ export function listChildAccountReminderSubscriptions(
       childAccountId: childAccount.id,
       spaceName: space.name,
       childAccountEmail: childAccount.email,
+      childAccountContact: childAccount.contact,
       childAccountLabel: childAccount.label,
       email: childAccountReminderSubscription.email,
     })
@@ -121,6 +124,7 @@ export function listDueChildAccountPaymentReminders(
       childAccountId: childAccount.id,
       spaceName: space.name,
       childAccountEmail: childAccount.email,
+      childAccountContact: childAccount.contact,
       childAccountLabel: childAccount.label,
       nextPaymentDate: childAccount.nextPaymentDate,
       amountMinor: childAccount.monthlyAmountMinor,

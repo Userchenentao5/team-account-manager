@@ -16,6 +16,23 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Login
+
+This app uses a single personal access key. Set these env vars before running it:
+
+```bash
+APP_AUTH_SECRET=<random signing secret>
+APP_LOGIN_KEY_HASH=<sha256 hex of your access key>
+```
+
+Generate values:
+
+```bash
+node -e "console.log('secret:', crypto.randomUUID() + crypto.randomUUID()); crypto.subtle.digest('SHA-256', new TextEncoder().encode(process.argv[1])).then(b => console.log('hash:', Buffer.from(b).toString('hex')))" "your-access-key"
+```
+
+Failed login attempts are rate-limited per client IP: 5 failures in 15 minutes locks login for 15 minutes.
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.

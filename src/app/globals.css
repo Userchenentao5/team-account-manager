@@ -118,6 +118,10 @@
 }
 
 @layer base {
+  button#next-logo {
+    bottom: 4.75rem !important;
+  }
+
   * {
     @apply border-border outline-ring/50;
   }

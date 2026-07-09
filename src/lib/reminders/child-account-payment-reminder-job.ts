@@ -1,6 +1,5 @@
 import type { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
 import {
-  getChildAccountReminderSubscriptionEmail,
   listDueChildAccountPaymentReminders,
   recordChildAccountReminderSent,
   wasChildAccountReminderSent,
@@ -56,46 +55,33 @@ export async function runChildAccountPaymentReminderJob(
       subject: emailSettings.templateSubject,
       body: emailSettings.templateBody,
     });
-    const subscriptionEmail = getChildAccountReminderSubscriptionEmail(
-      db,
-      candidate.childAccountId,
-    );
-    const recipients = Array.from(
-      new Set(
-        [emailSettings.recipientEmail, subscriptionEmail].filter(
-          (email): email is string => Boolean(email),
-        ),
-      ),
-    );
-
-    for (const recipientEmail of recipients) {
-      if (
-        wasChildAccountReminderSent(
-          db,
-          candidate.childAccountId,
-          candidate.nextPaymentDate,
-          recipientEmail,
-        )
-      ) {
-        continue;
-      }
-
-      await emailSender({
-        smtpUrl: emailSettings.smtpUrl,
-        from: emailSettings.smtpFrom,
-        to: recipientEmail,
-        subject: message.subject,
-        text: message.text,
-        html: message.html,
-      });
-      recordChildAccountReminderSent(db, {
-        childAccountId: candidate.childAccountId,
-        nextPaymentDate: candidate.nextPaymentDate,
+    const recipientEmail = emailSettings.recipientEmail;
+    if (
+      wasChildAccountReminderSent(
+        db,
+        candidate.childAccountId,
+        candidate.nextPaymentDate,
         recipientEmail,
-        sentAt: now,
-      });
-      sent += 1;
+      )
+    ) {
+      continue;
     }
+
+    await emailSender({
+      smtpUrl: emailSettings.smtpUrl,
+      from: emailSettings.smtpFrom,
+      to: recipientEmail,
+      subject: message.subject,
+      text: message.text,
+      html: message.html,
+    });
+    recordChildAccountReminderSent(db, {
+      childAccountId: candidate.childAccountId,
+      nextPaymentDate: candidate.nextPaymentDate,
+      recipientEmail,
+      sentAt: now,
+    });
+    sent += 1;
   }
 
   return { checked: true, sent };

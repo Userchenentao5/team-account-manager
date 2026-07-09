@@ -10,21 +10,16 @@ import {
   Italic,
   List,
   ListOrdered,
+  Mail,
   Pencil,
   Save,
-  Trash2,
   Underline,
 } from "lucide-react";
 import { toast } from "sonner";
 import {
-  removeChildAccountReminderSubscription,
-  saveChildAccountReminderSubscription,
+  sendChildAccountEmailReminderTest,
   updateChildAccountEmailReminderSettings,
 } from "@/actions/settings";
-import type {
-  ChildAccountReminderOption,
-  ChildAccountReminderSubscription,
-} from "@/db/childAccountReminders";
 import type { ChildAccountEmailReminderSettings } from "@/db/settings";
 import { Button } from "@/components/ui/button";
 import {
@@ -36,13 +31,6 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import {
   renderRichTextTemplateBody,
@@ -52,14 +40,10 @@ import {
 
 type ChildAccountReminderFormProps = {
   settings: ChildAccountEmailReminderSettings;
-  options: ChildAccountReminderOption[];
-  subscriptions: ChildAccountReminderSubscription[];
 };
 
 export function ChildAccountReminderForm({
   settings,
-  options,
-  subscriptions,
 }: ChildAccountReminderFormProps) {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
@@ -67,7 +51,7 @@ export function ChildAccountReminderForm({
   const [isEditingTemplate, setIsEditingTemplate] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
   const templateBodyRef = useRef<HTMLDivElement>(null);
-  const firstOption = options[0];
+  const templateBodyDraftRef = useRef(settings.templateBody);
   const [draft, setDraft] = useState({
     enabled: settings.enabled,
     recipientEmail: settings.recipientEmail,
@@ -77,9 +61,9 @@ export function ChildAccountReminderForm({
     templateSubject: settings.templateSubject,
     templateBody: settings.templateBody,
   });
-  const [subscriptionDraft, setSubscriptionDraft] = useState({
-    childAccountId: firstOption ? String(firstOption.childAccountId) : "",
-    email: firstOption?.childAccountEmail ?? "",
+  const [previewDraft, setPreviewDraft] = useState({
+    templateSubject: settings.templateSubject,
+    templateBody: settings.templateBody,
   });
 
   function updateDraft(key: keyof typeof draft, value: boolean | string) {
@@ -87,19 +71,9 @@ export function ChildAccountReminderForm({
     setError(null);
   }
 
-  function selectedOption(id = subscriptionDraft.childAccountId) {
-    return options.find((option) => String(option.childAccountId) === id);
-  }
-
-  function optionText(option: ChildAccountReminderOption) {
-    const label = option.childAccountLabel
-      ? ` · ${option.childAccountLabel}`
-      : "";
-    return `${option.spaceName} · ${option.childAccountEmail}${label}`;
-  }
-
   function onTemplateBodyInput() {
-    updateDraft("templateBody", templateBodyRef.current?.innerHTML ?? "");
+    templateBodyDraftRef.current = templateBodyRef.current?.innerHTML ?? "";
+    setError(null);
   }
 
   function runTemplateCommand(command: string) {
@@ -120,7 +94,7 @@ export function ChildAccountReminderForm({
 
   function onSaveSettings() {
     startTransition(async () => {
-      const res = await updateChildAccountEmailReminderSettings(draft);
+      const res = await updateChildAccountEmailReminderSettings(currentDraft());
 
       if (res.ok) {
         toast.success("已保存子账号邮件提醒");
@@ -131,16 +105,12 @@ export function ChildAccountReminderForm({
     });
   }
 
-  function onSaveSubscription() {
-    const childAccountId = Number(subscriptionDraft.childAccountId);
+  function onTestEmail() {
     startTransition(async () => {
-      const res = await saveChildAccountReminderSubscription({
-        childAccountId,
-        email: subscriptionDraft.email,
-      });
+      const res = await sendChildAccountEmailReminderTest(currentDraft());
 
       if (res.ok) {
-        toast.success("已保存订阅提醒邮箱");
+        toast.success("测试邮件已发送");
       } else {
         setError(res.error);
         toast.error(res.error);
@@ -148,27 +118,24 @@ export function ChildAccountReminderForm({
     });
   }
 
-  function onRemoveSubscription(childAccountId: number) {
-    startTransition(async () => {
-      const res = await removeChildAccountReminderSubscription(childAccountId);
-
-      if (res.ok) {
-        toast.success("已移除订阅提醒邮箱");
-      } else {
-        setError(res.error);
-        toast.error(res.error);
-      }
-    });
+  function onTogglePreview() {
+    const next = !showPreview;
+    if (next) setPreviewDraft(currentDraft());
+    setShowPreview(next);
   }
 
-  const preview = renderPreview(draft);
+  function currentDraft() {
+    return { ...draft, templateBody: templateBodyDraftRef.current };
+  }
+
+  const preview = renderPreview(previewDraft);
 
   return (
     <Card className="max-w-2xl">
       <CardHeader className="border-b">
         <CardTitle>子账号邮件提醒</CardTitle>
         <CardDescription>
-          非自用子账号到期当天，先发送给自己的必填接收邮箱；可额外给该子账号对应的订阅邮箱发送一份。
+          非自用子账号到期当天，只发送给自己的必填接收邮箱。
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-5">
@@ -271,7 +238,6 @@ export function ChildAccountReminderForm({
                 />
               </div>
             </div>
-
             <div className="space-y-3 rounded-md border px-4 py-3">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <Label>子账号提醒邮件模板</Label>
@@ -291,7 +257,7 @@ export function ChildAccountReminderForm({
                     type="button"
                     variant="outline"
                     size="sm"
-                    onClick={() => setShowPreview((current) => !current)}
+                    onClick={onTogglePreview}
                   >
                     <Eye className="size-4" />
                     {showPreview ? "收起预览" : "预览模板"}
@@ -401,8 +367,7 @@ export function ChildAccountReminderForm({
 
                   <p className="text-xs text-muted-foreground">
                     占位符：{"{spaceName}"} {"{childAccountEmail}"}{" "}
-                    {"{childAccountLabel}"} {"{daysUntilPayment}"}{" "}
-                    {"{amount}"} {"{currencyCode}"} {"{nextPaymentDate}"}
+                    {"{contact}"} {"{amount}"} {"{currencyCode}"}
                   </p>
                 </div>
               ) : null}
@@ -418,110 +383,28 @@ export function ChildAccountReminderForm({
               ) : null}
             </div>
 
-            <div className="space-y-3 rounded-md border px-4 py-3">
-              <div className="space-y-1">
-                <Label>接受订阅提醒用户列表</Label>
-                <p className="text-sm text-muted-foreground">
-                  每个子账号最多保存一个订阅邮箱，可使用该子账号邮箱或用户提供的其他邮箱。
-                </p>
-              </div>
-
-              <div className="grid gap-3 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto]">
-                <Select
-                  value={subscriptionDraft.childAccountId}
-                  onValueChange={(value) => {
-                    const option = selectedOption(value);
-                    setSubscriptionDraft({
-                      childAccountId: value,
-                      email: option?.childAccountEmail ?? "",
-                    });
-                    setError(null);
-                  }}
-                  disabled={isPending || options.length === 0}
-                >
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="选择子账号" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {options.map((option) => (
-                      <SelectItem
-                        key={option.childAccountId}
-                        value={String(option.childAccountId)}
-                      >
-                        {optionText(option)}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <Input
-                  type="email"
-                  value={subscriptionDraft.email}
-                  onChange={(event) =>
-                    setSubscriptionDraft((current) => ({
-                      ...current,
-                      email: event.target.value,
-                    }))
-                  }
-                  disabled={isPending || options.length === 0}
-                  placeholder="subscriber@example.com"
-                />
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={onSaveSubscription}
-                  disabled={isPending || options.length === 0}
-                >
-                  <Save className="size-4" />
-                  保存订阅
-                </Button>
-              </div>
-
-              <div className="space-y-2">
-                {subscriptions.length === 0 ? (
-                  <p className="text-sm text-muted-foreground">
-                    暂无订阅提醒邮箱。
-                  </p>
-                ) : (
-                  subscriptions.map((subscription) => (
-                    <div
-                      key={subscription.childAccountId}
-                      className="flex flex-wrap items-center justify-between gap-3 rounded-md border px-3 py-2 text-sm"
-                    >
-                      <div className="min-w-0">
-                        <p className="truncate font-medium">
-                          {optionText(subscription)}
-                        </p>
-                        <p className="truncate text-muted-foreground">
-                          {subscription.email}
-                        </p>
-                      </div>
-                      <Button
-                        type="button"
-                        variant="ghost"
-                        size="icon-sm"
-                        onClick={() =>
-                          onRemoveSubscription(subscription.childAccountId)
-                        }
-                        disabled={isPending}
-                        aria-label="移除订阅邮箱"
-                        title="移除订阅邮箱"
-                      >
-                        <Trash2 className="size-4" />
-                      </Button>
-                    </div>
-                  ))
-                )}
-              </div>
-            </div>
           </>
         ) : null}
 
         {error ? <p className="text-sm text-destructive">{error}</p> : null}
 
-        <Button type="button" onClick={onSaveSettings} disabled={isPending}>
-          <Save className="size-4" />
-          保存子账号提醒设置
-        </Button>
+        <div className="flex flex-wrap gap-2">
+          <Button type="button" onClick={onSaveSettings} disabled={isPending}>
+            <Save className="size-4" />
+            保存子账号提醒设置
+          </Button>
+          {draft.enabled ? (
+            <Button
+              type="button"
+              variant="outline"
+              onClick={onTestEmail}
+              disabled={isPending}
+            >
+              <Mail className="size-4" />
+              发送测试邮件
+            </Button>
+          ) : null}
+        </div>
       </CardContent>
     </Card>
   );
@@ -531,11 +414,11 @@ function renderPreview(draft: { templateSubject: string; templateBody: string })
   const values: Record<string, string> = {
     amount: "12.99",
     amountUsd: "12.99",
+    contact: "wx-member",
     childAccountEmail: "member@example.com",
     childAccountLabel: "Team seat",
     currencyCode: "CNY",
     daysUntilPayment: "0",
-    nextPaymentDate: "2026-07-08",
     spaceName: "US Team",
   };
   const body = renderRichTextTemplateBody(draft.templateBody, values);

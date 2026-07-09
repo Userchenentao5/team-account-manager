@@ -19,8 +19,12 @@ vi.mock("nodemailer", () => ({
   },
 }));
 
-import { sendSpaceEmailReminderTest } from "@/actions/settings";
+import {
+  sendChildAccountEmailReminderTest,
+  sendSpaceEmailReminderTest,
+} from "@/actions/settings";
 import { insertChannel } from "@/db/channels";
+import { insertChildAccount } from "@/db/childAccounts";
 import { seedCurrencies } from "@/db/seed";
 import { insertSpaceWithMother } from "@/db/spaces";
 import { createTestDb } from "@/test/db-harness";
@@ -92,5 +96,70 @@ describe("settings server actions", () => {
       text: "Real Team has 6 days left via Visa: 25.99 USD on 2026-07-14",
       html: "<p>Real Team has 6 days left via Visa: 25.99 USD on 2026-07-14</p>",
     });
+  });
+
+  it("sends a rendered child account reminder test without next payment date", async () => {
+    const channel = insertChannel(ctx.db, "Visa");
+    const space = insertSpaceWithMother(
+      ctx.db,
+      {
+        name: "Real Team",
+        country: "US",
+        paymentChannelId: channel.id,
+        currencyCode: "USD",
+        amountMinor: 2599,
+        periodUnit: "month",
+        periodCount: 1,
+        rateUsed: "1",
+        rateAsOf: "2026-06-28T00:00:00.000Z",
+        rateSource: "frankfurter",
+        amountUsd: 2599,
+        openingDate: "2026-07-01",
+        currentPeriodStartDate: "2026-07-01",
+        expiryDate: "2026-07-14",
+      },
+      "owner@example.com",
+    );
+    insertChildAccount(ctx.db, {
+      spaceId: space.id,
+      email: "member@example.com",
+      contact: "wx-member",
+      label: "Team seat",
+      joinedDate: "2026-06-08",
+      monthlyAmountMinor: 1299,
+      monthlyCurrencyCode: "CNY",
+      monthlyRateUsed: "1",
+      monthlyRateAsOf: "2026-06-28T00:00:00.000Z",
+      monthlyRateSource: "frankfurter",
+      monthlyAmountUsd: 181,
+      monthlyPaymentDay: 8,
+      billingPeriodUnit: "month",
+      billingPeriodCount: 1,
+      nextPaymentDate: "2026-07-08",
+    });
+
+    const res = await sendChildAccountEmailReminderTest({
+      enabled: true,
+      recipientEmail: "billing@example.com",
+      sendTime: "09:00",
+      smtpUrl: "smtp://user:pass@smtp.example.com:587",
+      smtpFrom: "sender@example.com",
+      templateSubject: "{spaceName} child reminder",
+      templateBody:
+        "{spaceName} {childAccountEmail} {contact}: {amount} {currencyCode}",
+    });
+
+    expect(res).toEqual({ ok: true });
+    expect(mailer.createTransport).toHaveBeenCalledWith(
+      "smtp://user:pass@smtp.example.com:587",
+    );
+    expect(mailer.sendMail).toHaveBeenCalledWith({
+      from: "sender@example.com",
+      to: "billing@example.com",
+      subject: "Real Team child reminder",
+      text: "Real Team member@example.com wx-member: 12.99 CNY",
+      html: "<p>Real Team member@example.com wx-member: 12.99 CNY</p>",
+    });
+    expect(mailer.sendMail.mock.calls[0][0].text).not.toContain("2026-07-08");
   });
 });

@@ -56,6 +56,7 @@ export function StatusThresholdForm({
   const [thresholdError, setThresholdError] = useState<string | null>(null);
   const [emailError, setEmailError] = useState<string | null>(null);
   const templateBodyRef = useRef<HTMLDivElement>(null);
+  const templateBodyDraftRef = useRef(emailReminder.templateBody);
   const [showPreview, setShowPreview] = useState(false);
   const [showSmtpUrl, setShowSmtpUrl] = useState(false);
   const [isEditingTemplate, setIsEditingTemplate] = useState(false);
@@ -69,6 +70,10 @@ export function StatusThresholdForm({
     sendTime: emailReminder.sendTime,
     smtpUrl: emailReminder.smtpUrl,
     smtpFrom: emailReminder.smtpFrom,
+    templateSubject: emailReminder.templateSubject,
+    templateBody: emailReminder.templateBody,
+  });
+  const [previewDraft, setPreviewDraft] = useState({
     templateSubject: emailReminder.templateSubject,
     templateBody: emailReminder.templateBody,
   });
@@ -87,7 +92,8 @@ export function StatusThresholdForm({
   }
 
   function onTemplateBodyInput() {
-    updateEmailDraft("templateBody", templateBodyRef.current?.innerHTML ?? "");
+    templateBodyDraftRef.current = templateBodyRef.current?.innerHTML ?? "";
+    setEmailError(null);
   }
 
   function runTemplateCommand(command: string) {
@@ -131,7 +137,7 @@ export function StatusThresholdForm({
     event.preventDefault();
 
     startEmailTransition(async () => {
-      const res = await updateSpaceEmailReminderSettings(emailDraft);
+      const res = await updateSpaceEmailReminderSettings(currentEmailDraft());
 
       if (res.ok) {
         toast.success("已保存空间邮件提醒");
@@ -144,7 +150,7 @@ export function StatusThresholdForm({
 
   function onTestEmail() {
     startEmailTransition(async () => {
-      const res = await sendSpaceEmailReminderTest(emailDraft);
+      const res = await sendSpaceEmailReminderTest(currentEmailDraft());
 
       if (res.ok) {
         toast.success("测试邮件已发送");
@@ -155,7 +161,17 @@ export function StatusThresholdForm({
     });
   }
 
-  const preview = renderPreview(emailDraft, thresholdDraft.spaceSoonDays);
+  function onTogglePreview() {
+    const next = !showPreview;
+    if (next) setPreviewDraft(currentEmailDraft());
+    setShowPreview(next);
+  }
+
+  function currentEmailDraft() {
+    return { ...emailDraft, templateBody: templateBodyDraftRef.current };
+  }
+
+  const preview = renderPreview(previewDraft, thresholdDraft.spaceSoonDays);
 
   return (
     <div className="grid max-w-2xl gap-4">
@@ -354,7 +370,7 @@ export function StatusThresholdForm({
                         type="button"
                         variant="outline"
                         size="sm"
-                        onClick={() => setShowPreview((current) => !current)}
+                        onClick={onTogglePreview}
                       >
                         <Eye className="size-4" />
                         {showPreview ? "收起预览" : "预览模板"}

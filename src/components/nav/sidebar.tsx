@@ -10,11 +10,14 @@ import {
   Coins,
   Banknote,
   Settings,
+  LogOut,
 } from "lucide-react";
 
+import { logout } from "@/actions/auth";
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarHeader,
@@ -106,6 +109,18 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter>
+        <form action={logout}>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton type="submit" tooltip="退出登录">
+                <LogOut aria-hidden="true" />
+                <span>退出登录</span>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </form>
+      </SidebarFooter>
     </Sidebar>
   );
 }

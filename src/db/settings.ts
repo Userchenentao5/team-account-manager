@@ -17,9 +17,11 @@ export const DEFAULT_CHILD_ACCOUNT_EMAIL_REMINDER_SEND_TIME = "09:00";
 export const DEFAULT_CHILD_ACCOUNT_EMAIL_TEMPLATE_SUBJECT =
   "{spaceName} 子账号到期提醒";
 export const DEFAULT_CHILD_ACCOUNT_EMAIL_TEMPLATE_BODY =
-  "<p>{spaceName} 的子账号 <strong>{childAccountEmail}</strong> 今天到期。</p><p>应收金额：{amount} {currencyCode}，下一付款日：{nextPaymentDate}。</p>";
-const LEGACY_CHILD_ACCOUNT_EMAIL_TEMPLATE_BODY =
-  "<p>{spaceName} 的子账号 <strong>{childAccountEmail}</strong> 今天到期。</p><p>应收金额：{amountUsd} USD，下一付款日：{nextPaymentDate}。</p>";
+  "{spaceName} 空间的子账号 {childAccountEmail} 今天到期，联系人：{contact}，应收金额：{amount} {currencyCode}。";
+const LEGACY_CHILD_ACCOUNT_EMAIL_TEMPLATE_BODIES = new Set([
+  "<p>{spaceName} 的子账号 <strong>{childAccountEmail}</strong> 今天到期。</p><p>应收金额：{amount} {currencyCode}，下一付款日：{nextPaymentDate}。</p>",
+  "<p>{spaceName} 的子账号 <strong>{childAccountEmail}</strong> 今天到期。</p><p>应收金额：{amountUsd} USD，下一付款日：{nextPaymentDate}。</p>",
+]);
 
 export type StatusThresholds = {
   spaceSoonDays: number;
@@ -141,8 +143,9 @@ export function getChildAccountEmailReminderSettings(
       values[CHILD_ACCOUNT_EMAIL_REMINDER_TEMPLATE_SUBJECT_KEY] ??
       DEFAULT_CHILD_ACCOUNT_EMAIL_TEMPLATE_SUBJECT,
     templateBody:
-      values[CHILD_ACCOUNT_EMAIL_REMINDER_TEMPLATE_BODY_KEY] ===
-      LEGACY_CHILD_ACCOUNT_EMAIL_TEMPLATE_BODY
+      LEGACY_CHILD_ACCOUNT_EMAIL_TEMPLATE_BODIES.has(
+        values[CHILD_ACCOUNT_EMAIL_REMINDER_TEMPLATE_BODY_KEY] ?? "",
+      )
         ? DEFAULT_CHILD_ACCOUNT_EMAIL_TEMPLATE_BODY
         : (values[CHILD_ACCOUNT_EMAIL_REMINDER_TEMPLATE_BODY_KEY] ??
           DEFAULT_CHILD_ACCOUNT_EMAIL_TEMPLATE_BODY),

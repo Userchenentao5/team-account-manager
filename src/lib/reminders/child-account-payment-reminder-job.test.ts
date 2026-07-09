@@ -46,6 +46,7 @@ describe("child account payment reminder job", () => {
     return insertChildAccount(ctx.db, {
       spaceId: space.id,
       email: "member@example.com",
+      contact: "wx-member",
       label: "Team seat",
       joinedDate: "2026-06-08",
       monthlyAmountMinor: 1299,
@@ -61,7 +62,7 @@ describe("child account payment reminder job", () => {
     });
   }
 
-  it("sends to the owner recipient and matching subscription once on due day", async () => {
+  it("sends only to the owner recipient once on due day", async () => {
     setChildAccountEmailReminderSettings(ctx.db, {
       enabled: true,
       recipientEmail: "owner@example.com",
@@ -70,7 +71,7 @@ describe("child account payment reminder job", () => {
       smtpFrom: "sender@example.com",
       templateSubject: "{spaceName} {childAccountEmail} due",
       templateBody:
-        "<p>{childAccountEmail} is due on {nextPaymentDate}, amount {amount} {currencyCode}.</p>",
+        "<p>{spaceName} {childAccountEmail} {contact}, amount {amount} {currencyCode}.</p>",
     });
     const child = makeChildAccount("2026-07-08");
     makeChildAccount("2026-07-09");
@@ -98,24 +99,16 @@ describe("child account payment reminder job", () => {
         new Date(2026, 6, 8, 9, 30),
         sendEmail,
       ),
-    ).resolves.toMatchObject({ checked: true, sent: 2 });
+    ).resolves.toMatchObject({ checked: true, sent: 1 });
 
-    expect(sendEmail).toHaveBeenCalledTimes(2);
-    expect(sendEmail).toHaveBeenNthCalledWith(1, {
+    expect(sendEmail).toHaveBeenCalledTimes(1);
+    expect(sendEmail).toHaveBeenCalledWith({
       smtpUrl: "smtp://user:pass@smtp.example.com:587",
       from: "sender@example.com",
       to: "owner@example.com",
       subject: "US Team member@example.com due",
-      text: "member@example.com is due on 2026-07-08, amount 12.99 CNY.",
-      html: "<p>member@example.com is due on 2026-07-08, amount 12.99 CNY.</p>",
-    });
-    expect(sendEmail).toHaveBeenNthCalledWith(2, {
-      smtpUrl: "smtp://user:pass@smtp.example.com:587",
-      from: "sender@example.com",
-      to: "member-reminder@example.com",
-      subject: "US Team member@example.com due",
-      text: "member@example.com is due on 2026-07-08, amount 12.99 CNY.",
-      html: "<p>member@example.com is due on 2026-07-08, amount 12.99 CNY.</p>",
+      text: "US Team member@example.com wx-member, amount 12.99 CNY.",
+      html: "<p>US Team member@example.com wx-member, amount 12.99 CNY.</p>",
     });
 
     await expect(
@@ -125,6 +118,6 @@ describe("child account payment reminder job", () => {
         sendEmail,
       ),
     ).resolves.toMatchObject({ checked: true, sent: 0 });
-    expect(sendEmail).toHaveBeenCalledTimes(2);
+    expect(sendEmail).toHaveBeenCalledTimes(1);
   });
 });

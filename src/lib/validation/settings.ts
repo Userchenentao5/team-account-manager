@@ -119,14 +119,6 @@ export const childAccountEmailReminderSchema = z
     message: "开启子账号邮件提醒后请输入发件邮箱。",
   });
 
-export const childAccountReminderSubscriptionSchema = z.object({
-  childAccountId: z.number().int().positive("请选择子账号。"),
-  email: z
-    .string()
-    .trim()
-    .max(254, "邮箱长度不能超过 254 个字符。")
-    .pipe(emailAddress),
-});
 
 export type StatusThresholdInput = z.infer<typeof statusThresholdSchema>;
 export type SpaceEmailReminderInput = z.infer<
@@ -134,7 +126,4 @@ export type SpaceEmailReminderInput = z.infer<
 >;
 export type ChildAccountEmailReminderInput = z.infer<
   typeof childAccountEmailReminderSchema
->;
-export type ChildAccountReminderSubscriptionInput = z.infer<
-  typeof childAccountReminderSubscriptionSchema
 >;

@@ -27,11 +27,11 @@ function templateValues(
   return {
     amount,
     amountUsd: amount,
+    contact: row.childAccountContact || "-",
     childAccountEmail: row.childAccountEmail,
     childAccountLabel: row.childAccountLabel,
     currencyCode: row.currencyCode,
     daysUntilPayment: String(row.daysUntilPayment),
-    nextPaymentDate: row.nextPaymentDate,
     spaceName: row.spaceName,
   };
 }

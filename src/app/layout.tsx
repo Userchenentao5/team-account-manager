@@ -2,12 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-import { AppSidebar } from "@/components/nav/sidebar";
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@/components/ui/sidebar";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { startSpaceExpiryReminderScheduler } from "@/lib/reminders/space-expiry-reminder-scheduler";
@@ -40,17 +34,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full">
-        <TooltipProvider>
-          <SidebarProvider>
-            <AppSidebar />
-            <SidebarInset className="bg-transparent">
-              <header className="sticky top-0 z-20 flex h-14 items-center gap-2 border-b bg-background/78 px-4 backdrop-blur-xl">
-                <SidebarTrigger aria-label="切换侧边栏" />
-              </header>
-              <main className="flex min-w-0 flex-1 flex-col">{children}</main>
-            </SidebarInset>
-          </SidebarProvider>
-        </TooltipProvider>
+        <TooltipProvider>{children}</TooltipProvider>
         <Toaster />
       </body>
     </html>
