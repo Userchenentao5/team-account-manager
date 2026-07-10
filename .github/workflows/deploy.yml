@@ -1,0 +1,61 @@
+name: Deploy to ECS
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 25.5.0
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build
+
+  deploy:
+    needs: verify
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    env:
+      ECS_HOST: 8.153.38.90
+      ECS_PORT: "22"
+      ECS_PATH: /data/team-account-manager
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: ${{ github.sha }}
+      - name: Configure SSH
+        env:
+          ECS_SSH_PRIVATE_KEY: ${{ secrets.ECS_SSH_PRIVATE_KEY }}
+          ECS_SSH_KNOWN_HOSTS: ${{ secrets.ECS_SSH_KNOWN_HOSTS }}
+        run: |
+          install -d -m 700 "$RUNNER_TEMP/ssh"
+          printf '%s\n' "$ECS_SSH_PRIVATE_KEY" > "$RUNNER_TEMP/ssh/id_ed25519"
+          printf '%s\n' "$ECS_SSH_KNOWN_HOSTS" > "$RUNNER_TEMP/ssh/known_hosts"
+          chmod 600 "$RUNNER_TEMP/ssh/id_ed25519" "$RUNNER_TEMP/ssh/known_hosts"
+      - name: Validate deployment host
+        env:
+          ECS_SSH_USER: ${{ secrets.ECS_SSH_USER }}
+        run: |
+          ssh -i "$RUNNER_TEMP/ssh/id_ed25519" -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$RUNNER_TEMP/ssh/known_hosts" -o GlobalKnownHostsFile=/dev/null -p "$ECS_PORT" "$ECS_SSH_USER@$ECS_HOST" 'command -v docker && docker compose version && command -v rsync && test -d /data/team-account-manager && test -f /data/team-account-manager/.env.production && test ! -L /data/team-account-manager/.env.production && test "$(stat -c %a /data/team-account-manager/.env.production)" -le 600'
+      - name: Synchronize source
+        env:
+          ECS_SSH_USER: ${{ secrets.ECS_SSH_USER }}
+        run: |
+          rsync -az --delete --exclude='.env*' --exclude='data/' --exclude='.git/' --exclude='node_modules/' --exclude='.next/' --exclude='.planning/' --exclude='graphify-out/' -e "ssh -i $RUNNER_TEMP/ssh/id_ed25519 -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$RUNNER_TEMP/ssh/known_hosts -o GlobalKnownHostsFile=/dev/null -p $ECS_PORT" ./ "$ECS_SSH_USER@$ECS_HOST:$ECS_PATH/"
+      - name: Build and start
+        env:
+          ECS_SSH_USER: ${{ secrets.ECS_SSH_USER }}
+        run: |
+          ssh -i "$RUNNER_TEMP/ssh/id_ed25519" -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$RUNNER_TEMP/ssh/known_hosts" -o GlobalKnownHostsFile=/dev/null -p "$ECS_PORT" "$ECS_SSH_USER@$ECS_HOST" 'cd /data/team-account-manager && docker compose up -d --build --wait --wait-timeout 60 --remove-orphans || { docker compose ps; docker compose logs --tail=100 app; exit 1; }'

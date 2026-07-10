@@ -1,0 +1,13 @@
+node_modules
+.next
+data
+.git
+.github
+.planning
+.agents
+.claude
+.codex
+graphify-out
+.env*
+*.log
+README.md
