@@ -1,1263 +1,661 @@
-# Graph Report - team-account-manager  (2026-07-09)
+# Graph Report - .  (2026-07-10)
 
 ## Corpus Check
-- 250 files · ~188,017 words
+- 255 files · ~188,017 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 2458 nodes · 3513 edges · 548 communities (163 shown, 385 thin omitted)
-- Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 4 edges (avg confidence: 0.67)
+- 1701 nodes · 3471 edges · 132 communities (110 shown, 22 thin omitted)
+- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 78 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
-## Graph Freshness
-- Built from commit: `b66f24d3`
-- Run `git rev-parse HEAD` and compare to check if the graph is stale.
-- Run `graphify update .` after code changes (no API cost).
-
 ## Community Hubs (Navigation)
-- [[_COMMUNITY_child-account-table.tsx|child-account-table.tsx]]
-- [[_COMMUNITY_page.tsx|page.tsx]]
-- [[_COMMUNITY_Next revalidatePath|Next revalidatePath]]
-- [[_COMMUNITY_space-form.tsx|space-form.tsx]]
-- [[_COMMUNITY_childAccounts.test.ts|childAccounts.test.ts]]
-- [[_COMMUNITY_childAccounts.ts|childAccounts.ts]]
-- [[_COMMUNITY_dependencies|dependencies]]
-- [[_COMMUNITY_Button polymorphic command component|Button polymorphic command component]]
-- [[_COMMUNITY_Child accounts and mother seat schema|Child accounts and mother seat schema]]
-- [[_COMMUNITY_frankfurter.ts|frankfurter.ts]]
-- [[_COMMUNITY_getDashboardOverview aggregate facade|getDashboardOverview aggregate facade]]
-- [[_COMMUNITY_channel-table.tsx|channel-table.tsx]]
-- [[_COMMUNITY_sidebar.tsx|sidebar.tsx]]
-- [[_COMMUNITY_spaces.ts|spaces.ts]]
-- [[_COMMUNITY_components.json|components.json]]
-- [[_COMMUNITY_page.tsx|page.tsx]]
-- [[_COMMUNITY_dashboard.ts|dashboard.ts]]
-- [[_COMMUNITY_Frankfurter FX strategy|Frankfurter FX strategy]]
-- [[_COMMUNITY_space-table.tsx|space-table.tsx]]
-- [[_COMMUNITY_compilerOptions|compilerOptions]]
-- [[_COMMUNITY_space table|space table]]
-- [[_COMMUNITY_deleteSpaceCascade exact-name transactional delete helper|deleteSpaceCascade exact-name transactional delete helper]]
-- [[_COMMUNITY_channels.ts|channels.ts]]
-- [[_COMMUNITY_spaces.query.test.ts|spaces.query.test.ts]]
-- [[_COMMUNITY_fx_rate cache table|fx_rate cache table]]
-- [[_COMMUNITY_Phase 3 Spaces Expiry USD Snapshot|Phase 3 Spaces Expiry USD Snapshot]]
-- [[_COMMUNITY_Dashboard overview aggregate query facade|Dashboard overview aggregate query facade]]
-- [[_COMMUNITY_createSpace Server Action|createSpace Server Action]]
-- [[_COMMUNITY_expiry.ts|expiry.ts]]
-- [[_COMMUNITY_sheet.tsx|sheet.tsx]]
-- [[_COMMUNITY_AlertDialog Component Suite|AlertDialog Component Suite]]
-- [[_COMMUNITY_insertSpaceWithMother|insertSpaceWithMother]]
-- [[_COMMUNITY_Drizzle migrate function|Drizzle migrate function]]
-- [[_COMMUNITY_mother_account Table|mother_account Table]]
-- [[_COMMUNITY_Dependency-driven phase roadmap|Dependency-driven phase roadmap]]
-- [[_COMMUNITY_layout.tsx|layout.tsx]]
-- [[_COMMUNITY_paymentChannel table usage|paymentChannel table usage]]
-- [[_COMMUNITY_fxRate table usage|fxRate table usage]]
-- [[_COMMUNITY_Form label control description message accessibility contract|Form label control description message accessibility contract]]
-- [[_COMMUNITY_Phase 04 implementation pattern map|Phase 04 implementation pattern map]]
-- [[_COMMUNITY_Phase 04 UI design contract|Phase 04 UI design contract]]
-- [[_COMMUNITY_Select content portal with viewport and scroll buttons|Select content portal with viewport and scroll buttons]]
-- [[_COMMUNITY_eslint.config.mjs|eslint.config.mjs]]
-- [[_COMMUNITY_next.config.ts|next.config.ts]]
-- [[_COMMUNITY_postcss.config.mjs|postcss.config.mjs]]
-- [[_COMMUNITY_file document icon asset|file document icon asset]]
-- [[_COMMUNITY_Badge polymorphic status label|Badge polymorphic status label]]
-- [[_COMMUNITY_Sidebar menu loading skeleton with randomized width|Sidebar menu loading skeleton with randomized width]]
-- [[_COMMUNITY_Payment channel data access helpers|Payment channel data access helpers]]
-- [[_COMMUNITY_Currency data access and usage counting|Currency data access and usage counting]]
-- [[_COMMUNITY_Empty Claude Instructions File|Empty Claude Instructions File]]
-- [[_COMMUNITY_Space data access helpers|Space data access helpers]]
-- [[_COMMUNITY_Card composition suite|Card composition suite]]
-- [[_COMMUNITY_Radix separator orientation wrapper|Radix separator orientation wrapper]]
-- [[_COMMUNITY_Radix switch with size variants and checked state styling|Radix switch with size variants and checked state styling]]
-- [[_COMMUNITY_Expiry helpers module|Expiry helpers module]]
-- [[_COMMUNITY_Money helpers module|Money helpers module]]
-- [[_COMMUNITY_cn class merge utility|cn class merge utility]]
-- [[_COMMUNITY_Pattern Assignments|Pattern Assignments]]
-- [[_COMMUNITY_space-detail-actions.tsx|space-detail-actions.tsx]]
-- [[_COMMUNITY_shadcnui (interactive component installer)|shadcn/ui (interactive component installer)]]
-- [[_COMMUNITY_Pattern Assignments|Pattern Assignments]]
-- [[_COMMUNITY_Implications for Roadmap|Implications for Roadmap]]
-- [[_COMMUNITY_Pitfalls Research|Pitfalls Research]]
-- [[_COMMUNITY_Implementation Decisions|Implementation Decisions]]
-- [[_COMMUNITY_Implementation Decisions|Implementation Decisions]]
-- [[_COMMUNITY_Pattern Assignments|Pattern Assignments]]
-- [[_COMMUNITY_Phase 1 Foundations, Schema & Reference Data - Context|Phase 1: Foundations, Schema & Reference Data - Context]]
-- [[_COMMUNITY_settings.ts|settings.ts]]
-- [[_COMMUNITY_Phase 1 Plan 02 Navigation Shell & Currency List Summary|Phase 1 Plan 02: Navigation Shell & Currency List Summary]]
-- [[_COMMUNITY_Phase 1 Plan 03 Payment-Channel Maintenance Summary|Phase 1 Plan 03: Payment-Channel Maintenance Summary]]
-- [[_COMMUNITY_Phase 1 Plan 01 Foundations, Schema & Reference Data Summary|Phase 1 Plan 01: Foundations, Schema & Reference Data Summary]]
-- [[_COMMUNITY_Phase 2 Plan 01 FX Cache Persistence Foundation Summary|Phase 2 Plan 01: FX Cache Persistence Foundation Summary]]
-- [[_COMMUNITY_Phase 2 Plan 02 Frankfurter Anti-Corruption FX Service Summary|Phase 2 Plan 02: Frankfurter Anti-Corruption FX Service Summary]]
-- [[_COMMUNITY_Phase 2 Plan 03 Rates Screen + refreshRates Server Action Summary|Phase 2 Plan 03: Rates Screen + refreshRates Server Action Summary]]
-- [[_COMMUNITY_Implementation Decisions|Implementation Decisions]]
-- [[_COMMUNITY_Phase 5 Dashboard & Overview - Context|Phase 5: Dashboard & Overview - Context]]
-- [[_COMMUNITY_Phase 05 Dashboard & Overview - Research|Phase 05: Dashboard & Overview - Research]]
-- [[_COMMUNITY_Feature Research|Feature Research]]
-- [[_COMMUNITY_Stack Research|Stack Research]]
-- [[_COMMUNITY_Goal Achievement|Goal Achievement]]
-- [[_COMMUNITY_Phase 05 Plan 02 Root Dashboard UI Summary|Phase 05 Plan 02: Root Dashboard UI Summary]]
-- [[_COMMUNITY_Phase 05 Plan 03 Final Dashboard Verification Summary|Phase 05 Plan 03: Final Dashboard Verification Summary]]
-- [[_COMMUNITY_channels.ts|channels.ts]]
-- [[_COMMUNITY_Phase 2 Exchange-Rate Layer - Research|Phase 2: Exchange-Rate Layer - Research]]
-- [[_COMMUNITY_Phase 04 Child Accounts & Cascade Delete - Research|Phase 04: Child Accounts & Cascade Delete - Research]]
-- [[_COMMUNITY_Phase 05 Plan 01 Dashboard Aggregate Contract Summary|Phase 05 Plan 01: Dashboard Aggregate Contract Summary]]
-- [[_COMMUNITY_Phase 1 Foundations, Schema & Reference Data - Discussion Log|Phase 1: Foundations, Schema & Reference Data - Discussion Log]]
-- [[_COMMUNITY_Phase 1 Foundations, Schema & Reference Data - Research|Phase 1: Foundations, Schema & Reference Data - Research]]
-- [[_COMMUNITY_Phase 2 Code Review Report|Phase 2: Code Review Report]]
-- [[_COMMUNITY_Phase 3 Plan 01 Mother Account Schema Summary|Phase 3 Plan 01: Mother Account Schema Summary]]
-- [[_COMMUNITY_Phase 3 Plan 02 Expiry and USD Freeze Helpers Summary|Phase 3 Plan 02: Expiry and USD Freeze Helpers Summary]]
-- [[_COMMUNITY_Phase 3 Plan 05 Space UI Summary|Phase 3 Plan 05: Space UI Summary]]
-- [[_COMMUNITY_Phase 03 Plan 06 MVP Metadata Gap Closure Summary|Phase 03 Plan 06: MVP Metadata Gap Closure Summary]]
-- [[_COMMUNITY_Phase 3 Spaces (Expiry + USD Snapshot) - Research|Phase 3: Spaces (Expiry + USD Snapshot) - Research]]
-- [[_COMMUNITY_Phase 04 Plan 01 Child Account Persistence Summary|Phase 04 Plan 01: Child Account Persistence Summary]]
-- [[_COMMUNITY_Phase 04 Plan 02 Child Account Server Actions Summary|Phase 04 Plan 02: Child Account Server Actions Summary]]
-- [[_COMMUNITY_Phase 04 Plan 03 Detail-Page Child Account UI Summary|Phase 04 Plan 03: Detail-Page Child Account UI Summary]]
-- [[_COMMUNITY_Phase 04 Plan 04 Space Cascade Delete Summary|Phase 04 Plan 04: Space Cascade Delete Summary]]
-- [[_COMMUNITY_Phase 04 Plan 05 CNY Reference and Final Verification Summary|Phase 04 Plan 05: CNY Reference and Final Verification Summary]]
-- [[_COMMUNITY_Phase 4 Child Accounts & Cascade Delete - Discussion Log|Phase 4: Child Accounts & Cascade Delete - Discussion Log]]
-- [[_COMMUNITY_Goal Achievement|Goal Achievement]]
-- [[_COMMUNITY_Phase 2 Exchange-Rate Layer - Discussion Log|Phase 2: Exchange-Rate Layer - Discussion Log]]
-- [[_COMMUNITY_Goal Achievement|Goal Achievement]]
-- [[_COMMUNITY_Phase 3 Plan 03 Validation and Data Layer Summary|Phase 3 Plan 03: Validation and Data Layer Summary]]
-- [[_COMMUNITY_Phase 3 Plan 04 Space Server Actions Summary|Phase 3 Plan 04: Space Server Actions Summary]]
-- [[_COMMUNITY_Tests|Tests]]
-- [[_COMMUNITY_Phase 4 - UI Design Contract|Phase 4 - UI Design Contract]]
-- [[_COMMUNITY_Phase 4 - Validation Strategy|Phase 4 - Validation Strategy]]
-- [[_COMMUNITY_Phase 5 - UI Design Contract|Phase 5 - UI Design Contract]]
-- [[_COMMUNITY_Phase 5 - Validation Strategy|Phase 5 - Validation Strategy]]
-- [[_COMMUNITY_Phase Details|Phase Details]]
-- [[_COMMUNITY_Project State|Project State]]
-- [[_COMMUNITY_Phase 1 — UI Design Contract|Phase 1 — UI Design Contract]]
-- [[_COMMUNITY_Tests|Tests]]
-- [[_COMMUNITY_Phase 2 — UI Design Contract|Phase 2 — UI Design Contract]]
-- [[_COMMUNITY_Phase 3 — UI Design Contract|Phase 3 — UI Design Contract]]
-- [[_COMMUNITY_Phase 05 Dashboard & Overview Verification Report|Phase 05: Dashboard & Overview Verification Report]]
-- [[_COMMUNITY_Areas Discussed|Areas Discussed]]
-- [[_COMMUNITY_User Constraints (from CONTEXT.md)|User Constraints (from CONTEXT.md)]]
-- [[_COMMUNITY_Dashboard Priority|Dashboard Priority]]
-- [[_COMMUNITY_Architecture Patterns|Architecture Patterns]]
-- [[_COMMUNITY_Code Examples|Code Examples]]
-- [[_COMMUNITY_Phase 1 — Validation Strategy|Phase 1 — Validation Strategy]]
-- [[_COMMUNITY_Architecture Patterns|Architecture Patterns]]
-- [[_COMMUNITY_Phase 2 — Validation Strategy|Phase 2 — Validation Strategy]]
-- [[_COMMUNITY_Architecture Patterns|Architecture Patterns]]
-- [[_COMMUNITY_Phase 3 — Validation Strategy|Phase 3 — Validation Strategy]]
-- [[_COMMUNITY_Architecture Patterns|Architecture Patterns]]
-- [[_COMMUNITY_Architecture Patterns|Architecture Patterns]]
-- [[_COMMUNITY_Walking Skeleton — 团队空间管理系统 (team-account-manager)|Walking Skeleton — 团队空间管理系统 (team-account-manager)]]
-- [[_COMMUNITY_Common Pitfalls|Common Pitfalls]]
-- [[_COMMUNITY_Common Pitfalls|Common Pitfalls]]
-- [[_COMMUNITY_Phase 04 Child Accounts & Cascade Delete Verification Report|Phase 04: Child Accounts & Cascade Delete Verification Report]]
-- [[_COMMUNITY_cn|cn]]
-- [[_COMMUNITY_Common Pitfalls|Common Pitfalls]]
-- [[_COMMUNITY_Common Pitfalls|Common Pitfalls]]
-- [[_COMMUNITY_05-01-PLAN|05-01-PLAN.md]]
-- [[_COMMUNITY_05-02-PLAN|05-02-PLAN.md]]
-- [[_COMMUNITY_05-03-PLAN|05-03-PLAN.md]]
-- [[_COMMUNITY_Common Pitfalls|Common Pitfalls]]
-- [[_COMMUNITY_space-expiry-reminder-job.ts|space-expiry-reminder-job.ts]]
-- [[_COMMUNITY_Validation Architecture|Validation Architecture]]
-- [[_COMMUNITY_Code Examples|Code Examples]]
-- [[_COMMUNITY_Validation Architecture|Validation Architecture]]
-- [[_COMMUNITY_03-06-PLAN|03-06-PLAN.md]]
-- [[_COMMUNITY_Validation Architecture|Validation Architecture]]
-- [[_COMMUNITY_04-01-PLAN|04-01-PLAN.md]]
-- [[_COMMUNITY_04-02-PLAN|04-02-PLAN.md]]
-- [[_COMMUNITY_04-03-PLAN|04-03-PLAN.md]]
-- [[_COMMUNITY_04-04-PLAN|04-04-PLAN.md]]
-- [[_COMMUNITY_04-05-PLAN|04-05-PLAN.md]]
-- [[_COMMUNITY_Validation Architecture|Validation Architecture]]
-- [[_COMMUNITY_Validation Architecture|Validation Architecture]]
-- [[_COMMUNITY_Standard Stack|Standard Stack]]
-- [[_COMMUNITY_User Constraints (from CONTEXT.md)|User Constraints (from CONTEXT.md)]]
-- [[_COMMUNITY_Sources|Sources]]
-- [[_COMMUNITY_02-01-PLAN|02-01-PLAN.md]]
-- [[_COMMUNITY_02-02-PLAN|02-02-PLAN.md]]
-- [[_COMMUNITY_02-03-PLAN|02-03-PLAN.md]]
-- [[_COMMUNITY_Standard Stack|Standard Stack]]
-- [[_COMMUNITY_User Constraints (from CONTEXT.md)|User Constraints (from CONTEXT.md)]]
-- [[_COMMUNITY_Sources|Sources]]
-- [[_COMMUNITY_03-01-PLAN|03-01-PLAN.md]]
-- [[_COMMUNITY_03-02-PLAN|03-02-PLAN.md]]
-- [[_COMMUNITY_03-03-PLAN|03-03-PLAN.md]]
-- [[_COMMUNITY_03-04-PLAN|03-04-PLAN.md]]
-- [[_COMMUNITY_03-05-PLAN|03-05-PLAN.md]]
-- [[_COMMUNITY_Standard Stack|Standard Stack]]
-- [[_COMMUNITY_Code Examples|Code Examples]]
-- [[_COMMUNITY_User Constraints (from CONTEXT.md)|User Constraints (from CONTEXT.md)]]
-- [[_COMMUNITY_Sources|Sources]]
-- [[_COMMUNITY_Standard Stack|Standard Stack]]
-- [[_COMMUNITY_Sources|Sources]]
-- [[_COMMUNITY_Standard Stack|Standard Stack]]
-- [[_COMMUNITY_Code Examples|Code Examples]]
-- [[_COMMUNITY_Implementation Decisions|Implementation Decisions]]
-- [[_COMMUNITY_Sources|Sources]]
-- [[_COMMUNITY_.continue-here|.continue-here.md]]
-- [[_COMMUNITY_README|README.md]]
-- [[_COMMUNITY_01-01-PLAN|01-01-PLAN.md]]
-- [[_COMMUNITY_01-02-PLAN|01-02-PLAN.md]]
-- [[_COMMUNITY_01-03-PLAN|01-03-PLAN.md]]
-- [[_COMMUNITY_Security Domain|Security Domain]]
-- [[_COMMUNITY_Security Domain|Security Domain]]
-- [[_COMMUNITY_Security Domain|Security Domain]]
-- [[_COMMUNITY_Code Examples|Code Examples]]
-- [[_COMMUNITY_Security Domain|Security Domain]]
-- [[_COMMUNITY_Security Domain|Security Domain]]
-- [[_COMMUNITY_Frankfurter FX strategy|Frankfurter FX strategy]]
-- [[_COMMUNITY_AGENTS|AGENTS.md]]
-- [[_COMMUNITY_Child account schema contract without credentials|Child account schema contract without credentials]]
-- [[_COMMUNITY_Mother seat metadata defaults|Mother seat metadata defaults]]
-- [[_COMMUNITY_Phase 04 Plan 01 child account persistence foundation|Phase 04 Plan 01 child account persistence foundation]]
-- [[_COMMUNITY_Completed Phase 04 Plan 01 database slice|Completed Phase 04 Plan 01 database slice]]
-- [[_COMMUNITY_Child and mother Zod validation contracts|Child and mother Zod validation contracts]]
-- [[_COMMUNITY_Child monthly USD snapshot freeze preserve refreeze flow|Child monthly USD snapshot freeze preserve refreeze flow]]
-- [[_COMMUNITY_No-rate child save block|No-rate child save block]]
-- [[_COMMUNITY_Phase 04 Plan 02 child account Server Actions|Phase 04 Plan 02 child account Server Actions]]
-- [[_COMMUNITY_Completed Phase 04 Plan 02 actions slice|Completed Phase 04 Plan 02 actions slice]]
-- [[_COMMUNITY_Child account table add edit delete dialogs|Child account table add edit delete dialogs]]
-- [[_COMMUNITY_Detail-page-only child account management|Detail-page-only child account management]]
-- [[_COMMUNITY_Mother seat card detail-page integration|Mother seat card detail-page integration]]
-- [[_COMMUNITY_Phase 04 Plan 03 detail-page child account UI|Phase 04 Plan 03 detail-page child account UI]]
-- [[_COMMUNITY_Completed Phase 04 Plan 03 UI slice|Completed Phase 04 Plan 03 UI slice]]
-- [[_COMMUNITY_compute-on-write derived fields|compute-on-write derived fields]]
-- [[_COMMUNITY_read-only dashboard aggregation|read-only dashboard aggregation]]
-- [[_COMMUNITY_ExchangeRateService anti-corruption layer|ExchangeRateService anti-corruption layer]]
-- [[_COMMUNITY_FX rate snapshot at payment time|FX rate snapshot at payment time]]
-- [[_COMMUNITY_single-user layered monolith|single-user layered monolith]]
-- [[_COMMUNITY_reference tables over hard-coded enums|reference tables over hard-coded enums]]
-- [[_COMMUNITY_feature dependency map|feature dependency map]]
-- [[_COMMUNITY_v1 MVP feature scope|v1 MVP feature scope]]
-- [[_COMMUNITY_calendar-aware expiry date math|calendar-aware expiry date math]]
-- [[_COMMUNITY_editable reference-data integrity|editable reference-data integrity]]
-- [[_COMMUNITY_FX API hard dependency risk|FX API hard dependency risk]]
-- [[_COMMUNITY_live-rate recomputation historical drift|live-rate recomputation historical drift]]
-- [[_COMMUNITY_integer minor units for money|integer minor units for money]]
-- [[_COMMUNITY_project research summary|project research summary]]
-- [[_COMMUNITY_addCurrency Server Action|addCurrency Server Action]]
-- [[_COMMUNITY_archiveChannel Server Action|archiveChannel Server Action]]
-- [[_COMMUNITY_Channel Server Actions Module|Channel Server Actions Module]]
-- [[_COMMUNITY_Channel Server Action Tests|Channel Server Action Tests]]
-- [[_COMMUNITY_Child Account Server Actions Module|Child Account Server Actions Module]]
-- [[_COMMUNITY_Child Account Server Action Tests|Child Account Server Action Tests]]
-- [[_COMMUNITY_computeMonthlySnapshot Helper|computeMonthlySnapshot Helper]]
-- [[_COMMUNITY_createChildAccount Server Action|createChildAccount Server Action]]
-- [[_COMMUNITY_Currency Server Actions Module|Currency Server Actions Module]]
-- [[_COMMUNITY_Currency Server Action Tests|Currency Server Action Tests]]
-- [[_COMMUNITY_deleteChildAccount Server Action|deleteChildAccount Server Action]]
-- [[_COMMUNITY_deleteCurrency Server Action|deleteCurrency Server Action]]
-- [[_COMMUNITY_FX Server Actions Module|FX Server Actions Module]]
-- [[_COMMUNITY_FX Refresh Server Action Tests|FX Refresh Server Action Tests]]
-- [[_COMMUNITY_reactivateChannel Server Action|reactivateChannel Server Action]]
-- [[_COMMUNITY_refreshRates Server Action|refreshRates Server Action]]
-- [[_COMMUNITY_renameChannel Server Action|renameChannel Server Action]]
-- [[_COMMUNITY_updateChildAccount Server Action|updateChildAccount Server Action]]
-- [[_COMMUNITY_updateCurrency Server Action|updateCurrency Server Action]]
-- [[_COMMUNITY_updateMotherSeat Server Action|updateMotherSeat Server Action]]
-- [[_COMMUNITY_deleteSpace server action|deleteSpace server action]]
-- [[_COMMUNITY_renewSpace server action|renewSpace server action]]
-- [[_COMMUNITY_updateSpace server action|updateSpace server action]]
-- [[_COMMUNITY_Shared channel Zod validation schema|Shared channel Zod validation schema]]
-- [[_COMMUNITY_Channel Server Actions|Channel Server Actions]]
-- [[_COMMUNITY_Child account query and cascade tests|Child account query and cascade tests]]
-- [[_COMMUNITY_GSD workflow enforcement|GSD workflow enforcement]]
-- [[_COMMUNITY_GSD-generated project instructions|GSD-generated project instructions]]
-- [[_COMMUNITY_Prescriptive stack decisions|Prescriptive stack decisions]]
-- [[_COMMUNITY_cn Utility|cn Utility]]
-- [[_COMMUNITY_Payment Channel Soft Delete Invariant|Payment Channel Soft Delete Invariant]]
-- [[_COMMUNITY_Currency Usage Delete And Minor Unit Guard|Currency Usage Delete And Minor Unit Guard]]
-- [[_COMMUNITY_Server Action Mass Assignment Guard|Server Action Mass Assignment Guard]]
-- [[_COMMUNITY_Frozen Monthly USD Snapshot|Frozen Monthly USD Snapshot]]
-- [[_COMMUNITY_Last Good FX Rate Fallback|Last Good FX Rate Fallback]]
-- [[_COMMUNITY_BigInt half-up rounding|BigInt half-up rounding]]
-- [[_COMMUNITY_Calendar-aware expiry math|Calendar-aware expiry math]]
-- [[_COMMUNITY_Currency-aware exponent|Currency-aware exponent]]
-- [[_COMMUNITY_External FX anti-corruption boundary|External FX anti-corruption boundary]]
-- [[_COMMUNITY_Integer minor units|Integer minor units]]
-- [[_COMMUNITY_Drizzle Kit SQLite Configuration|Drizzle Kit SQLite Configuration]]
-- [[_COMMUNITY_Next ESLint Configuration|Next ESLint Configuration]]
-- [[_COMMUNITY_Default Next Configuration|Default Next Configuration]]
-- [[_COMMUNITY_Project Scripts And Dependencies|Project Scripts And Dependencies]]
-- [[_COMMUNITY_Tailwind PostCSS Configuration|Tailwind PostCSS Configuration]]
-- [[_COMMUNITY_shadcn UI Configuration|shadcn UI Configuration]]
-- [[_COMMUNITY_Strict TypeScript Alias Configuration|Strict TypeScript Alias Configuration]]
-- [[_COMMUNITY_Vitest Node Alias Configuration|Vitest Node Alias Configuration]]
-- [[_COMMUNITY_countCurrencyUsage counts space and child account references|countCurrencyUsage counts space and child account references]]
-- [[_COMMUNITY_Static ISO 3166 alpha-2 country constant|Static ISO 3166 alpha-2 country constant]]
-- [[_COMMUNITY_createSpace Server Action|createSpace Server Action]]
-- [[_COMMUNITY_currency table usage|currency table usage]]
-- [[_COMMUNITY_Read-only currency list RSC|Read-only currency list RSC]]
-- [[_COMMUNITY_Curated seeded currency table|Curated seeded currency table]]
-- [[_COMMUNITY_Dashboard metric order contract|Dashboard metric order contract]]
-- [[_COMMUNITY_DashboardOverview DTO contract|DashboardOverview DTO contract]]
-- [[_COMMUNITY_Dashboard overview aggregate tests|Dashboard overview aggregate tests]]
-- [[_COMMUNITY_Channel Database Helpers|Channel Database Helpers]]
-- [[_COMMUNITY_Child Account Database Helpers|Child Account Database Helpers]]
-- [[_COMMUNITY_Currency Minor Unit Lookup|Currency Minor Unit Lookup]]
-- [[_COMMUNITY_Currency Database Helpers|Currency Database Helpers]]
-- [[_COMMUNITY_FX Rate Lookup|FX Rate Lookup]]
-- [[_COMMUNITY_Space Detail Lookup|Space Detail Lookup]]
-- [[_COMMUNITY_HMR-safe SQLite Drizzle singleton with FK enforcement|HMR-safe SQLite Drizzle singleton with FK enforcement]]
-- [[_COMMUNITY_SQLite Drizzle singleton and migration harness|SQLite Drizzle singleton and migration harness]]
-- [[_COMMUNITY_child_account table|child_account table]]
-- [[_COMMUNITY_currency table|currency table]]
-- [[_COMMUNITY_fx_rate table|fx_rate table]]
-- [[_COMMUNITY_mother_account table|mother_account table]]
-- [[_COMMUNITY_payment_channel table|payment_channel table]]
-- [[_COMMUNITY_space table|space table]]
-- [[_COMMUNITY_Child account billing and identifier field set|Child account billing and identifier field set]]
-- [[_COMMUNITY_Child accounts managed only on space detail page|Child accounts managed only on space detail page]]
-- [[_COMMUNITY_Display-only current CNY reference beside frozen USD|Display-only current CNY reference beside frozen USD]]
-- [[_COMMUNITY_Exact-name transactional space cascade delete|Exact-name transactional space cascade delete]]
-- [[_COMMUNITY_deleteSpaceCascade exact-name transactional delete helper|deleteSpaceCascade exact-name transactional delete helper]]
-- [[_COMMUNITY_DistributionList CSS bar-list component|DistributionList CSS bar-list component]]
-- [[_COMMUNITY_Project Graphify Policy|Project Graphify Policy]]
-- [[_COMMUNITY_Locked Architecture Decisions|Locked Architecture Decisions]]
-- [[_COMMUNITY_Phase 1 Behavioral Spot Checks|Phase 1 Behavioral Spot Checks]]
-- [[_COMMUNITY_Manual Reference Data Checks|Manual Reference Data Checks]]
-- [[_COMMUNITY_Phase 1 Observable Truths|Phase 1 Observable Truths]]
-- [[_COMMUNITY_Phase 1 Required Artifacts|Phase 1 Required Artifacts]]
-- [[_COMMUNITY_Vitest SQLite Test Infrastructure|Vitest SQLite Test Infrastructure]]
-- [[_COMMUNITY_Phase 1 Validation Strategy|Phase 1 Validation Strategy]]
-- [[_COMMUNITY_Phase 1 Verification Report|Phase 1 Verification Report]]
-- [[_COMMUNITY_Team Account Manager Walking Skeleton|Team Account Manager Walking Skeleton]]
-- [[_COMMUNITY_Wave 0 Verification Requirements|Wave 0 Verification Requirements]]
-- [[_COMMUNITY_Create Next App README|Create Next App README]]
-- [[_COMMUNITY_ensureFreshRates Service|ensureFreshRates Service]]
-- [[_COMMUNITY_ExpiringSpaceTable renewal-risk table|ExpiringSpaceTable renewal-risk table]]
-- [[_COMMUNITY_expiryStatus utility call|expiryStatus utility call]]
-- [[_COMMUNITY_expiryStatus Helper|expiryStatus Helper]]
-- [[_COMMUNITY_SQLite foreign_keys ON pragma|SQLite foreign_keys ON pragma]]
-- [[_COMMUNITY_formatCountryLabel utility call|formatCountryLabel utility call]]
-- [[_COMMUNITY_freezeUsdMinor Helper|freezeUsdMinor Helper]]
-- [[_COMMUNITY_fxRate table usage|fxRate table usage]]
-- [[_COMMUNITY_FX rate cache data access helpers|FX rate cache data access helpers]]
-- [[_COMMUNITY_FX rate cache query tests|FX rate cache query tests]]
-- [[_COMMUNITY_getCurrencyMinorUnit Helper|getCurrencyMinorUnit Helper]]
-- [[_COMMUNITY_getDashboardOverview aggregate facade|getDashboardOverview aggregate facade]]
-- [[_COMMUNITY_getRate cached X-to-USD lookup|getRate cached X-to-USD lookup]]
-- [[_COMMUNITY_getRate Helper|getRate Helper]]
-- [[_COMMUNITY_Frozen USD snapshot computation|Frozen USD snapshot computation]]
-- [[_COMMUNITY_Space path revalidation|Space path revalidation]]
-- [[_COMMUNITY_Space reference validation|Space reference validation]]
-- [[_COMMUNITY_insertChannel helper|insertChannel helper]]
-- [[_COMMUNITY_insertChildAccount helper|insertChildAccount helper]]
-- [[_COMMUNITY_insertSpaceWithMother|insertSpaceWithMother]]
-- [[_COMMUNITY_Left-sidebar navigation shell|Left-sidebar navigation shell]]
-- [[_COMMUNITY_Rate Supported Currency Metadata|Rate Supported Currency Metadata]]
-- [[_COMMUNITY_Ensure Fresh FX Rates|Ensure Fresh FX Rates]]
-- [[_COMMUNITY_Rate Base Allow List Guard|Rate Base Allow List Guard]]
-- [[_COMMUNITY_Frankfurter Refresh Service|Frankfurter Refresh Service]]
-- [[_COMMUNITY_Freeze USD Minor Amount|Freeze USD Minor Amount]]
-- [[_COMMUNITY_Channel Zod Schemas|Channel Zod Schemas]]
-- [[_COMMUNITY_Child And Mother Zod Schemas|Child And Mother Zod Schemas]]
-- [[_COMMUNITY_Currency Zod Schemas|Currency Zod Schemas]]
-- [[_COMMUNITY_Country options from currency metadata|Country options from currency metadata]]
-- [[_COMMUNITY_Currency lookup and display formatting|Currency lookup and display formatting]]
-- [[_COMMUNITY_Country label formatter|Country label formatter]]
-- [[_COMMUNITY_Rate-supported currency metadata|Rate-supported currency metadata]]
-- [[_COMMUNITY_listChannels active or archived query|listChannels active or archived query]]
-- [[_COMMUNITY_listChildAccounts joins child accounts to currency metadata|listChildAccounts joins child accounts to currency metadata]]
-- [[_COMMUNITY_listSpaceDetails joined space rows with child counts|listSpaceDetails joined space rows with child counts]]
-- [[_COMMUNITY_listSpaces Helper|listSpaces Helper]]
-- [[_COMMUNITY_MetricCard dashboard component|MetricCard dashboard component]]
-- [[_COMMUNITY_Currency country metadata migration|Currency country metadata migration]]
-- [[_COMMUNITY_Currency symbol migration|Currency symbol migration]]
-- [[_COMMUNITY_Mother account seat metadata migration|Mother account seat metadata migration]]
-- [[_COMMUNITY_Programmatic SQLite migration runner|Programmatic SQLite migration runner]]
-- [[_COMMUNITY_Space current period start migration|Space current period start migration]]
-- [[_COMMUNITY_Integer minor-unit money model|Integer minor-unit money model]]
-- [[_COMMUNITY_motherAccount table usage|motherAccount table usage]]
-- [[_COMMUNITY_mother_account Table|mother_account Table]]
-- [[_COMMUNITY_Next revalidatePath|Next revalidatePath]]
-- [[_COMMUNITY_No chart package for dashboard distributions|No chart package for dashboard distributions]]
-- [[_COMMUNITY_No Cached Rate Save Block|No Cached Rate Save Block]]
-- [[_COMMUNITY_Server Action parse and whitelist security pattern|Server Action parse and whitelist security pattern]]
-- [[_COMMUNITY_paymentChannel table usage|paymentChannel table usage]]
-- [[_COMMUNITY_Payment channel soft-delete and reactivation|Payment channel soft-delete and reactivation]]
-- [[_COMMUNITY_Payment-channel surrogate id and uniform soft-delete|Payment-channel surrogate id and uniform soft-delete]]
-- [[_COMMUNITY_Phase 01 foundations schema and reference data|Phase 01 foundations schema and reference data]]
-- [[_COMMUNITY_Phase 01 compact reference-data UI contract|Phase 01 compact reference-data UI contract]]
-- [[_COMMUNITY_Phase 04 child accounts and cascade delete context|Phase 04 child accounts and cascade delete context]]
-- [[_COMMUNITY_Phase 04 discussion alternatives and user choices|Phase 04 discussion alternatives and user choices]]
-- [[_COMMUNITY_Phase 04 implementation pattern map|Phase 04 implementation pattern map]]
-- [[_COMMUNITY_Phase 04 research architecture and risk findings|Phase 04 research architecture and risk findings]]
-- [[_COMMUNITY_Phase 04 validation strategy|Phase 04 validation strategy]]
-- [[_COMMUNITY_Phase 04 verification report passed|Phase 04 verification report passed]]
-- [[_COMMUNITY_Core-value-first dashboard priority|Core-value-first dashboard priority]]
-- [[_COMMUNITY_Phase 05 Dashboard Overview|Phase 05 Dashboard Overview]]
-- [[_COMMUNITY_Phase 05 final verification gate|Phase 05 final verification gate]]
-- [[_COMMUNITY_Phase 2 Plan 02 completed Frankfurter service|Phase 2 Plan 02 completed Frankfurter service]]
-- [[_COMMUNITY_Phase 2 FX decision set D-01 through D-11|Phase 2 FX decision set D-01 through D-11]]
-- [[_COMMUNITY_Phase 2 selected design choices|Phase 2 selected design choices]]
-- [[_COMMUNITY_Phase 2 Plan 01 FX cache persistence foundation|Phase 2 Plan 01 FX cache persistence foundation]]
-- [[_COMMUNITY_Phase 2 Plan 01 completed FX cache foundation|Phase 2 Plan 01 completed FX cache foundation]]
-- [[_COMMUNITY_Phase 2 implementation pattern map|Phase 2 implementation pattern map]]
-- [[_COMMUNITY_Phase 2 Plan 03 rates screen and refresh action|Phase 2 Plan 03 rates screen and refresh action]]
-- [[_COMMUNITY_Phase 2 Plan 03 completed rates screen|Phase 2 Plan 03 completed rates screen]]
-- [[_COMMUNITY_Phase 2 FX architecture research|Phase 2 FX architecture research]]
-- [[_COMMUNITY_Phase 2 code review warnings|Phase 2 code review warnings]]
-- [[_COMMUNITY_Phase 2 UAT passed for rates screen|Phase 2 UAT passed for rates screen]]
-- [[_COMMUNITY_Phase 2 rates screen UI contract|Phase 2 rates screen UI contract]]
-- [[_COMMUNITY_Phase 2 validation strategy|Phase 2 validation strategy]]
-- [[_COMMUNITY_Phase 2 verification report|Phase 2 verification report]]
-- [[_COMMUNITY_Phase 3 Discussion Decisions|Phase 3 Discussion Decisions]]
-- [[_COMMUNITY_Phase 3 Pattern Map|Phase 3 Pattern Map]]
-- [[_COMMUNITY_Plan 01 Mother Account Schema|Plan 01 Mother Account Schema]]
-- [[_COMMUNITY_Plan 02 Expiry And Money Helpers|Plan 02 Expiry And Money Helpers]]
-- [[_COMMUNITY_Plan 03 Validation And Data Layer|Plan 03 Validation And Data Layer]]
-- [[_COMMUNITY_Plan 04 Space Server Actions|Plan 04 Space Server Actions]]
-- [[_COMMUNITY_Plan 05 Space UI|Plan 05 Space UI]]
-- [[_COMMUNITY_Plan 06 MVP Metadata Closure|Plan 06 MVP Metadata Closure]]
-- [[_COMMUNITY_Phase 3 Research Architecture|Phase 3 Research Architecture]]
-- [[_COMMUNITY_Phase 3 Spaces Expiry USD Snapshot|Phase 3 Spaces Expiry USD Snapshot]]
-- [[_COMMUNITY_Phase 3 UAT|Phase 3 UAT]]
-- [[_COMMUNITY_Phase 3 UI Design Contract|Phase 3 UI Design Contract]]
-- [[_COMMUNITY_Phase 3 Validation Strategy Draft|Phase 3 Validation Strategy Draft]]
-- [[_COMMUNITY_Phase 3 Verification Passed|Phase 3 Verification Passed]]
-- [[_COMMUNITY_Phase 5 Plan 01 dashboard aggregate contract|Phase 5 Plan 01 dashboard aggregate contract]]
-- [[_COMMUNITY_Phase 5 dashboard paused handoff|Phase 5 dashboard paused handoff]]
-- [[_COMMUNITY_Plan 04 safe cascade-delete workflow|Plan 04 safe cascade-delete workflow]]
-- [[_COMMUNITY_Plan 05 CNY reference and final verification|Plan 05 CNY reference and final verification]]
-- [[_COMMUNITY_GSD workflow gate configuration|GSD workflow gate configuration]]
-- [[_COMMUNITY_Dashboard handoff pause state|Dashboard handoff pause state]]
-- [[_COMMUNITY_Validated v1 requirements|Validated v1 requirements]]
-- [[_COMMUNITY_Dependency-driven phase roadmap|Dependency-driven phase roadmap]]
-- [[_COMMUNITY_Phase 05 complete verifying state|Phase 05 complete verifying state]]
-- [[_COMMUNITY_Read-only dashboard constraint|Read-only dashboard constraint]]
-- [[_COMMUNITY_Renewal-risk expiring spaces|Renewal-risk expiring spaces]]
-- [[_COMMUNITY_Child account schema with cascade foreign key|Child account schema with cascade foreign key]]
-- [[_COMMUNITY_Current CNY reference conversion pattern|Current CNY reference conversion pattern]]
-- [[_COMMUNITY_Space delete transaction pattern|Space delete transaction pattern]]
-- [[_COMMUNITY_Dynamic root dashboard RSC page|Dynamic root dashboard RSC page]]
-- [[_COMMUNITY_Drizzle schema object|Drizzle schema object]]
-- [[_COMMUNITY_Initial space currency channel schema|Initial space currency channel schema]]
-- [[_COMMUNITY_FX rate schema|FX rate schema]]
-- [[_COMMUNITY_Mother account schema|Mother account schema]]
-- [[_COMMUNITY_Currency symbol schema|Currency symbol schema]]
-- [[_COMMUNITY_Child accounts and mother seat schema|Child accounts and mother seat schema]]
-- [[_COMMUNITY_Currency country metadata schema|Currency country metadata schema]]
-- [[_COMMUNITY_Current period start date schema|Current period start date schema]]
-- [[_COMMUNITY_Drizzle migration journal|Drizzle migration journal]]
-- [[_COMMUNITY_Separate space-payment and child-monthly aggregation|Separate space-payment and child-monthly aggregation]]
-- [[_COMMUNITY_space table usage|space table usage]]
-- [[_COMMUNITY_spacesid Route|/spaces/[id] Route]]
-- [[_COMMUNITY_SpaceForm Component|SpaceForm Component]]
-- [[_COMMUNITY_spaceFormSchema|spaceFormSchema]]
-- [[_COMMUNITY_Space query list detail and cascade tests|Space query list detail and cascade tests]]
-- [[_COMMUNITY_Reserved space FX snapshot and period columns|Reserved space FX snapshot and period columns]]
-- [[_COMMUNITY_space Table|space Table]]
-- [[_COMMUNITY_SpaceTable Component|SpaceTable Component]]
-- [[_COMMUNITY_spaces Route|/spaces Route]]
-- [[_COMMUNITY_Application shell root layout|Application shell root layout]]
-- [[_COMMUNITY_Dashboard overview page|Dashboard overview page]]
-- [[_COMMUNITY_Dashboard renewal risk and USD cost contract|Dashboard renewal risk and USD cost contract]]
-- [[_COMMUNITY_Payment channels reference-data page|Payment channels reference-data page]]
-- [[_COMMUNITY_Currencies reference-data page|Currencies reference-data page]]
-- [[_COMMUNITY_Rates reference-data page|Rates reference-data page]]
-- [[_COMMUNITY_Rate base selection URL contract|Rate base selection URL contract]]
-- [[_COMMUNITY_FX rate table client component|FX rate table client component]]
-- [[_COMMUNITY_Stale-banner versus empty-rate state|Stale-banner versus empty-rate state]]
-- [[_COMMUNITY_Main navigation sidebar|Main navigation sidebar]]
-- [[_COMMUNITY_Reference data navigation group|Reference data navigation group]]
-- [[_COMMUNITY_Badge variant styling contract|Badge variant styling contract]]
-- [[_COMMUNITY_Button polymorphic command component|Button polymorphic command component]]
-- [[_COMMUNITY_Button variant and size styling contract|Button variant and size styling contract]]
-- [[_COMMUNITY_Dialog content with overlay and close action|Dialog content with overlay and close action]]
-- [[_COMMUNITY_Dialog footer optional close button|Dialog footer optional close button]]
-- [[_COMMUNITY_Radix dialog primitive wrapper contract|Radix dialog primitive wrapper contract]]
-- [[_COMMUNITY_React Hook Form controller field provider|React Hook Form controller field provider]]
-- [[_COMMUNITY_Form field context and validation state hook|Form field context and validation state hook]]
-- [[_COMMUNITY_Input field visual and invalid-state contract|Input field visual and invalid-state contract]]
-- [[_COMMUNITY_Radix label primitive wrapper|Radix label primitive wrapper]]
-- [[_COMMUNITY_Select item with check indicator|Select item with check indicator]]
-- [[_COMMUNITY_Select primitive suite with trigger content item and scroll controls|Select primitive suite with trigger content item and scroll controls]]
-- [[_COMMUNITY_Sheet built on Radix dialog primitive|Sheet built on Radix dialog primitive]]
-- [[_COMMUNITY_Sheet side panel content with overlay and close action|Sheet side panel content with overlay and close action]]
-- [[_COMMUNITY_Responsive sidebar renderer|Responsive sidebar renderer]]
-- [[_COMMUNITY_Sidebar menu button with collapsed tooltip|Sidebar menu button with collapsed tooltip]]
-- [[_COMMUNITY_Sidebar provider state cookie and keyboard shortcut controller|Sidebar provider state cookie and keyboard shortcut controller]]
-- [[_COMMUNITY_Sidebar trigger button|Sidebar trigger button]]
-- [[_COMMUNITY_Sidebar context hook|Sidebar context hook]]
-- [[_COMMUNITY_Generic pulse loading placeholder|Generic pulse loading placeholder]]
-- [[_COMMUNITY_Theme-aware Sonner toaster with lucide status icons|Theme-aware Sonner toaster with lucide status icons]]
-- [[_COMMUNITY_Table suite with overflow container and row states|Table suite with overflow container and row states]]
-- [[_COMMUNITY_Tooltip suite with zero delay provider and arrow content|Tooltip suite with zero delay provider and arrow content]]
-- [[_COMMUNITY_Responsive mobile breakpoint hook|Responsive mobile breakpoint hook]]
-- [[_COMMUNITY_Frankfurter FX service behavior tests|Frankfurter FX service behavior tests]]
-- [[_COMMUNITY_FX fallback and poisoned-rate coverage|FX fallback and poisoned-rate coverage]]
-- [[_COMMUNITY_Frankfurter FX service|Frankfurter FX service]]
-- [[_COMMUNITY_Local fx_rate cache contract|Local fx_rate cache contract]]
-- [[_COMMUNITY_Lazy age-gated FX refresh|Lazy age-gated FX refresh]]
-- [[_COMMUNITY_FX cache fallback result|FX cache fallback result]]
-- [[_COMMUNITY_Rate-to-USD normalization|Rate-to-USD normalization]]
-- [[_COMMUNITY_Manual live FX refresh|Manual live FX refresh]]
-- [[_COMMUNITY_Positive significant decimal formatting|Positive significant decimal formatting]]
-- [[_COMMUNITY_Isolated in-memory migrated test database|Isolated in-memory migrated test database]]
-- [[_COMMUNITY_ArchiveDialog|ArchiveDialog]]
-- [[_COMMUNITY_archiveChannel action contract|archiveChannel action contract]]
-- [[_COMMUNITY_channel add and rename form contract|channel add and rename form contract]]
-- [[_COMMUNITY_ChannelDialog|ChannelDialog]]
-- [[_COMMUNITY_archived channel URL filter|archived channel URL filter]]
-- [[_COMMUNITY_ChannelTable|ChannelTable]]
-- [[_COMMUNITY_reactivateChannel action contract|reactivateChannel action contract]]
-- [[_COMMUNITY_CurrencyDeleteDialog|CurrencyDeleteDialog]]
-- [[_COMMUNITY_currency delete integrity guard|currency delete integrity guard]]
-- [[_COMMUNITY_currency add and edit action contract|currency add and edit action contract]]
-- [[_COMMUNITY_CurrencyDialog|CurrencyDialog]]
-- [[_COMMUNITY_currency metadata auto-fill|currency metadata auto-fill]]
-- [[_COMMUNITY_currency country filter|currency country filter]]
-- [[_COMMUNITY_CurrencyTable|CurrencyTable]]
-- [[_COMMUNITY_DistributionList|DistributionList]]
-- [[_COMMUNITY_spend distribution reconciliation|spend distribution reconciliation]]
-- [[_COMMUNITY_ExpiringSpaceTable|ExpiringSpaceTable]]
-- [[_COMMUNITY_formatDays|formatDays]]
-- [[_COMMUNITY_MetricCard|MetricCard]]
-- [[_COMMUNITY_DEFAULT_RATE_BASE|DEFAULT_RATE_BASE]]
-- [[_COMMUNITY_isRateBase|isRateBase]]
-- [[_COMMUNITY_parseRateBase|parseRateBase]]
-- [[_COMMUNITY_Alert Component Suite|Alert Component Suite]]
-- [[_COMMUNITY_AlertDialogAction|AlertDialogAction]]
-- [[_COMMUNITY_AlertDialogCancel|AlertDialogCancel]]
-- [[_COMMUNITY_AlertDialog Component Suite|AlertDialog Component Suite]]
-- [[_COMMUNITY_AlertDialogContent|AlertDialogContent]]
-- [[_COMMUNITY_Alert Function|Alert Function]]
-- [[_COMMUNITY_alertVariants CVA|alertVariants CVA]]
-- [[_COMMUNITY_Dashboard bucket accumulation and percentage helpers|Dashboard bucket accumulation and percentage helpers]]
-- [[_COMMUNITY_Dashboard expiring spaces risk list|Dashboard expiring spaces risk list]]
-- [[_COMMUNITY_Dashboard overview aggregate query facade|Dashboard overview aggregate query facade]]
-- [[_COMMUNITY_Expiry helper test contract|Expiry helper test contract]]
-- [[_COMMUNITY_addPeriod|addPeriod]]
-- [[_COMMUNITY_index.ts|index.ts]]
-- [[_COMMUNITY_localDateFromIsoDate|localDateFromIsoDate]]
-- [[_COMMUNITY_formatCurrencyMinor display contract|formatCurrencyMinor display contract]]
-- [[_COMMUNITY_Money helper test contract|Money helper test contract]]
-- [[_COMMUNITY_convertUsdMinorToCurrencyMinor|convertUsdMinorToCurrencyMinor]]
-- [[_COMMUNITY_formatMinor|formatMinor]]
-- [[_COMMUNITY_freezeUsdMinor|freezeUsdMinor]]
-- [[_COMMUNITY_parseToMinor|parseToMinor]]
-- [[_COMMUNITY_Stored frozen USD minor-unit fields|Stored frozen USD minor-unit fields]]
-- [[_COMMUNITY_Plan 04 exact-name cascade delete completed|Plan 04 exact-name cascade delete completed]]
-- [[_COMMUNITY_Plan 05 display-only CNY reference completed|Plan 05 display-only CNY reference completed]]
-- [[_COMMUNITY_currency seed reference-data contract tests|currency seed reference-data contract tests]]
-- [[_COMMUNITY_space query and cascade behavior tests|space query and cascade behavior tests]]
-- [[_COMMUNITY_Country option derivation tests|Country option derivation tests]]
-- [[_COMMUNITY_Space action lifecycle tests|Space action lifecycle tests]]
-- [[_COMMUNITY_Child account delete dialog|Child account delete dialog]]
-- [[_COMMUNITY_Child account dialog form|Child account dialog form]]
-- [[_COMMUNITY_Inline child account table|Inline child account table]]
-- [[_COMMUNITY_Expiry status badge|Expiry status badge]]
-- [[_COMMUNITY_Mother seat card|Mother seat card]]
-- [[_COMMUNITY_Space delete confirmation dialog|Space delete confirmation dialog]]
-- [[_COMMUNITY_Space detail action bar|Space detail action bar]]
-- [[_COMMUNITY_Space addedit form|Space add/edit form]]
-- [[_COMMUNITY_Space list table|Space list table]]
-- [[_COMMUNITY_Child account table and dialog interaction contract|Child account table and dialog interaction contract]]
-- [[_COMMUNITY_Typed-name destructive space delete dialog contract|Typed-name destructive space delete dialog contract]]
-- [[_COMMUNITY_Mother account seat metadata update helper|Mother account seat metadata update helper]]
-- [[_COMMUNITY_updateSpace Server Action|updateSpace Server Action]]
-- [[_COMMUNITY_updateSpaceRow Helper|updateSpaceRow Helper]]
-- [[_COMMUNITY_Atomic FX rate upsert transaction|Atomic FX rate upsert transaction]]
-- [[_COMMUNITY_space-table.tsx|space-table.tsx]]
-- [[_COMMUNITY_react|react]]
-- [[_COMMUNITY_InlineChildAccountRow|InlineChildAccountRow]]
+- [[_COMMUNITY_UI Layout Utilities|UI Layout Utilities]]
+- [[_COMMUNITY_Database Schema and Spaces|Database Schema and Spaces]]
+- [[_COMMUNITY_Exchange Rate Planning|Exchange Rate Planning]]
+- [[_COMMUNITY_FX Rate Runtime|FX Rate Runtime]]
+- [[_COMMUNITY_Money Formatting and Pages|Money Formatting and Pages]]
+- [[_COMMUNITY_Form and Dialog System|Form and Dialog System]]
+- [[_COMMUNITY_Authentication and Rate Limits|Authentication and Rate Limits]]
+- [[_COMMUNITY_Package Dependencies|Package Dependencies]]
+- [[_COMMUNITY_Dashboard Expiry Calculations|Dashboard Expiry Calculations]]
+- [[_COMMUNITY_Card Based Settings UI|Card Based Settings UI]]
+- [[_COMMUNITY_Button and Delete Dialogs|Button and Delete Dialogs]]
+- [[_COMMUNITY_Test Database and FX|Test Database and FX]]
+- [[_COMMUNITY_Database Query Tests|Database Query Tests]]
+- [[_COMMUNITY_Data Tables and Tooltips|Data Tables and Tooltips]]
+- [[_COMMUNITY_Space Server Actions|Space Server Actions]]
+- [[_COMMUNITY_Reminder Jobs and Scheduling|Reminder Jobs and Scheduling]]
+- [[_COMMUNITY_Child Account Status UI|Child Account Status UI]]
+- [[_COMMUNITY_Child Account Query Tests|Child Account Query Tests]]
+- [[_COMMUNITY_Payment Channel Data|Payment Channel Data]]
+- [[_COMMUNITY_Settings and SMTP Actions|Settings and SMTP Actions]]
+- [[_COMMUNITY_Shadcn Component Configuration|Shadcn Component Configuration]]
+- [[_COMMUNITY_Space Expiry Email Reminders|Space Expiry Email Reminders]]
+- [[_COMMUNITY_Child Reminder Rich Text|Child Reminder Rich Text]]
+- [[_COMMUNITY_Migrations and Dashboard Accounting|Migrations and Dashboard Accounting]]
+- [[_COMMUNITY_Child Account Server Actions|Child Account Server Actions]]
+- [[_COMMUNITY_Currency Server Actions|Currency Server Actions]]
+- [[_COMMUNITY_TypeScript Configuration|TypeScript Configuration]]
+- [[_COMMUNITY_Space Table and Form|Space Table and Form]]
+- [[_COMMUNITY_Explicit Database Helpers|Explicit Database Helpers]]
+- [[_COMMUNITY_Project Research and Dashboard|Project Research and Dashboard]]
+- [[_COMMUNITY_Settings Data and Page|Settings Data and Page]]
+- [[_COMMUNITY_Currency Action Contracts|Currency Action Contracts]]
+- [[_COMMUNITY_Child Reminder Planning|Child Reminder Planning]]
+- [[_COMMUNITY_Phase Three UAT|Phase Three UAT]]
+- [[_COMMUNITY_Snapshot Transaction Patterns|Snapshot Transaction Patterns]]
+- [[_COMMUNITY_Space Data Layer Planning|Space Data Layer Planning]]
+- [[_COMMUNITY_Rich Text Email Rendering|Rich Text Email Rendering]]
+- [[_COMMUNITY_Child Account Mutation Actions|Child Account Mutation Actions]]
+- [[_COMMUNITY_Child Billing Snapshot Logic|Child Billing Snapshot Logic]]
+- [[_COMMUNITY_Inline Child Account UI|Inline Child Account UI]]
+- [[_COMMUNITY_Reminder Database Migrations|Reminder Database Migrations]]
+- [[_COMMUNITY_Space Snapshot UI Planning|Space Snapshot UI Planning]]
+- [[_COMMUNITY_Phase One Reference Data|Phase One Reference Data]]
+- [[_COMMUNITY_Space Action Tests|Space Action Tests]]
+- [[_COMMUNITY_Channel Actions and Tests|Channel Actions and Tests]]
+- [[_COMMUNITY_Foundation Schema Delivery|Foundation Schema Delivery]]
+- [[_COMMUNITY_Dashboard Verification Delivery|Dashboard Verification Delivery]]
+- [[_COMMUNITY_Vercel Brand Asset|Vercel Brand Asset]]
+- [[_COMMUNITY_Reminder Settings Forms|Reminder Settings Forms]]
+- [[_COMMUNITY_Child Account Validation|Child Account Validation]]
+- [[_COMMUNITY_Dashboard Aggregation Queries|Dashboard Aggregation Queries]]
+- [[_COMMUNITY_Currency and FX Storage|Currency and FX Storage]]
+- [[_COMMUNITY_Sidebar Sheet System|Sidebar Sheet System]]
+- [[_COMMUNITY_Frontend Tooling Stack|Frontend Tooling Stack]]
+- [[_COMMUNITY_Dashboard Aggregation Patterns|Dashboard Aggregation Patterns]]
+- [[_COMMUNITY_Reminder Job Test Harness|Reminder Job Test Harness]]
+- [[_COMMUNITY_Phase Four Verification|Phase Four Verification]]
+- [[_COMMUNITY_Relational CRUD Research|Relational CRUD Research]]
+- [[_COMMUNITY_Dashboard UI Delivery|Dashboard UI Delivery]]
+- [[_COMMUNITY_Channel Management UI|Channel Management UI]]
+- [[_COMMUNITY_Reminder Test Email Actions|Reminder Test Email Actions]]
+- [[_COMMUNITY_Frozen Amount Help UI|Frozen Amount Help UI]]
+- [[_COMMUNITY_Dashboard Requirements Verification|Dashboard Requirements Verification]]
+- [[_COMMUNITY_Account Hierarchy Schema Planning|Account Hierarchy Schema Planning]]
+- [[_COMMUNITY_Child Cost Display Hierarchy|Child Cost Display Hierarchy]]
+- [[_COMMUNITY_Milestone Roadmap State|Milestone Roadmap State]]
+- [[_COMMUNITY_Space Reminder Job Flow|Space Reminder Job Flow]]
+- [[_COMMUNITY_Root Layout Providers|Root Layout Providers]]
+- [[_COMMUNITY_Currency Reference Data UI|Currency Reference Data UI]]
+- [[_COMMUNITY_Dashboard Page Composition|Dashboard Page Composition]]
+- [[_COMMUNITY_Child Reminder Job Flow|Child Reminder Job Flow]]
+- [[_COMMUNITY_Schema Snapshot History|Schema Snapshot History]]
+- [[_COMMUNITY_Next.js Application Architecture|Next.js Application Architecture]]
+- [[_COMMUNITY_Product Scope and Security|Product Scope and Security]]
+- [[_COMMUNITY_Data Integrity Pitfalls|Data Integrity Pitfalls]]
+- [[_COMMUNITY_Route Authentication Boundary|Route Authentication Boundary]]
+- [[_COMMUNITY_Space Snapshot Routing|Space Snapshot Routing]]
+- [[_COMMUNITY_Secure Child Account Actions|Secure Child Account Actions]]
+- [[_COMMUNITY_Child Account Detail UI|Child Account Detail UI]]
+- [[_COMMUNITY_Globe Icon Asset|Globe Icon Asset]]
+- [[_COMMUNITY_Next.js Brand Asset|Next.js Brand Asset]]
+- [[_COMMUNITY_Window Icon Asset|Window Icon Asset]]
+- [[_COMMUNITY_Space FX Snapshot Logic|Space FX Snapshot Logic]]
+- [[_COMMUNITY_Dynamic Space Pages|Dynamic Space Pages]]
+- [[_COMMUNITY_FX Refresh Action Tests|FX Refresh Action Tests]]
+- [[_COMMUNITY_Child Account Persistence Planning|Child Account Persistence Planning]]
+- [[_COMMUNITY_Safe Cascade Delete|Safe Cascade Delete]]
+- [[_COMMUNITY_File Icon Asset|File Icon Asset]]
+- [[_COMMUNITY_Space Form Submission|Space Form Submission]]
+- [[_COMMUNITY_Settings Action Boundary|Settings Action Boundary]]
+- [[_COMMUNITY_Reminder Settings Validation|Reminder Settings Validation]]
+- [[_COMMUNITY_Dashboard UI Contract|Dashboard UI Contract]]
+- [[_COMMUNITY_Space Action Architecture|Space Action Architecture]]
+- [[_COMMUNITY_Select Component System|Select Component System]]
+- [[_COMMUNITY_Child Billing Migrations|Child Billing Migrations]]
+- [[_COMMUNITY_Application Sidebar Navigation|Application Sidebar Navigation]]
+- [[_COMMUNITY_Dashboard Priority Context|Dashboard Priority Context]]
+- [[_COMMUNITY_Reminder Scheduler Singleton|Reminder Scheduler Singleton]]
+- [[_COMMUNITY_SMTP Delivery Transport|SMTP Delivery Transport]]
+- [[_COMMUNITY_Root Scheduler Bootstrap|Root Scheduler Bootstrap]]
+- [[_COMMUNITY_Login Page States|Login Page States]]
+- [[_COMMUNITY_Child Reminder Deduplication|Child Reminder Deduplication]]
+- [[_COMMUNITY_Reminder Subscription Storage|Reminder Subscription Storage]]
+- [[_COMMUNITY_SQLite Connection Singleton|SQLite Connection Singleton]]
+- [[_COMMUNITY_Input Component States|Input Component States]]
+- [[_COMMUNITY_Responsive Sidebar State|Responsive Sidebar State]]
+- [[_COMMUNITY_GSD Workflow Gates|GSD Workflow Gates]]
+- [[_COMMUNITY_FX Base Currency Rules|FX Base Currency Rules]]
+- [[_COMMUNITY_Database Migration Entry|Database Migration Entry]]
+- [[_COMMUNITY_Graphify Project Policy|Graphify Project Policy]]
+- [[_COMMUNITY_Protected Layout Authentication|Protected Layout Authentication]]
+- [[_COMMUNITY_Child Reminder Due Queries|Child Reminder Due Queries]]
+- [[_COMMUNITY_Sidebar Skeleton Loading|Sidebar Skeleton Loading]]
+- [[_COMMUNITY_Table Container System|Table Container System]]
+- [[_COMMUNITY_Drizzle Migration Runner|Drizzle Migration Runner]]
+- [[_COMMUNITY_Phase One Validation|Phase One Validation]]
+- [[_COMMUNITY_Phase Two Validation|Phase Two Validation]]
+- [[_COMMUNITY_ESLint Configuration|ESLint Configuration]]
+- [[_COMMUNITY_Mobile Breakpoint Hook|Mobile Breakpoint Hook]]
+- [[_COMMUNITY_Tailwind Class Utilities|Tailwind Class Utilities]]
+- [[_COMMUNITY_Next.js Configuration|Next.js Configuration]]
+- [[_COMMUNITY_PostCSS Configuration|PostCSS Configuration]]
+- [[_COMMUNITY_Channel Validation Schemas|Channel Validation Schemas]]
+- [[_COMMUNITY_Currency Validation Schemas|Currency Validation Schemas]]
+- [[_COMMUNITY_Space Validation Schemas|Space Validation Schemas]]
+- [[_COMMUNITY_Child Account Lookup|Child Account Lookup]]
+- [[_COMMUNITY_Separator UI Component|Separator UI Component]]
+- [[_COMMUNITY_Switch UI Component|Switch UI Component]]
+- [[_COMMUNITY_Subscription Period Model|Subscription Period Model]]
+- [[_COMMUNITY_FX History Deferral|FX History Deferral]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `cn()` - 101 edges
-2. `Button()` - 30 edges
-3. `formatMinor()` - 27 edges
-4. `Pattern Assignments` - 24 edges
-5. `Phase 05: Dashboard & Overview - Research` - 22 edges
-6. `insertChannel()` - 20 edges
-7. `Phase 2: Exchange-Rate Layer - Research` - 20 edges
-8. `Phase 04: Child Accounts & Cascade Delete - Research` - 20 edges
-9. `Phase 1: Foundations, Schema & Reference Data - Research` - 19 edges
-10. `Phase 3: Spaces (Expiry + USD Snapshot) - Research` - 19 edges
+2. `SpaceTable` - 54 edges
+3. `SpaceForm` - 51 edges
+4. `RateTable` - 39 edges
+5. `MotherSeatCard` - 37 edges
+6. `Button` - 37 edges
+7. `StatusThresholdForm` - 35 edges
+8. `Button()` - 30 edges
+9. `formatMinor()` - 27 edges
+10. `ExpiringSpaceTable` - 25 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `globe icon asset` --generic_global_fx_visual_asset--> `Frankfurter FX strategy`  [AMBIGUOUS]
-  public/globe.svg → .planning/research/STACK.md
-- `Next.js logo asset` --represents_framework_brand_asset--> `Next.js plus SQLite stack`  [INFERRED]
-  public/next.svg → .planning/research/STACK.md
-- `Vercel triangle logo asset` --represents_related_deployment_brand_asset--> `Next.js plus SQLite stack`  [INFERRED]
-  public/vercel.svg → .planning/research/STACK.md
-- `middleware()` --calls--> `verifySessionToken()`  [EXTRACTED]
-  middleware.ts → src/lib/auth.ts
-- `useFormField()` --references--> `react`  [EXTRACTED]
-  src/components/ui/form.tsx → package.json
+- `Application Route Authentication Guard` --semantically_similar_to--> `Server-Side Zod Trust Boundary Validation`  [INFERRED] [semantically similar]
+  middleware.ts → .planning/phases/01-foundations-schema-reference-data/01-03-PLAN.md
+- `Single Personal Access Key Authentication` --conceptually_related_to--> `Application Route Authentication Guard`  [INFERRED]
+  README.md → middleware.ts
+- `Channel Table Dialog and Archive UI` --implements--> `shadcn Radix Nova Component System`  [INFERRED]
+  .planning/phases/01-foundations-schema-reference-data/01-03-PLAN.md → components.json
+- `Completed Navigation and Currency Read Slice` --references--> `shadcn Radix Nova Component System`  [EXTRACTED]
+  .planning/phases/01-foundations-schema-reference-data/01-02-SUMMARY.md → components.json
+- `Plan 01-01 Foundation Schema Delivery` --references--> `Drizzle SQLite Configuration`  [EXTRACTED]
+  .planning/phases/01-foundations-schema-reference-data/01-01-PLAN.md → drizzle.config.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (548 total, 385 thin omitted)
+## Hyperedges (group relationships)
+- **Phase 1 Reference Data Delivery** — plan01_foundation_schema, plan02_navigation_shell, plan03_channel_maintenance [EXTRACTED 1.00]
+- **Reference Data Walking Skeleton** — summary01_seeded_currency_reference, plan02_currency_rsc, plan03_channel_server_actions, plan03_channel_management_ui [INFERRED 0.90]
+- **GSD Traceability Chain** — planning_requirements_traceability, planning_roadmap_dependency_sequence, planning_state_milestone_completion, planning_handoff_phase5_execution [INFERRED 0.80]
+- **Phase 1 Reference-Data Foundation** — p1_currency_reference_data, p1_payment_channel_reference_data, p1_iso_country_codes, p1_stable_channel_fk, p1_uniform_channel_soft_delete [EXTRACTED 1.00]
+- **Validated FX Refresh Pipeline** — p2_refresh_rates_action, p2_refresh_from_api, p2_zod_response_boundary, p2_rate_inversion, p2_upsert_rates, p2_fx_rate_cache [EXTRACTED 1.00]
+- **FX Failure Resilience Flow** — p2_fetch_timeout, p2_last_good_cache_fallback, p2_failure_only_stale_flag, p2_empty_cache_state, p2_rates_screen [EXTRACTED 1.00]
+- **Phase 3 Space Save Pipeline** — p3_create_space, p3_ensure_fresh_rates, p3_get_rate, p3_add_period, p3_freeze_usd_minor, p3_insert_space_with_mother [EXTRACTED 1.00]
+- **Phase 3 Space UI Slice** — p3_space_form, p3_space_table, p3_expiry_badge, p3_spaces_list_route, p3_space_detail_route [EXTRACTED 1.00]
+- **Space Mother and Child Account Hierarchy** — p3_space_db_table, p3_mother_account_table, p4_child_account_table, p4_cascade_delete_integrity [EXTRACTED 1.00]
+- **Phase 4 Account Management Flow** — phase4_summary02_actions_complete, phase4_summary03_ui_complete, phase4_summary04_delete_complete, phase4_summary05_complete, phase4_verification_report [EXTRACTED 1.00]
+- **Safe Space Cascade Delete** — phase4_exact_name_confirmation, phase4_server_authoritative_delete, phase4_transactional_fk_cascade, phase4_destructive_interaction [EXTRACTED 1.00]
+- **Phase 5 Dashboard Delivery** — phase5_plan01_aggregate_contract, phase5_plan02_dashboard_ui, phase5_plan03_final_verification, phase5_summary03_verified [EXTRACTED 1.00]
+- **Dashboard Aggregation Pipeline** — p5_dynamic_root_rsc, p5_get_dashboard_overview, p5_renewal_risk, p5_frozen_usd_cost, p5_distribution_buckets, p5_count_overview [EXTRACTED 1.00]
+- **Stored Accounting Snapshot Model** — research_integer_minor_money, research_compute_on_write, research_fx_snapshot, db_space, db_child_account, p5_frozen_usd_cost [EXTRACTED 1.00]
+- **Child Reminder Delivery and Idempotency Flow** — quick_reminder_scheduler, quick_reminder_job, db_child_next_payment_date, quick_owner_recipient, quick_subscription_recipient, quick_reminder_log, quick_reminder_idempotency [EXTRACTED 1.00]
+- **Drizzle Schema Evolution Timeline** — snapshot_0000_foundation_schema, snapshot_0001_fx_cache, snapshot_0002_mother_account, snapshot_0003_currency_symbol, snapshot_0004_child_accounts, snapshot_0005_currency_geography, snapshot_0006_space_current_period, snapshot_0007_app_settings, snapshot_0008_child_contact, snapshot_0009_next_payment, snapshot_0010_billing_period, snapshot_0011_space_reminders, snapshot_0012_child_reminders [EXTRACTED 1.00]
+- **Login Security Flow** — src_actions_auth_login, src_actions_auth_client_identifier, src_actions_auth_get_rate_limit_status, src_actions_auth_record_failure, src_actions_auth_verify_login_key, src_actions_auth_record_success, src_actions_auth_create_session_token [EXTRACTED 1.00]
+- **Child Account Lifecycle** — child_create, child_update, child_renew, child_delete, child_update_mother_seat [EXTRACTED 1.00]
+- **Space FX Snapshot Mutation Flow** — c7_create_space, c7_update_space, c7_renew_space, c7_compute_snapshot, c7_ensure_fresh_rates, c7_freeze_usd_minor [EXTRACTED 1.00]
+- **Protected Force-Dynamic SQLite RSC Pages** — c7_dashboard_page, c7_channels_page, c7_currencies_page, c7_rates_page, c7_settings_page, c7_spaces_page, c7_space_detail_page [EXTRACTED 1.00]
+- **Reference Data Table and Dialog CRUD Components** — c7_channel_table, c7_channel_dialog, c7_archive_dialog, c7_currency_table, c7_currency_dialog, c7_currency_delete_dialog [INFERRED 0.88]
+- **Dashboard Renewal Risk Surfaces** — src_components_dashboard_expiring_space_table, dashboard_expiring_child_table, src_components_spaces_expiry_badge [EXTRACTED 1.00]
+- **Email Reminder Editor Flow** — settings_child_reminder_form, src_components_settings_status_threshold_form, settings_sanitize_rich_text_ref, settings_render_rich_body_ref, settings_render_template_text_ref [EXTRACTED 1.00]
+- **Space Management Interactions** — src_components_spaces_space_table, src_components_spaces_space_form, src_components_spaces_space_detail_actions, src_components_spaces_space_delete_dialog, child_table, src_components_spaces_mother_seat_card [INFERRED 0.90]
+- **Accessible React Hook Form Field System** — c9_form_field, c9_form_item, c9_use_form_field, c9_form_label, c9_form_control, c9_form_message, c9_form_accessibility_wiring [EXTRACTED 1.00]
+- **Responsive Persistent Sidebar System** — c9_sidebar_provider, c9_use_sidebar, c9_sidebar, c9_sidebar_trigger, c9_sidebar_menu_button, c9_sheet, c9_sidebar_responsive_state, c9_sidebar_persistence [EXTRACTED 1.00]
+- **Dashboard Aggregation and Distribution Pipeline** — c9_get_dashboard_overview, c9_separate_dashboard_queries, c9_add_bucket, c9_to_buckets, c9_child_next_payment_date, c9_is_self_use_child, c9_dashboard_distribution_model [EXTRACTED 1.00]
+- **Space Persistence and Cascade Flow** — src_db_spaces_insert_with_mother, db_space_table, db_mother_account_table, db_child_account_table, src_db_spaces_delete_cascade, db_account_cascade_relations [EXTRACTED 1.00]
+- **Space Reminder Selection and Idempotency Flow** — src_db_settings_status_thresholds, space_reminder_candidates, space_due_reminders, space_reminder_was_sent, space_reminder_record_sent, db_space_reminder_log_table, db_reminder_unique_guards [EXTRACTED 1.00]
+- **Currency Money and Billing-Date Flow** — currency_supported_catalog, src_lib_money_parse_minor, src_lib_money_format_minor, src_lib_money_freeze_usd, src_lib_money_convert_usd_target, src_lib_expiry_next_due, src_lib_expiry_renew_due, src_lib_expiry_calendar_clamping [INFERRED 0.88]
+- **Safe Email Rendering Pipeline** — space_email_template_values, space_email_render_template, rich_render_template_body, rich_sanitize_html, src_lib_email_smtp_send_email [EXTRACTED 1.00]
+- **FX Anti-Corruption Refresh Flow** — src_lib_fx_frankfurter_refresh_from_api, validation_frankfurter_schema, src_lib_fx_frankfurter_rate_from_base, src_lib_fx_frankfurter_upsert_rates_ref, src_lib_fx_frankfurter_fallback_to_cache [EXTRACTED 1.00]
+- **Scheduled Reminder Jobs** — reminder_scheduler_start, reminder_scheduler_tick, space_reminder_run_job, child_reminder_run_job [EXTRACTED 1.00]
 
-### Community 0 - "child-account-table.tsx"
-Cohesion: 0.19
-Nodes (15): errorText, DistributionListProps, MetricCardProps, ChildAccountReminderFormProps, StatusThresholdFormProps, FrozenAmountHelp(), SpaceInlineEditor(), Card() (+7 more)
+## Communities (132 total, 22 thin omitted)
 
-### Community 1 - "page.tsx"
-Cohesion: 0.14
-Nodes (26): config, middleware(), clientIdentifier(), login(), loginRedirect(), logout(), ProtectedLayout(), constantTimeEqual() (+18 more)
+### Community 0 - "UI Layout Utilities"
+Cohesion: 0.05
+Nodes (66): createChildAccount, Currency-Aware Child Money Input, parseToMinor for Child Form, ChildAccountForm.onSubmit, updateChildAccount, react, AppSidebar(), referenceChildren (+58 more)
 
-### Community 3 - "space-form.tsx"
+### Community 1 - "Database Schema and Spaces"
+Cohesion: 0.05
+Nodes (68): formatCountryLabel, countryOptionsFromCurrencies, Static Country Label Fallback, findRateSupportedCurrencyByCountry, findRateSupportedCurrency, formatCurrencyMinor, RATE_SUPPORTED_CURRENCIES, Space and Account Cascade Relations (+60 more)
+
+### Community 2 - "Exchange Rate Planning"
+Cohesion: 0.05
+Nodes (67): Phase 1 Foundations Schema and Reference Data Context, Phase 1 Foundations Discussion Log, Phase 1 Plan 03 Payment-Channel Maintenance Summary, Phase 1 Foundations Research, Team Account Manager Walking Skeleton, Phase 1 UI Design Contract, Phase 1 Verification Report, Phase 2 Exchange-Rate Layer Context (+59 more)
+
+### Community 3 - "FX Rate Runtime"
+Cohesion: 0.06
+Nodes (53): One-Day Lazy Refresh Contract, Sole Frankfurter API Boundary Contract, Failure Leaves Cache Untouched and Falls Back, Any Supported Base Normalizes to X-to-USD, buildHref for Rate Base, formatAsOf, formatRate, isRateBase (+45 more)
+
+### Community 4 - "Money Formatting and Pages"
+Cohesion: 0.08
+Nodes (42): CnyDisplayRate, cnyFromUsd(), DashboardPage(), usd(), ChannelsPage(), CurrenciesPage(), formatAsOf(), formatPeriodLabel() (+34 more)
+
+### Community 5 - "Form and Dialog System"
 Cohesion: 0.10
-Nodes (44): ChannelDialogProps, CurrencyDialogProps, BILLING_PERIOD_OPTIONS, ChildAccountForm(), ChildAccountFormProps, ChildAccountFormValue, defaultValues(), localIsoDate() (+36 more)
+Nodes (43): Form ARIA Description and Error Wiring, FormField, Label, useFormField, ChannelDialogProps, CurrencyDialogProps, BILLING_PERIOD_OPTIONS, ChildAccountForm() (+35 more)
 
-### Community 4 - "childAccounts.test.ts"
-Cohesion: 0.19
-Nodes (19): ChildAccountReminderForm(), renderPreview(), renderPreview(), StatusThresholdForm(), ChildAccountReminderEmail, ChildAccountReminderTemplate, composeChildAccountReminderEmail(), renderChildAccountReminderTemplate() (+11 more)
+### Community 6 - "Authentication and Rate Limits"
+Cohesion: 0.07
+Nodes (46): Login Attempt Lockout State Machine, In-Memory Login Rate Limiter, Authentication Module, Authentication Tests, Login Rate-Limit Module, config, middleware(), clientIdentifier (+38 more)
 
-### Community 5 - "childAccounts.ts"
-Cohesion: 0.22
-Nodes (17): ChildAccountActionResult, childBillingPeriod(), computeMonthlySnapshot(), createChildAccount(), deleteChildAccount(), renewChildAccount(), revalidateSpace(), dbHolder (+9 more)
+### Community 7 - "Package Dependencies"
+Cohesion: 0.04
+Nodes (47): Theme-Aware Semantic Toast Icons, Toaster, dependencies, better-sqlite3, class-variance-authority, clsx, date-fns, drizzle-orm (+39 more)
 
-### Community 6 - "dependencies"
+### Community 8 - "Dashboard Expiry Calculations"
+Cohesion: 0.07
+Nodes (45): Expiry and Payment Due-Date Module, Expiry and Payment Due-Date Tests, childBillingPeriod(), childExpiryDate(), draftExpiryDate(), addBucket(), BucketSeed, childBillingPeriod() (+37 more)
+
+### Community 9 - "Card Based Settings UI"
+Cohesion: 0.09
+Nodes (36): Risk-Toned Dashboard Metric, Mother-Only Seat-Type Changeability, MotherSeatCard.onSubmit, updateMotherSeat, sendSpaceEmailReminderTest, StatusThresholdForm.onEmailSubmit, StatusThresholdForm.onTestEmail, Independent Space and Child Soon-Day Thresholds (+28 more)
+
+### Community 10 - "Button and Delete Dialogs"
+Cohesion: 0.15
+Nodes (28): deleteSpace, SpaceDeleteDialog.onConfirm, Space Edit Renew Delete Action Cluster, SpaceDetailActions.onRenew, Exact-Name Space Delete Guard, renewSpace, ArchiveDialogProps, CurrencyDeleteDialogProps (+20 more)
+
+### Community 11 - "Test Database and FX"
+Cohesion: 0.10
+Nodes (22): seedUsdRate(), dbHolder, FIXED_USD_RATES, seedCache(), USD_RATES, VALID_CNY_RESPONSE, VALID_RESPONSE, dbHolder (+14 more)
+
+### Community 12 - "Database Query Tests"
+Cohesion: 0.10
+Nodes (25): dbHolder, CurrencyInsert, CurrencyUpdate, CurrencyUsage, Db, Db, FxRateInsert, FxRateRow (+17 more)
+
+### Community 13 - "Data Tables and Tooltips"
+Cohesion: 0.15
+Nodes (25): Space Payment USD Cost Display, formatDays for Spaces, ArchiveDialog(), ChannelDialog(), ChannelStatusFilter, ChannelTableProps, DialogState, CurrencyDeleteDialog() (+17 more)
+
+### Community 14 - "Space Server Actions"
+Cohesion: 0.16
+Nodes (22): computeSnapshot(), createSpace(), deleteSpace(), deleteSpaceSchema, renewSpace(), revalidateSpace(), SpaceActionResult, dbHolder (+14 more)
+
+### Community 15 - "Reminder Jobs and Scheduling"
 Cohesion: 0.11
-Nodes (18): dependencies, better-sqlite3, class-variance-authority, clsx, date-fns, drizzle-orm, @hookform/resolvers, lucide-react (+10 more)
+Nodes (19): ChildAccountPaymentReminderRow, ChildAccountReminderOption, ChildAccountReminderSubscription, Db, listDueChildAccountPaymentReminders(), localDateFromIsoDate(), recordChildAccountReminderSent(), upsertChildAccountReminderSubscription() (+11 more)
 
-### Community 10 - "frankfurter.ts"
+### Community 16 - "Child Account Status UI"
+Cohesion: 0.11
+Nodes (24): formatDays for Child Accounts, Child Rental Revenue USD Display, ExpiringChildAccountTable, expiryStatus, Expiry Status Visual Map, ChildAccountDeleteDialog(), BILLING_PERIOD_OPTIONS, billingPeriodLabel() (+16 more)
+
+### Community 17 - "Child Account Query Tests"
+Cohesion: 0.14
+Nodes (19): seedChild(), ChildAccountInsert, ChildAccountListRow, ChildAccountRow, ChildAccountUpdate, Db, deleteChildAccount(), insertChildAccount() (+11 more)
+
+### Community 18 - "Payment Channel Data"
+Cohesion: 0.20
+Nodes (16): addChannel(), archiveChannel(), ChannelActionResult, reactivateChannel(), renameChannel(), dbHolder, ChannelDb, findActiveByName() (+8 more)
+
+### Community 19 - "Settings and SMTP Actions"
 Cohesion: 0.14
 Nodes (20): localDateFromIsoDate(), randomChildAccountReminderRow(), randomSpaceReminderRow(), sendChildAccountEmailReminderTest(), sendSpaceEmailReminderTest(), SettingsActionResult, updateChildAccountEmailReminderSettings(), setChildAccountEmailReminderSettings() (+12 more)
 
-### Community 12 - "channel-table.tsx"
-Cohesion: 0.19
-Nodes (15): dbHolder, dbHolder, mailer, insertChannel(), makeSpace(), currency, main(), seedCurrencies() (+7 more)
-
-### Community 13 - "sidebar.tsx"
-Cohesion: 0.13
-Nodes (21): seedChild(), ChildAccountInsert, ChildAccountUpdate, Db, deleteChildAccount(), insertChildAccount(), listChildAccounts(), MotherSeatUpdate (+13 more)
-
-### Community 14 - "spaces.ts"
-Cohesion: 0.12
-Nodes (27): computeSnapshot(), createSpace(), deleteSpace(), deleteSpaceSchema, renewSpace(), revalidateSpace(), SpaceActionResult, dbHolder (+19 more)
-
-### Community 15 - "components.json"
+### Community 20 - "Shadcn Component Configuration"
 Cohesion: 0.09
 Nodes (21): aliases, components, hooks, lib, ui, utils, iconLibrary, menuAccent (+13 more)
 
-### Community 16 - "page.tsx"
+### Community 21 - "Space Expiry Email Reminders"
+Cohesion: 0.16
+Nodes (18): spaceExpiryReminderLog, Db, listDueSpaceExpiryReminders(), listSpaceExpiryReminderCandidates(), localDateFromIsoDate(), recordSpaceExpiryReminderSent(), SpaceExpiryReminderRow, wasSpaceExpiryReminderSent() (+10 more)
+
+### Community 22 - "Child Reminder Rich Text"
+Cohesion: 0.19
+Nodes (19): ChildAccountReminderForm(), renderPreview(), renderPreview(), StatusThresholdForm(), ChildAccountReminderEmail, ChildAccountReminderTemplate, composeChildAccountReminderEmail(), renderChildAccountReminderTemplate() (+11 more)
+
+### Community 23 - "Migrations and Dashboard Accounting"
 Cohesion: 0.13
-Nodes (27): ChannelDialog(), ChannelStatusFilter, ChannelTable(), ChannelTableProps, DialogState, CurrencyDialog(), CurrencyTable(), CurrencyTableProps (+19 more)
+Nodes (20): child_account Table, child_account.contact, currency Table, Currency Country Metadata, Currency Symbol Metadata, space.current_period_start_date, fx_rate Table, mother_account Table (+12 more)
 
-### Community 17 - "dashboard.ts"
-Cohesion: 0.15
-Nodes (24): ArchiveDialog(), ArchiveDialogProps, CurrencyDeleteDialog(), CurrencyDeleteDialogProps, ChildAccountDeleteDialog(), ChildAccountDeleteDialogProps, SpaceDeleteDialog(), SpaceDeleteDialogProps (+16 more)
+### Community 24 - "Child Account Server Actions"
+Cohesion: 0.23
+Nodes (16): ChildAccountActionResult, childBillingPeriod(), computeMonthlySnapshot(), createChildAccount(), deleteChildAccount(), renewChildAccount(), revalidateSpace(), dbHolder (+8 more)
 
-### Community 18 - "Frankfurter FX strategy"
-Cohesion: 0.67
-Nodes (3): Next.js plus SQLite stack, Next.js logo asset, Vercel triangle logo asset
+### Community 25 - "Currency Server Actions"
+Cohesion: 0.17
+Nodes (18): addCurrency(), CURRENCY_PATHS, CurrencyActionResult, deleteCurrency(), updateCurrency(), countCurrencyUsage(), deleteCurrencyRow(), findCurrencyByCode() (+10 more)
 
-### Community 19 - "space-table.tsx"
-Cohesion: 0.12
-Nodes (23): CnyDisplayRate, cnyFromUsd(), DashboardPage(), usd(), formatAsOf(), formatPeriodLabel(), SpaceDetailPage(), DistributionList() (+15 more)
-
-### Community 20 - "compilerOptions"
+### Community 26 - "TypeScript Configuration"
 Cohesion: 0.10
 Nodes (19): compilerOptions, allowJs, esModuleInterop, incremental, isolatedModules, jsx, lib, module (+11 more)
 
-### Community 21 - "space table"
-Cohesion: 0.17
-Nodes (11): Active, Constraints, Context, Core Value, Evolution, Key Decisions, Out of Scope, Requirements (+3 more)
-
-### Community 23 - "channels.ts"
-Cohesion: 0.09
-Nodes (34): addCurrency(), CURRENCY_PATHS, CurrencyActionResult, deleteCurrency(), updateCurrency(), refreshRates(), RefreshRatesResult, RatesPage() (+26 more)
-
-### Community 24 - "spaces.query.test.ts"
-Cohesion: 0.10
-Nodes (25): dbHolder, FIXED_USD_RATES, seedCache(), USD_RATES, VALID_CNY_RESPONSE, VALID_RESPONSE, getMostRecentFetchedAt(), listRates() (+17 more)
-
-### Community 29 - "expiry.ts"
-Cohesion: 0.43
-Nodes (5): composeSpaceExpiryReminderEmail(), renderSpaceExpiryReminderTemplate(), SpaceExpiryReminderEmail, SpaceExpiryReminderTemplate, templateValues()
-
-### Community 30 - "sheet.tsx"
-Cohesion: 0.05
-Nodes (38): Authentication, Destructive Confirmations, Dialog Forms, `drizzle/0004_*.sql` (migration, CRUD), Explicit-DB Data Helpers, File Classification, FX Snapshot, Metadata (+30 more)
-
-### Community 35 - "Dependency-driven phase roadmap"
+### Community 27 - "Space Table and Form"
 Cohesion: 0.14
-Nodes (13): Out of Scope, Requirements: 团队空间管理系统 (team-account-manager), Traceability, v1 Requirements, v2 Requirements, 仪表盘 (DASH), 到期计算 (EXP), 协作 (COLLAB) (+5 more)
+Nodes (16): buildHref for Space Filters, compareRows, SortableHead, SpaceForm(), SpaceFormValue, SpaceTable, compareNullableText(), compareRows() (+8 more)
 
-### Community 36 - "layout.tsx"
-Cohesion: 0.09
-Nodes (34): addBucket(), BucketSeed, childBillingPeriod(), ChildDashboardRow, ChildExpiryStatus, childNextPaymentDate(), DashboardCountSummary, DashboardExpiringChildAccountRow (+26 more)
-
-### Community 51 - "Empty Claude Instructions File"
-Cohesion: 0.06
-Nodes (30): Anti-Pattern 1: Calling the FX API on every request / page load, Anti-Pattern 2: Re-converting historical spend with today's rate, Anti-Pattern 3: Computing expiry/USD only on read, everywhere, Anti-Pattern 4: Hard-coding payment channels / currencies in code, Anti-Pattern 5: Over-engineering for one user, Anti-Patterns, Architectural Patterns, Architecture Research (+22 more)
-
-### Community 61 - "Pattern Assignments"
-Cohesion: 0.07
-Nodes (28): Atomic multi-row transaction (synchronous), Client form: RHF + zodResolver + server-error mapping, Explicit-`db` parameterized data helpers, File Classification, `force-dynamic` Node-runtime RSC reading SQLite, Metadata, Money is integer minor units, FX is decimal string, No Analog Found (+20 more)
-
-### Community 62 - "space-detail-actions.tsx"
-Cohesion: 0.11
-Nodes (25): BILLING_PERIOD_OPTIONS, billingPeriodLabel(), BillingPeriodValue, ChildAccountFormValue, ChildAccountTable(), ChildAccountTableProps, childBillingPeriod(), childDisplayStatus() (+17 more)
-
-### Community 63 - "shadcn/ui (interactive component installer)"
-Cohesion: 0.07
-Nodes (26): Alternatives Considered, Architecture, Charts + icons (shadcn pulls Recharts in when you add chart components), Constraints, Conventions, Core Technologies, Database + ORM, Developer Profile (+18 more)
-
-### Community 64 - "Pattern Assignments"
-Cohesion: 0.08
-Nodes (24): Client write component (useTransition → Server Action → toast → router.refresh), Discriminated-union action result + revalidatePath, Explicit-`db` query helpers (testability), File Classification, Metadata, No Analog Found, Node-runtime constraint (better-sqlite3), Pattern Assignments (+16 more)
-
-### Community 65 - "Implications for Roadmap"
-Cohesion: 0.08
-Nodes (23): Architecture Approach, Confidence Assessment, Critical Pitfalls, Executive Summary, Expected Features, Gaps to Address, Implications for Roadmap, Key Findings (+15 more)
-
-### Community 66 - "Pitfalls Research"
-Cohesion: 0.10
-Nodes (20): Critical Pitfalls, Integration Gotchas, "Looks Done But Isn't" Checklist, Performance Traps, Pitfall 1: Using floating-point (`float`/`double`/JS `number`) for money, Pitfall 2: Recomputing historical payments against the *live* exchange rate (snapshot vs live) — **the key decision**, Pitfall 3: Treating the exchange-rate API as an always-available hard dependency, Pitfall 4: Ignoring the free-tier base-currency restriction and update cadence (+12 more)
-
-### Community 67 - "Implementation Decisions"
-Cohesion: 0.10
-Nodes (19): Cache table shape, Canonical References, Claude's Discretion, Deferred Ideas, Established Patterns, Existing Code Insights, Fallback chain scope (MVP), Implementation Decisions (+11 more)
-
-### Community 68 - "Implementation Decisions"
-Cohesion: 0.10
-Nodes (19): Canonical References, Child Account Placement and Interaction, Child Monthly Price and FX Snapshot, CNY Reference Display, Deferred Ideas, Established Patterns, Existing Code Insights, Existing Source Files (+11 more)
-
-### Community 69 - "Pattern Assignments"
-Cohesion: 0.11
-Nodes (18): Dynamic Server Components For DB Reads, Expiry Status, Explicit DB Parameter In Query Helpers, File Classification, Frozen USD Money Semantics, Metadata, No Analog Found, No Dashboard Auth Or Mutation Surface (+10 more)
-
-### Community 70 - "Phase 1: Foundations, Schema & Reference Data - Context"
-Cohesion: 0.11
-Nodes (17): Canonical References, Claude's Discretion, Country handling (schema decision, consumed in Phase 3), Currency reference data (REF-02), Deferred Ideas, Established Patterns, Existing Code Insights, FX dependency (context for schema, implemented Phase 2) (+9 more)
-
-### Community 71 - "settings.ts"
-Cohesion: 0.17
-Nodes (16): spaceExpiryReminderLog, Db, listDueSpaceExpiryReminders(), listSpaceExpiryReminderCandidates(), localDateFromIsoDate(), recordSpaceExpiryReminderSent(), SpaceExpiryReminderRow, wasSpaceExpiryReminderSent() (+8 more)
-
-### Community 72 - "Phase 1 Plan 02: Navigation Shell & Currency List Summary"
+### Community 28 - "Explicit Database Helpers"
 Cohesion: 0.12
-Nodes (16): Accomplishments, Auto-fixed Issues, Decisions Made, Dependency graph, Deviations from Plan, Files Created/Modified, Issues Encountered, Metrics (+8 more)
+Nodes (17): Channel Query Behavior Tests, Channel Soft Delete and Reactivation Contract, Child Account Query and Cascade Tests, Space-to-Mother-and-Child Cascade Contract, deleteChildAccount, Explicit-DB Parameterized Channel Helpers, Explicit-DB Child Account Helpers, findActiveByName (+9 more)
 
-### Community 73 - "Phase 1 Plan 03: Payment-Channel Maintenance Summary"
-Cohesion: 0.12
-Nodes (16): Accomplishments, Auto-fixed Issues, Decisions Made, Dependency graph, Deviations from Plan, Files Created, Known Stubs, Metrics (+8 more)
-
-### Community 74 - "Phase 1 Plan 01: Foundations, Schema & Reference Data Summary"
-Cohesion: 0.12
-Nodes (15): Accomplishments, Auto-fixed Issues, Decisions Made, Dependency graph, Deviations from Plan, Files Created/Modified, Issues Encountered, Metrics (+7 more)
-
-### Community 75 - "Phase 2 Plan 01: FX Cache Persistence Foundation Summary"
-Cohesion: 0.12
-Nodes (15): Accomplishments, Auto-fixed Issues, Decisions Made, Dependency graph, Deviations from Plan, Files Created/Modified, Issues Encountered, Metrics (+7 more)
-
-### Community 76 - "Phase 2 Plan 02: Frankfurter Anti-Corruption FX Service Summary"
-Cohesion: 0.12
-Nodes (15): Accomplishments, Decisions Made, Dependency graph, Deviations from Plan, Files Created/Modified, Issues Encountered, Known Stubs, Metrics (+7 more)
-
-### Community 77 - "Phase 2 Plan 03: Rates Screen + refreshRates Server Action Summary"
-Cohesion: 0.12
-Nodes (15): Accomplishments, Decisions Made, Dependency graph, Deviations from Plan, Files Created/Modified, Human Verification (deferred to end-of-phase UAT), Issues Encountered, Known Stubs (+7 more)
-
-### Community 78 - "Implementation Decisions"
-Cohesion: 0.12
-Nodes (15): Canonical References, Claude's Discretion, Deferred Ideas, FX 快照取数(FX-02), FX 服务(Phase 2 交付,本阶段消费), Implementation Decisions, Phase 3: Spaces (Expiry + USD Snapshot) - Context, Phase Boundary (+7 more)
-
-### Community 79 - "Phase 5: Dashboard & Overview - Context"
-Cohesion: 0.12
-Nodes (15): Canonical References, Dashboard Priority and First Screen, Deferred Ideas, Established Patterns, Existing Code Insights, Existing Source Files, Implementation Decisions, Integration Points (+7 more)
-
-### Community 80 - "Phase 05: Dashboard & Overview - Research"
-Cohesion: 0.12
-Nodes (15): Architectural Responsibility Map, Assumptions Log, Deferred Ideas, Don't Hand-Roll, Environment Availability, Locked Decisions, Metadata, Open Questions (+7 more)
-
-### Community 81 - "Feature Research"
-Cohesion: 0.13
-Nodes (14): Add After Validation (v1.x), Anti-Features (Deliberately Avoid), Competitor Feature Analysis, Dependency Notes, Differentiators (Competitive Advantage / Polish), Feature Dependencies, Feature Landscape, Feature Prioritization Matrix (+6 more)
-
-### Community 82 - "Stack Research"
-Cohesion: 0.13
-Nodes (14): Alternatives Considered, Core Technologies, Development Tools, Exchange-Rate Strategy (the one external dependency), Installation, Recommended Stack, Scheduling Note, Sources (+6 more)
-
-### Community 83 - "Goal Achievement"
+### Community 29 - "Project Research and Dashboard"
 Cohesion: 0.14
-Nodes (13): Anti-Patterns Found, Behavioral Spot-Checks, Data-Flow Trace (Level 4), Gaps Summary, Goal Achievement, Human Verification Required, Key Link Verification, MVP User Story Guard (+5 more)
+Nodes (16): Project Architecture Research, Project Feature Research, Project Research Summary, Project Stack Research, CSS Bar-List Distributions, Dashboard and Overview Phase, Child Account Same-Day Email Reminders, Renewal Risk Plus Total USD Core Value (+8 more)
 
-### Community 84 - "Phase 05 Plan 02: Root Dashboard UI Summary"
-Cohesion: 0.14
-Nodes (13): Accomplishments, Auto-fixed Issues, Decisions Made, Deviations From Plan, Files Created/Modified, Issues Encountered, Next Phase Readiness, Performance (+5 more)
+### Community 30 - "Settings Data and Page"
+Cohesion: 0.22
+Nodes (13): updateSpaceEmailReminderSettings(), updateStatusThresholds(), SettingsPage(), appSetting, Db, DEFAULT_STATUS_THRESHOLDS, getChildAccountEmailReminderSettings(), getSpaceEmailReminderSettings() (+5 more)
 
-### Community 85 - "Phase 05 Plan 03: Final Dashboard Verification Summary"
-Cohesion: 0.14
-Nodes (13): Accomplishments, Auto-fixed Issues, Decisions Made, Deviations From Plan, Files Created/Modified, Issues Encountered, Next Phase Readiness, Performance (+5 more)
-
-### Community 86 - "channels.ts"
+### Community 31 - "Currency Action Contracts"
 Cohesion: 0.21
-Nodes (15): addChannel(), archiveChannel(), ChannelActionResult, reactivateChannel(), renameChannel(), dbHolder, ChannelDb, findActiveByName() (+7 more)
+Nodes (14): Currency Action Test Suite, addCurrency, countCurrencyUsage, deleteCurrency, deleteCurrencyRow, findCurrencyByCode, findRateSupportedCurrency, insertCurrency (+6 more)
 
-### Community 87 - "Phase 2: Exchange-Rate Layer - Research"
-Cohesion: 0.15
-Nodes (12): Architectural Responsibility Map, Assumptions Log, Don't Hand-Roll, Environment Availability, Metadata, Open Questions (RESOLVED), Package Legitimacy Audit, Phase 2: Exchange-Rate Layer - Research (+4 more)
-
-### Community 88 - "Phase 04: Child Accounts & Cascade Delete - Research"
-Cohesion: 0.15
-Nodes (12): Architectural Responsibility Map, Assumptions Log, Don't Hand-Roll, Environment Availability, Metadata, Open Questions (RESOLVED), Package Legitimacy Audit, Phase 04: Child Accounts & Cascade Delete - Research (+4 more)
-
-### Community 89 - "Phase 05 Plan 01: Dashboard Aggregate Contract Summary"
-Cohesion: 0.15
-Nodes (12): Accomplishments, Decisions Made, Deviations From Plan, Files Created/Modified, Issues Encountered, Next Phase Readiness, Performance, Phase 05 Plan 01: Dashboard Aggregate Contract Summary (+4 more)
-
-### Community 90 - "Phase 1: Foundations, Schema & Reference Data - Discussion Log"
-Cohesion: 0.17
-Nodes (11): Channel delete rule, Claude's Discretion, Country & seeding, Country storage, Currency list source, Currency seed set (follow-up), Deferred Ideas, Gray-area selection (+3 more)
-
-### Community 91 - "Phase 1: Foundations, Schema & Reference Data - Research"
-Cohesion: 0.17
-Nodes (11): Architectural Responsibility Map, Assumptions Log, Don't Hand-Roll, Environment Availability, Metadata, Open Questions (RESOLVED), Package Legitimacy Audit, Phase 1: Foundations, Schema & Reference Data - Research (+3 more)
-
-### Community 92 - "Phase 2: Code Review Report"
-Cohesion: 0.17
-Nodes (11): IN-01: Redundant `amount` union in the Zod schema, IN-02: Time-dependent test relies on the real wall clock, IN-03: "汇率截至" label renders UTC timestamps in browser-local time without a timezone hint, Info, Narrative Findings (AI reviewer), Phase 2: Code Review Report, Summary, Warnings (+3 more)
-
-### Community 93 - "Phase 3 Plan 01: Mother Account Schema Summary"
-Cohesion: 0.17
-Nodes (11): Accomplishments, Auto-fixed Issues, Decisions Made, Deviations from Plan, Files Created/Modified, Issues Encountered, Next Phase Readiness, Performance (+3 more)
-
-### Community 94 - "Phase 3 Plan 02: Expiry and USD Freeze Helpers Summary"
-Cohesion: 0.17
-Nodes (11): Accomplishments, Auto-fixed Issues, Decisions Made, Deviations from Plan, Files Created/Modified, Issues Encountered, Next Phase Readiness, Performance (+3 more)
-
-### Community 95 - "Phase 3 Plan 05: Space UI Summary"
-Cohesion: 0.17
-Nodes (11): Accomplishments, Auto-fixed Issues, Decisions Made, Deviations from Plan, Files Created/Modified, Issues Encountered, Next Phase Readiness, Performance (+3 more)
-
-### Community 96 - "Phase 03 Plan 06: MVP Metadata Gap Closure Summary"
-Cohesion: 0.17
-Nodes (11): Accomplishments, Decisions Made, Deviations from Plan, Files Created/Modified, Issues Encountered, Next Phase Readiness, Performance, Phase 03 Plan 06: MVP Metadata Gap Closure Summary (+3 more)
-
-### Community 97 - "Phase 3: Spaces (Expiry + USD Snapshot) - Research"
-Cohesion: 0.17
-Nodes (11): Architectural Responsibility Map, Assumptions Log, Don't Hand-Roll, Environment Availability, Metadata, Open Questions, Package Legitimacy Audit, Phase 3: Spaces (Expiry + USD Snapshot) - Research (+3 more)
-
-### Community 98 - "Phase 04 Plan 01: Child Account Persistence Summary"
-Cohesion: 0.17
-Nodes (11): Accomplishments, Decisions Made, Deviations from Plan, Files Created/Modified, Issues Encountered, Next Phase Readiness, Performance, Phase 04 Plan 01: Child Account Persistence Summary (+3 more)
-
-### Community 99 - "Phase 04 Plan 02: Child Account Server Actions Summary"
-Cohesion: 0.17
-Nodes (11): Accomplishments, Decisions Made, Deviations from Plan, Files Created/Modified, Issues Encountered, Next Phase Readiness, Performance, Phase 04 Plan 02: Child Account Server Actions Summary (+3 more)
-
-### Community 100 - "Phase 04 Plan 03: Detail-Page Child Account UI Summary"
-Cohesion: 0.17
-Nodes (11): Accomplishments, Decisions Made, Deviations from Plan, Files Created/Modified, Issues Encountered, Next Phase Readiness, Performance, Phase 04 Plan 03: Detail-Page Child Account UI Summary (+3 more)
-
-### Community 101 - "Phase 04 Plan 04: Space Cascade Delete Summary"
-Cohesion: 0.17
-Nodes (11): Accomplishments, Decisions Made, Deviations from Plan, Files Created/Modified, Issues Encountered, Next Phase Readiness, Performance, Phase 04 Plan 04: Space Cascade Delete Summary (+3 more)
-
-### Community 102 - "Phase 04 Plan 05: CNY Reference and Final Verification Summary"
-Cohesion: 0.17
-Nodes (11): Accomplishments, Decisions Made, Deviations from Plan, Files Created/Modified, Issues Encountered, Next Phase Readiness, Performance, Phase 04 Plan 05: CNY Reference and Final Verification Summary (+3 more)
-
-### Community 103 - "Phase 4: Child Accounts & Cascade Delete - Discussion Log"
-Cohesion: 0.17
-Nodes (11): Child Account Fields, Child Account Interaction, Child Account Placement, Child Monthly Price FX, CNY Reference Display, Deferred Ideas, Delete Confirmation, Mother Account Editing (+3 more)
-
-### Community 104 - "Goal Achievement"
-Cohesion: 0.18
-Nodes (10): Anti-Patterns Found, Behavioral Spot-Checks, Gaps Summary, Goal Achievement, Human Verification Required, Key Link Verification, Observable Truths, Phase 1: Foundations, Schema & Reference Data Verification Report (+2 more)
-
-### Community 105 - "Phase 2: Exchange-Rate Layer - Discussion Log"
-Cohesion: 0.18
-Nodes (10): Cache table shape, Claude's Discretion, Deferred Ideas, Fallback chain scope, Fetch mode (follow-up), Phase 2: Exchange-Rate Layer - Discussion Log, Rate direction (follow-up), Refresh triggers (+2 more)
-
-### Community 106 - "Goal Achievement"
-Cohesion: 0.18
-Nodes (10): Anti-Patterns Found, Behavioral Spot-Checks, Gaps Summary, Goal Achievement, Human Verification Required, Key Link Verification, Observable Truths, Phase 2: Exchange-Rate Layer Verification Report (+2 more)
-
-### Community 107 - "Phase 3 Plan 03: Validation and Data Layer Summary"
-Cohesion: 0.18
-Nodes (10): Accomplishments, Decisions Made, Deviations from Plan, Files Created/Modified, Issues Encountered, Next Phase Readiness, Performance, Phase 3 Plan 03: Validation and Data Layer Summary (+2 more)
-
-### Community 108 - "Phase 3 Plan 04: Space Server Actions Summary"
-Cohesion: 0.18
-Nodes (10): Accomplishments, Decisions Made, Deviations from Plan, Files Created/Modified, Issues Encountered, Next Phase Readiness, Performance, Phase 3 Plan 04: Space Server Actions Summary (+2 more)
-
-### Community 109 - "Tests"
-Cohesion: 0.18
-Nodes (10): 1. Open space list, 2. Create space, 3. No-rate block, 4. Filters, 5. Detail page, 6. Edit freeze semantics, Current Test, Gaps (+2 more)
-
-### Community 110 - "Phase 4 - UI Design Contract"
-Cohesion: 0.18
-Nodes (10): Checker Sign-Off, Color, Copywriting Contract, Design System, Interaction Contract, Phase 4 - UI Design Contract, Registry Safety, Source Decisions Applied (+2 more)
-
-### Community 111 - "Phase 4 - Validation Strategy"
-Cohesion: 0.18
-Nodes (10): Decision Validation Map, Manual-Only Verifications, Per-Plan Verification Map, Phase 4 - Validation Strategy, Phase Acceptance Gates, Requirement Validation Map, Sampling Strategy, Test Infrastructure (+2 more)
-
-### Community 112 - "Phase 5 - UI Design Contract"
-Cohesion: 0.18
-Nodes (10): Checker Sign-Off, Color, Copywriting Contract, Design System, Interaction Contract, Phase 5 - UI Design Contract, Registry Safety, Source Decisions Applied (+2 more)
-
-### Community 113 - "Phase 5 - Validation Strategy"
-Cohesion: 0.18
-Nodes (10): Decision Validation Map, Manual-Only Verifications, Per-Plan Verification Map, Phase 5 - Validation Strategy, Phase Acceptance Gates, Requirement Validation Map, Sampling Strategy, Test Infrastructure (+2 more)
-
-### Community 114 - "Phase Details"
-Cohesion: 0.18
-Nodes (10): Overview, Phase 1: Foundations, Schema & Reference Data, Phase 2: Exchange-Rate Layer, Phase 3: Spaces (Expiry + USD Snapshot), Phase 4: Child Accounts & Cascade Delete, Phase 5: Dashboard & Overview, Phase Details, Phases (+2 more)
-
-### Community 115 - "Project State"
-Cohesion: 0.17
-Nodes (11): Accumulated Context, Blockers/Concerns, Current Position, Decisions, Deferred Items, Pending Todos, Performance Metrics, Project Reference (+3 more)
-
-### Community 116 - "Phase 1 — UI Design Contract"
+### Community 32 - "Child Reminder Planning"
 Cohesion: 0.20
-Nodes (9): Checker Sign-Off, Color, Copywriting Contract, Design System, Interaction & State Contract, Phase 1 — UI Design Contract, Registry Safety, Spacing Scale (+1 more)
+Nodes (14): app_setting Table, Child Account Email Reminders Quick Plan, Child Account Email Reminders Quick Summary, Migration 0007 Application Settings, Required Owner Recipient Email, Per-Child Due-Date Recipient Idempotency, Child Account Payment Reminder Job, child_account_reminder_log Table (+6 more)
 
-### Community 117 - "Tests"
-Cohesion: 0.20
-Nodes (9): 1. 汇率屏幕展示 6 行汇率 + 汇率截至 label, 2. 点击刷新汇率触发实时刷新, 3. 重启后缓存数据持久化, 4. API 不可用降级 + 陈旧横幅, 5. 空缓存 + 抓取失败的空状态, Current Test, Gaps, Summary (+1 more)
-
-### Community 118 - "Phase 2 — UI Design Contract"
-Cohesion: 0.20
-Nodes (9): Checker Sign-Off, Color, Component Inventory, Copywriting Contract, Design System, Phase 2 — UI Design Contract, Registry Safety, Spacing Scale (+1 more)
-
-### Community 119 - "Phase 3 — UI Design Contract"
-Cohesion: 0.20
-Nodes (9): Checker Sign-Off, Color, Copywriting Contract, Design System, Interaction Contract, Phase 3 — UI Design Contract, Registry Safety, Spacing Scale (+1 more)
-
-### Community 120 - "Phase 05: Dashboard & Overview Verification Report"
-Cohesion: 0.20
-Nodes (9): Automated Verification, Browser Verification, Gaps Summary, Goal Achievement, Human Verification Required, Key Link Verification, Phase 05: Dashboard & Overview Verification Report, Required Artifacts (+1 more)
-
-### Community 121 - "Areas Discussed"
-Cohesion: 0.22
-Nodes (8): Area 1: FX 快照取数逻辑, Area 2: 母账号建模, Area 3: 到期状态与列表呈现, Area 4: 日历到期算法边界, Areas Discussed, Claude's Discretion, Deferred Ideas, Phase 3 Discussion Log
-
-### Community 122 - "User Constraints (from CONTEXT.md)"
-Cohesion: 0.22
-Nodes (9): Child Account Placement and Interaction, Child Monthly Price and FX Snapshot, CNY Reference Display, Deferred Ideas (OUT OF SCOPE), Locked Decisions, Seat Model and Fields, Space Delete and Cascade, the agent's Discretion (+1 more)
-
-### Community 123 - "Dashboard Priority"
-Cohesion: 0.22
-Nodes (8): Dashboard Priority, Deferred Ideas, First-Screen Job, Information Density, Phase 5: Dashboard & Overview - Discussion Log, Section Order, the agent's Discretion, Top Metric Order
-
-### Community 124 - "Architecture Patterns"
-Cohesion: 0.25
-Nodes (8): Anti-Patterns to Avoid, Architecture Patterns, Pattern 1: RSC reads, Server Actions write, Pattern 2: Declare the full locked schema now (including Phase 3 reserved columns), Pattern 3: Integer minor units + per-currency exponent, Pattern 4: Surrogate-id FK + uniform soft-delete for channels, Recommended Project Structure, System Architecture Diagram
-
-### Community 125 - "Code Examples"
-Cohesion: 0.25
-Nodes (8): Code Examples, drizzle.config.ts, next.config.ts (optional explicit externalization), Server Action: add / archive channel (REF-01), src/db/index.ts — singleton client (HMR-safe), src/db/migrate.ts — programmatic migrate (Success Criterion 4), src/db/schema.ts — reference tables + reserved space columns, src/db/seed.ts — idempotent currency seed (D-02/03)
-
-### Community 126 - "Phase 1 — Validation Strategy"
-Cohesion: 0.25
-Nodes (7): Manual-Only Verifications, Per-Task Verification Map, Phase 1 — Validation Strategy, Sampling Rate, Test Infrastructure, Validation Sign-Off, Wave 0 Requirements
-
-### Community 127 - "Architecture Patterns"
-Cohesion: 0.25
-Nodes (8): Anti-Patterns to Avoid, Architecture Patterns, Pattern 1: Anti-corruption fetch → validate → invert → upsert, Pattern 2: Inversion + atomic upsert (decimal-string money math), Pattern 3: Staleness is a per-request computed flag, NOT a column, Pattern 4: RSC + client refresh button (mirror channels), Recommended Project Structure, System Architecture Diagram
-
-### Community 128 - "Phase 2 — Validation Strategy"
-Cohesion: 0.25
-Nodes (7): Manual-Only Verifications, Per-Task Verification Map, Phase 2 — Validation Strategy, Sampling Rate, Test Infrastructure, Validation Sign-Off, Wave 0 Requirements
-
-### Community 129 - "Architecture Patterns"
-Cohesion: 0.25
-Nodes (8): Anti-Patterns to Avoid, Architecture Patterns, Pattern 1: `mother_account` 1:1 table with reserved cascade (D-04/D-05), Pattern 2: Async-refresh-then-sync-transaction save pipeline (FX-02, the critical pattern), Pattern 3: Exact integer/BigInt USD freeze (CLAUDE.md "no float money math"), Pattern 4: List sort/filter via search params (SPACE-02 / D-06), Recommended Project Structure (additive, follows existing layout), System Architecture Diagram
-
-### Community 130 - "Phase 3 — Validation Strategy"
-Cohesion: 0.25
-Nodes (7): Manual-Only Verifications, Per-Task Verification Map, Phase 3 — Validation Strategy, Sampling Rate, Test Infrastructure, Validation Sign-Off, Wave 0 Requirements
-
-### Community 131 - "Architecture Patterns"
-Cohesion: 0.25
-Nodes (8): Architecture Patterns, Pattern 1: Child Account Schema, Pattern 2: Mother Seat Metadata Migration, Pattern 3: Reusable USD Snapshot Helper, Pattern 4: Space Delete Transaction, Pattern 5: Current CNY Reference, Recommended Project Structure, System Architecture Diagram
-
-### Community 132 - "Architecture Patterns"
-Cohesion: 0.25
-Nodes (8): Anti-Patterns to Avoid, Architecture Patterns, Pattern 1: Single Dashboard Query Facade, Pattern 2: Independent Cost-Class Aggregates, Pattern 3: Stored Expiry Window, No Expiry Recalculation, Pattern 4: Distribution Buckets Reconcile by Construction, Recommended Project Structure, System Architecture Diagram
-
-### Community 133 - "Walking Skeleton — 团队空间管理系统 (team-account-manager)"
-Cohesion: 0.29
-Nodes (6): Architectural Decisions, Capability Proven End-to-End, Out of Scope (Deferred to Later Slices), Stack Touched in Phase 1, Subsequent Slice Plan, Walking Skeleton — 团队空间管理系统 (team-account-manager)
-
-### Community 134 - "Common Pitfalls"
-Cohesion: 0.29
-Nodes (7): Common Pitfalls, Pitfall 1: Writing 0/NULL/partial rates on a failed or malformed fetch, Pitfall 2: Inversion precision loss, Pitfall 3: Edge runtime crash from better-sqlite3, Pitfall 4: `fetched_at` semantics confusing the "as of" label vs the refresh-age decision, Pitfall 5: First-run empty cache + API down, Pitfall 6: Server Action input/trust
-
-### Community 135 - "Common Pitfalls"
-Cohesion: 0.29
-Nodes (7): Common Pitfalls, Pitfall 1: Timezone drift parsing `YYYY-MM-DD` opening dates, Pitfall 2: `await` inside a better-sqlite3 transaction, Pitfall 3: Wrong minor-unit exponent for JPY in the freeze, Pitfall 4: Edge runtime on a DB-reading route, Pitfall 5: Re-freezing USD on every edit, Pitfall 6: Validating against inactive reference data
-
-### Community 136 - "Phase 04: Child Accounts & Cascade Delete Verification Report"
-Cohesion: 0.29
-Nodes (6): Automated Verification, Gaps Summary, Goal Achievement, Human Verification Required, Phase 04: Child Accounts & Cascade Delete Verification Report, Required Artifacts
-
-### Community 137 - "cn"
-Cohesion: 0.07
-Nodes (54): react, AppSidebar(), referenceChildren, topLevel, Alert(), AlertAction(), AlertDescription(), AlertTitle() (+46 more)
-
-### Community 138 - "Common Pitfalls"
-Cohesion: 0.33
-Nodes (6): Common Pitfalls, Pitfall 1: better-sqlite3 native build fails on Node 25 / no toolchain (BLOCKING on this machine), Pitfall 2: DB code accidentally bundled for Edge / double-instantiated under HMR, Pitfall 3: Floating-point money / wrong exponent for JPY, Pitfall 4: Missing FX-snapshot / period columns → painful retrofit, Pitfall 5: Tailwind v4 + shadcn mismatch
-
-### Community 139 - "Common Pitfalls"
-Cohesion: 0.33
-Nodes (6): Common Pitfalls, Pitfall 1: Orphans despite an FK-looking schema, Pitfall 2: Re-freezing child USD snapshots on every edit, Pitfall 3: Wrong USD-to-CNY conversion direction, Pitfall 4: Credential scope creep, Pitfall 5: Typed confirmation only enforced in the browser
-
-### Community 140 - "05-01-PLAN.md"
-Cohesion: 0.33
-Nodes (5): Artifacts this phase produces, Phase Goal, Source Coverage Audit, STRIDE Threat Register, Trust Boundaries
-
-### Community 141 - "05-02-PLAN.md"
-Cohesion: 0.33
-Nodes (5): Artifacts this phase produces, Phase Goal, Source Coverage Audit, STRIDE Threat Register, Trust Boundaries
-
-### Community 142 - "05-03-PLAN.md"
-Cohesion: 0.33
-Nodes (5): Artifacts this phase produces, Phase Goal, Source Coverage Audit, STRIDE Threat Register, Trust Boundaries
-
-### Community 143 - "Common Pitfalls"
-Cohesion: 0.33
-Nodes (6): Common Pitfalls, Pitfall 1: Double Counting Space Payments, Pitfall 2: Recomputing Frozen USD, Pitfall 3: Static Root Page After DB Import, Pitfall 4: Inconsistent Date Parsing for Days Remaining, Pitfall 5: Copying Jest Flags into Vitest
-
-### Community 144 - "space-expiry-reminder-job.ts"
-Cohesion: 0.13
-Nodes (16): ChildAccountPaymentReminderRow, ChildAccountReminderOption, ChildAccountReminderSubscription, Db, listDueChildAccountPaymentReminders(), localDateFromIsoDate(), recordChildAccountReminderSent(), upsertChildAccountReminderSubscription() (+8 more)
-
-### Community 145 - "Validation Architecture"
-Cohesion: 0.40
-Nodes (5): Phase Requirements → Test Map, Sampling Rate, Test Framework, Validation Architecture, Wave 0 Gaps
-
-### Community 146 - "Code Examples"
-Cohesion: 0.40
-Nodes (5): Code Examples, Frankfurter response (verified live), `fx_rate` schema addition, Query module (mirror of channels.ts), Zod schema for the response (anti-corruption boundary)
-
-### Community 147 - "Validation Architecture"
-Cohesion: 0.40
-Nodes (5): Phase Requirements → Test Map, Sampling Rate, Test Framework, Validation Architecture, Wave 0 Gaps
-
-### Community 148 - "03-06-PLAN.md"
-Cohesion: 0.40
-Nodes (4): Artifacts this phase produces, Multi-Source Coverage Audit, STRIDE Threat Register, Trust Boundaries
-
-### Community 149 - "Validation Architecture"
-Cohesion: 0.40
-Nodes (5): Phase Requirements → Test Map, Sampling Rate, Test Framework, Validation Architecture, Wave 0 Gaps
-
-### Community 150 - "04-01-PLAN.md"
-Cohesion: 0.40
-Nodes (4): Artifacts this phase produces, Phase Goal, STRIDE Threat Register, Trust Boundaries
-
-### Community 151 - "04-02-PLAN.md"
-Cohesion: 0.40
-Nodes (4): Artifacts this phase produces, Phase Goal, STRIDE Threat Register, Trust Boundaries
-
-### Community 152 - "04-03-PLAN.md"
-Cohesion: 0.40
-Nodes (4): Artifacts this phase produces, Phase Goal, STRIDE Threat Register, Trust Boundaries
-
-### Community 153 - "04-04-PLAN.md"
-Cohesion: 0.40
-Nodes (4): Artifacts this phase produces, Phase Goal, STRIDE Threat Register, Trust Boundaries
-
-### Community 154 - "04-05-PLAN.md"
-Cohesion: 0.40
-Nodes (4): Artifacts this phase produces, Phase Goal, STRIDE Threat Register, Trust Boundaries
-
-### Community 155 - "Validation Architecture"
-Cohesion: 0.40
-Nodes (5): Phase Requirements -> Test Map, Sampling Rate, Test Framework, Validation Architecture, Wave 0 Gaps
-
-### Community 156 - "Validation Architecture"
-Cohesion: 0.40
-Nodes (5): Phase Requirements -> Test Map, Sampling Rate, Test Framework, Validation Architecture, Wave 0 Gaps
-
-### Community 157 - "Standard Stack"
-Cohesion: 0.50
-Nodes (4): Alternatives Considered (rejected per CLAUDE.md "What NOT to Use"), Core, Standard Stack, Supporting
-
-### Community 158 - "User Constraints (from CONTEXT.md)"
-Cohesion: 0.50
-Nodes (4): Claude's Discretion, Deferred Ideas (OUT OF SCOPE), Locked Decisions, User Constraints (from CONTEXT.md)
-
-### Community 159 - "Sources"
-Cohesion: 0.50
-Nodes (4): Primary (HIGH confidence), Secondary (MEDIUM confidence), Sources, Tertiary (LOW confidence)
-
-### Community 160 - "02-01-PLAN.md"
-Cohesion: 0.50
-Nodes (3): Artifacts this phase produces (Plan 01 portion), STRIDE Threat Register, Trust Boundaries
-
-### Community 161 - "02-02-PLAN.md"
-Cohesion: 0.50
-Nodes (3): Artifacts this phase produces (Plan 02 portion), STRIDE Threat Register, Trust Boundaries
-
-### Community 162 - "02-03-PLAN.md"
-Cohesion: 0.50
-Nodes (3): Artifacts this phase produces (Plan 03 portion), STRIDE Threat Register, Trust Boundaries
-
-### Community 163 - "Standard Stack"
-Cohesion: 0.50
-Nodes (4): Alternatives Considered, Core, Standard Stack, Supporting
-
-### Community 164 - "User Constraints (from CONTEXT.md)"
-Cohesion: 0.50
-Nodes (4): Claude's Discretion, Deferred Ideas (OUT OF SCOPE), Locked Decisions, User Constraints (from CONTEXT.md)
-
-### Community 165 - "Sources"
-Cohesion: 0.50
-Nodes (4): Primary (HIGH confidence), Secondary (MEDIUM confidence), Sources, Tertiary (LOW confidence)
-
-### Community 166 - "03-01-PLAN.md"
-Cohesion: 0.50
-Nodes (3): Artifacts this phase produces (Plan 01), STRIDE Threat Register, Trust Boundaries
-
-### Community 167 - "03-02-PLAN.md"
-Cohesion: 0.50
-Nodes (3): Artifacts this phase produces (Plan 02), STRIDE Threat Register, Trust Boundaries
-
-### Community 168 - "03-03-PLAN.md"
-Cohesion: 0.50
-Nodes (3): Artifacts this phase produces (Plan 03), STRIDE Threat Register, Trust Boundaries
-
-### Community 169 - "03-04-PLAN.md"
-Cohesion: 0.50
-Nodes (3): Artifacts this phase produces (Plan 04), STRIDE Threat Register, Trust Boundaries
-
-### Community 170 - "03-05-PLAN.md"
-Cohesion: 0.50
-Nodes (3): Artifacts this phase produces (Plan 05), STRIDE Threat Register, Trust Boundaries
-
-### Community 171 - "Standard Stack"
-Cohesion: 0.50
-Nodes (4): Alternatives Considered, Core, Standard Stack, Supporting
-
-### Community 172 - "Code Examples"
-Cohesion: 0.50
-Nodes (4): Calendar-aware expiry (EXP-01) — verified against installed date-fns@4.4.0, Code Examples, Reading the cached rate for the freeze (D-01), Space validation schema (SPACE-01, mass-assignment guard)
-
-### Community 173 - "User Constraints (from CONTEXT.md)"
-Cohesion: 0.50
-Nodes (4): Claude's Discretion, Deferred Ideas (OUT OF SCOPE), Locked Decisions, User Constraints (from CONTEXT.md)
-
-### Community 174 - "Sources"
-Cohesion: 0.50
-Nodes (4): Primary (HIGH confidence), Secondary (MEDIUM confidence), Sources, Tertiary (LOW confidence)
-
-### Community 175 - "Standard Stack"
-Cohesion: 0.50
-Nodes (4): Alternatives Considered, Core, Standard Stack, Supporting
-
-### Community 176 - "Sources"
-Cohesion: 0.50
-Nodes (4): Primary (HIGH confidence), Secondary (MEDIUM confidence), Sources, Tertiary (LOW confidence)
-
-### Community 177 - "Standard Stack"
-Cohesion: 0.50
-Nodes (4): Alternatives Considered, Core, Standard Stack, Supporting
-
-### Community 178 - "Code Examples"
-Cohesion: 0.50
-Nodes (4): Code Examples, Currency Distribution Without Losing Child Currency, Reconciled Dashboard Totals, Root Dashboard Page Boundary
-
-### Community 179 - "Implementation Decisions"
-Cohesion: 0.50
-Nodes (4): Dashboard Priority and First Screen, Deferred Ideas (OUT OF SCOPE), Implementation Decisions, the agent's Discretion
-
-### Community 180 - "Sources"
-Cohesion: 0.50
-Nodes (4): Primary (HIGH confidence), Secondary (MEDIUM confidence), Sources, Tertiary (LOW confidence)
-
-### Community 181 - ".continue-here.md"
-Cohesion: 0.50
-Nodes (3): Critical Anti-Patterns (do NOT repeat these), Infrastructure State, Required Reading (in order)
-
-### Community 182 - "README.md"
-Cohesion: 0.40
-Nodes (4): Deploy on Vercel, Getting Started, Learn More, Login
-
-### Community 186 - "Security Domain"
-Cohesion: 0.67
-Nodes (3): Applicable ASVS Categories, Known Threat Patterns for Next.js + Drizzle + SQLite, Security Domain
-
-### Community 187 - "Security Domain"
-Cohesion: 0.67
-Nodes (3): Applicable ASVS Categories, Known Threat Patterns for this stack, Security Domain
-
-### Community 188 - "Security Domain"
-Cohesion: 0.67
-Nodes (3): Applicable ASVS Categories, Known Threat Patterns for {Next.js Server Actions + SQLite}, Security Domain
-
-### Community 189 - "Code Examples"
-Cohesion: 0.67
-Nodes (3): Action-Level Child Create Flow, Code Examples, DB Test for Cascade
-
-### Community 190 - "Security Domain"
-Cohesion: 0.67
-Nodes (3): Applicable ASVS Categories, Known Threat Patterns for This Stack, Security Domain
-
-### Community 191 - "Security Domain"
-Cohesion: 0.67
-Nodes (3): Applicable ASVS Categories, Known Threat Patterns for Next.js + SQLite Dashboard, Security Domain
-
-### Community 438 - "Dashboard overview page"
-Cohesion: 0.15
-Nodes (16): ChannelsPage(), CurrenciesPage(), SpacesPage(), CurrencyInsert, CurrencyUpdate, CurrencyUsage, Db, listCurrencies() (+8 more)
-
-### Community 439 - "Dashboard renewal risk and USD cost contract"
+### Community 33 - "Phase Three UAT"
 Cohesion: 0.14
-Nodes (14): devDependencies, drizzle-kit, eslint, eslint-config-next, tailwindcss, @tailwindcss/postcss, tsx, @types/better-sqlite3 (+6 more)
+Nodes (14): addPeriod, Phase 3 Canonical Verification Passed, ExpiryBadge, expiryStatus, Local Date-Part Construction, MVP User Story Guard, SpaceTable, Date-Only Timezone Drift Pitfall (+6 more)
 
-### Community 440 - "Payment channels reference-data page"
-Cohesion: 0.25
-Nodes (6): sonner, geistMono, geistSans, metadata, Toaster(), TooltipProvider()
-
-### Community 441 - "Currencies reference-data page"
-Cohesion: 0.22
-Nodes (9): scripts, build, db:generate, db:migrate, db:seed, dev, lint, start (+1 more)
-
-### Community 442 - "Rates reference-data page"
-Cohesion: 0.50
-Nodes (3): name, private, version
-
-### Community 521 - "index.ts"
+### Community 34 - "Snapshot Transaction Patterns"
 Cohesion: 0.19
-Nodes (16): updateSpaceEmailReminderSettings(), updateStatusThresholds(), SettingsPage(), appSetting, ChildAccountEmailReminderSettings, Db, DEFAULT_STATUS_THRESHOLDS, getChildAccountEmailReminderSettings() (+8 more)
+Nodes (13): Async Refresh Then Synchronous Transaction, Exact BigInt USD Freeze, createSpace, ensureFreshRates, ES2017 BigInt Runtime Compatibility, freezeUsdMinor, getCurrencyMinorUnit, getRate (+5 more)
 
-### Community 552 - "space-table.tsx"
-Cohesion: 0.15
-Nodes (14): SpaceForm(), compareNullableText(), compareRows(), compareText(), SortDirection, SortKey, SortState, SpaceTableProps (+6 more)
+### Community 35 - "Space Data Layer Planning"
+Cohesion: 0.18
+Nodes (13): DB-Enforced Mother Account One-to-One, Explicit-DB Data Helpers, getSpaceDetail, insertSpaceWithMother, listSpaces, Drizzle Migration 0002 Simple The Executioner, Mother Account Table, No Stored Account Credentials (+5 more)
 
-### Community 554 - "react"
+### Community 36 - "Rich Text Email Rendering"
+Cohesion: 0.18
+Nodes (13): decodeHtmlEntities, escapeHtml, htmlToText, looksLikeHtml, renderRichTextTemplateBody, renderTemplateText, Allowlisted Rich-Text Template Policy, sanitizeRichTextHtml (+5 more)
+
+### Community 37 - "Child Account Mutation Actions"
+Cohesion: 0.26
+Nodes (12): Child Account Action Test Suite, Child Billing Cycle Renewal Contract, deleteChildAccount, deleteChildAccount Row Helper, getChildAccount, getSpaceDetail, renewChildAccount, revalidateSpace (+4 more)
+
+### Community 38 - "Child Billing Snapshot Logic"
+Cohesion: 0.20
+Nodes (12): computeMonthlySnapshot, createChildAccount, ensureFreshRates, freezeUsdMinor, getRate, insertChildAccount, Credential-Like Mass Assignment Guard, nextPaymentDueDate (+4 more)
+
+### Community 39 - "Inline Child Account UI"
+Cohesion: 0.17
+Nodes (12): deleteChildAccount, ChildAccountDeleteDialog.onConfirm, ChildAccountDeleteDialog, InlineChildAccountRow, InlineChildAccountRow.onSave, ChildAccountTable, createChildAccount for Inline Row, childExpiryDate (+4 more)
+
+### Community 40 - "Reminder Database Migrations"
+Cohesion: 0.18
+Nodes (12): renewPaymentDueDate, Drizzle SQLite Migration Journal, One Space Reminder per Expiry Threshold, Space Expiry Reminder Log Migration, Child Account Reminder Log Migration, Child Account Reminder Subscription Migration, Child Reminder Idempotency Indexes, Snapshot 0000 Foundation Accounting Schema (+4 more)
+
+### Community 41 - "Space Snapshot UI Planning"
+Cohesion: 0.18
+Nodes (12): Chinese Space UI Copywriting Contract, Client-Safe Currency Metadata, Conditional FX Snapshot Refreeze, Currency Symbol and Detail Discoverability Gap, Phase 3 Locked Discussion Decisions, Frozen USD Snapshot Decisions D-01 to D-03, No-Rate Save Block, Historical Snapshot Refreeze Pitfall (+4 more)
+
+### Community 42 - "Phase One Reference Data"
+Cohesion: 0.23
+Nodes (12): Read-Only Currency Server Component, Plan 01-02 Navigation Shell, Plan 01-03 Payment Channel Maintenance, REF-01 Payment Channel Maintenance, REF-02 Supported Currency List, Requirement-to-Phase Traceability, v1 Requirement Set, Phase 1 Foundations Schema and Reference Data (+4 more)
+
+### Community 43 - "Space Action Tests"
+Cohesion: 0.31
+Nodes (11): addPeriod, createSpace, deleteSpace, Exact Space Name Delete Guard, renewSpace, revalidateSpace, Space Action Integration Tests, Exact-Name Space Cascade Delete Test Contract (+3 more)
+
+### Community 44 - "Channel Actions and Tests"
+Cohesion: 0.29
+Nodes (11): Payment Channel Action Test Suite, Payment Channel Soft-Delete Contract, addChannel, archiveChannel, findActiveByName, insertChannel, reactivateChannel, renameChannel (+3 more)
+
+### Community 45 - "Foundation Schema Delivery"
+Cohesion: 0.25
+Nodes (11): Drizzle SQLite Configuration, Database Generate Migrate Seed Workflow, Plan 01-01 Foundation Schema Delivery, Currency-Aware Integer Minor Units, Upfront Reserved FX and Period Schema, Reviewable Generated SQL Migrations, Stable FK References with Soft Delete, Uniform Payment Channel Soft Delete (+3 more)
+
+### Community 46 - "Dashboard Verification Delivery"
+Cohesion: 0.22
+Nodes (11): Desktop and Mobile Dashboard Verification, Dashboard Accounting and Scope Anti-Patterns, Dashboard Aggregate Query Tests, Phase 5 Execution Handoff, Mobile Dashboard Header Stacking Fix, Plan 05-01 Dashboard Aggregate Contract, Plan 05-03 Final Dashboard Verification, Dashboard Source and Package Backstops (+3 more)
+
+### Community 47 - "Vercel Brand Asset"
+Cohesion: 0.20
+Nodes (11): 1155 by 1000 Scalable ViewBox, Centered Vertically Symmetric Composition, High-Contrast Use on Dark Surfaces, Apex-to-Baseline Edge-Spanning Layout, Flat Single-Path Construction Without Stroke, Vercel Platform Brand Identity, Single Solid Geometric Triangle, Symbol-Only Mark Without Text (+3 more)
+
+### Community 48 - "Reminder Settings Forms"
+Cohesion: 0.20
+Nodes (11): ChildAccountReminderForm, Child Reminder renderPreview, Sanitized Child Reminder Rich-Text Editor, ChildAccountReminderForm.onSaveSettings, ChildAccountReminderForm.onTestEmail, renderRichTextTemplateBody, renderTemplateText, sanitizeRichTextHtml (+3 more)
+
+### Community 49 - "Child Account Validation"
+Cohesion: 0.22
+Nodes (9): billingPeriodUnitSchema, ChildAccountFormInput, childAccountFormSchema, childAccountIdSchema, SeatType, seatTypeSchema, MotherSeatFormInput, motherSeatFormSchema (+1 more)
+
+### Community 50 - "Dashboard Aggregation Queries"
+Cohesion: 0.22
+Nodes (10): addBucket, childNextPaymentDate, Space Spend and Rented Child Revenue Separation, Country Currency Channel and Space Distributions, Dashboard Aggregate Query Tests, Configurable Dashboard Status Thresholds, getDashboardOverview, isSelfUseChild (+2 more)
+
+### Community 51 - "Currency and FX Storage"
+Cohesion: 0.20
+Nodes (10): Atomic Decimal-String FX Cache, countCurrencyUsage, Currency and FX Rate Delete Transaction, deleteCurrencyRow, FX Rate Cache Query Tests, USD Rate Pinned to Decimal String One, getMostRecentFetchedAt, getRate (+2 more)
+
+### Community 52 - "Sidebar Sheet System"
+Cohesion: 0.20
+Nodes (10): Sheet Component System, SheetContent, Directional Portal Sheet Overlay, Sidebar, SidebarMenuButton, Accessible Resizable Sidebar Width, SidebarTrigger, TooltipProvider (+2 more)
+
+### Community 53 - "Frontend Tooling Stack"
+Cohesion: 0.20
+Nodes (10): shadcn Radix Nova Component System, Frontend Source Aliases, Next.js ESLint Quality Configuration, TypeScript Lint Build Test Workflow, In-Memory Migrated SQLite Test Harness, Channel Table Dialog and Archive UI, Tailwind CSS PostCSS Pipeline, TypeScript @ Source Alias (+2 more)
+
+### Community 54 - "Dashboard Aggregation Patterns"
+Cohesion: 0.24
+Nodes (10): Phase 5 Dashboard Pattern Map, Space Child Status and Seat-Type Counts, Parent-Child Double-Counting Guard, Dynamic Root Dashboard Server Component, getDashboardOverview, Independent Space and Child Cost Aggregates, Expired and Soon-to-Expire Renewal Risk, Single Dashboard Query Facade (+2 more)
+
+### Community 55 - "Reminder Job Test Harness"
+Cohesion: 0.22
+Nodes (9): Child Payment Reminder Job Test Suite, Owner-Only Once-Per-Due-Day Child Reminder, Space Expiry Reminder Job Test Suite, Once-Per-Threshold Space Reminder Contract, createTestDb, better-sqlite3 Database, drizzle Test Database, Isolated Foreign-Key-Enforced In-Memory Database (+1 more)
+
+### Community 56 - "Phase Four Verification"
+Cohesion: 0.28
+Nodes (9): Display-Only Current CNY Reference, Phase 4 Full Automated Gate, 17 of 17 Phase 4 Must-Haves Verified, Plan 04-05 CNY Reference and Final Gate, Phase 4 Requirement and Decision Test Map, Completed CNY Reference and Verification, BigInt USD-to-CNY Display Conversion, Phase 4 Nyquist Validation Strategy (+1 more)
+
+### Community 57 - "Relational CRUD Research"
+Cohesion: 0.22
+Nodes (9): Explicit-Database Helper Pattern, No New Phase 4 Dependencies, Phase 4 Existing-Code Pattern Map, Phase 4 Relational CRUD Research, Reuse Existing Space and Channel Analogs, RSC Reads and Client Server-Action Mutations, Transactional Foreign-Key Cascade Delete, Drizzle Indexes and Constraints Documentation (+1 more)
+
+### Community 58 - "Dashboard UI Delivery"
+Cohesion: 0.28
+Nodes (9): Dependency-Free CSS Bar Distributions, Risk Row DTO Display Extension, Force-Dynamic SQLite Dashboard RSC, Plan 05-02 Root Dashboard UI, Read-Only Dashboard DTO Contract, Expiring List Before Distributions Selection, Completed Dashboard Aggregate Facade, Completed Root Dashboard UI (+1 more)
+
+### Community 59 - "Channel Management UI"
+Cohesion: 0.29
+Nodes (8): ArchiveDialog, Archived Channel URL State, ChannelDialog, Channel Server Errors Mapped to Form Field, ChannelTable, ChannelsPage, Transition Toast and Inline Error Action Feedback, Reversible Neutral Channel Archive
+
+### Community 60 - "Reminder Test Email Actions"
+Cohesion: 0.32
+Nodes (8): Reminder Template Rendering and SMTP Delivery, localDateFromIsoDate, randomChildAccountReminderRow, randomSpaceReminderRow, sendChildAccountEmailReminderTest, sendSpaceEmailReminderTest, Settings Reminder Action Tests, Real Space and Child Reminder Test Data
+
+### Community 61 - "Frozen Amount Help UI"
+Cohesion: 0.25
+Nodes (8): ChildAccountForm, Frozen USD Historical Cost Semantics, FrozenAmountHelp, FrozenAmountHelpProps, Secondary Current CNY Space Reference, DialogContent, DialogTrigger(), Dialog Primitive System
+
+### Community 62 - "Dashboard Requirements Verification"
+Cohesion: 0.46
+Nodes (8): Phase 5 Dashboard Research, Phase 5 Validation Strategy, Phase 5 Dashboard Verification Report, Phase 5 Twelve of Twelve Verified, DASH-01 Renewal Risk Highlighting, DASH-02 Total USD Spend, DASH-03 Spend Distributions, DASH-04 Count Overviews
+
+### Community 63 - "Account Hierarchy Schema Planning"
+Cohesion: 0.29
+Nodes (8): Deferred Child Accounts and Space Deletion, Space Account Hierarchy Cascade Integrity, childAccountFormSchema, Child Account Table, Drizzle Migration 0004 Brown Madripoor, motherSeatFormSchema, Mother Account Seat Metadata, seatTypeSchema
+
+### Community 64 - "Child Cost Display Hierarchy"
+Cohesion: 0.29
+Nodes (8): Authoritative USD with Current CNY Reference, Phase 4 Child Accounts and Cascade Scope, Tiered Destructive Confirmation Interaction, Frozen USD Primary and CNY Secondary Visual Hierarchy, Mother and Child Seat Model, Phase 4 UI Design Contract, Risk Cost Space Child Metric Hierarchy, Stored USD Fields as Dashboard Authority
+
+### Community 65 - "Milestone Roadmap State"
+Cohesion: 0.43
+Nodes (8): Phase 5 Execution Handoff, Stored-Field Dashboard Aggregation, Dependency-Driven Delivery Sequence, Phase 2 Exchange-Rate Layer, Phase 3 Spaces Expiry and USD Snapshot, Phase 4 Child Accounts and Cascade Delete, Phase 5 Dashboard and Overview, v1 Milestone Completion State
+
+### Community 66 - "Space Reminder Job Flow"
+Cohesion: 0.25
+Nodes (8): composeSpaceExpiryReminderEmail, Default Space Expiry Email Template, getStatusThresholds, listDueSpaceExpiryReminders, Space Reminder Configuration Schedule and Threshold Gates, recordSpaceExpiryReminderSent, runSpaceExpiryReminderJob, timeText for Space Reminder
+
+### Community 67 - "Root Layout Providers"
+Cohesion: 0.29
+Nodes (5): geistMono, geistSans, metadata, Toaster(), TooltipProvider()
+
+### Community 68 - "Currency Reference Data UI"
+Cohesion: 0.29
+Nodes (7): Country-Driven Currency Metadata Auto-Fill, CurrenciesPage, Currency Country and Region Filter, CurrencyDeleteDialog, CurrencyDialog, Currency Referential Delete Guard, CurrencyTable
+
+### Community 69 - "Dashboard Page Composition"
+Cohesion: 0.33
+Nodes (7): cnyFromUsd, Space Cost and Child Rental Income Model, getDashboardOverview, DashboardPage, Dashboard Renewal Risk Surface, DistributionList, Distribution Subtotal Reconciliation
+
+### Community 70 - "Child Reminder Job Flow"
+Cohesion: 0.29
+Nodes (7): composeChildAccountReminderEmail, listDueChildAccountPaymentReminders, Child Reminder Configuration and Schedule Gates, recordChildAccountReminderSent, runChildAccountPaymentReminderJob, timeText for Child Reminder, wasChildAccountReminderSent
+
+### Community 71 - "Schema Snapshot History"
+Cohesion: 0.29
+Nodes (7): Preserve or Refreeze Child USD Snapshot, Snapshot 0002 Mother Account Relation, Snapshot 0003 Currency Symbol Metadata, Snapshot 0004 Child Accounts and Seat Metadata, Snapshot 0005 Currency Country Metadata, Snapshot 0006 Space Current Period Start, Snapshot 0007 Application Settings
+
+### Community 72 - "Next.js Application Architecture"
+Cohesion: 0.29
+Nodes (7): Embedded SQLite for Single User, Locked Full-Stack Architecture, Server Components for Direct Reads, Single Deployable Next.js Architecture, Next.js Runtime Configuration, Application Runtime Stack, Local Development Entry Point
+
+### Community 73 - "Product Scope and Security"
+Cohesion: 0.29
+Nodes (7): Lean Single-User Architecture Boundary, Child Account Credential Minimization, Space Mother Account Child Account Hierarchy, Team Account Manager, USD-Normalized Cost and Expiry Overview, Per-IP Login Rate Limiting, Single Personal Access Key Authentication
+
+### Community 74 - "Data Integrity Pitfalls"
+Cohesion: 0.29
+Nodes (7): Project Pitfalls Research, Migration 0004 Child Accounts and Mother Seat Fields, Integer-Minor Distribution Reconciliation, Calendar-Aware Expiry Arithmetic, Transactional Space Account Cascade, Stable Channel FK and Soft Delete, Currency-Aware Integer Minor Units
+
+### Community 75 - "Route Authentication Boundary"
+Cohesion: 0.29
+Nodes (7): Application Route Authentication Guard, Login Redirect Flow, NextResponse.next, NextResponse.redirect, verifySessionToken, Payment Channel Server Actions, Server-Side Zod Trust Boundary Validation
+
+### Community 76 - "Space Snapshot Routing"
+Cohesion: 0.29
+Nodes (7): SQLite Edge Runtime Pitfall, Force-Dynamic Node Runtime RSC, listSpaceDetails, Phase 3 Space Snapshot Architecture, Phase 3 Space Management Boundary, Spaces List Route, Verified Space Snapshot Data Flow
+
+### Community 77 - "Secure Child Account Actions"
+Cohesion: 0.29
+Nodes (7): Per-Child Frozen Monthly USD Snapshot, Expanded Child Billing Fields Selection, Child Monthly USD Snapshot Preservation, Completed Child Account Server Actions, Whitelisted Server Action Validation, Separate Parent and Child Cost Aggregation, Next.js Data Security Guide
+
+### Community 78 - "Child Account Detail UI"
+Cohesion: 0.29
+Nodes (7): Child Account Table and Dialog Pattern, Space-Detail-Only Child Management, Phase 4 Decision Alternatives Audit, Credential-Free Child Account UI, Plan 04-03 Detail-Page Account UI, Read-Only Frozen Child USD Display, Completed Detail-Page Child Account UI
+
+### Community 79 - "Globe Icon Asset"
+Cohesion: 0.29
+Nodes (7): Circular Earth Outline, Generic Globe Icon, Global International or Web Affordance, Curved Horizontal Latitude Bands, Curved Longitude Meridian Bands, Monochrome Gray Vector Style, White Negative-Space Globe Grid
+
+### Community 80 - "Next.js Brand Asset"
+Cohesion: 0.29
+Nodes (7): Next.js Framework Brand Identity, Bold Geometric Sans-Serif Lettering, Wide Single-Line Logo Lockup, Smaller Dot-JS Suffix, Black-on-White Monochrome Contrast, Large Uppercase NEXT Letterforms, Next.js Wordmark Logo
+
+### Community 81 - "Window Icon Asset"
+Cohesion: 0.29
+Nodes (7): Generic Browser or Application Window Icon, Monochrome Gray Vector Style, Minimal Negative-Space Window Layout, Thick Rounded Window Frame, Three Circular Window Controls, White Content Viewport, Generic Window or Web Interface Affordance
+
+### Community 82 - "Space FX Snapshot Logic"
+Cohesion: 0.33
+Nodes (6): computeSnapshot, ensureFreshRates, freezeUsdMinor, Missing FX Rate Write Block, RatesPage, Space Snapshot Preserve and Refreeze Test Contract
+
+### Community 83 - "Dynamic Space Pages"
+Cohesion: 0.47
+Nodes (6): Space Detail Current CNY Reference, URL-Driven Space and Mother Seat Inline Editing, Force-Dynamic SQLite RSC Boundary, SpaceDetailPage, Current CNY Reference Map for Spaces, SpacesPage
+
+### Community 84 - "FX Refresh Action Tests"
 Cohesion: 0.40
-Nodes (4): Goal, Quick Task 260708-x2b: Child Account Email Reminders, Scope, Verification
+Nodes (6): refreshRates Action Tests, Frankfurter USD and CNY Response Fixtures, FX Last-Good Cache Fallback Contract, USD and CNY Rate Base Allow-List, refreshFromApi, refreshRates
 
-### Community 556 - "InlineChildAccountRow"
+### Community 85 - "Child Account Persistence Planning"
+Cohesion: 0.33
+Nodes (6): Child Account Explicit-DB Helpers, Child Snapshot Preservation on Non-Price Edits, deleteChildAccount, Phase 4 Account Persistence Foundation, updateChildAccount, updateMotherSeat
+
+### Community 86 - "Safe Cascade Delete"
+Cohesion: 0.40
+Nodes (6): No-Orphan Cascade Safety Policy, Exact Space Name Confirmation, Plan 04-04 Safe Space Cascade Delete, Typed-Name Delete Selection, Server-Authoritative Destructive Confirmation, Completed Space Cascade Delete
+
+### Community 87 - "File Icon Asset"
+Cohesion: 0.33
+Nodes (6): Folded Upper-Right Page Corner, Generic File Document Icon, Generic File or Document Affordance, Monochrome Gray Vector Style, Rounded Page Silhouette, Three Abstract Text-Line Glyphs
+
+### Community 88 - "Space Form Submission"
+Cohesion: 0.33
+Nodes (6): Country and Currency Bidirectional Sync, createSpace, SpaceEditorForm, parseToMinor for Space Form, updateSpace, SpaceEditorForm.onSubmit
+
+### Community 89 - "Settings Action Boundary"
+Cohesion: 0.40
+Nodes (5): SettingsPage, Settings Zod Validation Boundary, updateChildAccountEmailReminderSettings, updateSpaceEmailReminderSettings, updateStatusThresholds
+
+### Community 90 - "Reminder Settings Validation"
+Cohesion: 0.40
+Nodes (5): getChildAccountEmailReminderSettings, getSpaceEmailReminderSettings, Status and Email Reminder Settings Schemas, Enabled Reminder Requires Recipient and SMTP, SMTP and SMTPS URL Validation Policy
+
+### Community 91 - "Dashboard UI Contract"
 Cohesion: 0.50
-Nodes (3): Completed, Quick Task 260708-x2b Summary, Verification
+Nodes (5): Phase 5 UI Design Contract, First-Viewport Renewal Priority, Four-Metric Operations Order, No Fake Zero Loading Metrics, View-First Dashboard
 
-## Ambiguous Edges - Review These
-- `Frankfurter FX strategy` → `globe icon asset`  [AMBIGUOUS]
-  public/globe.svg · relation: generic_global_fx_visual_asset
+### Community 92 - "Space Action Architecture"
+Cohesion: 0.40
+Nodes (5): Currency Creation for No-Rate Testing Gap, Do Not Hand-Roll Existing Infrastructure, Server-Side Reference Data Validation, Phase 3 Space Server Actions, Existing Vertical Slice Template Reuse
+
+### Community 93 - "Select Component System"
+Cohesion: 0.50
+Nodes (4): Select Component System, SelectContent, SelectItem, Portal-Based Scrollable Select Popover
+
+### Community 94 - "Child Billing Migrations"
+Cohesion: 0.50
+Nodes (4): Child Account Billing Period Unit and Count, child_account.next_payment_date, Migration 0009 Child Next Payment Date, Migration 0010 Child Billing Period
+
+### Community 95 - "Application Sidebar Navigation"
+Cohesion: 0.50
+Nodes (4): Active Route Navigation Hierarchy, AppSidebar, logout, usePathname
+
+### Community 96 - "Dashboard Priority Context"
+Cohesion: 0.67
+Nodes (4): Compact Operations Dashboard Composition, Phase 5 Dashboard Scope, Core-Value-First Dashboard Priority, Phase 5 Dashboard Priority Audit
+
+### Community 97 - "Reminder Scheduler Singleton"
+Cohesion: 0.50
+Nodes (4): shouldStartScheduler, Global Minute Reminder Scheduler Singleton, startSpaceExpiryReminderScheduler, Reminder Scheduler tick
+
+### Community 98 - "SMTP Delivery Transport"
+Cohesion: 0.50
+Nodes (4): SMTP Configuration Guard, nodemailer.createTransport, sendEmail, transporter.sendMail
+
+### Community 99 - "Root Scheduler Bootstrap"
+Cohesion: 0.67
+Nodes (3): Space Expiry Reminder Scheduler Bootstrap, Global Tooltip and Toast Providers, RootLayout
+
+### Community 100 - "Login Page States"
+Cohesion: 0.67
+Nodes (3): login Server Action, Login Configuration Invalid and Locked States, LoginPage
+
+### Community 101 - "Child Reminder Deduplication"
+Cohesion: 1.00
+Nodes (3): Child Reminder Delivery Deduplication, recordChildAccountReminderSent, wasChildAccountReminderSent
+
+### Community 102 - "Reminder Subscription Storage"
+Cohesion: 0.67
+Nodes (3): listChildAccountReminderOptions, listChildAccountReminderSubscriptions, upsertChildAccountReminderSubscription
+
+### Community 103 - "SQLite Connection Singleton"
+Cohesion: 0.67
+Nodes (3): HMR-Safe Drizzle SQLite Singleton, Native SQLite Node Runtime Boundary, SQLite WAL and Foreign Key Connection Policy
+
+### Community 104 - "Input Component States"
+Cohesion: 0.67
+Nodes (3): Input, Input Invalid Focus and Disabled States, SidebarInput
+
+### Community 105 - "Responsive Sidebar State"
+Cohesion: 0.67
+Nodes (3): Sidebar Cookie and Keyboard Persistence, SidebarProvider, Responsive Desktop and Mobile Sidebar State
+
+### Community 106 - "GSD Workflow Gates"
+Cohesion: 0.67
+Nodes (3): GSD Workflow Enforcement, Planning and Verification Quality Gates, GSD Project Workflow Configuration
+
+### Community 107 - "FX Base Currency Rules"
+Cohesion: 0.67
+Nodes (3): isRateBase, parseRateBase, RATE_BASES USD and CNY
 
 ## Knowledge Gaps
-- **1583 isolated node(s):** `$schema`, `style`, `rsc`, `tsx`, `config` (+1578 more)
+- **426 isolated node(s):** `$schema`, `style`, `rsc`, `tsx`, `config` (+421 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **385 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **22 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **What is the exact relationship between `Frankfurter FX strategy` and `globe icon asset`?**
-  _Edge tagged AMBIGUOUS (relation: generic_global_fx_visual_asset) - confidence is low._
-- **Why does `cn()` connect `cn` to `child-account-table.tsx`, `space-form.tsx`, `page.tsx`, `dashboard.ts`, `space-table.tsx`?**
-  _High betweenness centrality (0.018) - this node is a cross-community bridge._
-- **Why does `Button()` connect `dashboard.ts` to `child-account-table.tsx`, `space-form.tsx`, `space-table.tsx`, `cn`, `page.tsx`, `space-table.tsx`, `channels.ts`, `space-detail-actions.tsx`?**
-  _High betweenness centrality (0.006) - this node is a cross-community bridge._
-- **Why does `dependencies` connect `dependencies` to `Payment channels reference-data page`, `cn`, `Rates reference-data page`?**
-  _High betweenness centrality (0.005) - this node is a cross-community bridge._
+- **Why does `expiryStatus` connect `Dashboard Expiry Calculations` to `Child Account Status UI`, `Data Tables and Tooltips`?**
+  _High betweenness centrality (0.065) - this node is a cross-community bridge._
+- **Why does `Expiry Local Date Parsing` connect `Dashboard Expiry Calculations` to `Database Schema and Spaces`?**
+  _High betweenness centrality (0.058) - this node is a cross-community bridge._
+- **Why does `Space Reminder Local Date Parsing` connect `Database Schema and Spaces` to `Dashboard Expiry Calculations`?**
+  _High betweenness centrality (0.057) - this node is a cross-community bridge._
 - **What connects `$schema`, `style`, `rsc` to the rest of the system?**
-  _1616 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `page.tsx` be split into smaller, more focused modules?**
-  _Cohesion score 0.13978494623655913 - nodes in this community are weakly interconnected._
-- **Should `space-form.tsx` be split into smaller, more focused modules?**
-  _Cohesion score 0.09675324675324676 - nodes in this community are weakly interconnected._
+  _592 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `UI Layout Utilities` be split into smaller, more focused modules?**
+  _Cohesion score 0.05263157894736842 - nodes in this community are weakly interconnected._
+- **Should `Database Schema and Spaces` be split into smaller, more focused modules?**
+  _Cohesion score 0.051360842844600525 - nodes in this community are weakly interconnected._
+- **Should `Exchange Rate Planning` be split into smaller, more focused modules?**
+  _Cohesion score 0.050203527815468114 - nodes in this community are weakly interconnected._

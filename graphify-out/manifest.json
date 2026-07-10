@@ -1,9 +1,4 @@
 {
-  ".codex/hooks.json": {
-    "mtime": 1783177894.7592952,
-    "ast_hash": "79ab7b14c00939e3bf9273d7284655ac",
-    "semantic_hash": "79ab7b14c00939e3bf9273d7284655ac"
-  },
   ".planning/HANDOFF.json": {
     "mtime": 1782836566.4989357,
     "ast_hash": "e5a3af40956deb0ffff97f78d61fefdf",
@@ -1278,5 +1273,1280 @@
     "mtime": 1783240661.2912693,
     "ast_hash": "f7c5ef1124774a08d6ca2f0e543c2325",
     "semantic_hash": ""
+  },
+  "D:\\projects\\team-account-manager\\.planning\\HANDOFF.json": {
+    "mtime": 1783612053.6842906,
+    "ast_hash": "4ebe17918e5b45cacdfb2c023dea184b",
+    "semantic_hash": "4ebe17918e5b45cacdfb2c023dea184b"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\config.json": {
+    "mtime": 1783612051.1766975,
+    "ast_hash": "3cc74e5e498cb6b5a1204298c44c75b1",
+    "semantic_hash": "3cc74e5e498cb6b5a1204298c44c75b1"
+  },
+  "D:\\projects\\team-account-manager\\components.json": {
+    "mtime": 1783612050.1204052,
+    "ast_hash": "76e8fb47aecaf8352374f2c5a291b58a",
+    "semantic_hash": "76e8fb47aecaf8352374f2c5a291b58a"
+  },
+  "D:\\projects\\team-account-manager\\drizzle.config.ts": {
+    "mtime": 1783612050.5704436,
+    "ast_hash": "2ac545ce3f24974871f7918ad89754f8",
+    "semantic_hash": "2ac545ce3f24974871f7918ad89754f8"
+  },
+  "D:\\projects\\team-account-manager\\drizzle\\0000_sudden_tony_stark.sql": {
+    "mtime": 1783612050.5718548,
+    "ast_hash": "8d9fe583dcf69b9b95139d02c7f4d19f",
+    "semantic_hash": "8d9fe583dcf69b9b95139d02c7f4d19f"
+  },
+  "D:\\projects\\team-account-manager\\drizzle\\0001_charming_rawhide_kid.sql": {
+    "mtime": 1783612051.7129064,
+    "ast_hash": "2ff940acd5706dd3f9b7671a38d31090",
+    "semantic_hash": "2ff940acd5706dd3f9b7671a38d31090"
+  },
+  "D:\\projects\\team-account-manager\\drizzle\\0002_simple_the_executioner.sql": {
+    "mtime": 1783612143.0990481,
+    "ast_hash": "fe66376dc268d9acfab6181be2788ed0",
+    "semantic_hash": "fe66376dc268d9acfab6181be2788ed0"
+  },
+  "D:\\projects\\team-account-manager\\drizzle\\0003_dazzling_warhawk.sql": {
+    "mtime": 1783612143.1002362,
+    "ast_hash": "8ce4be056c28c3ec3d2e7003766b4a54",
+    "semantic_hash": "8ce4be056c28c3ec3d2e7003766b4a54"
+  },
+  "D:\\projects\\team-account-manager\\drizzle\\0004_brown_madripoor.sql": {
+    "mtime": 1783612143.101538,
+    "ast_hash": "16472a7cf0a046dff37181ef3ee519bc",
+    "semantic_hash": "16472a7cf0a046dff37181ef3ee519bc"
+  },
+  "D:\\projects\\team-account-manager\\drizzle\\0005_organic_sauron.sql": {
+    "mtime": 1783612143.1020434,
+    "ast_hash": "55ff91ce3503ed509f0a73229984f814",
+    "semantic_hash": "55ff91ce3503ed509f0a73229984f814"
+  },
+  "D:\\projects\\team-account-manager\\drizzle\\0006_cuddly_karen_page.sql": {
+    "mtime": 1783612143.1030571,
+    "ast_hash": "eabca16c26972f2ea83212a09db36e44",
+    "semantic_hash": "eabca16c26972f2ea83212a09db36e44"
+  },
+  "D:\\projects\\team-account-manager\\drizzle\\0007_peaceful_typhoid_mary.sql": {
+    "mtime": 1783612143.104062,
+    "ast_hash": "408353886cd5fda7e781ab5a09710c74",
+    "semantic_hash": "408353886cd5fda7e781ab5a09710c74"
+  },
+  "D:\\projects\\team-account-manager\\drizzle\\0008_normal_smiling_tiger.sql": {
+    "mtime": 1783612143.104062,
+    "ast_hash": "bc6182c666a47104699f94b710ef7b32",
+    "semantic_hash": "bc6182c666a47104699f94b710ef7b32"
+  },
+  "D:\\projects\\team-account-manager\\drizzle\\0009_large_firestar.sql": {
+    "mtime": 1783612143.761217,
+    "ast_hash": "b2cc6d2c22ca162dd27bc760eb599db9",
+    "semantic_hash": "b2cc6d2c22ca162dd27bc760eb599db9"
+  },
+  "D:\\projects\\team-account-manager\\drizzle\\0010_outgoing_thunderbolt_ross.sql": {
+    "mtime": 1783612144.0940077,
+    "ast_hash": "b11e4cfa6800f888aabbe126bfd96580",
+    "semantic_hash": "b11e4cfa6800f888aabbe126bfd96580"
+  },
+  "D:\\projects\\team-account-manager\\drizzle\\0011_groovy_doctor_octopus.sql": {
+    "mtime": 1783612144.3048675,
+    "ast_hash": "d7fa1d63e0ff554d123db3936d8bc0b0",
+    "semantic_hash": "d7fa1d63e0ff554d123db3936d8bc0b0"
+  },
+  "D:\\projects\\team-account-manager\\drizzle\\0012_spooky_hellion.sql": {
+    "mtime": 1783612144.5039713,
+    "ast_hash": "39fbf4067eda0d242400b8500c92e08c",
+    "semantic_hash": "39fbf4067eda0d242400b8500c92e08c"
+  },
+  "D:\\projects\\team-account-manager\\drizzle\\meta\\0000_snapshot.json": {
+    "mtime": 1783612050.572856,
+    "ast_hash": "c970588919f340287fe7db879ff0a6bc",
+    "semantic_hash": "c970588919f340287fe7db879ff0a6bc"
+  },
+  "D:\\projects\\team-account-manager\\drizzle\\meta\\0001_snapshot.json": {
+    "mtime": 1783612051.7139125,
+    "ast_hash": "7a1e57ae908fcbfdd3b871e758cef243",
+    "semantic_hash": "7a1e57ae908fcbfdd3b871e758cef243"
+  },
+  "D:\\projects\\team-account-manager\\drizzle\\meta\\0002_snapshot.json": {
+    "mtime": 1783612143.1050632,
+    "ast_hash": "72953c293cf3b393f208b8ec7cf1fb40",
+    "semantic_hash": "72953c293cf3b393f208b8ec7cf1fb40"
+  },
+  "D:\\projects\\team-account-manager\\drizzle\\meta\\0003_snapshot.json": {
+    "mtime": 1783612143.1060956,
+    "ast_hash": "0f8c223d9ac9bde6ae861e7ce28b5f3f",
+    "semantic_hash": "0f8c223d9ac9bde6ae861e7ce28b5f3f"
+  },
+  "D:\\projects\\team-account-manager\\drizzle\\meta\\0004_snapshot.json": {
+    "mtime": 1783612143.1071002,
+    "ast_hash": "44c68a9ea6cbcf6d72c948935a7ccd69",
+    "semantic_hash": "44c68a9ea6cbcf6d72c948935a7ccd69"
+  },
+  "D:\\projects\\team-account-manager\\drizzle\\meta\\0005_snapshot.json": {
+    "mtime": 1783612143.1071002,
+    "ast_hash": "e46448bc1038482187fc373c6a1c16a2",
+    "semantic_hash": "e46448bc1038482187fc373c6a1c16a2"
+  },
+  "D:\\projects\\team-account-manager\\drizzle\\meta\\0006_snapshot.json": {
+    "mtime": 1783612143.10858,
+    "ast_hash": "ac399a93b6042cccb963318aff16720b",
+    "semantic_hash": "ac399a93b6042cccb963318aff16720b"
+  },
+  "D:\\projects\\team-account-manager\\drizzle\\meta\\0007_snapshot.json": {
+    "mtime": 1783612143.1096737,
+    "ast_hash": "243c2f131197267d34cd5d42e2271edf",
+    "semantic_hash": "243c2f131197267d34cd5d42e2271edf"
+  },
+  "D:\\projects\\team-account-manager\\drizzle\\meta\\0008_snapshot.json": {
+    "mtime": 1783612143.1096737,
+    "ast_hash": "5e4c00612a6f7c2839a65c9e012025e8",
+    "semantic_hash": "5e4c00612a6f7c2839a65c9e012025e8"
+  },
+  "D:\\projects\\team-account-manager\\drizzle\\meta\\0009_snapshot.json": {
+    "mtime": 1783612143.7632923,
+    "ast_hash": "6f9a68e125da75879d23b10ad2a9e7b3",
+    "semantic_hash": "6f9a68e125da75879d23b10ad2a9e7b3"
+  },
+  "D:\\projects\\team-account-manager\\drizzle\\meta\\0010_snapshot.json": {
+    "mtime": 1783612144.0950105,
+    "ast_hash": "eabec4e1d90d46067fbeb03ed6d19e47",
+    "semantic_hash": "eabec4e1d90d46067fbeb03ed6d19e47"
+  },
+  "D:\\projects\\team-account-manager\\drizzle\\meta\\0011_snapshot.json": {
+    "mtime": 1783612144.306873,
+    "ast_hash": "cd5f0485b4cb7f7e6f15d980d218781e",
+    "semantic_hash": "cd5f0485b4cb7f7e6f15d980d218781e"
+  },
+  "D:\\projects\\team-account-manager\\drizzle\\meta\\0012_snapshot.json": {
+    "mtime": 1783612144.504974,
+    "ast_hash": "460be28ac575892fa8efac520dd2acb8",
+    "semantic_hash": "460be28ac575892fa8efac520dd2acb8"
+  },
+  "D:\\projects\\team-account-manager\\drizzle\\meta\\_journal.json": {
+    "mtime": 1783612144.5069785,
+    "ast_hash": "d1eba8cbd0c94c9480321abb47c1de7a",
+    "semantic_hash": "d1eba8cbd0c94c9480321abb47c1de7a"
+  },
+  "D:\\projects\\team-account-manager\\eslint.config.mjs": {
+    "mtime": 1783612050.1218262,
+    "ast_hash": "6c4307ffa009658f5c97f5629094c0c2",
+    "semantic_hash": "6c4307ffa009658f5c97f5629094c0c2"
+  },
+  "D:\\projects\\team-account-manager\\middleware.ts": {
+    "mtime": 1783612145.0192742,
+    "ast_hash": "b0f1459b4f3927c923adf597cb1d4309",
+    "semantic_hash": "b0f1459b4f3927c923adf597cb1d4309"
+  },
+  "D:\\projects\\team-account-manager\\next.config.ts": {
+    "mtime": 1783612050.1218262,
+    "ast_hash": "025f4fcb6024b3524d19492cf7ce54a2",
+    "semantic_hash": "025f4fcb6024b3524d19492cf7ce54a2"
+  },
+  "D:\\projects\\team-account-manager\\package.json": {
+    "mtime": 1783612144.1040344,
+    "ast_hash": "e18c327c86f6a1cbe0c66520d39b5a92",
+    "semantic_hash": "e18c327c86f6a1cbe0c66520d39b5a92"
+  },
+  "D:\\projects\\team-account-manager\\postcss.config.mjs": {
+    "mtime": 1783612050.1288965,
+    "ast_hash": "481fac0fdecd70e1821cc30b86030c1a",
+    "semantic_hash": "481fac0fdecd70e1821cc30b86030c1a"
+  },
+  "D:\\projects\\team-account-manager\\src\\actions\\auth.ts": {
+    "mtime": 1783612145.0278008,
+    "ast_hash": "b9a3a26a0b522c65d8dd90431b9756fc",
+    "semantic_hash": "b9a3a26a0b522c65d8dd90431b9756fc"
+  },
+  "D:\\projects\\team-account-manager\\src\\actions\\channels.test.ts": {
+    "mtime": 1783612050.927639,
+    "ast_hash": "4e05af9143e8eee2e72571ca586f5e1a",
+    "semantic_hash": "4e05af9143e8eee2e72571ca586f5e1a"
+  },
+  "D:\\projects\\team-account-manager\\src\\actions\\channels.ts": {
+    "mtime": 1783612050.9967585,
+    "ast_hash": "a433f7743a5f0a63850582cf0d0702c1",
+    "semantic_hash": "a433f7743a5f0a63850582cf0d0702c1"
+  },
+  "D:\\projects\\team-account-manager\\src\\actions\\childAccounts.test.ts": {
+    "mtime": 1783612144.1071587,
+    "ast_hash": "6416aa0fc2275e8b11e42949fd541a4b",
+    "semantic_hash": "6416aa0fc2275e8b11e42949fd541a4b"
+  },
+  "D:\\projects\\team-account-manager\\src\\actions\\childAccounts.ts": {
+    "mtime": 1783612144.1091628,
+    "ast_hash": "6a5a439a5f2103445bd25b4badcaa115",
+    "semantic_hash": "6a5a439a5f2103445bd25b4badcaa115"
+  },
+  "D:\\projects\\team-account-manager\\src\\actions\\currencies.test.ts": {
+    "mtime": 1783612143.4544418,
+    "ast_hash": "746b80dbbebc8cc49487c1facd402828",
+    "semantic_hash": "746b80dbbebc8cc49487c1facd402828"
+  },
+  "D:\\projects\\team-account-manager\\src\\actions\\currencies.ts": {
+    "mtime": 1783612143.4588587,
+    "ast_hash": "6954ebeba41116fbe1e7e73066c8bd70",
+    "semantic_hash": "6954ebeba41116fbe1e7e73066c8bd70"
+  },
+  "D:\\projects\\team-account-manager\\src\\actions\\fx.test.ts": {
+    "mtime": 1783612143.4603722,
+    "ast_hash": "64a36e272a695744968fa7dc4ef37f86",
+    "semantic_hash": "64a36e272a695744968fa7dc4ef37f86"
+  },
+  "D:\\projects\\team-account-manager\\src\\actions\\fx.ts": {
+    "mtime": 1783612143.4619915,
+    "ast_hash": "f44b6aac7783472fc277a77cfd90d4fc",
+    "semantic_hash": "f44b6aac7783472fc277a77cfd90d4fc"
+  },
+  "D:\\projects\\team-account-manager\\src\\actions\\settings.test.ts": {
+    "mtime": 1783612145.0298533,
+    "ast_hash": "a048744d7bd513e8b558687632509a59",
+    "semantic_hash": "a048744d7bd513e8b558687632509a59"
+  },
+  "D:\\projects\\team-account-manager\\src\\actions\\settings.ts": {
+    "mtime": 1783612145.0318582,
+    "ast_hash": "48f940fb2e4acc0d3079e3e6036f4559",
+    "semantic_hash": "48f940fb2e4acc0d3079e3e6036f4559"
+  },
+  "D:\\projects\\team-account-manager\\src\\actions\\spaces.test.ts": {
+    "mtime": 1783612143.4694638,
+    "ast_hash": "8a7225e307082275a94225b4ec49ed73",
+    "semantic_hash": "8a7225e307082275a94225b4ec49ed73"
+  },
+  "D:\\projects\\team-account-manager\\src\\actions\\spaces.ts": {
+    "mtime": 1783612143.4707863,
+    "ast_hash": "3b7352762341d01142e8269d25c4d83b",
+    "semantic_hash": "3b7352762341d01142e8269d25c4d83b"
+  },
+  "D:\\projects\\team-account-manager\\src\\app\\(protected)\\layout.tsx": {
+    "mtime": 1783612145.0338619,
+    "ast_hash": "8fdeedab064b32023834e659738d100c",
+    "semantic_hash": "8fdeedab064b32023834e659738d100c"
+  },
+  "D:\\projects\\team-account-manager\\src\\app\\(protected)\\page.tsx": {
+    "mtime": 1783612145.035866,
+    "ast_hash": "87bf76265a0fa85b15e95eee31007635",
+    "semantic_hash": "87bf76265a0fa85b15e95eee31007635"
+  },
+  "D:\\projects\\team-account-manager\\src\\app\\(protected)\\reference-data\\channels\\page.tsx": {
+    "mtime": 1783612145.03787,
+    "ast_hash": "c24f9d3dd4155bcc0f52dc54a0c5e5d7",
+    "semantic_hash": "c24f9d3dd4155bcc0f52dc54a0c5e5d7"
+  },
+  "D:\\projects\\team-account-manager\\src\\app\\(protected)\\reference-data\\currencies\\page.tsx": {
+    "mtime": 1783612145.0447297,
+    "ast_hash": "df2d515283381303f95af6f5ba7f3fbd",
+    "semantic_hash": "df2d515283381303f95af6f5ba7f3fbd"
+  },
+  "D:\\projects\\team-account-manager\\src\\app\\(protected)\\reference-data\\rates\\page.tsx": {
+    "mtime": 1783612145.0467877,
+    "ast_hash": "a29188b3d1cc3ee4b2a51e5b099823c8",
+    "semantic_hash": "a29188b3d1cc3ee4b2a51e5b099823c8"
+  },
+  "D:\\projects\\team-account-manager\\src\\app\\(protected)\\settings\\page.tsx": {
+    "mtime": 1783612145.0487924,
+    "ast_hash": "903f426490bfadff15b079139e9be5ee",
+    "semantic_hash": "903f426490bfadff15b079139e9be5ee"
+  },
+  "D:\\projects\\team-account-manager\\src\\app\\(protected)\\spaces\\[id]\\page.tsx": {
+    "mtime": 1783612145.0528052,
+    "ast_hash": "39555d53fec7a8a7ab7c1317a61eb0e4",
+    "semantic_hash": "39555d53fec7a8a7ab7c1317a61eb0e4"
+  },
+  "D:\\projects\\team-account-manager\\src\\app\\(protected)\\spaces\\page.tsx": {
+    "mtime": 1783612145.0549552,
+    "ast_hash": "8f229a348d0bf9813a868f854375915f",
+    "semantic_hash": "8f229a348d0bf9813a868f854375915f"
+  },
+  "D:\\projects\\team-account-manager\\src\\app\\layout.tsx": {
+    "mtime": 1783612145.0570211,
+    "ast_hash": "bc47fc916c12e417dc7698f3081e247d",
+    "semantic_hash": "bc47fc916c12e417dc7698f3081e247d"
+  },
+  "D:\\projects\\team-account-manager\\src\\app\\login\\page.tsx": {
+    "mtime": 1783612145.0590255,
+    "ast_hash": "45cacc198e83ca1a2e8aeb4a50556147",
+    "semantic_hash": "45cacc198e83ca1a2e8aeb4a50556147"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\channels\\archive-dialog.tsx": {
+    "mtime": 1783612051.0709143,
+    "ast_hash": "8ae606ff3bea54eb2c47024b49e5ed3c",
+    "semantic_hash": "8ae606ff3bea54eb2c47024b49e5ed3c"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\channels\\channel-dialog.tsx": {
+    "mtime": 1783612051.0709143,
+    "ast_hash": "3725c33dfa45b8fd68e522fc6676ba8d",
+    "semantic_hash": "3725c33dfa45b8fd68e522fc6676ba8d"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\channels\\channel-table.tsx": {
+    "mtime": 1783612143.4797485,
+    "ast_hash": "e707d80011ce3bd1a1053eb19e413bca",
+    "semantic_hash": "e707d80011ce3bd1a1053eb19e413bca"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\currencies\\currency-delete-dialog.tsx": {
+    "mtime": 1783612143.4817526,
+    "ast_hash": "1759d5cb2ef65a9f15ff774d99100aff",
+    "semantic_hash": "1759d5cb2ef65a9f15ff774d99100aff"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\currencies\\currency-dialog.tsx": {
+    "mtime": 1783612143.4817526,
+    "ast_hash": "067126f5b864cacd14c55820da8b99f9",
+    "semantic_hash": "067126f5b864cacd14c55820da8b99f9"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\currencies\\currency-table.tsx": {
+    "mtime": 1783612143.483757,
+    "ast_hash": "4d150a5ec5a200a4fdb4c30f98dbe5c9",
+    "semantic_hash": "4d150a5ec5a200a4fdb4c30f98dbe5c9"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\dashboard\\distribution-list.tsx": {
+    "mtime": 1783612144.1334212,
+    "ast_hash": "88f07a7da04b0dbe9a791999ad307a46",
+    "semantic_hash": "88f07a7da04b0dbe9a791999ad307a46"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\dashboard\\expiring-child-account-table.tsx": {
+    "mtime": 1783612144.1354256,
+    "ast_hash": "c4c9b031de0b2b1ed7134a3df3a63145",
+    "semantic_hash": "c4c9b031de0b2b1ed7134a3df3a63145"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\dashboard\\expiring-space-table.tsx": {
+    "mtime": 1783612144.1374302,
+    "ast_hash": "0be84d5b341cb7dbcef854f58a85546f",
+    "semantic_hash": "0be84d5b341cb7dbcef854f58a85546f"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\dashboard\\metric-card.tsx": {
+    "mtime": 1783612144.1394348,
+    "ast_hash": "a36685fb40fc3b46012dc781d4e76687",
+    "semantic_hash": "a36685fb40fc3b46012dc781d4e76687"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\fx\\rate-table.tsx": {
+    "mtime": 1783612143.486389,
+    "ast_hash": "a5e5bbfedc659b403ef628ca7f7ae1a0",
+    "semantic_hash": "a5e5bbfedc659b403ef628ca7f7ae1a0"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\nav\\sidebar.tsx": {
+    "mtime": 1783612145.0610309,
+    "ast_hash": "70f0be57e5b9938642bc66df32fb1813",
+    "semantic_hash": "70f0be57e5b9938642bc66df32fb1813"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\settings\\child-account-reminder-form.tsx": {
+    "mtime": 1783612145.0630357,
+    "ast_hash": "801936d5db34802b3ab9b52a8f9ce4f4",
+    "semantic_hash": "801936d5db34802b3ab9b52a8f9ce4f4"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\settings\\status-threshold-form.tsx": {
+    "mtime": 1783612145.0650413,
+    "ast_hash": "c759067880784b7385082685f49f219b",
+    "semantic_hash": "c759067880784b7385082685f49f219b"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\spaces\\child-account-delete-dialog.tsx": {
+    "mtime": 1783612143.4909406,
+    "ast_hash": "25fc40fc541c753c3ee52caa3d0a994d",
+    "semantic_hash": "25fc40fc541c753c3ee52caa3d0a994d"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\spaces\\child-account-form.tsx": {
+    "mtime": 1783612144.1445189,
+    "ast_hash": "24ffa897af1e4b9be234e005e9f081af",
+    "semantic_hash": "24ffa897af1e4b9be234e005e9f081af"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\spaces\\child-account-table.tsx": {
+    "mtime": 1783612144.1465645,
+    "ast_hash": "d8af86abd2d8421545433cb8a747f516",
+    "semantic_hash": "d8af86abd2d8421545433cb8a747f516"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\spaces\\expiry-badge.tsx": {
+    "mtime": 1783612144.148569,
+    "ast_hash": "11498fee2ca60e2f541f9d48e8fe94ae",
+    "semantic_hash": "11498fee2ca60e2f541f9d48e8fe94ae"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\spaces\\frozen-amount-help.tsx": {
+    "mtime": 1783612143.4944792,
+    "ast_hash": "6aadc3b4cc2660c6914200e2135eb025",
+    "semantic_hash": "6aadc3b4cc2660c6914200e2135eb025"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\spaces\\mother-seat-card.tsx": {
+    "mtime": 1783612143.4964848,
+    "ast_hash": "01142fcd8fe94ce3163e690ee09ed6c8",
+    "semantic_hash": "01142fcd8fe94ce3163e690ee09ed6c8"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\spaces\\space-delete-dialog.tsx": {
+    "mtime": 1783612143.4977715,
+    "ast_hash": "a11ddd58859ab51b132fd5fac69232fe",
+    "semantic_hash": "a11ddd58859ab51b132fd5fac69232fe"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\spaces\\space-detail-actions.tsx": {
+    "mtime": 1783612143.4988053,
+    "ast_hash": "8f617fe565ad5829f0a0a8b7c3898d01",
+    "semantic_hash": "8f617fe565ad5829f0a0a8b7c3898d01"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\spaces\\space-form.tsx": {
+    "mtime": 1783612143.499903,
+    "ast_hash": "02114527a4d58ac567f762bd31ecb4d3",
+    "semantic_hash": "02114527a4d58ac567f762bd31ecb4d3"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\spaces\\space-table.tsx": {
+    "mtime": 1783612143.501191,
+    "ast_hash": "c29e23ce0a3d18f989cde84665b9f279",
+    "semantic_hash": "c29e23ce0a3d18f989cde84665b9f279"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\ui\\alert-dialog.tsx": {
+    "mtime": 1783612050.1527338,
+    "ast_hash": "32394856a1522c0a5f410f4b04cc28f2",
+    "semantic_hash": "32394856a1522c0a5f410f4b04cc28f2"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\ui\\alert.tsx": {
+    "mtime": 1783612052.1948707,
+    "ast_hash": "9108d1b03130fcb014cbcb31a9adf6c2",
+    "semantic_hash": "9108d1b03130fcb014cbcb31a9adf6c2"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\ui\\badge.tsx": {
+    "mtime": 1783612050.1547396,
+    "ast_hash": "affdaf8bd8dda0dc4a6c50e1dd7f7d77",
+    "semantic_hash": "affdaf8bd8dda0dc4a6c50e1dd7f7d77"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\ui\\button.tsx": {
+    "mtime": 1783612144.1505742,
+    "ast_hash": "c41917ac7f4cdee99c4b2aae0e2cdc68",
+    "semantic_hash": "c41917ac7f4cdee99c4b2aae0e2cdc68"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\ui\\card.tsx": {
+    "mtime": 1783612144.1529133,
+    "ast_hash": "fbb016a3c87e5e42f761379a1f4d1e84",
+    "semantic_hash": "fbb016a3c87e5e42f761379a1f4d1e84"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\ui\\dialog.tsx": {
+    "mtime": 1783612050.1587486,
+    "ast_hash": "7b9c76b71e85cbab30757eb1661fd005",
+    "semantic_hash": "7b9c76b71e85cbab30757eb1661fd005"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\ui\\form.tsx": {
+    "mtime": 1783612050.160754,
+    "ast_hash": "be11535cef5b36393c2294118379c97d",
+    "semantic_hash": "be11535cef5b36393c2294118379c97d"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\ui\\input.tsx": {
+    "mtime": 1783612050.162758,
+    "ast_hash": "ffe96ac26ee9c563f4ae55abc55f54d5",
+    "semantic_hash": "ffe96ac26ee9c563f4ae55abc55f54d5"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\ui\\label.tsx": {
+    "mtime": 1783612050.1645012,
+    "ast_hash": "83a4dee523e5fa680b528a13f6cea20f",
+    "semantic_hash": "83a4dee523e5fa680b528a13f6cea20f"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\ui\\select.tsx": {
+    "mtime": 1783612144.3195145,
+    "ast_hash": "7313e8905930746a021d810bd6d8cd53",
+    "semantic_hash": "7313e8905930746a021d810bd6d8cd53"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\ui\\separator.tsx": {
+    "mtime": 1783612050.1683128,
+    "ast_hash": "5a960f39c32941873dbcf90b165ef32c",
+    "semantic_hash": "5a960f39c32941873dbcf90b165ef32c"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\ui\\sheet.tsx": {
+    "mtime": 1783612050.1683128,
+    "ast_hash": "095dade777d9c57088b8a6b75a9048dd",
+    "semantic_hash": "095dade777d9c57088b8a6b75a9048dd"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\ui\\sidebar.tsx": {
+    "mtime": 1783612144.5573986,
+    "ast_hash": "6554cca0c98bf9e56d4ae5e086c681a5",
+    "semantic_hash": "6554cca0c98bf9e56d4ae5e086c681a5"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\ui\\skeleton.tsx": {
+    "mtime": 1783612050.1703174,
+    "ast_hash": "58a45c5aceb0b4cb1c16d06758ea16d6",
+    "semantic_hash": "58a45c5aceb0b4cb1c16d06758ea16d6"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\ui\\sonner.tsx": {
+    "mtime": 1783612050.1723218,
+    "ast_hash": "7005ed2984ab498ef51f3ed910e1abf2",
+    "semantic_hash": "7005ed2984ab498ef51f3ed910e1abf2"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\ui\\switch.tsx": {
+    "mtime": 1783612050.1743293,
+    "ast_hash": "09f5961b9ba49ec385801bf8779eeee5",
+    "semantic_hash": "09f5961b9ba49ec385801bf8779eeee5"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\ui\\table.tsx": {
+    "mtime": 1783612050.1763344,
+    "ast_hash": "7424f42ca135637e99ac19646cbb6625",
+    "semantic_hash": "7424f42ca135637e99ac19646cbb6625"
+  },
+  "D:\\projects\\team-account-manager\\src\\components\\ui\\tooltip.tsx": {
+    "mtime": 1783612050.1763344,
+    "ast_hash": "6a44e2088a717880642dc7bcda564ba3",
+    "semantic_hash": "6a44e2088a717880642dc7bcda564ba3"
+  },
+  "D:\\projects\\team-account-manager\\src\\db\\channels.query.test.ts": {
+    "mtime": 1783612050.927639,
+    "ast_hash": "de68223c6298551c6b026740a73741ab",
+    "semantic_hash": "de68223c6298551c6b026740a73741ab"
+  },
+  "D:\\projects\\team-account-manager\\src\\db\\channels.ts": {
+    "mtime": 1783612050.9983816,
+    "ast_hash": "063ec234cb799940a7f3c29766a20da0",
+    "semantic_hash": "063ec234cb799940a7f3c29766a20da0"
+  },
+  "D:\\projects\\team-account-manager\\src\\db\\childAccountReminders.ts": {
+    "mtime": 1783612145.0684204,
+    "ast_hash": "83074bec48b2fbf34560327201ab7934",
+    "semantic_hash": "83074bec48b2fbf34560327201ab7934"
+  },
+  "D:\\projects\\team-account-manager\\src\\db\\childAccounts.query.test.ts": {
+    "mtime": 1783612143.501191,
+    "ast_hash": "a7ddb8230396e4cc586472d787782e76",
+    "semantic_hash": "a7ddb8230396e4cc586472d787782e76"
+  },
+  "D:\\projects\\team-account-manager\\src\\db\\childAccounts.ts": {
+    "mtime": 1783612143.5028589,
+    "ast_hash": "ff6a251d9ffdf08623c8cca21ab59b84",
+    "semantic_hash": "ff6a251d9ffdf08623c8cca21ab59b84"
+  },
+  "D:\\projects\\team-account-manager\\src\\db\\currencies.ts": {
+    "mtime": 1783612143.504178,
+    "ast_hash": "cbcbe4fcfbc869ab78e7ae8a19b63d59",
+    "semantic_hash": "cbcbe4fcfbc869ab78e7ae8a19b63d59"
+  },
+  "D:\\projects\\team-account-manager\\src\\db\\dashboard.query.test.ts": {
+    "mtime": 1783612144.1589322,
+    "ast_hash": "2017f1f689861dab391a76b0cb5b4de7",
+    "semantic_hash": "2017f1f689861dab391a76b0cb5b4de7"
+  },
+  "D:\\projects\\team-account-manager\\src\\db\\dashboard.ts": {
+    "mtime": 1783612144.1609373,
+    "ast_hash": "37ce536e4dc9df8701e6b224a8c9534e",
+    "semantic_hash": "37ce536e4dc9df8701e6b224a8c9534e"
+  },
+  "D:\\projects\\team-account-manager\\src\\db\\fxRates.query.test.ts": {
+    "mtime": 1783612143.5078106,
+    "ast_hash": "32a06fca04dcb3845dbd95db3c519fb5",
+    "semantic_hash": "32a06fca04dcb3845dbd95db3c519fb5"
+  },
+  "D:\\projects\\team-account-manager\\src\\db\\fxRates.ts": {
+    "mtime": 1783612143.50885,
+    "ast_hash": "754e3004ddb859793847cecfb66687a0",
+    "semantic_hash": "754e3004ddb859793847cecfb66687a0"
+  },
+  "D:\\projects\\team-account-manager\\src\\db\\index.ts": {
+    "mtime": 1783612050.3478405,
+    "ast_hash": "c34def889c4e2898354c5d97b8efe07a",
+    "semantic_hash": "c34def889c4e2898354c5d97b8efe07a"
+  },
+  "D:\\projects\\team-account-manager\\src\\db\\migrate.ts": {
+    "mtime": 1783612050.5751927,
+    "ast_hash": "9174349ce0b2e9a58d6819ca0be40244",
+    "semantic_hash": "9174349ce0b2e9a58d6819ca0be40244"
+  },
+  "D:\\projects\\team-account-manager\\src\\db\\schema.ts": {
+    "mtime": 1783612144.5611594,
+    "ast_hash": "7b69353c067ec19f63f2cf0a295aa5f6",
+    "semantic_hash": "7b69353c067ec19f63f2cf0a295aa5f6"
+  },
+  "D:\\projects\\team-account-manager\\src\\db\\seed.test.ts": {
+    "mtime": 1783612143.513558,
+    "ast_hash": "2683e2d176f77de29545e3d2029c8a22",
+    "semantic_hash": "2683e2d176f77de29545e3d2029c8a22"
+  },
+  "D:\\projects\\team-account-manager\\src\\db\\seed.ts": {
+    "mtime": 1783612143.5147266,
+    "ast_hash": "4e8a814421c9dbe7cd78237f8f4b9bba",
+    "semantic_hash": "4e8a814421c9dbe7cd78237f8f4b9bba"
+  },
+  "D:\\projects\\team-account-manager\\src\\db\\settings.test.ts": {
+    "mtime": 1783612144.3318977,
+    "ast_hash": "9b67ebf7bdf83b702dbc2ed47ef29b5e",
+    "semantic_hash": "9b67ebf7bdf83b702dbc2ed47ef29b5e"
+  },
+  "D:\\projects\\team-account-manager\\src\\db\\settings.ts": {
+    "mtime": 1783612145.071515,
+    "ast_hash": "6e9f162fc5c6265151c9be31590152de",
+    "semantic_hash": "6e9f162fc5c6265151c9be31590152de"
+  },
+  "D:\\projects\\team-account-manager\\src\\db\\spaceReminders.test.ts": {
+    "mtime": 1783612144.3362129,
+    "ast_hash": "fb11b49886b3aef3041db6f45336b9e2",
+    "semantic_hash": "fb11b49886b3aef3041db6f45336b9e2"
+  },
+  "D:\\projects\\team-account-manager\\src\\db\\spaceReminders.ts": {
+    "mtime": 1783612144.338217,
+    "ast_hash": "c7582dd528cfb5679f9aa81a4c9c8d47",
+    "semantic_hash": "c7582dd528cfb5679f9aa81a4c9c8d47"
+  },
+  "D:\\projects\\team-account-manager\\src\\db\\spaces.query.test.ts": {
+    "mtime": 1783612143.5167303,
+    "ast_hash": "a9d39a5b3d1b4b3c8eebc6710bfa5115",
+    "semantic_hash": "a9d39a5b3d1b4b3c8eebc6710bfa5115"
+  },
+  "D:\\projects\\team-account-manager\\src\\db\\spaces.ts": {
+    "mtime": 1783612143.5187342,
+    "ast_hash": "da2e331bc2c063f7b2d220cd67b49e04",
+    "semantic_hash": "da2e331bc2c063f7b2d220cd67b49e04"
+  },
+  "D:\\projects\\team-account-manager\\src\\hooks\\use-mobile.ts": {
+    "mtime": 1783612144.1830423,
+    "ast_hash": "243c3396e10df3747ea10162943ab28c",
+    "semantic_hash": "243c3396e10df3747ea10162943ab28c"
+  },
+  "D:\\projects\\team-account-manager\\src\\lib\\auth.test.ts": {
+    "mtime": 1783612145.0976152,
+    "ast_hash": "137dc0831edde7872452607206ce8f17",
+    "semantic_hash": "137dc0831edde7872452607206ce8f17"
+  },
+  "D:\\projects\\team-account-manager\\src\\lib\\auth.ts": {
+    "mtime": 1783612145.0996203,
+    "ast_hash": "c4a8d6315ac1555ead5d3d74671b66f7",
+    "semantic_hash": "c4a8d6315ac1555ead5d3d74671b66f7"
+  },
+  "D:\\projects\\team-account-manager\\src\\lib\\countries.test.ts": {
+    "mtime": 1783612143.521594,
+    "ast_hash": "261b6925376c70c2cbedddc0f1384823",
+    "semantic_hash": "261b6925376c70c2cbedddc0f1384823"
+  },
+  "D:\\projects\\team-account-manager\\src\\lib\\countries.ts": {
+    "mtime": 1783612143.5235991,
+    "ast_hash": "3ff18089cbdca38d760ffbe29060a308",
+    "semantic_hash": "3ff18089cbdca38d760ffbe29060a308"
+  },
+  "D:\\projects\\team-account-manager\\src\\lib\\currencies.ts": {
+    "mtime": 1783612143.5235991,
+    "ast_hash": "55ef2497fc7c1025e386ed26584cab13",
+    "semantic_hash": "55ef2497fc7c1025e386ed26584cab13"
+  },
+  "D:\\projects\\team-account-manager\\src\\lib\\email\\child-account-reminder.ts": {
+    "mtime": 1783612145.114707,
+    "ast_hash": "96238b83dfc3e03c6d60519ca8581973",
+    "semantic_hash": "96238b83dfc3e03c6d60519ca8581973"
+  },
+  "D:\\projects\\team-account-manager\\src\\lib\\email\\rich-text.ts": {
+    "mtime": 1783612144.5672169,
+    "ast_hash": "6f957cc530fff17b32518a48e6fa74ec",
+    "semantic_hash": "6f957cc530fff17b32518a48e6fa74ec"
+  },
+  "D:\\projects\\team-account-manager\\src\\lib\\email\\smtp.ts": {
+    "mtime": 1783612144.5672169,
+    "ast_hash": "ad08f0ca0bd495cec4550c3a7273a55a",
+    "semantic_hash": "ad08f0ca0bd495cec4550c3a7273a55a"
+  },
+  "D:\\projects\\team-account-manager\\src\\lib\\email\\space-expiry-reminder.test.ts": {
+    "mtime": 1783612144.5695415,
+    "ast_hash": "daa5bece96414166f65107122f2f0a1d",
+    "semantic_hash": "daa5bece96414166f65107122f2f0a1d"
+  },
+  "D:\\projects\\team-account-manager\\src\\lib\\email\\space-expiry-reminder.ts": {
+    "mtime": 1783612144.5772896,
+    "ast_hash": "b8adac520a26468ab8994b4145f33b19",
+    "semantic_hash": "b8adac520a26468ab8994b4145f33b19"
+  },
+  "D:\\projects\\team-account-manager\\src\\lib\\expiry.test.ts": {
+    "mtime": 1783612144.1933618,
+    "ast_hash": "9b1989c2429180e6ee2bd0b3d81d31f9",
+    "semantic_hash": "9b1989c2429180e6ee2bd0b3d81d31f9"
+  },
+  "D:\\projects\\team-account-manager\\src\\lib\\expiry.ts": {
+    "mtime": 1783612144.1933618,
+    "ast_hash": "1a3c147abc37bdfad45d26347e06aa31",
+    "semantic_hash": "1a3c147abc37bdfad45d26347e06aa31"
+  },
+  "D:\\projects\\team-account-manager\\src\\lib\\fx\\base.ts": {
+    "mtime": 1783612143.5299222,
+    "ast_hash": "863942fb447863a3c83b586a90771a20",
+    "semantic_hash": "863942fb447863a3c83b586a90771a20"
+  },
+  "D:\\projects\\team-account-manager\\src\\lib\\fx\\frankfurter.test.ts": {
+    "mtime": 1783612143.5299222,
+    "ast_hash": "cd42223b8d7b1470f3c4b7a58a12c39c",
+    "semantic_hash": "cd42223b8d7b1470f3c4b7a58a12c39c"
+  },
+  "D:\\projects\\team-account-manager\\src\\lib\\fx\\frankfurter.ts": {
+    "mtime": 1783612143.5319266,
+    "ast_hash": "842c1d1edd529ef9efaecb9d66454ac5",
+    "semantic_hash": "842c1d1edd529ef9efaecb9d66454ac5"
+  },
+  "D:\\projects\\team-account-manager\\src\\lib\\login-rate-limit.ts": {
+    "mtime": 1783612145.1167123,
+    "ast_hash": "7b8296294e3ffbbcc7d0d9c0f6a6eb04",
+    "semantic_hash": "7b8296294e3ffbbcc7d0d9c0f6a6eb04"
+  },
+  "D:\\projects\\team-account-manager\\src\\lib\\money.test.ts": {
+    "mtime": 1783612143.5339315,
+    "ast_hash": "e1d4befb150772b1beca42251bb14c81",
+    "semantic_hash": "e1d4befb150772b1beca42251bb14c81"
+  },
+  "D:\\projects\\team-account-manager\\src\\lib\\money.ts": {
+    "mtime": 1783612143.5377047,
+    "ast_hash": "58dd33cfb6a8b05627d7d2774ffa8cf7",
+    "semantic_hash": "58dd33cfb6a8b05627d7d2774ffa8cf7"
+  },
+  "D:\\projects\\team-account-manager\\src\\lib\\reminders\\child-account-payment-reminder-job.test.ts": {
+    "mtime": 1783612145.1250606,
+    "ast_hash": "825ce48b58853cfcbe3161bc269e4ff5",
+    "semantic_hash": "825ce48b58853cfcbe3161bc269e4ff5"
+  },
+  "D:\\projects\\team-account-manager\\src\\lib\\reminders\\child-account-payment-reminder-job.ts": {
+    "mtime": 1783612145.1290708,
+    "ast_hash": "00456e31bfcfa349c106cf4f6d97b1af",
+    "semantic_hash": "00456e31bfcfa349c106cf4f6d97b1af"
+  },
+  "D:\\projects\\team-account-manager\\src\\lib\\reminders\\space-expiry-reminder-job.test.ts": {
+    "mtime": 1783612144.5936248,
+    "ast_hash": "9f6f46f556138573da11ffec18d87eab",
+    "semantic_hash": "9f6f46f556138573da11ffec18d87eab"
+  },
+  "D:\\projects\\team-account-manager\\src\\lib\\reminders\\space-expiry-reminder-job.ts": {
+    "mtime": 1783612144.5956323,
+    "ast_hash": "3f349017909503b65e7023ce04bd8893",
+    "semantic_hash": "3f349017909503b65e7023ce04bd8893"
+  },
+  "D:\\projects\\team-account-manager\\src\\lib\\reminders\\space-expiry-reminder-scheduler.ts": {
+    "mtime": 1783612144.597636,
+    "ast_hash": "4475e6c90cc5810659b99d50681b0719",
+    "semantic_hash": "4475e6c90cc5810659b99d50681b0719"
+  },
+  "D:\\projects\\team-account-manager\\src\\lib\\utils.ts": {
+    "mtime": 1783612050.1803439,
+    "ast_hash": "1d8011eb18769078bf77502b220daa5e",
+    "semantic_hash": "1d8011eb18769078bf77502b220daa5e"
+  },
+  "D:\\projects\\team-account-manager\\src\\lib\\validation\\channel.ts": {
+    "mtime": 1783612050.9999342,
+    "ast_hash": "3e24d21c41f632fc8225bf19b1b839d2",
+    "semantic_hash": "3e24d21c41f632fc8225bf19b1b839d2"
+  },
+  "D:\\projects\\team-account-manager\\src\\lib\\validation\\childAccount.ts": {
+    "mtime": 1783612144.1953666,
+    "ast_hash": "44ba44fb4c9b7bbfaf459efb1966ed59",
+    "semantic_hash": "44ba44fb4c9b7bbfaf459efb1966ed59"
+  },
+  "D:\\projects\\team-account-manager\\src\\lib\\validation\\currency.ts": {
+    "mtime": 1783612143.5411024,
+    "ast_hash": "8e0d255a74ef12fede7f0897e01eedaa",
+    "semantic_hash": "8e0d255a74ef12fede7f0897e01eedaa"
+  },
+  "D:\\projects\\team-account-manager\\src\\lib\\validation\\fx.ts": {
+    "mtime": 1783612143.5435214,
+    "ast_hash": "fcf6188b51f2183cef6334c1be034940",
+    "semantic_hash": "fcf6188b51f2183cef6334c1be034940"
+  },
+  "D:\\projects\\team-account-manager\\src\\lib\\validation\\motherAccount.ts": {
+    "mtime": 1783612143.545412,
+    "ast_hash": "b1e2ec8cbf1a26e7d81cca32539e8a9e",
+    "semantic_hash": "b1e2ec8cbf1a26e7d81cca32539e8a9e"
+  },
+  "D:\\projects\\team-account-manager\\src\\lib\\validation\\settings.ts": {
+    "mtime": 1783612145.1310768,
+    "ast_hash": "dc26236667dbedb1529a4cb2fdcd2b88",
+    "semantic_hash": "dc26236667dbedb1529a4cb2fdcd2b88"
+  },
+  "D:\\projects\\team-account-manager\\src\\lib\\validation\\space.ts": {
+    "mtime": 1783612143.5475826,
+    "ast_hash": "8bf2eeb3d707ddb059c61fdec656f51b",
+    "semantic_hash": "8bf2eeb3d707ddb059c61fdec656f51b"
+  },
+  "D:\\projects\\team-account-manager\\src\\test\\db-harness.ts": {
+    "mtime": 1783612050.1839988,
+    "ast_hash": "315e3ca09b997744caef67d50bbe8127",
+    "semantic_hash": "315e3ca09b997744caef67d50bbe8127"
+  },
+  "D:\\projects\\team-account-manager\\tsconfig.json": {
+    "mtime": 1783612050.1850004,
+    "ast_hash": "0a2f4ed9289b65cd3feb4fb4ab3a4fcd",
+    "semantic_hash": "0a2f4ed9289b65cd3feb4fb4ab3a4fcd"
+  },
+  "D:\\projects\\team-account-manager\\vitest.config.ts": {
+    "mtime": 1783612050.1890106,
+    "ast_hash": "aa3aff2adc84e1b88c174ee60e40ed5f",
+    "semantic_hash": "aa3aff2adc84e1b88c174ee60e40ed5f"
+  },
+  "D:\\projects\\team-account-manager\\.claude\\CLAUDE.md": {
+    "mtime": 1783612049.4356163,
+    "ast_hash": "61981359832e79e3b4d1dccc51953026",
+    "semantic_hash": "61981359832e79e3b4d1dccc51953026"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\PROJECT.md": {
+    "mtime": 1783612054.3805542,
+    "ast_hash": "bda727325cea6423aeb4489446806177",
+    "semantic_hash": "bda727325cea6423aeb4489446806177"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\REQUIREMENTS.md": {
+    "mtime": 1783612054.3216183,
+    "ast_hash": "03baff55526e04ffedd84938529400da",
+    "semantic_hash": "03baff55526e04ffedd84938529400da"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\ROADMAP.md": {
+    "mtime": 1783612054.3233604,
+    "ast_hash": "99d52b9b5582f7ca6c0754f65a06a8ff",
+    "semantic_hash": "99d52b9b5582f7ca6c0754f65a06a8ff"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\STATE.md": {
+    "mtime": 1783612144.4979565,
+    "ast_hash": "a34ffe6a3ddb7ac5042b1a0dc0cff55d",
+    "semantic_hash": "a34ffe6a3ddb7ac5042b1a0dc0cff55d"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\01-foundations-schema-reference-data\\01-01-PLAN.md": {
+    "mtime": 1783612049.899284,
+    "ast_hash": "3e6e09472ac91f651dd9a033dae89582",
+    "semantic_hash": "3e6e09472ac91f651dd9a033dae89582"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\01-foundations-schema-reference-data\\01-01-SUMMARY.md": {
+    "mtime": 1783612050.6513853,
+    "ast_hash": "d79c41da8c0ac380fe87334205ad1803",
+    "semantic_hash": "d79c41da8c0ac380fe87334205ad1803"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\01-foundations-schema-reference-data\\01-02-PLAN.md": {
+    "mtime": 1783612049.9012885,
+    "ast_hash": "e3453480ee74d9c976a129dd31bc08f2",
+    "semantic_hash": "e3453480ee74d9c976a129dd31bc08f2"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\01-foundations-schema-reference-data\\01-02-SUMMARY.md": {
+    "mtime": 1783612050.8445022,
+    "ast_hash": "c53d76cdc3e64e6758fa2e6e42d4e1a0",
+    "semantic_hash": "c53d76cdc3e64e6758fa2e6e42d4e1a0"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\01-foundations-schema-reference-data\\01-03-PLAN.md": {
+    "mtime": 1783612049.9032936,
+    "ast_hash": "dc5c3668717d26fbfa2af12c5fb1f902",
+    "semantic_hash": "dc5c3668717d26fbfa2af12c5fb1f902"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\01-foundations-schema-reference-data\\01-03-SUMMARY.md": {
+    "mtime": 1783612051.1251147,
+    "ast_hash": "5115ec5539dfaf4684215f4cba06a958",
+    "semantic_hash": "5115ec5539dfaf4684215f4cba06a958"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\01-foundations-schema-reference-data\\01-CONTEXT.md": {
+    "mtime": 1783612049.5030284,
+    "ast_hash": "40b6e7c9681d7f5d6da242e40d86d704",
+    "semantic_hash": "40b6e7c9681d7f5d6da242e40d86d704"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\01-foundations-schema-reference-data\\01-DISCUSSION-LOG.md": {
+    "mtime": 1783612049.505032,
+    "ast_hash": "d857da30edbc3e6ca9abefad628dbd7d",
+    "semantic_hash": "d857da30edbc3e6ca9abefad628dbd7d"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\01-foundations-schema-reference-data\\01-RESEARCH.md": {
+    "mtime": 1783612049.975092,
+    "ast_hash": "23fa2f52b9a3b1ea409b8d216cdcd10a",
+    "semantic_hash": "23fa2f52b9a3b1ea409b8d216cdcd10a"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\01-foundations-schema-reference-data\\01-UI-SPEC.md": {
+    "mtime": 1783612049.8320696,
+    "ast_hash": "69f6715014ca1398c2b6686cb08c820e",
+    "semantic_hash": "69f6715014ca1398c2b6686cb08c820e"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\01-foundations-schema-reference-data\\01-VALIDATION.md": {
+    "mtime": 1783612049.976541,
+    "ast_hash": "f81cb98397edc2aff93d6ad65051c8e6",
+    "semantic_hash": "f81cb98397edc2aff93d6ad65051c8e6"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\01-foundations-schema-reference-data\\01-VERIFICATION.md": {
+    "mtime": 1783612051.1766975,
+    "ast_hash": "c1bd7ebd81842b4334144d1c58cc0b74",
+    "semantic_hash": "c1bd7ebd81842b4334144d1c58cc0b74"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\01-foundations-schema-reference-data\\SKELETON.md": {
+    "mtime": 1783612049.905298,
+    "ast_hash": "9d7dfb366fcc14dc7c0a2e80a6064f49",
+    "semantic_hash": "9d7dfb366fcc14dc7c0a2e80a6064f49"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\02-exchange-rate-layer\\02-01-PLAN.md": {
+    "mtime": 1783612051.546137,
+    "ast_hash": "8fe4ec349f4076d75fefbf7f48f369d2",
+    "semantic_hash": "8fe4ec349f4076d75fefbf7f48f369d2"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\02-exchange-rate-layer\\02-01-SUMMARY.md": {
+    "mtime": 1783612051.8274531,
+    "ast_hash": "1715f21eb95b9f4ea5b7d3da95af530b",
+    "semantic_hash": "1715f21eb95b9f4ea5b7d3da95af530b"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\02-exchange-rate-layer\\02-02-PLAN.md": {
+    "mtime": 1783612051.611609,
+    "ast_hash": "f76279773c75dd849ade8186209524bb",
+    "semantic_hash": "f76279773c75dd849ade8186209524bb"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\02-exchange-rate-layer\\02-02-SUMMARY.md": {
+    "mtime": 1783612052.0625286,
+    "ast_hash": "795b6ba5acf65cb418a400761a1595bb",
+    "semantic_hash": "795b6ba5acf65cb418a400761a1595bb"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\02-exchange-rate-layer\\02-03-PLAN.md": {
+    "mtime": 1783612051.548218,
+    "ast_hash": "4763c3a7b171ad1277b1eb6c2235623c",
+    "semantic_hash": "4763c3a7b171ad1277b1eb6c2235623c"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\02-exchange-rate-layer\\02-03-SUMMARY.md": {
+    "mtime": 1783612052.2691436,
+    "ast_hash": "faede6b9584c7e155ded517eaae2e380",
+    "semantic_hash": "faede6b9584c7e155ded517eaae2e380"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\02-exchange-rate-layer\\02-CONTEXT.md": {
+    "mtime": 1783612051.234672,
+    "ast_hash": "ffd30e28c21d23da41f68cdba8619dab",
+    "semantic_hash": "ffd30e28c21d23da41f68cdba8619dab"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\02-exchange-rate-layer\\02-DISCUSSION-LOG.md": {
+    "mtime": 1783612051.234672,
+    "ast_hash": "c918d548311c27abcf5f6967961dd8d2",
+    "semantic_hash": "c918d548311c27abcf5f6967961dd8d2"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\02-exchange-rate-layer\\02-PATTERNS.md": {
+    "mtime": 1783612143.0695472,
+    "ast_hash": "caa3a46e86663a7a2c3aa6a4ec979bab",
+    "semantic_hash": "caa3a46e86663a7a2c3aa6a4ec979bab"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\02-exchange-rate-layer\\02-RESEARCH.md": {
+    "mtime": 1783612051.6159084,
+    "ast_hash": "8b9f4f80e9854c418dfb3733a2fa083c",
+    "semantic_hash": "8b9f4f80e9854c418dfb3733a2fa083c"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\02-exchange-rate-layer\\02-REVIEW.md": {
+    "mtime": 1783612052.3400483,
+    "ast_hash": "44a2bdba7523548e1665305a480bf8c7",
+    "semantic_hash": "44a2bdba7523548e1665305a480bf8c7"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\02-exchange-rate-layer\\02-UAT.md": {
+    "mtime": 1783612052.4844396,
+    "ast_hash": "734a2e748a7b28e8b7b4dd7d5c94ecff",
+    "semantic_hash": "734a2e748a7b28e8b7b4dd7d5c94ecff"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\02-exchange-rate-layer\\02-UI-SPEC.md": {
+    "mtime": 1783612051.4841454,
+    "ast_hash": "5f9660bc1956ca54d179e7c41323c812",
+    "semantic_hash": "5f9660bc1956ca54d179e7c41323c812"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\02-exchange-rate-layer\\02-VALIDATION.md": {
+    "mtime": 1783612051.6180005,
+    "ast_hash": "d510aec16096678ac7562e45f9c8d722",
+    "semantic_hash": "d510aec16096678ac7562e45f9c8d722"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\02-exchange-rate-layer\\02-VERIFICATION.md": {
+    "mtime": 1783612052.5603175,
+    "ast_hash": "621180719408241abc685d0496449da1",
+    "semantic_hash": "621180719408241abc685d0496449da1"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\03-spaces-expiry-usd-snapshot\\03-01-PLAN.md": {
+    "mtime": 1783612053.1167545,
+    "ast_hash": "2de5bb2249d512246590c076991c1a70",
+    "semantic_hash": "2de5bb2249d512246590c076991c1a70"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\03-spaces-expiry-usd-snapshot\\03-01-SUMMARY.md": {
+    "mtime": 1783612143.0703006,
+    "ast_hash": "689517c9647948de05197f974e64bf23",
+    "semantic_hash": "689517c9647948de05197f974e64bf23"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\03-spaces-expiry-usd-snapshot\\03-02-PLAN.md": {
+    "mtime": 1783612053.1763775,
+    "ast_hash": "4a99ddf9d0a3f402f18499ff807693d9",
+    "semantic_hash": "4a99ddf9d0a3f402f18499ff807693d9"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\03-spaces-expiry-usd-snapshot\\03-02-SUMMARY.md": {
+    "mtime": 1783612143.0718334,
+    "ast_hash": "84e6691a5bf490e207d43294188d889e",
+    "semantic_hash": "84e6691a5bf490e207d43294188d889e"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\03-spaces-expiry-usd-snapshot\\03-03-PLAN.md": {
+    "mtime": 1783612053.1187503,
+    "ast_hash": "3c04ce8728af52702c51f14d396b08e6",
+    "semantic_hash": "3c04ce8728af52702c51f14d396b08e6"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\03-spaces-expiry-usd-snapshot\\03-03-SUMMARY.md": {
+    "mtime": 1783612143.0718334,
+    "ast_hash": "efcddcf5e5c7e27c34139709215db0f5",
+    "semantic_hash": "efcddcf5e5c7e27c34139709215db0f5"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\03-spaces-expiry-usd-snapshot\\03-04-PLAN.md": {
+    "mtime": 1783612053.1213732,
+    "ast_hash": "a40d3b137b12f6ad32662443f58dd5c5",
+    "semantic_hash": "a40d3b137b12f6ad32662443f58dd5c5"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\03-spaces-expiry-usd-snapshot\\03-04-SUMMARY.md": {
+    "mtime": 1783612143.0718334,
+    "ast_hash": "a35fc895dd2a89b8bb9f9481c1bdcaa2",
+    "semantic_hash": "a35fc895dd2a89b8bb9f9481c1bdcaa2"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\03-spaces-expiry-usd-snapshot\\03-05-PLAN.md": {
+    "mtime": 1783612053.1223807,
+    "ast_hash": "a5b662edc705dc4a6dcc035f45b4d27c",
+    "semantic_hash": "a5b662edc705dc4a6dcc035f45b4d27c"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\03-spaces-expiry-usd-snapshot\\03-05-SUMMARY.md": {
+    "mtime": 1783612143.0718334,
+    "ast_hash": "a45d513e031152bb5698a02ec5e2c3b5",
+    "semantic_hash": "a45d513e031152bb5698a02ec5e2c3b5"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\03-spaces-expiry-usd-snapshot\\03-06-PLAN.md": {
+    "mtime": 1783612143.0718334,
+    "ast_hash": "6609a9c79445bc27d018913a19ad7529",
+    "semantic_hash": "6609a9c79445bc27d018913a19ad7529"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\03-spaces-expiry-usd-snapshot\\03-06-SUMMARY.md": {
+    "mtime": 1783612143.0769737,
+    "ast_hash": "facdd3268cf0639ad5fc16723623199b",
+    "semantic_hash": "facdd3268cf0639ad5fc16723623199b"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\03-spaces-expiry-usd-snapshot\\03-CONTEXT.md": {
+    "mtime": 1783612053.1763775,
+    "ast_hash": "ceb6f4c81dc755725339417cf0b701f5",
+    "semantic_hash": "ceb6f4c81dc755725339417cf0b701f5"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\03-spaces-expiry-usd-snapshot\\03-DISCUSSION-LOG.md": {
+    "mtime": 1783612052.6431525,
+    "ast_hash": "ac3309f03ebd33eb462da7eda47882c0",
+    "semantic_hash": "ac3309f03ebd33eb462da7eda47882c0"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\03-spaces-expiry-usd-snapshot\\03-PATTERNS.md": {
+    "mtime": 1783612143.0785744,
+    "ast_hash": "5dd1fd859d2ce70745fd5d9a4c218d40",
+    "semantic_hash": "5dd1fd859d2ce70745fd5d9a4c218d40"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\03-spaces-expiry-usd-snapshot\\03-RESEARCH.md": {
+    "mtime": 1783612052.796395,
+    "ast_hash": "3d4e405ba2578e4e06c03712441fa74e",
+    "semantic_hash": "3d4e405ba2578e4e06c03712441fa74e"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\03-spaces-expiry-usd-snapshot\\03-UAT.md": {
+    "mtime": 1783612143.0797174,
+    "ast_hash": "ede965682ccc64e884cbce6da44b515a",
+    "semantic_hash": "ede965682ccc64e884cbce6da44b515a"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\03-spaces-expiry-usd-snapshot\\03-UI-SPEC.md": {
+    "mtime": 1783612053.0429068,
+    "ast_hash": "750d48b78c53d352da0a7b835a25c922",
+    "semantic_hash": "750d48b78c53d352da0a7b835a25c922"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\03-spaces-expiry-usd-snapshot\\03-VALIDATION.md": {
+    "mtime": 1783612052.8763134,
+    "ast_hash": "6ad7f7f1c36288ecb121854abf0accff",
+    "semantic_hash": "6ad7f7f1c36288ecb121854abf0accff"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\03-spaces-expiry-usd-snapshot\\03-VERIFICATION.md": {
+    "mtime": 1783612143.0797174,
+    "ast_hash": "06f7c3a4f15fd23da7f8a7f3356f3f00",
+    "semantic_hash": "06f7c3a4f15fd23da7f8a7f3356f3f00"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\04-child-accounts-cascade-delete\\04-01-PLAN.md": {
+    "mtime": 1783612143.082172,
+    "ast_hash": "7ef13ef91115abc6d2bfc7f40bc824a9",
+    "semantic_hash": "7ef13ef91115abc6d2bfc7f40bc824a9"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\04-child-accounts-cascade-delete\\04-01-SUMMARY.md": {
+    "mtime": 1783612143.082172,
+    "ast_hash": "0fc0933097a36a057afaf2203f72fc20",
+    "semantic_hash": "0fc0933097a36a057afaf2203f72fc20"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\04-child-accounts-cascade-delete\\04-02-PLAN.md": {
+    "mtime": 1783612143.082172,
+    "ast_hash": "8148fd568f5f239d099a608b006adb5f",
+    "semantic_hash": "8148fd568f5f239d099a608b006adb5f"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\04-child-accounts-cascade-delete\\04-02-SUMMARY.md": {
+    "mtime": 1783612143.082172,
+    "ast_hash": "9ff28a91f8cf27d3851b11adf25093b7",
+    "semantic_hash": "9ff28a91f8cf27d3851b11adf25093b7"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\04-child-accounts-cascade-delete\\04-03-PLAN.md": {
+    "mtime": 1783612143.0853875,
+    "ast_hash": "87843e511e90ae8c8beb71a63a9b5aa9",
+    "semantic_hash": "87843e511e90ae8c8beb71a63a9b5aa9"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\04-child-accounts-cascade-delete\\04-03-SUMMARY.md": {
+    "mtime": 1783612143.087106,
+    "ast_hash": "a9b71eda71fa6e3a301b6ac89976adc4",
+    "semantic_hash": "a9b71eda71fa6e3a301b6ac89976adc4"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\04-child-accounts-cascade-delete\\04-04-PLAN.md": {
+    "mtime": 1783612143.0881126,
+    "ast_hash": "e0981d2fbb7eb6cf2af3e4192ed8aa41",
+    "semantic_hash": "e0981d2fbb7eb6cf2af3e4192ed8aa41"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\04-child-accounts-cascade-delete\\04-04-SUMMARY.md": {
+    "mtime": 1783612143.0893197,
+    "ast_hash": "4d2c6ea12b0eaf15006cfec3d5dcc81f",
+    "semantic_hash": "4d2c6ea12b0eaf15006cfec3d5dcc81f"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\04-child-accounts-cascade-delete\\04-05-PLAN.md": {
+    "mtime": 1783612143.0904605,
+    "ast_hash": "3e68de0a8afaa9ad8de05f247615576b",
+    "semantic_hash": "3e68de0a8afaa9ad8de05f247615576b"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\04-child-accounts-cascade-delete\\04-05-SUMMARY.md": {
+    "mtime": 1783612143.09154,
+    "ast_hash": "72014f6df9f25ae2ea24e6f8165db871",
+    "semantic_hash": "72014f6df9f25ae2ea24e6f8165db871"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\04-child-accounts-cascade-delete\\04-CONTEXT.md": {
+    "mtime": 1783612143.092728,
+    "ast_hash": "1501efadaab2ee9cf975bda0a0cf08f3",
+    "semantic_hash": "1501efadaab2ee9cf975bda0a0cf08f3"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\04-child-accounts-cascade-delete\\04-DISCUSSION-LOG.md": {
+    "mtime": 1783612143.092728,
+    "ast_hash": "5087eca0dae8383b0e00f3707b79d7db",
+    "semantic_hash": "5087eca0dae8383b0e00f3707b79d7db"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\04-child-accounts-cascade-delete\\04-PATTERNS.md": {
+    "mtime": 1783612143.0937984,
+    "ast_hash": "c861f34afae4011d7a2433ae126c941e",
+    "semantic_hash": "c861f34afae4011d7a2433ae126c941e"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\04-child-accounts-cascade-delete\\04-RESEARCH.md": {
+    "mtime": 1783612143.0958028,
+    "ast_hash": "b639987765f3c21f0741d9ea68cbe024",
+    "semantic_hash": "b639987765f3c21f0741d9ea68cbe024"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\04-child-accounts-cascade-delete\\04-UI-SPEC.md": {
+    "mtime": 1783612053.3522441,
+    "ast_hash": "b598c40c6387bf018bda943588883c92",
+    "semantic_hash": "b598c40c6387bf018bda943588883c92"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\04-child-accounts-cascade-delete\\04-VALIDATION.md": {
+    "mtime": 1783612143.0968053,
+    "ast_hash": "0832178384813bacf36432436db532c3",
+    "semantic_hash": "0832178384813bacf36432436db532c3"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\04-child-accounts-cascade-delete\\04-VERIFICATION.md": {
+    "mtime": 1783612143.0978992,
+    "ast_hash": "31d65cf781105c540dff5c0e4e232a9b",
+    "semantic_hash": "31d65cf781105c540dff5c0e4e232a9b"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\05-dashboard-overview\\.continue-here.md": {
+    "mtime": 1783612053.690885,
+    "ast_hash": "8c9469da670ec8d6b5246de3cf8c4dc0",
+    "semantic_hash": "8c9469da670ec8d6b5246de3cf8c4dc0"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\05-dashboard-overview\\05-01-PLAN.md": {
+    "mtime": 1783612054.3261075,
+    "ast_hash": "e3aab7450695f080ce4d3c96384ec733",
+    "semantic_hash": "e3aab7450695f080ce4d3c96384ec733"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\05-dashboard-overview\\05-01-SUMMARY.md": {
+    "mtime": 1783612053.914992,
+    "ast_hash": "aa093656532dfdbf866741e487b91884",
+    "semantic_hash": "aa093656532dfdbf866741e487b91884"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\05-dashboard-overview\\05-02-PLAN.md": {
+    "mtime": 1783612054.3261075,
+    "ast_hash": "b02db0724ac259f6fe5bf838d42504ae",
+    "semantic_hash": "b02db0724ac259f6fe5bf838d42504ae"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\05-dashboard-overview\\05-02-SUMMARY.md": {
+    "mtime": 1783612054.067955,
+    "ast_hash": "68baa7673e80ad63d7b9b7e359095cbc",
+    "semantic_hash": "68baa7673e80ad63d7b9b7e359095cbc"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\05-dashboard-overview\\05-03-PLAN.md": {
+    "mtime": 1783612054.3292563,
+    "ast_hash": "1852cb9541267c1b5114fdb05a2669e8",
+    "semantic_hash": "1852cb9541267c1b5114fdb05a2669e8"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\05-dashboard-overview\\05-03-SUMMARY.md": {
+    "mtime": 1783612054.1948793,
+    "ast_hash": "95a2897b598d03f873e1eaa53d8951c6",
+    "semantic_hash": "95a2897b598d03f873e1eaa53d8951c6"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\05-dashboard-overview\\05-CONTEXT.md": {
+    "mtime": 1783612053.420415,
+    "ast_hash": "a6775c1e7ba584751079860df5adb53e",
+    "semantic_hash": "a6775c1e7ba584751079860df5adb53e"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\05-dashboard-overview\\05-DISCUSSION-LOG.md": {
+    "mtime": 1783612053.420415,
+    "ast_hash": "e25ccf56fe8f871b296868a1ddc312a6",
+    "semantic_hash": "e25ccf56fe8f871b296868a1ddc312a6"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\05-dashboard-overview\\05-PATTERNS.md": {
+    "mtime": 1783612054.3292563,
+    "ast_hash": "7b190b8aaa2646e644eecba132c76a7c",
+    "semantic_hash": "7b190b8aaa2646e644eecba132c76a7c"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\05-dashboard-overview\\05-RESEARCH.md": {
+    "mtime": 1783612053.615599,
+    "ast_hash": "b757e2ec8b707f67a74b9dcb49f0c8f9",
+    "semantic_hash": "b757e2ec8b707f67a74b9dcb49f0c8f9"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\05-dashboard-overview\\05-UI-SPEC.md": {
+    "mtime": 1783612053.5576015,
+    "ast_hash": "a481f6e04bf772cd3be5e0d574132de0",
+    "semantic_hash": "a481f6e04bf772cd3be5e0d574132de0"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\05-dashboard-overview\\05-VALIDATION.md": {
+    "mtime": 1783612054.3292563,
+    "ast_hash": "f39f9952a65765c1a8ec5c50b8b9221b",
+    "semantic_hash": "f39f9952a65765c1a8ec5c50b8b9221b"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\phases\\05-dashboard-overview\\05-VERIFICATION.md": {
+    "mtime": 1783612054.2568028,
+    "ast_hash": "aa9234563d85318abbb4bd89805724d0",
+    "semantic_hash": "aa9234563d85318abbb4bd89805724d0"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\quick\\260708-x2b-child-account-email-reminders\\PLAN.md": {
+    "mtime": 1783612144.5009634,
+    "ast_hash": "6de15aa6181d89d364de52b68263dd0b",
+    "semantic_hash": "6de15aa6181d89d364de52b68263dd0b"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\quick\\260708-x2b-child-account-email-reminders\\SUMMARY.md": {
+    "mtime": 1783612144.5019658,
+    "ast_hash": "3b80ceb228271f62c9b9ba43a4515a6b",
+    "semantic_hash": "3b80ceb228271f62c9b9ba43a4515a6b"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\research\\ARCHITECTURE.md": {
+    "mtime": 1783612049.3115559,
+    "ast_hash": "d5a8a7572c83582b17ce82c7cadbf334",
+    "semantic_hash": "d5a8a7572c83582b17ce82c7cadbf334"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\research\\FEATURES.md": {
+    "mtime": 1783612049.3115559,
+    "ast_hash": "8b48081863fb96a8dc379dc55206048a",
+    "semantic_hash": "8b48081863fb96a8dc379dc55206048a"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\research\\PITFALLS.md": {
+    "mtime": 1783612049.313561,
+    "ast_hash": "0c94698aa0c6fc968d391d6d5c4eb4c3",
+    "semantic_hash": "0c94698aa0c6fc968d391d6d5c4eb4c3"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\research\\STACK.md": {
+    "mtime": 1783612049.315566,
+    "ast_hash": "2452c28699d7f62de4dc62f57eef99cf",
+    "semantic_hash": "2452c28699d7f62de4dc62f57eef99cf"
+  },
+  "D:\\projects\\team-account-manager\\.planning\\research\\SUMMARY.md": {
+    "mtime": 1783612049.3175704,
+    "ast_hash": "8f835343b4f91a4c28b192e1ba275995",
+    "semantic_hash": "8f835343b4f91a4c28b192e1ba275995"
+  },
+  "D:\\projects\\team-account-manager\\AGENTS.md": {
+    "mtime": 1783612143.0990481,
+    "ast_hash": "21ceb6533048be51308e69e7b74a35cf",
+    "semantic_hash": "21ceb6533048be51308e69e7b74a35cf"
+  },
+  "D:\\projects\\team-account-manager\\README.md": {
+    "mtime": 1783612144.9750097,
+    "ast_hash": "ab3345bd733f8ced46ed3ac6d466e99b",
+    "semantic_hash": "ab3345bd733f8ced46ed3ac6d466e99b"
+  },
+  "D:\\projects\\team-account-manager\\public\\file.svg": {
+    "mtime": 1783612050.1309004,
+    "ast_hash": "d09f95206c3fa0bb9bd9fefabfd0ea71",
+    "semantic_hash": "d09f95206c3fa0bb9bd9fefabfd0ea71"
+  },
+  "D:\\projects\\team-account-manager\\public\\globe.svg": {
+    "mtime": 1783612050.1332314,
+    "ast_hash": "2aaafa6a49b6563925fe440891e32717",
+    "semantic_hash": "2aaafa6a49b6563925fe440891e32717"
+  },
+  "D:\\projects\\team-account-manager\\public\\next.svg": {
+    "mtime": 1783612050.1342614,
+    "ast_hash": "8e061864f388b47f33a1c3780831193e",
+    "semantic_hash": "8e061864f388b47f33a1c3780831193e"
+  },
+  "D:\\projects\\team-account-manager\\public\\vercel.svg": {
+    "mtime": 1783612050.1362658,
+    "ast_hash": "c0af2f507b369b085b35ef4bbe3bcf1e",
+    "semantic_hash": "c0af2f507b369b085b35ef4bbe3bcf1e"
+  },
+  "D:\\projects\\team-account-manager\\public\\window.svg": {
+    "mtime": 1783612050.1377497,
+    "ast_hash": "a2760511c65806022ad20adf74370ff3",
+    "semantic_hash": "a2760511c65806022ad20adf74370ff3"
   }
 }
