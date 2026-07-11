@@ -10,6 +10,9 @@ RUN npm ci
 COPY . ./
 RUN mkdir -p data && npm run db:migrate && npm run build
 
+FROM build AS production-dependencies
+RUN npm prune --omit=dev
+
 FROM node:24.18.0-bookworm-slim
 
 WORKDIR /app
@@ -19,7 +22,7 @@ LABEL org.opencontainers.image.revision=$VCS_REF
 LABEL org.opencontainers.image.source=https://github.com/Userchenentao5/team-account-manager
 
 COPY --from=build /app/package.json /app/package-lock.json ./
-COPY --from=build /app/node_modules ./node_modules
+COPY --from=production-dependencies /app/node_modules ./node_modules
 COPY --from=build /app/.next ./.next
 COPY --from=build /app/public ./public
 COPY --from=build /app/src ./src

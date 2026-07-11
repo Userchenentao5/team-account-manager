@@ -72,7 +72,13 @@ backup_path="$backup_dir/$backup_name"
 test -s "$backup_path"
 
 DOCKER_CONFIG="$docker_config" docker login ghcr.io --username "$GHCR_USERNAME" --password-stdin < "$GHCR_TOKEN_FILE"
-DOCKER_CONFIG="$docker_config" docker pull "$APP_IMAGE"
+for attempt in 1 2 3; do
+  if DOCKER_CONFIG="$docker_config" docker pull "$APP_IMAGE"; then
+    break
+  fi
+  test "$attempt" -lt 3
+  sleep "$((attempt * 10))"
+done
 docker image inspect "$APP_IMAGE" >/dev/null
 
 deployment_started=true
