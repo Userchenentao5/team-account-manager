@@ -5,9 +5,9 @@ milestone_name: milestone
 current_phase: 05
 status: verifying
 stopped_at: Completed 05-03-PLAN.md
-last_updated: "2026-07-11T08:30:00.000Z"
+last_updated: "2026-07-11T06:30:00.000Z"
 last_activity: 2026-07-11
-last_activity_desc: Completed quick task 260711-m0o
+last_activity_desc: Completed quick task 260711-jr0
 progress:
   total_phases: 5
   completed_phases: 5
@@ -116,7 +116,6 @@ Items acknowledged and carried forward from previous milestone close:
 | 2026-07-11 | 260711-d5p | Separate ECS application source from persistent deployment state | Complete |
 | 2026-07-11 | 260711-f5r | Allow explicit HTTP session-cookie fallback | Complete |
 | 2026-07-11 | 260711-jr0 | Harden GitHub Actions deployment to ECS | Complete |
-| 2026-07-11 | 260711-m0o | Publish immutable GHCR images with rollback | Complete |
 
 ## Session Continuity
 
