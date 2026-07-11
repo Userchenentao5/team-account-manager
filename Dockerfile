@@ -1,3 +1,5 @@
+ARG VCS_REF=unknown
+
 FROM node:24.18.0-bookworm-slim AS build
 
 WORKDIR /app
@@ -12,6 +14,9 @@ FROM node:24.18.0-bookworm-slim
 
 WORKDIR /app
 ENV NODE_ENV=production
+ARG VCS_REF
+LABEL org.opencontainers.image.revision=$VCS_REF
+LABEL org.opencontainers.image.source=https://github.com/Userchenentao5/team-account-manager
 
 COPY --from=build /app/package.json /app/package-lock.json ./
 COPY --from=build /app/node_modules ./node_modules

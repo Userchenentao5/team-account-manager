@@ -9,9 +9,11 @@ on:
 
 permissions:
   contents: read
+  packages: write
 
 env:
   NODE_VERSION: 24.18.0
+  IMAGE_NAME: ghcr.io/userchenentao5/team-account-manager
 
 jobs:
   verify:
@@ -41,8 +43,35 @@ jobs:
       - name: Build application
         run: npm run build
 
-  deploy:
+  build-image:
+    name: Build and publish image
     needs: verify
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    outputs:
+      image: ${{ steps.publish.outputs.image }}
+    steps:
+      - name: Check out source
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: ${{ github.sha }}
+      - name: Authenticate to GHCR
+        env:
+          GHCR_TOKEN: ${{ github.token }}
+        run: echo "$GHCR_TOKEN" | docker login ghcr.io --username "$GITHUB_ACTOR" --password-stdin
+      - name: Build and publish immutable image
+        id: publish
+        run: |
+          image="$IMAGE_NAME:$GITHUB_SHA"
+          docker build --build-arg VCS_REF="$GITHUB_SHA" --tag "$image" .
+          docker push "$image"
+          digest="$(docker image inspect "$image" --format '{{index .RepoDigests 0}}')"
+          test -n "$digest"
+          echo "image=$digest" >> "$GITHUB_OUTPUT"
+
+  deploy:
+    needs: [verify, build-image]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     name: Deploy production
     runs-on: ubuntu-24.04
@@ -55,6 +84,8 @@ jobs:
       ECS_HOST: 8.153.38.90
       ECS_PORT: "22"
       ECS_PATH: /data/team-account-manager
+      GHCR_USERNAME: Userchenentao5
+      GHCR_READ_TOKEN: ${{ secrets.GHCR_READ_TOKEN }}
     steps:
       - name: Check out source
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
@@ -95,10 +126,8 @@ jobs:
           ssh -F "$RUNNER_TEMP/ssh/config" ecs-deploy 'bash -se' <<'REMOTE'
           set -Eeuo pipefail
           ECS_PATH=/data/team-account-manager
-
           command -v docker
           docker compose version
-          command -v rsync
           test -d "$ECS_PATH" && test ! -L "$ECS_PATH"
           test -f "$ECS_PATH/.env.production" && test ! -L "$ECS_PATH/.env.production"
           case "$(stat -c '%a' "$ECS_PATH/.env.production")" in
@@ -106,33 +135,23 @@ jobs:
             *) echo "Unsafe .env.production permissions" >&2; exit 1 ;;
           esac
           test "$(stat -c '%U' "$ECS_PATH/.env.production")" = "$(id -un)"
-          mkdir -p "$ECS_PATH/app" "$ECS_PATH/data"
-          test -d "$ECS_PATH/app" && test ! -L "$ECS_PATH/app"
+          mkdir -p "$ECS_PATH/data"
           test -d "$ECS_PATH/data" && test ! -L "$ECS_PATH/data"
-          test "$(stat -c '%U' "$ECS_PATH/app")" = "$(id -un)"
-          test "$(stat -c '%U' "$ECS_PATH/data")" = "$(id -un)"
           REMOTE
-      - name: Synchronize source
+      - name: Stage candidate Compose file
+        run: scp -F "$RUNNER_TEMP/ssh/config" ./compose.yaml "ecs-deploy:$ECS_PATH/compose.candidate.yaml"
+      - name: Stage temporary registry credential
         run: |
-          rsync -az --delete-delay --delay-updates --timeout=120 --no-owner --no-group --exclude='.env*' --exclude='data/' --exclude='.git/' --exclude='node_modules/' --exclude='.next/' --exclude='.planning/' --exclude='graphify-out/' --exclude='compose.yaml' -e "ssh -F $RUNNER_TEMP/ssh/config" ./ ecs-deploy:"$ECS_PATH/app/"
-          rsync -az --timeout=120 --no-owner --no-group -e "ssh -F $RUNNER_TEMP/ssh/config" ./compose.yaml ecs-deploy:"$ECS_PATH/compose.yaml"
-      - name: Build and start
+          test -n "$GHCR_READ_TOKEN"
+          token_file="$RUNNER_TEMP/ghcr-read-token"
+          trap 'rm -f "$token_file"' EXIT
+          umask 077
+          printf '%s\n' "$GHCR_READ_TOKEN" > "$token_file"
+          scp -F "$RUNNER_TEMP/ssh/config" "$token_file" "ecs-deploy:/tmp/team-account-manager-ghcr-$GITHUB_RUN_ID.token"
+      - name: Deploy immutable image with rollback
+        env:
+          APP_IMAGE: ${{ needs.build-image.outputs.image }}
         run: |
-          ssh -F "$RUNNER_TEMP/ssh/config" ecs-deploy "bash -se -- '${{ github.sha }}'" <<'REMOTE'
-          set -Eeuo pipefail
-          revision="$1"
-          ECS_PATH=/data/team-account-manager
-          cd "$ECS_PATH"
-          trap 'docker compose ps >&2' ERR
-
-          APP_CONTEXT=./app docker compose --env-file .env.production config --quiet
-          APP_CONTEXT=./app docker compose up -d --build --wait --wait-timeout 60 --remove-orphans
-          container_id="$(docker compose ps -q app)"
-          test -n "$container_id"
-          test "$(docker inspect -f '{{.State.Health.Status}}' "$container_id")" = healthy
-          docker compose exec -T app node -e "fetch('http://127.0.0.1:3000/api/health').then((response) => process.exit(response.ok ? 0 : 1)).catch(() => process.exit(1))"
-          printf '%s\n' "$revision" > "$ECS_PATH/DEPLOYED_REVISION"
-          REMOTE
+          ssh -F "$RUNNER_TEMP/ssh/config" ecs-deploy "ECS_PATH='$ECS_PATH' APP_IMAGE='$APP_IMAGE' GHCR_USERNAME='$GHCR_USERNAME' GHCR_TOKEN_FILE='/tmp/team-account-manager-ghcr-$GITHUB_RUN_ID.token' bash -se" < scripts/deploy-production.sh
       - name: Verify public health endpoint
-        run: |
-          curl --fail --silent --show-error --retry 5 --retry-delay 3 --retry-all-errors --connect-timeout 15 "http://$ECS_HOST:3000/api/health"
+        run: curl --fail --silent --show-error --retry 5 --retry-delay 3 --retry-all-errors --connect-timeout 15 "http://$ECS_HOST:3000/api/health"

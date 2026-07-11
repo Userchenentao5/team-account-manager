@@ -1,7 +1,9 @@
+name: team-account-manager
+
 services:
   app:
-    build:
-      context: ${APP_CONTEXT:-.}
+    image: ${APP_IMAGE:?APP_IMAGE must be set to an immutable image digest}
+    pull_policy: never
     restart: unless-stopped
     env_file: .env.production
     environment:
