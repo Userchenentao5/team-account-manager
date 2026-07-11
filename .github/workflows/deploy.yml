@@ -3,103 +3,136 @@ name: Deploy to ECS
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
 
+env:
+  NODE_VERSION: 24.18.0
+
 jobs:
   verify:
-    runs-on: ubuntu-latest
+    name: Verify
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+      - name: Check out source
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
           ref: ${{ github.sha }}
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
-          node-version: 25.5.0
+          node-version: ${{ env.NODE_VERSION }}
           cache: npm
-      - run: npm ci
-      - run: npm run lint
-      - run: npm test
-      - run: mkdir -p data && npm run db:migrate
-      - run: npm run build
+      - name: Install dependencies
+        run: npm ci
+      - name: Run lint
+        run: npm run lint
+      - name: Run tests
+        env:
+          CI: "true"
+        run: npm test
+      - name: Validate migrations
+        run: mkdir -p data && npm run db:migrate
+      - name: Build application
+        run: npm run build
 
   deploy:
     needs: verify
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    name: Deploy production
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    environment: production
+    concurrency:
+      group: production-ecs-deploy
+      cancel-in-progress: false
     env:
       ECS_HOST: 8.153.38.90
       ECS_PORT: "22"
       ECS_PATH: /data/team-account-manager
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+      - name: Check out source
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
           ref: ${{ github.sha }}
       - name: Configure SSH
         env:
+          ECS_SSH_USER: ${{ secrets.ECS_SSH_USER }}
           ECS_SSH_PRIVATE_KEY: ${{ secrets.ECS_SSH_PRIVATE_KEY }}
           ECS_SSH_KNOWN_HOSTS: ${{ secrets.ECS_SSH_KNOWN_HOSTS }}
         run: |
+          test -n "$ECS_SSH_USER"
+          test -n "$ECS_SSH_PRIVATE_KEY"
+          test -n "$ECS_SSH_KNOWN_HOSTS"
+          umask 077
           install -d -m 700 "$RUNNER_TEMP/ssh"
           printf '%s\n' "$ECS_SSH_PRIVATE_KEY" > "$RUNNER_TEMP/ssh/id_ed25519"
           printf '%s\n' "$ECS_SSH_KNOWN_HOSTS" > "$RUNNER_TEMP/ssh/known_hosts"
-          chmod 600 "$RUNNER_TEMP/ssh/id_ed25519" "$RUNNER_TEMP/ssh/known_hosts"
+          cat > "$RUNNER_TEMP/ssh/config" <<EOF
+          Host ecs-deploy
+            HostName $ECS_HOST
+            Port $ECS_PORT
+            User $ECS_SSH_USER
+            IdentityFile $RUNNER_TEMP/ssh/id_ed25519
+            IdentitiesOnly yes
+            BatchMode yes
+            StrictHostKeyChecking yes
+            UserKnownHostsFile $RUNNER_TEMP/ssh/known_hosts
+            GlobalKnownHostsFile /dev/null
+            ConnectTimeout 15
+            ServerAliveInterval 15
+            ServerAliveCountMax 3
+            LogLevel ERROR
+          EOF
+          chmod 600 "$RUNNER_TEMP/ssh/id_ed25519" "$RUNNER_TEMP/ssh/known_hosts" "$RUNNER_TEMP/ssh/config"
       - name: Validate deployment host
-        env:
-          ECS_SSH_USER: ${{ secrets.ECS_SSH_USER }}
         run: |
-          ssh -i "$RUNNER_TEMP/ssh/id_ed25519" -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$RUNNER_TEMP/ssh/known_hosts" -o GlobalKnownHostsFile=/dev/null -p "$ECS_PORT" "$ECS_SSH_USER@$ECS_HOST" '
-            ECS_PATH=/data/team-account-manager
-            command -v docker && docker compose version && command -v rsync &&
-            test -d "$ECS_PATH" && test ! -L "$ECS_PATH" &&
-            test -f "$ECS_PATH/.env.production" && test ! -L "$ECS_PATH/.env.production" &&
-            test "$(stat -c %a "$ECS_PATH/.env.production")" -le 600 &&
-            mkdir -p "$ECS_PATH/app" "$ECS_PATH/data" &&
-            test -d "$ECS_PATH/app" && test ! -L "$ECS_PATH/app" &&
-            test -d "$ECS_PATH/data" && test ! -L "$ECS_PATH/data" &&
-            test "$(stat -c %U "$ECS_PATH/app")" = "$(id -un)" &&
-            test "$(stat -c %U "$ECS_PATH/data")" = "$(id -un)"
-          '
+          ssh -F "$RUNNER_TEMP/ssh/config" ecs-deploy 'bash -se' <<'REMOTE'
+          set -Eeuo pipefail
+          ECS_PATH=/data/team-account-manager
+
+          command -v docker
+          docker compose version
+          command -v rsync
+          test -d "$ECS_PATH" && test ! -L "$ECS_PATH"
+          test -f "$ECS_PATH/.env.production" && test ! -L "$ECS_PATH/.env.production"
+          case "$(stat -c '%a' "$ECS_PATH/.env.production")" in
+            400|600) ;;
+            *) echo "Unsafe .env.production permissions" >&2; exit 1 ;;
+          esac
+          test "$(stat -c '%U' "$ECS_PATH/.env.production")" = "$(id -un)"
+          mkdir -p "$ECS_PATH/app" "$ECS_PATH/data"
+          test -d "$ECS_PATH/app" && test ! -L "$ECS_PATH/app"
+          test -d "$ECS_PATH/data" && test ! -L "$ECS_PATH/data"
+          test "$(stat -c '%U' "$ECS_PATH/app")" = "$(id -un)"
+          test "$(stat -c '%U' "$ECS_PATH/data")" = "$(id -un)"
+          REMOTE
       - name: Synchronize source
-        env:
-          ECS_SSH_USER: ${{ secrets.ECS_SSH_USER }}
         run: |
-          rsync -az --delete --exclude='.env*' --exclude='data/' --exclude='.git/' --exclude='node_modules/' --exclude='.next/' --exclude='.planning/' --exclude='graphify-out/' --exclude='compose.yaml' -e "ssh -i $RUNNER_TEMP/ssh/id_ed25519 -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$RUNNER_TEMP/ssh/known_hosts -o GlobalKnownHostsFile=/dev/null -p $ECS_PORT" ./ "$ECS_SSH_USER@$ECS_HOST:$ECS_PATH/app/"
-          rsync -az -e "ssh -i $RUNNER_TEMP/ssh/id_ed25519 -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$RUNNER_TEMP/ssh/known_hosts -o GlobalKnownHostsFile=/dev/null -p $ECS_PORT" ./compose.yaml "$ECS_SSH_USER@$ECS_HOST:$ECS_PATH/compose.yaml"
+          rsync -az --delete-delay --delay-updates --timeout=120 --no-owner --no-group --exclude='.env*' --exclude='data/' --exclude='.git/' --exclude='node_modules/' --exclude='.next/' --exclude='.planning/' --exclude='graphify-out/' --exclude='compose.yaml' -e "ssh -F $RUNNER_TEMP/ssh/config" ./ ecs-deploy:"$ECS_PATH/app/"
+          rsync -az --timeout=120 --no-owner --no-group -e "ssh -F $RUNNER_TEMP/ssh/config" ./compose.yaml ecs-deploy:"$ECS_PATH/compose.yaml"
       - name: Build and start
-        env:
-          ECS_SSH_USER: ${{ secrets.ECS_SSH_USER }}
         run: |
-          ssh -i "$RUNNER_TEMP/ssh/id_ed25519" -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$RUNNER_TEMP/ssh/known_hosts" -o GlobalKnownHostsFile=/dev/null -p "$ECS_PORT" "$ECS_SSH_USER@$ECS_HOST" '
-            ECS_PATH=/data/team-account-manager
-            cd "$ECS_PATH"
-            APP_CONTEXT=./app docker compose up -d --build --wait --wait-timeout 60 --remove-orphans || {
-              docker compose ps
-              docker compose logs --tail=100 app
-              exit 1
-            }
-            container_id="$(docker compose ps -q app)"
-            test -n "$container_id"
-            test "$(docker inspect -f "{{.State.Health.Status}}" "$container_id")" = healthy
-            docker compose exec -T app node -e "fetch(\"http://127.0.0.1:3000/login\").then((response) => process.exit(response.ok ? 0 : 1)).catch(() => process.exit(1))"
-            cleanup_targets=(
-              .claude .dockerignore .gitignore .github .planning AGENTS.md Dockerfile LICENSE README.md
-              components.json drizzle drizzle.config.ts eslint.config.mjs graphify-out middleware.ts next.config.ts
-              package-lock.json package.json postcss.config.mjs public src tsconfig.json vitest.config.ts
-            )
-            for target in "${cleanup_targets[@]}"; do
-              case "$target" in
-                .claude|.dockerignore|.gitignore|.github|.planning|AGENTS.md|Dockerfile|LICENSE|README.md|components.json|drizzle|drizzle.config.ts|eslint.config.mjs|graphify-out|middleware.ts|next.config.ts|package-lock.json|package.json|postcss.config.mjs|public|src|tsconfig.json|vitest.config.ts) ;;
-                *) exit 1 ;;
-              esac
-            done
-            rm -rf -- .claude .dockerignore .gitignore .github .planning AGENTS.md Dockerfile LICENSE README.md components.json drizzle drizzle.config.ts eslint.config.mjs graphify-out middleware.ts next.config.ts package-lock.json package.json postcss.config.mjs public src tsconfig.json vitest.config.ts
-            shopt -s nullglob dotglob
-            for entry in *; do
-              case "$entry" in
-                app|data|compose.yaml|.env.production) ;;
-                *) echo "unexpected deployment entry: $entry" >&2; exit 1 ;;
-              esac
-            done
-          '
+          ssh -F "$RUNNER_TEMP/ssh/config" ecs-deploy "bash -se -- '${{ github.sha }}'" <<'REMOTE'
+          set -Eeuo pipefail
+          revision="$1"
+          ECS_PATH=/data/team-account-manager
+          cd "$ECS_PATH"
+          trap 'docker compose ps >&2' ERR
+
+          APP_CONTEXT=./app docker compose --env-file .env.production config --quiet
+          APP_CONTEXT=./app docker compose up -d --build --wait --wait-timeout 60 --remove-orphans
+          container_id="$(docker compose ps -q app)"
+          test -n "$container_id"
+          test "$(docker inspect -f '{{.State.Health.Status}}' "$container_id")" = healthy
+          docker compose exec -T app node -e "fetch('http://127.0.0.1:3000/api/health').then((response) => process.exit(response.ok ? 0 : 1)).catch(() => process.exit(1))"
+          printf '%s\n' "$revision" > "$ECS_PATH/DEPLOYED_REVISION"
+          REMOTE
+      - name: Verify public health endpoint
+        run: |
+          curl --fail --silent --show-error --retry 5 --retry-delay 3 --retry-all-errors --connect-timeout 15 "http://$ECS_HOST:3000/api/health"

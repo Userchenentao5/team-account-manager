@@ -1,4 +1,4 @@
-FROM node:25.5.0-bookworm-slim AS build
+FROM node:24.18.0-bookworm-slim AS build
 
 WORKDIR /app
 
@@ -8,7 +8,7 @@ RUN npm ci
 COPY . ./
 RUN mkdir -p data && npm run db:migrate && npm run build
 
-FROM node:25.5.0-bookworm-slim
+FROM node:24.18.0-bookworm-slim
 
 WORKDIR /app
 ENV NODE_ENV=production
