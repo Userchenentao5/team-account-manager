@@ -5,9 +5,9 @@ milestone_name: milestone
 current_phase: 05
 status: verifying
 stopped_at: Completed 05-03-PLAN.md
-last_updated: "2026-07-10T15:40:00.000Z"
-last_activity: 2026-07-10
-last_activity_desc: Completed quick task 260710-wm6
+last_updated: "2026-07-11T01:30:00.000Z"
+last_activity: 2026-07-11
+last_activity_desc: Completed quick task 260711-d5p
 progress:
   total_phases: 5
   completed_phases: 5
@@ -113,6 +113,7 @@ Items acknowledged and carried forward from previous milestone close:
 |------|----|------|--------|
 | 2026-07-08 | 260708-x2b | Child account email reminders | Complete |
 | 2026-07-10 | 260710-wm6 | Docker Compose and GitHub Actions deployment to ECS | Complete |
+| 2026-07-11 | 260711-d5p | Separate ECS application source from persistent deployment state | Complete |
 
 ## Session Continuity
 
