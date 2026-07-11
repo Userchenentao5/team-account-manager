@@ -6,7 +6,7 @@ COPY package.json package-lock.json ./
 RUN npm ci
 
 COPY . ./
-RUN npm run build
+RUN mkdir -p data && npm run db:migrate && npm run build
 
 FROM node:25.5.0-bookworm-slim
 

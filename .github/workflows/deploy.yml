@@ -21,6 +21,7 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm test
+      - run: mkdir -p data && npm run db:migrate
       - run: npm run build
 
   deploy:
