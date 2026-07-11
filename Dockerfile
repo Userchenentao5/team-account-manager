@@ -20,6 +20,7 @@ COPY --from=build /app/public ./public
 COPY --from=build /app/src ./src
 COPY --from=build /app/drizzle ./drizzle
 COPY --from=build /app/next.config.ts ./next.config.ts
+COPY --from=build /app/tsconfig.json ./tsconfig.json
 
 EXPOSE 3000
 CMD ["sh", "-c", "npm run db:migrate && npm run start"]
