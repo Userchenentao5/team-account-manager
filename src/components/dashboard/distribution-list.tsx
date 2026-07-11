@@ -49,7 +49,7 @@ export function DistributionList({
               <div className="flex items-center gap-2">
                 <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-muted shadow-inner">
                   <div
-                    className="h-2.5 rounded-full bg-primary/75 shadow-[0_0_18px_oklch(0.36_0.083_166_/_0.25)] transition-[width] duration-500"
+                    className="h-2.5 rounded-full bg-orange-500/80 shadow-[0_0_18px_oklch(0.7_0.16_55_/_0.25)] transition-[width] duration-500"
                     style={{
                       width: `${Math.min(100, Math.max(0, bucket.percentage))}%`,
                     }}

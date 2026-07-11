@@ -91,7 +91,13 @@ export default function DashboardPage() {
             <MetricCard
               label="空间到期风险"
               value={String(totals.renewalRiskSpaces)}
-              tone={totals.renewalRiskSpaces > 0 ? "risk" : "default"}
+              tone={
+                counts.spacesByExpiryStatus.expired > 0
+                  ? "risk"
+                  : counts.spacesByExpiryStatus.soon > 0
+                    ? "warning"
+                    : "default"
+              }
               description={
                 <>
                   已过期 {counts.spacesByExpiryStatus.expired} /{" "}
@@ -103,7 +109,14 @@ export default function DashboardPage() {
             <MetricCard
               label="非自用账号到期风险"
               value={String(totals.renewalRiskChildAccounts)}
-              tone={totals.renewalRiskChildAccounts > 0 ? "risk" : "default"}
+              tone={
+                counts.childAccountsByExpiryStatus.expired > 0 ||
+                counts.childAccountsByExpiryStatus.due > 0
+                  ? "risk"
+                  : counts.childAccountsByExpiryStatus.soon > 0
+                    ? "warning"
+                    : "default"
+              }
               description={
                 <>
                   逾期 {counts.childAccountsByExpiryStatus.expired} / 今日{" "}
@@ -116,11 +129,13 @@ export default function DashboardPage() {
             <MetricCard
               label="空间支出"
               value={usd(totals.spacePaymentUsdMinor)}
+              tone="expense"
               description="你为所有空间支付的冻结 USD 成本"
             />
             <MetricCard
               label="出租账号应收"
               value={usd(totals.childMonthlyRevenueUsdMinor)}
+              tone="income"
               description={
                 <>
                   {receivableCny ? `折合 ${receivableCny}` : "CNY 汇率缺失"}
