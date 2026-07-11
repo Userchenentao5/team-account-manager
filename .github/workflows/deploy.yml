@@ -49,14 +49,57 @@ jobs:
         env:
           ECS_SSH_USER: ${{ secrets.ECS_SSH_USER }}
         run: |
-          ssh -i "$RUNNER_TEMP/ssh/id_ed25519" -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$RUNNER_TEMP/ssh/known_hosts" -o GlobalKnownHostsFile=/dev/null -p "$ECS_PORT" "$ECS_SSH_USER@$ECS_HOST" 'command -v docker && docker compose version && command -v rsync && test -d /data/team-account-manager && test -f /data/team-account-manager/.env.production && test ! -L /data/team-account-manager/.env.production && test "$(stat -c %a /data/team-account-manager/.env.production)" -le 600'
+          ssh -i "$RUNNER_TEMP/ssh/id_ed25519" -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$RUNNER_TEMP/ssh/known_hosts" -o GlobalKnownHostsFile=/dev/null -p "$ECS_PORT" "$ECS_SSH_USER@$ECS_HOST" '
+            ECS_PATH=/data/team-account-manager
+            command -v docker && docker compose version && command -v rsync &&
+            test -d "$ECS_PATH" && test ! -L "$ECS_PATH" &&
+            test -f "$ECS_PATH/.env.production" && test ! -L "$ECS_PATH/.env.production" &&
+            test "$(stat -c %a "$ECS_PATH/.env.production")" -le 600 &&
+            mkdir -p "$ECS_PATH/app" "$ECS_PATH/data" &&
+            test -d "$ECS_PATH/app" && test ! -L "$ECS_PATH/app" &&
+            test -d "$ECS_PATH/data" && test ! -L "$ECS_PATH/data" &&
+            test "$(stat -c %U "$ECS_PATH/app")" = "$(id -un)" &&
+            test "$(stat -c %U "$ECS_PATH/data")" = "$(id -un)"
+          '
       - name: Synchronize source
         env:
           ECS_SSH_USER: ${{ secrets.ECS_SSH_USER }}
         run: |
-          rsync -az --delete --exclude='.env*' --exclude='data/' --exclude='.git/' --exclude='node_modules/' --exclude='.next/' --exclude='.planning/' --exclude='graphify-out/' -e "ssh -i $RUNNER_TEMP/ssh/id_ed25519 -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$RUNNER_TEMP/ssh/known_hosts -o GlobalKnownHostsFile=/dev/null -p $ECS_PORT" ./ "$ECS_SSH_USER@$ECS_HOST:$ECS_PATH/"
+          rsync -az --delete --exclude='.env*' --exclude='data/' --exclude='.git/' --exclude='node_modules/' --exclude='.next/' --exclude='.planning/' --exclude='graphify-out/' --exclude='compose.yaml' -e "ssh -i $RUNNER_TEMP/ssh/id_ed25519 -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$RUNNER_TEMP/ssh/known_hosts -o GlobalKnownHostsFile=/dev/null -p $ECS_PORT" ./ "$ECS_SSH_USER@$ECS_HOST:$ECS_PATH/app/"
+          rsync -az -e "ssh -i $RUNNER_TEMP/ssh/id_ed25519 -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$RUNNER_TEMP/ssh/known_hosts -o GlobalKnownHostsFile=/dev/null -p $ECS_PORT" ./compose.yaml "$ECS_SSH_USER@$ECS_HOST:$ECS_PATH/compose.yaml"
       - name: Build and start
         env:
           ECS_SSH_USER: ${{ secrets.ECS_SSH_USER }}
         run: |
-          ssh -i "$RUNNER_TEMP/ssh/id_ed25519" -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$RUNNER_TEMP/ssh/known_hosts" -o GlobalKnownHostsFile=/dev/null -p "$ECS_PORT" "$ECS_SSH_USER@$ECS_HOST" 'cd /data/team-account-manager && docker compose up -d --build --wait --wait-timeout 60 --remove-orphans || { docker compose ps; docker compose logs --tail=100 app; exit 1; }'
+          ssh -i "$RUNNER_TEMP/ssh/id_ed25519" -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$RUNNER_TEMP/ssh/known_hosts" -o GlobalKnownHostsFile=/dev/null -p "$ECS_PORT" "$ECS_SSH_USER@$ECS_HOST" '
+            ECS_PATH=/data/team-account-manager
+            cd "$ECS_PATH"
+            APP_CONTEXT=./app docker compose up -d --build --wait --wait-timeout 60 --remove-orphans || {
+              docker compose ps
+              docker compose logs --tail=100 app
+              exit 1
+            }
+            container_id="$(docker compose ps -q app)"
+            test -n "$container_id"
+            test "$(docker inspect -f "{{.State.Health.Status}}" "$container_id")" = healthy
+            docker compose exec -T app node -e "fetch(\"http://127.0.0.1:3000/login\").then((response) => process.exit(response.ok ? 0 : 1)).catch(() => process.exit(1))"
+            cleanup_targets=(
+              .claude .dockerignore .gitignore .github .planning AGENTS.md Dockerfile LICENSE README.md
+              components.json drizzle drizzle.config.ts eslint.config.mjs graphify-out middleware.ts next.config.ts
+              package-lock.json package.json postcss.config.mjs public src tsconfig.json vitest.config.ts
+            )
+            for target in "${cleanup_targets[@]}"; do
+              case "$target" in
+                .claude|.dockerignore|.gitignore|.github|.planning|AGENTS.md|Dockerfile|LICENSE|README.md|components.json|drizzle|drizzle.config.ts|eslint.config.mjs|graphify-out|middleware.ts|next.config.ts|package-lock.json|package.json|postcss.config.mjs|public|src|tsconfig.json|vitest.config.ts) ;;
+                *) exit 1 ;;
+              esac
+            done
+            rm -rf -- .claude .dockerignore .gitignore .github .planning AGENTS.md Dockerfile LICENSE README.md components.json drizzle drizzle.config.ts eslint.config.mjs graphify-out middleware.ts next.config.ts package-lock.json package.json postcss.config.mjs public src tsconfig.json vitest.config.ts
+            shopt -s nullglob dotglob
+            for entry in *; do
+              case "$entry" in
+                app|data|compose.yaml|.env.production) ;;
+                *) echo "unexpected deployment entry: $entry" >&2; exit 1 ;;
+              esac
+            done
+          '

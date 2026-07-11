@@ -1,6 +1,7 @@
 services:
   app:
-    build: .
+    build:
+      context: ${APP_CONTEXT:-.}
     restart: unless-stopped
     env_file: .env.production
     environment:
