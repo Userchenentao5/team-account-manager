@@ -7,6 +7,7 @@ import {
   AUTH_COOKIE_NAME,
   createSessionToken,
   SESSION_MAX_AGE_SECONDS,
+  shouldUseSecureSessionCookie,
   verifyLoginKey,
 } from "@/lib/auth";
 import {
@@ -63,7 +64,10 @@ export async function login(formData: FormData): Promise<void> {
     maxAge: SESSION_MAX_AGE_SECONDS,
     path: "/",
     sameSite: "lax",
-    secure: process.env.NODE_ENV === "production",
+    secure: shouldUseSecureSessionCookie(
+      process.env.NODE_ENV,
+      process.env.APP_ALLOW_INSECURE_COOKIES,
+    ),
   });
   redirect("/");
 }

@@ -1,6 +1,13 @@
 export const AUTH_COOKIE_NAME = "tam_session";
 export const SESSION_MAX_AGE_SECONDS = 60 * 60 * 24 * 7;
 
+export function shouldUseSecureSessionCookie(
+  nodeEnv: string | undefined,
+  allowInsecureCookies: string | undefined,
+): boolean {
+  return nodeEnv === "production" && allowInsecureCookies !== "true";
+}
+
 const encoder = new TextEncoder();
 
 function hex(bytes: ArrayBuffer): string {

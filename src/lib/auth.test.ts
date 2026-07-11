@@ -2,6 +2,7 @@ import { afterEach, describe, expect, it } from "vitest";
 import {
   createSessionToken,
   hashLoginKey,
+  shouldUseSecureSessionCookie,
   verifyLoginKey,
   verifySessionToken,
 } from "@/lib/auth";
@@ -22,6 +23,12 @@ afterEach(() => {
 });
 
 describe("auth", () => {
+  it("uses Secure session cookies unless production explicitly opts out", () => {
+    expect(shouldUseSecureSessionCookie("development", undefined)).toBe(false);
+    expect(shouldUseSecureSessionCookie("production", undefined)).toBe(true);
+    expect(shouldUseSecureSessionCookie("production", "true")).toBe(false);
+  });
+
   it("verifies login keys by hash", async () => {
     process.env.APP_LOGIN_KEY_HASH = await hashLoginKey("local-secret");
 
