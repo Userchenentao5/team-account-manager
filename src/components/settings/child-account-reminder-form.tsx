@@ -52,6 +52,8 @@ export function ChildAccountReminderForm({
   const [showPreview, setShowPreview] = useState(false);
   const templateBodyRef = useRef<HTMLDivElement>(null);
   const templateBodyDraftRef = useRef(settings.templateBody);
+  const previewSubjectRef = useRef<HTMLParagraphElement>(null);
+  const previewBodyRef = useRef<HTMLDivElement>(null);
   const [draft, setDraft] = useState({
     enabled: settings.enabled,
     recipientEmail: settings.recipientEmail,
@@ -61,18 +63,18 @@ export function ChildAccountReminderForm({
     templateSubject: settings.templateSubject,
     templateBody: settings.templateBody,
   });
-  const [previewDraft, setPreviewDraft] = useState({
-    templateSubject: settings.templateSubject,
-    templateBody: settings.templateBody,
-  });
 
   function updateDraft(key: keyof typeof draft, value: boolean | string) {
     setDraft((current) => ({ ...current, [key]: value }));
+    if (key === "templateSubject") {
+      syncPreview({ ...currentDraft(), templateSubject: String(value) });
+    }
     setError(null);
   }
 
   function onTemplateBodyInput() {
     templateBodyDraftRef.current = templateBodyRef.current?.innerHTML ?? "";
+    syncPreview();
     setError(null);
   }
 
@@ -119,16 +121,19 @@ export function ChildAccountReminderForm({
   }
 
   function onTogglePreview() {
-    const next = !showPreview;
-    if (next) setPreviewDraft(currentDraft());
-    setShowPreview(next);
+    setShowPreview((current) => !current);
   }
 
   function currentDraft() {
     return { ...draft, templateBody: templateBodyDraftRef.current };
   }
 
-  const preview = renderPreview(previewDraft);
+  function syncPreview(draft = currentDraft()) {
+    if (!previewSubjectRef.current || !previewBodyRef.current) return;
+    const preview = renderPreview(draft);
+    previewSubjectRef.current.textContent = preview.subject;
+    previewBodyRef.current.innerHTML = preview.html;
+  }
 
   return (
     <Card className="max-w-2xl">
@@ -374,10 +379,13 @@ export function ChildAccountReminderForm({
 
               {showPreview ? (
                 <div className="rounded-md bg-muted/60 p-3 text-sm">
-                  <p className="font-medium">{preview.subject}</p>
+                  <p ref={previewSubjectRef} className="font-medium" />
                   <div
+                    ref={(node) => {
+                      previewBodyRef.current = node;
+                      if (node) syncPreview();
+                    }}
                     className="mt-2 text-muted-foreground [&_ol]:ml-5 [&_ol]:list-decimal [&_p]:mb-2 [&_p:last-child]:mb-0 [&_ul]:ml-5 [&_ul]:list-disc"
-                    dangerouslySetInnerHTML={{ __html: preview.html }}
                   />
                 </div>
               ) : null}

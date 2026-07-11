@@ -57,6 +57,8 @@ export function StatusThresholdForm({
   const [emailError, setEmailError] = useState<string | null>(null);
   const templateBodyRef = useRef<HTMLDivElement>(null);
   const templateBodyDraftRef = useRef(emailReminder.templateBody);
+  const previewSubjectRef = useRef<HTMLParagraphElement>(null);
+  const previewBodyRef = useRef<HTMLDivElement>(null);
   const [showPreview, setShowPreview] = useState(false);
   const [showSmtpUrl, setShowSmtpUrl] = useState(false);
   const [isEditingTemplate, setIsEditingTemplate] = useState(false);
@@ -73,10 +75,6 @@ export function StatusThresholdForm({
     templateSubject: emailReminder.templateSubject,
     templateBody: emailReminder.templateBody,
   });
-  const [previewDraft, setPreviewDraft] = useState({
-    templateSubject: emailReminder.templateSubject,
-    templateBody: emailReminder.templateBody,
-  });
 
   function updateThresholdDraft(
     key: keyof typeof thresholdDraft,
@@ -88,11 +86,15 @@ export function StatusThresholdForm({
 
   function updateEmailDraft(key: keyof typeof emailDraft, value: boolean | string) {
     setEmailDraft((current) => ({ ...current, [key]: value }));
+    if (key === "templateSubject") {
+      syncPreview({ ...currentEmailDraft(), templateSubject: String(value) });
+    }
     setEmailError(null);
   }
 
   function onTemplateBodyInput() {
     templateBodyDraftRef.current = templateBodyRef.current?.innerHTML ?? "";
+    syncPreview();
     setEmailError(null);
   }
 
@@ -162,16 +164,22 @@ export function StatusThresholdForm({
   }
 
   function onTogglePreview() {
-    const next = !showPreview;
-    if (next) setPreviewDraft(currentEmailDraft());
-    setShowPreview(next);
+    setShowPreview((current) => !current);
   }
 
   function currentEmailDraft() {
     return { ...emailDraft, templateBody: templateBodyDraftRef.current };
   }
 
-  const preview = renderPreview(previewDraft, thresholdDraft.spaceSoonDays);
+  function syncPreview(
+    draft = currentEmailDraft(),
+    thresholdDays = thresholdDraft.spaceSoonDays,
+  ) {
+    if (!previewSubjectRef.current || !previewBodyRef.current) return;
+    const preview = renderPreview(draft, thresholdDays);
+    previewSubjectRef.current.textContent = preview.subject;
+    previewBodyRef.current.innerHTML = preview.html;
+  }
 
   return (
     <div className="grid max-w-2xl gap-4">
@@ -493,10 +501,13 @@ export function StatusThresholdForm({
 
                   {showPreview ? (
                     <div className="rounded-md bg-muted/60 p-3 text-sm">
-                      <p className="font-medium">{preview.subject}</p>
+                      <p ref={previewSubjectRef} className="font-medium" />
                       <div
+                        ref={(node) => {
+                          previewBodyRef.current = node;
+                          if (node) syncPreview();
+                        }}
                         className="mt-2 text-muted-foreground [&_ol]:ml-5 [&_ol]:list-decimal [&_p]:mb-2 [&_p:last-child]:mb-0 [&_ul]:ml-5 [&_ul]:list-disc"
-                        dangerouslySetInnerHTML={{ __html: preview.html }}
                       />
                     </div>
                   ) : null}
