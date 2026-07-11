@@ -91,7 +91,7 @@ type InlineChildAccountRowProps = {
 function defaultFormValue(currencies: readonly CurrencyRow[]): ChildAccountFormValue {
   const today = new Date();
   return {
-    seatType: "codex",
+    seatType: "chatgpt",
     email: "",
     contact: "",
     label: "",

@@ -168,7 +168,13 @@ export function RateTable({ rates, fetchedAt, stale, base }: RateTableProps) {
         </div>
       ) : (
         <div className="min-h-0 flex-1 overflow-auto px-6 pb-4">
-          <table data-slot="table" className="w-full caption-bottom text-sm">
+          <table data-slot="table" className="w-full min-w-[620px] table-fixed caption-bottom text-sm">
+          <colgroup>
+            <col className="w-[15%]" />
+            <col className="w-[13%]" />
+            <col className="w-[36%]" />
+            <col />
+          </colgroup>
           <TableHeader className="sticky top-0 z-20 bg-background shadow-sm [&_th]:bg-background">
             <TableRow>
               <TableHead scope="col">代码</TableHead>

@@ -175,7 +175,7 @@ export default function DashboardPage() {
                 支出来自空间付费，收入来自非自用子账号出租。自用账号只计数量，不计应收。
               </p>
             </div>
-            <div className="grid gap-4 rounded-xl border bg-card/70 p-5 shadow-[0_18px_55px_oklch(0.32_0.04_155_/_0.08)] backdrop-blur sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-4 rounded-xl border bg-card/70 p-5 shadow-[0_18px_55px_oklch(0.32_0.04_155_/_0.08)] backdrop-blur sm:grid-cols-2 lg:grid-cols-3">
               <div>
                 <p className="text-xs text-muted-foreground">空间总数</p>
                 <p className="font-mono text-2xl font-semibold">
@@ -186,12 +186,6 @@ export default function DashboardPage() {
                 <p className="text-xs text-muted-foreground">非自用账号</p>
                 <p className="font-mono text-2xl font-semibold">
                   {totals.rentedChildAccounts}
-                </p>
-              </div>
-              <div>
-                <p className="text-xs text-muted-foreground">自用账号</p>
-                <p className="font-mono text-2xl font-semibold">
-                  {totals.selfUseChildAccounts}
                 </p>
               </div>
               <div>

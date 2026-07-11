@@ -64,7 +64,7 @@ const BILLING_PERIOD_OPTIONS = [
 function defaultValues(): ChildAccountFormInput {
   const today = new Date();
   return {
-    seatType: "codex",
+    seatType: "chatgpt",
     email: "",
     contact: "",
     label: "",

@@ -82,7 +82,15 @@ export function CurrencyTable({
       </div>
 
       <div className="min-h-0 flex-1 overflow-auto px-6 pb-4">
-      <table data-slot="table" className="w-full caption-bottom text-sm">
+      <table data-slot="table" className="w-full min-w-[720px] table-fixed caption-bottom text-sm">
+        <colgroup>
+          <col className="w-[26%]" />
+          <col className="w-[11%]" />
+          <col className="w-[10%]" />
+          <col />
+          <col className="w-[14%]" />
+          <col className="w-32" />
+        </colgroup>
         <TableHeader className="sticky top-0 z-20 bg-background shadow-sm [&_th]:bg-background">
           <TableRow>
             <TableHead scope="col">国家/地区</TableHead>
