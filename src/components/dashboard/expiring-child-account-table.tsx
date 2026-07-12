@@ -40,7 +40,7 @@ export function ExpiringChildAccountTable({
 }: ExpiringChildAccountTableProps) {
   if (accounts.length === 0) {
     return (
-      <div className="flex min-h-48 flex-col items-center justify-center gap-4 overflow-hidden rounded-xl border border-dashed bg-card/58 px-6 py-12 text-center shadow-[0_18px_55px_oklch(0.32_0.04_155_/_0.08)] backdrop-blur">
+      <div className="flex min-h-48 flex-col items-center justify-center gap-4 rounded-xl border border-dashed bg-card/70 px-6 py-12 text-center">
         <h2 className="text-lg font-semibold tracking-tight">
           非自用账号暂无到期风险
         </h2>
@@ -52,7 +52,7 @@ export function ExpiringChildAccountTable({
   }
 
   return (
-    <div className="overflow-x-auto rounded-xl border bg-card/70 shadow-[0_18px_55px_oklch(0.32_0.04_155_/_0.08)] backdrop-blur">
+    <div className="overflow-x-auto rounded-xl border bg-card/70">
       <Table className="min-w-[760px]">
         <TableHeader>
           <TableRow>

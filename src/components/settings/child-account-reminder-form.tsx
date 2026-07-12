@@ -399,7 +399,7 @@ export function ChildAccountReminderForm({
         <div className="flex flex-wrap gap-2">
           <Button type="button" onClick={onSaveSettings} disabled={isPending}>
             <Save className="size-4" />
-            保存子账号提醒设置
+            保存设置
           </Button>
           {draft.enabled ? (
             <Button

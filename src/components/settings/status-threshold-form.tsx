@@ -522,7 +522,7 @@ export function StatusThresholdForm({
             <div className="flex flex-wrap gap-2">
               <Button type="submit" disabled={isEmailPending}>
                 <Save className="size-4" />
-                保存提醒设置
+                保存设置
               </Button>
               {emailDraft.enabled ? (
                 <Button
