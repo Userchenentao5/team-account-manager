@@ -23,4 +23,4 @@ COPY --from=build /app/next.config.ts ./next.config.ts
 COPY --from=build /app/tsconfig.json ./tsconfig.json
 
 EXPOSE 3000
-CMD ["sh", "-c", "npm run db:migrate && npm run start"]
+CMD ["sh", "-c", "npm run db:migrate && npm run db:seed && npm run start"]
