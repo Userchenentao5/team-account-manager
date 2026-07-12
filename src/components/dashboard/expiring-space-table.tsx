@@ -39,7 +39,7 @@ export function ExpiringSpaceTable({
 }: ExpiringSpaceTableProps) {
   if (spaces.length === 0) {
     return (
-      <div className="flex min-h-48 flex-col items-center justify-center gap-4 overflow-hidden rounded-xl border border-dashed bg-card/58 px-6 py-12 text-center shadow-[0_18px_55px_oklch(0.32_0.04_155_/_0.08)] backdrop-blur">
+      <div className="flex min-h-48 flex-col items-center justify-center gap-4 rounded-xl border border-dashed bg-card/70 px-6 py-12 text-center">
         <h2 className="text-lg font-semibold tracking-tight">暂无到期风险</h2>
         <p className="max-w-md text-sm leading-6 text-muted-foreground">
           当前没有已过期或 {soonDays} 天内到期的空间。
@@ -49,7 +49,7 @@ export function ExpiringSpaceTable({
   }
 
   return (
-    <div className="overflow-x-auto rounded-xl border bg-card/70 shadow-[0_18px_55px_oklch(0.32_0.04_155_/_0.08)] backdrop-blur">
+    <div className="overflow-x-auto rounded-xl border bg-card/70">
       <Table className="min-w-[720px]">
       <TableHeader>
         <TableRow>
