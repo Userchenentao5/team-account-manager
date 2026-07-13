@@ -134,17 +134,17 @@ export default async function SpaceDetailPage({
 
   return (
     <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-6 px-4 py-7 sm:px-6 lg:px-8">
-      <div className="sticky top-14 z-20 -mx-4 -mt-7 grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 border-b bg-background/95 px-4 py-4 backdrop-blur-lg sm:relative sm:top-0 sm:mx-0 sm:mt-0 sm:rounded-lg sm:border sm:bg-card">
+      <div className="sticky top-14 z-20 -mx-4 -mt-7 grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3 border-b bg-background/95 px-4 py-4 backdrop-blur-lg sm:relative sm:top-0 sm:mx-0 sm:mt-0 sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:rounded-lg sm:border sm:bg-card">
         <Button asChild variant="outline" className="h-9 gap-2 px-3">
           <Link href="/spaces">
             <ArrowLeft aria-hidden="true" className="size-4" />
             返回列表
           </Link>
         </Button>
-        <h1 className="min-w-0 truncate text-center text-xl font-semibold tracking-tight sm:absolute sm:left-1/2 sm:max-w-[52vw] sm:-translate-x-1/2 sm:text-2xl">
+        <h1 className="col-span-2 row-start-2 min-w-0 truncate text-center text-xl font-semibold tracking-tight sm:absolute sm:left-1/2 sm:col-span-1 sm:row-start-1 sm:max-w-[52vw] sm:-translate-x-1/2 sm:text-2xl">
           {space.name}
         </h1>
-        <div className="flex items-center gap-2 justify-self-end">
+        <div className="col-start-2 row-start-1 flex items-center gap-2 justify-self-end sm:col-start-3">
           <SpaceDetailActions
             space={formValue}
             childCount={childAccounts.length}

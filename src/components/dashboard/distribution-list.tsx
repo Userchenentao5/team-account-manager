@@ -26,7 +26,7 @@ export function DistributionList({
       <CardHeader className="border-b border-border/70 pb-3">
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
-            <CardTitle>{title}</CardTitle>
+            <CardTitle as="h3">{title}</CardTitle>
             <CardDescription className="mt-1 leading-5">
               {description}
             </CardDescription>

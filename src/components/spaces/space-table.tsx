@@ -277,7 +277,7 @@ export function SpaceTable({
         </div>
         <div className="flex flex-wrap items-center gap-2">
           <Select value={selectedCountry ?? "all"} onValueChange={setCountry}>
-            <SelectTrigger className="w-40">
+            <SelectTrigger className="w-40" aria-label="按国家/地区筛选">
               <SelectValue placeholder="全部国家/地区" />
             </SelectTrigger>
             <SelectContent>
@@ -293,7 +293,7 @@ export function SpaceTable({
             value={selectedChannel ? String(selectedChannel) : "all"}
             onValueChange={setChannel}
           >
-            <SelectTrigger className="w-40">
+            <SelectTrigger className="w-40" aria-label="按支付渠道筛选">
               <SelectValue placeholder="全部渠道" />
             </SelectTrigger>
             <SelectContent>

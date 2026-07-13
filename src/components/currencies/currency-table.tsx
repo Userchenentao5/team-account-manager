@@ -6,6 +6,7 @@ import type { CurrencyRow } from "@/db/currencies";
 import type { CurrencyMeta } from "@/lib/currencies";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   TableBody,
   TableCell,
@@ -70,7 +71,11 @@ export function CurrencyTable({
         </div>
 
         <div className="mt-4 max-w-sm">
+          <Label htmlFor="currency-country-filter" className="mb-2">
+            国家/地区
+          </Label>
           <Input
+            id="currency-country-filter"
             value={countryQuery}
             onChange={(event) => setCountryQuery(event.target.value)}
             placeholder="筛选国家/地区"

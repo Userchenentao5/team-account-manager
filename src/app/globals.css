@@ -149,3 +149,9 @@
     background: oklch(0.82 0.08 166 / 55%);
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

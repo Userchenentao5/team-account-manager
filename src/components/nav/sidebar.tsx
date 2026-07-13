@@ -29,6 +29,7 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
+  useSidebar,
 } from "@/components/ui/sidebar";
 
 const topLevel = [
@@ -48,6 +49,7 @@ const activeClasses =
 
 export function AppSidebar() {
   const pathname = usePathname();
+  const { setOpenMobile } = useSidebar();
 
   return (
     <Sidebar collapsible="icon" className="border-r">
@@ -78,7 +80,11 @@ export function AppSidebar() {
                       tooltip={item.label}
                       className={activeClasses}
                     >
-                      <Link href={item.href} aria-label={item.label}>
+                      <Link
+                        href={item.href}
+                        aria-label={item.label}
+                        onClick={() => setOpenMobile(false)}
+                      >
                         <Icon aria-hidden="true" />
                         <span>{item.label}</span>
                       </Link>
@@ -110,7 +116,11 @@ export function AppSidebar() {
                           isActive={isActive}
                           className={activeClasses}
                         >
-                          <Link href={child.href} aria-label={child.label}>
+                          <Link
+                            href={child.href}
+                            aria-label={child.label}
+                            onClick={() => setOpenMobile(false)}
+                          >
                             <Icon aria-hidden="true" />
                             <span>{child.label}</span>
                           </Link>
