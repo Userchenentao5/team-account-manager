@@ -33,10 +33,10 @@ export function ArchiveDialog({ channel, onOpenChange }: ArchiveDialogProps) {
           toast.success("已归档渠道");
           onOpenChange(false);
         } else {
-          toast.error("保存失败,请重试。");
+          toast.error("保存失败，请重试。");
         }
       } catch {
-        toast.error("保存失败,请重试。");
+        toast.error("保存失败，请重试。");
       }
     });
   }
@@ -47,7 +47,7 @@ export function ArchiveDialog({ channel, onOpenChange }: ArchiveDialogProps) {
         <AlertDialogHeader>
           <AlertDialogTitle>归档此渠道?</AlertDialogTitle>
           <AlertDialogDescription>
-            归档后,该渠道不会出现在新建空间的选择列表中;已使用它的空间不受影响。你可以随时恢复。
+            归档后，该渠道不会出现在新建空间的选择列表中；已使用它的空间不受影响。你可以随时恢复。
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

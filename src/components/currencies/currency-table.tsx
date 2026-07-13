@@ -54,13 +54,13 @@ export function CurrencyTable({
     : currencies;
 
   return (
-    <div className="flex h-[calc(100vh-3rem)] min-h-0 flex-col overflow-hidden">
-      <div className="shrink-0 border-b bg-background p-6 pb-4">
+    <div className="flex h-[calc(100dvh-3.5rem)] min-h-0 flex-col overflow-hidden">
+      <div className="shrink-0 border-b bg-background/95 px-4 py-6 sm:px-6 lg:px-8">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-semibold leading-tight">币种</h1>
-            <p className="mt-2 max-w-3xl text-sm text-muted-foreground">
-              币种是系统参考数据,用于金额输入、汇率缓存和 USD 成本折算。新增币种只保存元数据,不会自动生成汇率;没有缓存汇率时,创建空间会被阻断。
+            <h1 className="text-3xl font-semibold tracking-tight">币种</h1>
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-muted-foreground">
+              币种是系统参考数据，用于金额输入、汇率缓存和 USD 成本折算。新增币种只保存元数据，不会自动生成汇率；没有缓存汇率时，创建空间会被阻断。
             </p>
           </div>
           <Button onClick={() => setDialog({ mode: "add" })}>
@@ -77,11 +77,11 @@ export function CurrencyTable({
           />
         </div>
         <p className="mt-3 text-sm text-muted-foreground">
-          最小单位位数表示金额允许的小数位数,以币种元数据为准。
+          最小单位位数表示金额允许的小数位数，以币种元数据为准。
         </p>
       </div>
 
-      <div className="min-h-0 flex-1 overflow-auto px-6 pb-4">
+      <div className="min-h-0 flex-1 overflow-auto px-4 pb-4 sm:px-6 lg:px-8">
       <table data-slot="table" className="w-full min-w-[720px] table-fixed caption-bottom text-sm">
         <colgroup>
           <col className="w-[26%]" />

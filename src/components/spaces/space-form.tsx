@@ -234,7 +234,7 @@ function SpaceEditorForm({
           toast.error(res.error);
         }
       } catch {
-        toast.error("保存失败,请重试。");
+        toast.error("保存失败，请重试。");
       }
     });
   }
@@ -619,7 +619,7 @@ export function SpaceForm({
         <DialogHeader>
           <DialogTitle>{mode === "add" ? "新增空间" : "编辑空间"}</DialogTitle>
           <DialogDescription>
-            记录归属国家、支付渠道、金额与订阅周期,系统会自动算出到期日,并在保存时按当前汇率固定 USD 成本。
+            记录归属国家、支付渠道、金额与订阅周期，系统会自动算出到期日，并在保存时按当前汇率固定 USD 成本。
           </DialogDescription>
         </DialogHeader>
         <SpaceEditorForm

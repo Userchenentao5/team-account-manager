@@ -38,7 +38,7 @@ export function CurrencyDeleteDialog({
           toast.error(res.error);
         }
       } catch {
-        toast.error("删除失败,请重试。");
+        toast.error("删除失败，请重试。");
       }
     });
   }
@@ -49,7 +49,7 @@ export function CurrencyDeleteDialog({
         <AlertDialogHeader>
           <AlertDialogTitle>删除此币种?</AlertDialogTitle>
           <AlertDialogDescription>
-            删除会同时移除该币种的缓存汇率。若已有空间或子账号使用它,系统会阻止删除以保留历史金额口径。
+            删除会同时移除该币种的缓存汇率。若已有空间或子账号使用它，系统会阻止删除以保留历史金额口径。
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

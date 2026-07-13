@@ -11,6 +11,7 @@ import {
   Banknote,
   Settings,
   LogOut,
+  Layers3,
 } from "lucide-react";
 
 import { logout } from "@/actions/auth";
@@ -20,6 +21,7 @@ import {
   SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
+  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
@@ -42,18 +44,27 @@ const referenceChildren = [
 ] as const;
 
 const activeClasses =
-  "data-[active=true]:bg-primary/12 data-[active=true]:text-primary data-[active=true]:font-semibold data-[active=true]:shadow-inner";
+  "data-[active=true]:bg-sidebar-accent data-[active=true]:text-sidebar-accent-foreground data-[active=true]:font-semibold";
 
 export function AppSidebar() {
   const pathname = usePathname();
 
   return (
-    <Sidebar collapsible="icon" className="border-r bg-sidebar/90 backdrop-blur-xl">
-      <SidebarHeader className="px-4 py-4 text-base font-semibold tracking-tight">
-        团队空间管理
+    <Sidebar collapsible="icon" className="border-r">
+      <SidebarHeader className="h-14 justify-center border-b px-3">
+        <div className="flex items-center gap-2.5 overflow-hidden">
+          <div className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm">
+            <Layers3 aria-hidden="true" className="size-4" />
+          </div>
+          <div className="min-w-0 group-data-[collapsible=icon]:hidden">
+            <p className="truncate text-sm font-semibold">团队空间</p>
+            <p className="truncate text-[11px] text-sidebar-foreground/55">运营管理台</p>
+          </div>
+        </div>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
+          <SidebarGroupLabel>工作区</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {topLevel.map((item) => {
@@ -76,11 +87,15 @@ export function AppSidebar() {
                 );
               })}
 
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+        <SidebarGroup>
+          <SidebarGroupLabel>基础数据</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton
-                  tooltip="参考数据"
-                  className="font-semibold"
-                >
+                <SidebarMenuButton tooltip="参考数据">
                   <Database aria-hidden="true" />
                   <span>参考数据</span>
                 </SidebarMenuButton>
@@ -109,7 +124,7 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter>
+      <SidebarFooter className="border-t p-2">
         <form action={logout}>
           <SidebarMenu>
             <SidebarMenuItem>

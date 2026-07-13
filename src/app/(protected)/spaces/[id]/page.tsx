@@ -133,15 +133,15 @@ export default async function SpaceDetailPage({
   const motherSeatFormId = `space-${space.id}-mother-seat-edit-form`;
 
   return (
-    <div className="flex flex-col gap-6 p-6">
-      <div className="sticky top-0 z-20 -mx-6 -mt-6 grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-4 border-b bg-background/95 px-6 py-4 backdrop-blur sm:relative">
-        <Button asChild variant="outline" className="h-10 gap-2 px-4">
+    <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-6 px-4 py-7 sm:px-6 lg:px-8">
+      <div className="sticky top-14 z-20 -mx-4 -mt-7 grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 border-b bg-background/95 px-4 py-4 backdrop-blur-lg sm:relative sm:top-0 sm:mx-0 sm:mt-0 sm:rounded-lg sm:border sm:bg-card">
+        <Button asChild variant="outline" className="h-9 gap-2 px-3">
           <Link href="/spaces">
             <ArrowLeft aria-hidden="true" className="size-4" />
             返回列表
           </Link>
         </Button>
-        <h1 className="min-w-0 truncate text-center text-2xl font-semibold leading-tight sm:absolute sm:left-1/2 sm:max-w-[52vw] sm:-translate-x-1/2">
+        <h1 className="min-w-0 truncate text-center text-xl font-semibold tracking-tight sm:absolute sm:left-1/2 sm:max-w-[52vw] sm:-translate-x-1/2 sm:text-2xl">
           {space.name}
         </h1>
         <div className="flex items-center gap-2 justify-self-end">

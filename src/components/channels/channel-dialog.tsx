@@ -72,7 +72,7 @@ export function ChannelDialog({
           form.setError("name", { message: res.error });
         }
       } catch {
-        toast.error("保存失败,请重试。");
+        toast.error("保存失败，请重试。");
       }
     });
   }
@@ -84,8 +84,8 @@ export function ChannelDialog({
           <DialogTitle>{mode === "add" ? "新增渠道" : "重命名渠道"}</DialogTitle>
           <DialogDescription>
             {mode === "add"
-              ? "为支付渠道起一个名称,之后创建空间时就能选择它。"
-              : "修改渠道名称;它的引用关系(id)不会改变。"}
+              ? "为支付渠道起一个名称，之后创建空间时就能选择它。"
+              : "修改渠道名称；它的引用关系（ID）不会改变。"}
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>

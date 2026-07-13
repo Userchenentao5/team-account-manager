@@ -33,14 +33,14 @@ export function MetricCard({
   return (
     <div
       className={cn(
-        "min-h-28 border-l-2 py-1 pl-4",
+        "min-h-28 border-t-2 py-4",
         toneClassNames[tone],
       )}
     >
       <div className="text-xs font-medium text-muted-foreground">{label}</div>
       <div
         className={cn(
-          "mt-4 font-mono text-3xl font-semibold leading-none tracking-tight tabular-nums",
+          "mt-3 whitespace-nowrap font-mono text-2xl font-semibold leading-none tabular-nums",
           valueClassNames[tone],
         )}
       >

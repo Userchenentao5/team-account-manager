@@ -72,13 +72,13 @@ export function RateTable({ rates, fetchedAt, stale, base }: RateTableProps) {
         if (res.ok && !res.stale) {
           toast.success("汇率已更新");
         } else if (res.ok && res.stale) {
-          toast.error("刷新失败,已保留上次缓存的汇率。");
+          toast.error("刷新失败，已保留上次缓存的汇率。");
         } else {
-          toast.error("刷新失败,请重试。");
+          toast.error("刷新失败，请重试。");
         }
         router.refresh();
       } catch {
-        toast.error("刷新失败,请重试。");
+        toast.error("刷新失败，请重试。");
       }
     });
   }
@@ -99,13 +99,13 @@ export function RateTable({ rates, fetchedAt, stale, base }: RateTableProps) {
   const showStaleBanner = stale && !isEmpty;
 
   return (
-    <div className="flex h-[calc(100vh-3rem)] min-h-0 flex-col overflow-hidden">
-      <div className="shrink-0 border-b bg-background p-6 pb-4">
+    <div className="flex h-[calc(100dvh-3.5rem)] min-h-0 flex-col overflow-hidden">
+      <div className="shrink-0 border-b bg-background/95 px-4 py-6 sm:px-6 lg:px-8">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-semibold leading-tight">汇率</h1>
-          <p className="mt-2 text-sm text-muted-foreground">
-            汇率覆盖当前币种表,此页用于刷新缓存;新增币种后刷新一次即可获取对应汇率。
+          <h1 className="text-3xl font-semibold tracking-tight">汇率</h1>
+          <p className="mt-2 text-sm leading-6 text-muted-foreground">
+            汇率覆盖当前币种表，此页用于刷新缓存；新增币种后刷新一次即可获取对应汇率。
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
@@ -138,7 +138,7 @@ export function RateTable({ rates, fetchedAt, stale, base }: RateTableProps) {
         </p>
       )}
       <p className="mt-2 text-sm text-muted-foreground">
-        当前按 1 {base} 可兑换各币种展示;系统缓存仍统一保存为 X→USD,用于冻结空间和子账号的 USD 成本。
+        当前按 1 {base} 可兑换各币种展示；系统缓存仍统一保存为 X→USD，用于冻结空间和子账号的 USD 成本。
       </p>
 
       {showStaleBanner && (
@@ -146,18 +146,18 @@ export function RateTable({ rates, fetchedAt, stale, base }: RateTableProps) {
           <TriangleAlert />
           <AlertTitle>汇率可能已过期</AlertTitle>
           <AlertDescription>
-            无法连接汇率服务,当前显示上次缓存的汇率。请检查网络后重试“刷新汇率”。
+            无法连接汇率服务，当前显示上次缓存的汇率。请检查网络后重试“刷新汇率”。
           </AlertDescription>
         </Alert>
       )}
       </div>
 
       {isEmpty ? (
-        <div className="m-6 flex flex-col items-center justify-center gap-4 rounded-lg border border-dashed py-12 text-center">
+        <div className="m-4 flex flex-col items-center justify-center gap-3 rounded-lg border border-dashed bg-muted/20 py-12 text-center sm:m-6">
           <h2 className="text-lg font-semibold">暂无汇率数据</h2>
           <p className="max-w-md text-sm text-muted-foreground">
             尚未获取到汇率。点击“刷新汇率”从 Frankfurter
-            获取;若仍失败,请检查网络后稍后重试。
+            获取；若仍失败，请检查网络后稍后重试。
           </p>
           <Button onClick={onRefresh} disabled={isPending}>
             <RefreshCw
@@ -167,7 +167,7 @@ export function RateTable({ rates, fetchedAt, stale, base }: RateTableProps) {
           </Button>
         </div>
       ) : (
-        <div className="min-h-0 flex-1 overflow-auto px-6 pb-4">
+        <div className="min-h-0 flex-1 overflow-auto px-4 pb-4 sm:px-6 lg:px-8">
           <table data-slot="table" className="w-full min-w-[620px] table-fixed caption-bottom text-sm">
           <colgroup>
             <col className="w-[15%]" />
