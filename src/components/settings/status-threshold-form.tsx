@@ -36,11 +36,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
+import { TemplatePlaceholderList } from "@/components/settings/template-placeholder-list";
 import {
   renderRichTextTemplateBody,
   renderTemplateText,
   sanitizeRichTextHtml,
 } from "@/lib/email/rich-text";
+import { SPACE_REMINDER_TEMPLATE_PLACEHOLDERS } from "@/lib/email/reminder-template-placeholders";
 
 type StatusThresholdFormProps = {
   thresholds: StatusThresholds;
@@ -55,8 +57,10 @@ export function StatusThresholdForm({
   const [isEmailPending, startEmailTransition] = useTransition();
   const [thresholdError, setThresholdError] = useState<string | null>(null);
   const [emailError, setEmailError] = useState<string | null>(null);
+  const templateSubjectRef = useRef<HTMLInputElement>(null);
   const templateBodyRef = useRef<HTMLDivElement>(null);
   const templateBodyDraftRef = useRef(emailReminder.templateBody);
+  const lastTemplateFieldRef = useRef<"subject" | "body">("body");
   const previewSubjectRef = useRef<HTMLParagraphElement>(null);
   const previewBodyRef = useRef<HTMLDivElement>(null);
   const [showPreview, setShowPreview] = useState(false);
@@ -101,6 +105,38 @@ export function StatusThresholdForm({
   function runTemplateCommand(command: string) {
     templateBodyRef.current?.focus();
     document.execCommand(command);
+    onTemplateBodyInput();
+  }
+
+  function insertPlaceholder(placeholder: string) {
+    if (lastTemplateFieldRef.current === "subject") {
+      const input = templateSubjectRef.current;
+      const value = input?.value ?? emailDraft.templateSubject;
+      const start = input?.selectionStart ?? value.length;
+      const end = input?.selectionEnd ?? start;
+      const nextValue = `${value.slice(0, start)}${placeholder}${value.slice(end)}`;
+      updateEmailDraft("templateSubject", nextValue);
+      requestAnimationFrame(() => {
+        input?.focus();
+        input?.setSelectionRange(start + placeholder.length, start + placeholder.length);
+      });
+      return;
+    }
+
+    const editor = templateBodyRef.current;
+    if (!editor) return;
+    const selection = window.getSelection();
+    const hasEditorSelection =
+      Boolean(selection?.rangeCount) && editor.contains(selection?.anchorNode ?? null);
+    editor.focus();
+    if (!hasEditorSelection && selection) {
+      const range = document.createRange();
+      range.selectNodeContents(editor);
+      range.collapse(false);
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }
+    document.execCommand("insertText", false, placeholder);
     onTemplateBodyInput();
   }
 
@@ -393,6 +429,7 @@ export function StatusThresholdForm({
                           邮件标题模板
                         </Label>
                         <Input
+                          ref={templateSubjectRef}
                           id="spaceEmailTemplateSubject"
                           value={emailDraft.templateSubject}
                           onChange={(event) =>
@@ -402,6 +439,9 @@ export function StatusThresholdForm({
                             )
                           }
                           disabled={isEmailPending}
+                          onFocus={() => {
+                            lastTemplateFieldRef.current = "subject";
+                          }}
                         />
                       </div>
 
@@ -480,6 +520,9 @@ export function StatusThresholdForm({
                             suppressContentEditableWarning
                             onInput={onTemplateBodyInput}
                             onPaste={onTemplatePaste}
+                            onFocus={() => {
+                              lastTemplateFieldRef.current = "body";
+                            }}
                             className="min-h-28 w-full rounded-b-md bg-transparent px-3 py-2 text-sm outline-none transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 data-[disabled=true]:cursor-not-allowed data-[disabled=true]:opacity-50"
                             data-disabled={isEmailPending}
                             dangerouslySetInnerHTML={{
@@ -491,11 +534,10 @@ export function StatusThresholdForm({
                         </div>
                       </div>
 
-                      <p className="text-xs text-muted-foreground">
-                        占位符：{"{spaceName}"} {"{daysUntilExpiry}"}{" "}
-                        {"{paymentChannelName}"} {"{amountUsd}"}{" "}
-                        {"{expiryDate}"}
-                      </p>
+                      <TemplatePlaceholderList
+                        placeholders={SPACE_REMINDER_TEMPLATE_PLACEHOLDERS}
+                        onInsert={insertPlaceholder}
+                      />
                     </div>
                   ) : null}
 

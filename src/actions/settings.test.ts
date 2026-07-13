@@ -98,7 +98,7 @@ describe("settings server actions", () => {
     });
   });
 
-  it("sends a rendered child account reminder test without next payment date", async () => {
+  it("sends a rendered child account reminder test with next payment date", async () => {
     const channel = insertChannel(ctx.db, "Visa");
     const space = insertSpaceWithMother(
       ctx.db,
@@ -146,7 +146,7 @@ describe("settings server actions", () => {
       smtpFrom: "sender@example.com",
       templateSubject: "{spaceName} child reminder",
       templateBody:
-        "{spaceName} {childAccountEmail} {contact}: {amount} {currencyCode}",
+        "{spaceName} {childAccountEmail} {contact}: {amount} {currencyCode} on {nextPaymentDate}",
     });
 
     expect(res).toEqual({ ok: true });
@@ -157,9 +157,25 @@ describe("settings server actions", () => {
       from: "sender@example.com",
       to: "billing@example.com",
       subject: "Real Team child reminder",
-      text: "Real Team member@example.com wx-member: 12.99 CNY",
-      html: "<p>Real Team member@example.com wx-member: 12.99 CNY</p>",
+      text: "Real Team member@example.com wx-member: 12.99 CNY on 2026-07-08",
+      html: "<p>Real Team member@example.com wx-member: 12.99 CNY on 2026-07-08</p>",
     });
-    expect(mailer.sendMail.mock.calls[0][0].text).not.toContain("2026-07-08");
+  });
+
+  it("rejects unknown reminder template placeholders", async () => {
+    const res = await sendSpaceEmailReminderTest({
+      enabled: false,
+      recipientEmail: "",
+      sendTime: "09:00",
+      smtpUrl: "",
+      smtpFrom: "",
+      templateSubject: "{spaceName}",
+      templateBody: "Expires on {unknownDate}",
+    });
+
+    expect(res).toEqual({
+      ok: false,
+      error: "不支持的占位符：{unknownDate}",
+    });
   });
 });

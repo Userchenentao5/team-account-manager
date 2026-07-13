@@ -26,6 +26,20 @@ export function renderTemplateText(
   });
 }
 
+export function findUnknownTemplatePlaceholders(
+  template: string,
+  allowedKeys: readonly string[],
+): string[] {
+  const allowed = new Set(allowedKeys);
+  return [
+    ...new Set(
+      Array.from(template.matchAll(TOKEN_PATTERN), (match) => match[1]).filter(
+        (key) => !allowed.has(key),
+      ),
+    ),
+  ];
+}
+
 export function renderRichTextTemplateBody(
   template: string,
   values: Record<string, string>,
