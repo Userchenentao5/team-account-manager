@@ -4,7 +4,6 @@ import type { ClipboardEvent } from "react";
 import { useRef, useState, useTransition } from "react";
 import {
   Bold,
-  Clock,
   Eye,
   EyeOff,
   Italic,
@@ -31,6 +30,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { TimePicker } from "@/components/ui/time-picker";
 import { Switch } from "@/components/ui/switch";
 import { TemplatePlaceholderList } from "@/components/settings/template-placeholder-list";
 import {
@@ -172,7 +172,7 @@ export function ChildAccountReminderForm({
   }
 
   return (
-    <Card className="max-w-2xl">
+    <Card>
       <CardHeader className="border-b">
         <CardTitle>子账号邮件提醒</CardTitle>
         <CardDescription>
@@ -217,19 +217,12 @@ export function ChildAccountReminderForm({
 
             <div className="space-y-2">
               <Label htmlFor="childAccountEmailSendTime">发送时间</Label>
-              <div className="flex items-center gap-2">
-                <Clock className="size-4 text-muted-foreground" />
-                <Input
-                  id="childAccountEmailSendTime"
-                  type="time"
-                  value={draft.sendTime}
-                  onChange={(event) =>
-                    updateDraft("sendTime", event.target.value)
-                  }
-                  disabled={isPending}
-                  className="max-w-40 font-mono"
-                />
-              </div>
+              <TimePicker
+                id="childAccountEmailSendTime"
+                value={draft.sendTime}
+                onValueChange={(value) => updateDraft("sendTime", value)}
+                disabled={isPending}
+              />
             </div>
 
             <div className="grid gap-5 sm:grid-cols-2">
