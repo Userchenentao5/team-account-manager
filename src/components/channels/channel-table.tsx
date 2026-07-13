@@ -80,10 +80,10 @@ export function ChannelTable({ channels, showArchived }: ChannelTableProps) {
         if (res.ok) {
           toast.success("已恢复渠道");
         } else {
-          toast.error("保存失败,请重试。");
+          toast.error("保存失败，请重试。");
         }
       } catch {
-        toast.error("保存失败,请重试。");
+        toast.error("保存失败，请重试。");
       }
     });
   }
@@ -101,13 +101,13 @@ export function ChannelTable({ channels, showArchived }: ChannelTableProps) {
   const showEmptyState = channels.length === 0 && !includeArchived;
 
   return (
-    <div className="flex h-[calc(100vh-3rem)] min-h-0 flex-col overflow-hidden">
-      <div className="shrink-0 border-b bg-background p-6 pb-4">
+    <div className="flex h-[calc(100dvh-3.5rem)] min-h-0 flex-col overflow-hidden">
+      <div className="shrink-0 border-b bg-background/95 px-4 py-6 sm:px-6 lg:px-8">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-semibold leading-tight">支付渠道</h1>
-            <p className="mt-2 max-w-3xl text-sm text-muted-foreground">
-              管理创建空间时可选的支付渠道;归档后不会在新空间表单中出现,历史记录仍保留原渠道名称。
+            <h1 className="text-3xl font-semibold tracking-tight">支付渠道</h1>
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-muted-foreground">
+              管理创建空间时可选的支付渠道；归档后不会在新空间表单中出现，历史记录仍保留原渠道名称。
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-6">
@@ -159,10 +159,10 @@ export function ChannelTable({ channels, showArchived }: ChannelTableProps) {
       </div>
 
       {showEmptyState ? (
-        <div className="m-6 flex flex-col items-center justify-center gap-4 rounded-lg border border-dashed py-12 text-center">
+        <div className="m-4 flex flex-col items-center justify-center gap-3 rounded-lg border border-dashed bg-muted/20 py-12 text-center sm:m-6">
           <h2 className="text-lg font-semibold">还没有支付渠道</h2>
           <p className="max-w-md text-sm text-muted-foreground">
-            添加你的第一个支付渠道,之后创建空间时就能选择它。
+            添加你的第一个支付渠道，之后创建空间时就能选择它。
           </p>
           <Button onClick={() => setDialog({ mode: "add" })}>
             <Plus className="size-4" />
@@ -170,7 +170,7 @@ export function ChannelTable({ channels, showArchived }: ChannelTableProps) {
           </Button>
         </div>
       ) : (
-        <div className="min-h-0 flex-1 overflow-auto px-6 pb-4">
+        <div className="min-h-0 flex-1 overflow-auto px-4 pb-4 sm:px-6 lg:px-8">
           <table data-slot="table" className="w-full caption-bottom text-sm">
             <TableHeader className="sticky top-0 z-20 bg-background shadow-sm [&_th]:bg-background">
               <TableRow>

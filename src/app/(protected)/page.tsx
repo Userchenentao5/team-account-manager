@@ -49,7 +49,7 @@ export default function DashboardPage() {
     totals.renewalRiskSpaces > 0 || totals.renewalRiskChildAccounts > 0;
 
   return (
-    <div className="mx-auto w-full max-w-[1440px] px-4 py-6 sm:px-6 lg:px-8">
+    <div className="mx-auto w-full max-w-[1440px] px-4 py-7 sm:px-6 lg:px-8">
       <header className="flex flex-col gap-5 border-b border-border/80 pb-6 sm:flex-row sm:items-end sm:justify-between">
         <div className="max-w-2xl">
           <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
@@ -72,7 +72,7 @@ export default function DashboardPage() {
       </header>
 
       {totals.totalSpaces === 0 ? (
-        <div className="mt-8 flex flex-col items-center justify-center gap-4 rounded-xl border border-dashed bg-card/70 px-6 py-14 text-center">
+        <div className="mt-8 flex flex-col items-center justify-center gap-3 rounded-lg border border-dashed bg-muted/20 px-6 py-14 text-center">
           <h2 className="text-base font-semibold">还没有空间数据</h2>
           <p className="max-w-md text-sm text-muted-foreground">
             先到空间列表新增空间。仪表盘会在有数据后显示空间支出、出租账号收入和到期风险。
@@ -139,7 +139,7 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            <div className="border-l-2 border-primary/50 pl-5 sm:pl-6">
+            <div className="rounded-lg border border-primary/15 bg-accent/30 p-5 sm:p-6">
               <div>
                 <h2 className="text-lg font-semibold tracking-tight">本期现金流</h2>
                 <p className="mt-1 text-sm leading-6 text-muted-foreground">
@@ -160,7 +160,7 @@ export default function DashboardPage() {
                   description={receivableCny ? `折合 ${receivableCny}` : "CNY 汇率缺失"}
                 />
               </div>
-              <div className="mt-6 border-t border-border/70 pt-4">
+              <div className="mt-5 border-t border-primary/15 pt-4">
                 <p className="text-xs text-muted-foreground">预计净收入</p>
                 <p className="mt-2 font-mono text-xl font-semibold tabular-nums">
                   {usd(totals.netMonthlyUsdMinor)}
@@ -273,7 +273,7 @@ export default function DashboardPage() {
               </p>
             </div>
             {totals.spacePaymentUsdMinor === 0 ? (
-              <div className="rounded-xl border border-dashed bg-card/70 p-5 text-sm text-muted-foreground">
+              <div className="rounded-lg border border-dashed bg-muted/20 p-5 text-sm text-muted-foreground">
                 暂无空间支出分布。新增带 USD 成本的空间后，这里会按渠道和空间汇总。
               </div>
             ) : (

@@ -168,7 +168,7 @@ export function CurrencyDialog({
           form.setError(res.field ?? "code", { message: res.error });
         }
       } catch {
-        toast.error("保存失败,请重试。");
+        toast.error("保存失败，请重试。");
       }
     });
   }
@@ -181,7 +181,7 @@ export function CurrencyDialog({
           <DialogDescription>
             {mode === "add"
               ? "选择国家/地区后会自动加入对应币种。新增后刷新汇率即可获取该币种缓存。"
-              : "修改名称、符号或最小单位位数;代码保持不变。"}
+              : "修改名称、符号或最小单位位数；代码保持不变。"}
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>

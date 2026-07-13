@@ -266,12 +266,12 @@ export function SpaceTable({
   }
 
   return (
-    <div className="flex h-[calc(100vh-3rem)] min-h-0 flex-col overflow-hidden">
-      <div className="shrink-0 border-b bg-background p-6 pb-4">
+    <div className="flex h-[calc(100dvh-3.5rem)] min-h-0 flex-col overflow-hidden">
+      <div className="shrink-0 border-b bg-background/95 px-4 py-6 sm:px-6 lg:px-8">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-semibold leading-tight">空间</h1>
-          <p className="mt-2 text-sm text-muted-foreground">
+          <h1 className="text-3xl font-semibold tracking-tight">空间</h1>
+          <p className="mt-2 text-sm leading-6 text-muted-foreground">
             按国家/地区、支付渠道筛选空间，并查看冻结成本与到期状态。
           </p>
         </div>
@@ -314,19 +314,19 @@ export function SpaceTable({
       </div>
 
       {spaces.length === 0 ? (
-        <div className="min-h-0 flex-1 overflow-auto p-6">
+        <div className="min-h-0 flex-1 overflow-auto p-4 sm:p-6 lg:px-8">
           {hasFilters ? (
-            <div className="flex flex-col items-center justify-center gap-4 rounded-lg border border-dashed py-12 text-center">
+            <div className="flex flex-col items-center justify-center gap-3 rounded-lg border border-dashed bg-muted/20 py-12 text-center">
             <h2 className="text-lg font-semibold">没有符合条件的空间</h2>
             <p className="max-w-md text-sm text-muted-foreground">
               调整或清除筛选条件后再试。
             </p>
           </div>
           ) : (
-            <div className="flex flex-col items-center justify-center gap-4 rounded-lg border border-dashed py-12 text-center">
+            <div className="flex flex-col items-center justify-center gap-3 rounded-lg border border-dashed bg-muted/20 py-12 text-center">
             <h2 className="text-lg font-semibold">还没有空间</h2>
             <p className="max-w-md text-sm text-muted-foreground">
-              创建你的第一个空间,记录归属国家、支付渠道、金额与订阅周期,系统会自动算出到期日并冻结 USD 金额。
+              创建你的第一个空间，记录归属国家、支付渠道、金额与订阅周期，系统会自动算出到期日并冻结 USD 金额。
             </p>
             <Button onClick={() => setFormState({ mode: "add" })}>
               <Plus className="size-4" />
@@ -337,7 +337,7 @@ export function SpaceTable({
         </div>
       ) : (
         <>
-          <div className="min-h-0 flex-1 overflow-auto px-6 pb-4">
+        <div className="min-h-0 flex-1 overflow-auto px-4 pb-4 sm:px-6 lg:px-8">
             <table
               data-slot="table"
               className="w-full min-w-[980px] caption-bottom text-sm"
@@ -487,7 +487,7 @@ export function SpaceTable({
           </TableBody>
             </table>
           </div>
-          <div className="flex shrink-0 flex-wrap items-center justify-between gap-3 border-t bg-background px-6 py-3">
+          <div className="flex shrink-0 flex-wrap items-center justify-between gap-3 border-t bg-background px-4 py-3 sm:px-6 lg:px-8">
             <p className="text-sm text-muted-foreground">
               显示 {rangeStart}-{rangeEnd} 条，共 {sortedSpaces.length} 条
             </p>
