@@ -32,6 +32,7 @@ function templateValues(
     childAccountLabel: row.childAccountLabel,
     currencyCode: row.currencyCode,
     daysUntilPayment: String(row.daysUntilPayment),
+    nextPaymentDate: row.nextPaymentDate,
     spaceName: row.spaceName,
   };
 }

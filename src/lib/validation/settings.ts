@@ -1,4 +1,9 @@
 import { z } from "zod";
+import { findUnknownTemplatePlaceholders } from "@/lib/email/rich-text";
+import {
+  CHILD_ACCOUNT_REMINDER_TEMPLATE_KEYS,
+  SPACE_REMINDER_TEMPLATE_KEYS,
+} from "@/lib/email/reminder-template-placeholders";
 
 const thresholdDays = z
   .number({ error: "请输入有效天数。" })
@@ -24,6 +29,22 @@ const smtpUrl = z.string().refine((value) => {
     return false;
   }
 }, "请输入有效的 SMTP URL，例如 smtp://user:pass@smtp.example.com:587。");
+
+function validateTemplatePlaceholders(
+  value: { templateSubject: string; templateBody: string },
+  context: z.RefinementCtx,
+  allowedKeys: readonly string[],
+) {
+  for (const field of ["templateSubject", "templateBody"] as const) {
+    const unknown = findUnknownTemplatePlaceholders(value[field], allowedKeys);
+    if (unknown.length === 0) continue;
+    context.addIssue({
+      code: "custom",
+      path: [field],
+      message: `不支持的占位符：${unknown.map((key) => `{${key}}`).join(" ")}`,
+    });
+  }
+}
 
 export const spaceEmailReminderSchema = z
   .object({
@@ -57,6 +78,13 @@ export const spaceEmailReminderSchema = z
       .min(1, "邮件正文模板不能为空。")
       .max(1000, "邮件正文模板不能超过 1000 个字符。"),
   })
+  .superRefine((value, context) =>
+    validateTemplatePlaceholders(
+      value,
+      context,
+      SPACE_REMINDER_TEMPLATE_KEYS,
+    ),
+  )
   .refine((value) => !value.enabled || value.recipientEmail.length > 0, {
     path: ["recipientEmail"],
     message: "开启空间邮件提醒后请输入接收邮箱。",
@@ -106,6 +134,13 @@ export const childAccountEmailReminderSchema = z
       .min(1, "邮件正文模板不能为空。")
       .max(1000, "邮件正文模板不能超过 1000 个字符。"),
   })
+  .superRefine((value, context) =>
+    validateTemplatePlaceholders(
+      value,
+      context,
+      CHILD_ACCOUNT_REMINDER_TEMPLATE_KEYS,
+    ),
+  )
   .refine((value) => !value.enabled || value.recipientEmail.length > 0, {
     path: ["recipientEmail"],
     message: "开启子账号邮件提醒后请输入自己的接收邮箱。",
