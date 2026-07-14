@@ -4,7 +4,6 @@ import type { ClipboardEvent, FormEvent } from "react";
 import { useRef, useState, useTransition } from "react";
 import {
   Bold,
-  Clock,
   Eye,
   EyeOff,
   Italic,
@@ -35,6 +34,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { TimePicker } from "@/components/ui/time-picker";
 import { Switch } from "@/components/ui/switch";
 import { TemplatePlaceholderList } from "@/components/settings/template-placeholder-list";
 import {
@@ -218,7 +218,7 @@ export function StatusThresholdForm({
   }
 
   return (
-    <div className="grid max-w-2xl gap-4">
+    <div className="grid gap-4">
       <Card>
         <CardHeader className="border-b">
           <CardTitle>状态阈值</CardTitle>
@@ -330,19 +330,14 @@ export function StatusThresholdForm({
 
                 <div className="space-y-2">
                   <Label htmlFor="spaceEmailSendTime">发送时间</Label>
-                  <div className="flex items-center gap-2">
-                    <Clock className="size-4 text-muted-foreground" />
-                    <Input
-                      id="spaceEmailSendTime"
-                      type="time"
-                      value={emailDraft.sendTime}
-                      onChange={(event) =>
-                        updateEmailDraft("sendTime", event.target.value)
-                      }
-                      disabled={isEmailPending}
-                      className="max-w-40 font-mono"
-                    />
-                  </div>
+                  <TimePicker
+                    id="spaceEmailSendTime"
+                    value={emailDraft.sendTime}
+                    onValueChange={(value) =>
+                      updateEmailDraft("sendTime", value)
+                    }
+                    disabled={isEmailPending}
+                  />
                 </div>
 
                 <div className="grid gap-5 sm:grid-cols-2">

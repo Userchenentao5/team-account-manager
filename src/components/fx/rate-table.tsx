@@ -110,7 +110,7 @@ export function RateTable({ rates, fetchedAt, stale, base }: RateTableProps) {
         </div>
         <div className="flex flex-wrap items-center gap-2">
           <Select value={base} onValueChange={onBaseChange}>
-            <SelectTrigger className="w-36">
+            <SelectTrigger className="w-36" aria-label="选择基准币种">
               <SelectValue placeholder="基准币" />
             </SelectTrigger>
             <SelectContent align="end" position="popper">

@@ -34,9 +34,9 @@ export default async function LoginPage({
           <span className="text-sm font-semibold">团队空间管理</span>
         </div>
         <div className="max-w-xl">
-          <h1 className="text-4xl font-semibold leading-tight tracking-tight xl:text-5xl">
+          <h2 className="text-4xl font-semibold leading-tight tracking-tight xl:text-5xl">
             让成本、席位与到期状态保持清晰。
-          </h1>
+          </h2>
           <p className="mt-5 max-w-md text-sm leading-7 text-primary-foreground/72">
             用一个安静的工作台处理空间订阅、子账号收款和续费风险。
           </p>
@@ -57,7 +57,9 @@ export default async function LoginPage({
               <div className="mb-3 flex size-9 items-center justify-center rounded-lg bg-accent text-accent-foreground">
                 <KeyRound aria-hidden="true" className="size-4" />
               </div>
-              <CardTitle className="text-xl">访问验证</CardTitle>
+              <CardTitle as="h1" className="text-xl">
+                访问验证
+              </CardTitle>
               <CardDescription className="leading-6">
                 输入个人访问密钥后继续使用系统。
               </CardDescription>

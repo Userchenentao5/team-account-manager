@@ -58,10 +58,10 @@ export default function DashboardPage() {
     <div className="mx-auto w-full max-w-[1440px] px-4 py-7 sm:px-6 lg:px-8">
       <header className="flex flex-col gap-5 border-b border-border/80 pb-6 sm:flex-row sm:items-end sm:justify-between">
         <div className="max-w-2xl">
-          <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+          <h1 className="text-3xl font-semibold tracking-tight">
             仪表盘
           </h1>
-          <p className="mt-2 text-sm leading-6 text-muted-foreground sm:text-base">
+          <p className="mt-2 text-sm leading-6 text-muted-foreground">
             先处理续费风险，再核对本期成本与应收。
           </p>
         </div>
