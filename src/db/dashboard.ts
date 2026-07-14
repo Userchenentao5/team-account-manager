@@ -55,6 +55,16 @@ export type DashboardSpendBucket = {
   percentage: number;
 };
 
+export type DashboardSpacePerformance = {
+  id: number;
+  name: string;
+  spacePaymentUsdMinor: number;
+  rentedRevenueUsdMinor: number;
+  netUsdMinor: number;
+  rentedChildAccounts: number;
+  status: "cost_uncovered" | "no_rental_income" | "cost_covered";
+};
+
 export type DashboardCountSummary = {
   spacesByExpiryStatus: {
     expired: number;
@@ -105,8 +115,8 @@ export type DashboardOverview = {
     byCurrency: DashboardSpendBucket[];
     byPaymentChannel: DashboardSpendBucket[];
     spendingByPaymentChannel: DashboardSpendBucket[];
-    spendingBySpace: DashboardSpendBucket[];
   };
+  spacePerformance: DashboardSpacePerformance[];
   counts: DashboardCountSummary;
   thresholds: StatusThresholds;
 };
@@ -153,6 +163,11 @@ type BucketSeed = {
   usdMinor: number;
 };
 
+type SpacePerformanceSeed = Omit<
+  DashboardSpacePerformance,
+  "netUsdMinor" | "status"
+>;
+
 function addBucket(
   buckets: Map<string, BucketSeed>,
   key: string,
@@ -184,6 +199,33 @@ function toBuckets(
           ? 0
           : Number(((bucket.usdMinor / totalUsdMinor) * 100).toFixed(1)),
     }));
+}
+
+function toSpacePerformance(
+  rows: Map<number, SpacePerformanceSeed>,
+): DashboardSpacePerformance[] {
+  return Array.from(rows.values())
+    .map((row) => {
+      const netUsdMinor = row.rentedRevenueUsdMinor - row.spacePaymentUsdMinor;
+      const status: DashboardSpacePerformance["status"] =
+        row.rentedChildAccounts === 0
+          ? "no_rental_income"
+          : netUsdMinor < 0
+            ? "cost_uncovered"
+            : "cost_covered";
+      return { ...row, netUsdMinor, status };
+    })
+    .sort((left, right) => {
+      const statusWeight = {
+        cost_uncovered: 0,
+        no_rental_income: 1,
+        cost_covered: 2,
+      };
+      const byStatus = statusWeight[left.status] - statusWeight[right.status];
+      if (byStatus !== 0) return byStatus;
+      const byNet = left.netUsdMinor - right.netUsdMinor;
+      return byNet !== 0 ? byNet : left.name.localeCompare(right.name);
+    });
 }
 
 function statusWeight(status: ExpiryStatus) {
@@ -313,7 +355,7 @@ export function getDashboardOverview(
   const currencyBuckets = new Map<string, BucketSeed>();
   const paymentChannelBuckets = new Map<string, BucketSeed>();
   const spendingByPaymentChannelBuckets = new Map<string, BucketSeed>();
-  const spendingBySpaceBuckets = new Map<string, BucketSeed>();
+  const spacePerformanceById = new Map<number, SpacePerformanceSeed>();
   const childCountBySpace = new Map<number, number>();
 
   for (const row of childRows) {
@@ -348,12 +390,13 @@ export function getDashboardOverview(
       row.paymentChannelName,
       amountUsdMinor,
     );
-    addBucket(
-      spendingBySpaceBuckets,
-      String(row.id),
-      row.name,
-      amountUsdMinor,
-    );
+    spacePerformanceById.set(row.id, {
+      id: row.id,
+      name: row.name,
+      spacePaymentUsdMinor: amountUsdMinor,
+      rentedRevenueUsdMinor: 0,
+      rentedChildAccounts: 0,
+    });
 
     if (!row.expiryDate) {
       counts.spacesByExpiryStatus.normal += 1;
@@ -388,6 +431,11 @@ export function getDashboardOverview(
     } else {
       counts.childAccountsByUse.rented += 1;
       childMonthlyRevenueUsdMinor += row.monthlyAmountUsd;
+      const performance = spacePerformanceById.get(row.spaceId);
+      if (performance) {
+        performance.rentedRevenueUsdMinor += row.monthlyAmountUsd;
+        performance.rentedChildAccounts += 1;
+      }
     }
 
     addBucket(
@@ -494,8 +542,8 @@ export function getDashboardOverview(
         spendingByPaymentChannelBuckets,
         spacePaymentUsdMinor,
       ),
-      spendingBySpace: toBuckets(spendingBySpaceBuckets, spacePaymentUsdMinor),
     },
+    spacePerformance: toSpacePerformance(spacePerformanceById),
     counts,
     thresholds,
   };

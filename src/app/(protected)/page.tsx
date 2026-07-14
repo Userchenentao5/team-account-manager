@@ -8,6 +8,7 @@ import { DistributionList } from "@/components/dashboard/distribution-list";
 import { ExpiringChildAccountTable } from "@/components/dashboard/expiring-child-account-table";
 import { ExpiringSpaceTable } from "@/components/dashboard/expiring-space-table";
 import { MetricCard } from "@/components/dashboard/metric-card";
+import { SpacePerformanceList } from "@/components/dashboard/space-performance-list";
 import { Button } from "@/components/ui/button";
 
 // better-sqlite3 is a native module - keep this RSC on the Node runtime.
@@ -36,7 +37,8 @@ function cnyFromUsd(amountMinor: number, cnyRate: CnyDisplayRate | null) {
 
 export default function DashboardPage() {
   const overview = getDashboardOverview(db);
-  const { totals, counts, distributions, thresholds } = overview;
+  const { totals, counts, distributions, spacePerformance, thresholds } =
+    overview;
   const cnyRateRow = getRate(db, "CNY");
   const cnyMinorUnit = getCurrencyMinorUnit(db, "CNY");
   const cnyRate =
@@ -45,6 +47,10 @@ export default function DashboardPage() {
       : null;
   const receivableCny = cnyFromUsd(totals.childMonthlyRevenueUsdMinor, cnyRate);
   const netCny = cnyFromUsd(totals.netMonthlyUsdMinor, cnyRate);
+  const spacePerformanceDisplay = spacePerformance.map((item) => ({
+    ...item,
+    netCny: cnyFromUsd(item.netUsdMinor, cnyRate),
+  }));
   const hasAnyRisk =
     totals.renewalRiskSpaces > 0 || totals.renewalRiskChildAccounts > 0;
 
@@ -269,7 +275,7 @@ export default function DashboardPage() {
             <div className="mb-5">
               <h2 className="text-xl font-semibold tracking-tight">支出分布</h2>
               <p className="mt-1 text-sm leading-6 text-muted-foreground">
-                只展示空间支出，按支付渠道和空间拆分，方便判断成本主要落点。
+                按支付渠道查看资金去向，并核对各空间的成本覆盖情况。
               </p>
             </div>
             {totals.spacePaymentUsdMinor === 0 ? (
@@ -284,12 +290,7 @@ export default function DashboardPage() {
                   buckets={distributions.spendingByPaymentChannel}
                   totalUsdMinor={totals.spacePaymentUsdMinor}
                 />
-                <DistributionList
-                  title="按空间"
-                  description="每个空间自身的付费成本占比。"
-                  buckets={distributions.spendingBySpace}
-                  totalUsdMinor={totals.spacePaymentUsdMinor}
-                />
+                <SpacePerformanceList items={spacePerformanceDisplay} />
               </div>
             )}
           </section>
