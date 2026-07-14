@@ -147,7 +147,7 @@ describe("dashboard overview aggregates (DASH-01 / DASH-02 / DASH-03 / DASH-04)"
       amountUsd: 5000,
       expiryDate: "2026-07-04",
     });
-    makeSpace({
+    const normal = makeSpace({
       name: "Normal JP Visa",
       country: "JP",
       paymentChannelId: visa.id,
@@ -171,6 +171,11 @@ describe("dashboard overview aggregates (DASH-01 / DASH-02 / DASH-03 / DASH-04)"
       monthlyCurrencyCode: "CNY",
       monthlyAmountUsd: 7000,
     });
+    makeChild(normal.id, {
+      email: "self-use@example.com",
+      monthlyAmountMinor: 0,
+      monthlyAmountUsd: 0,
+    });
 
     const overview = getDashboardOverview(ctx.db, new Date(2026, 6, 1));
 
@@ -184,7 +189,6 @@ describe("dashboard overview aggregates (DASH-01 / DASH-02 / DASH-03 / DASH-04)"
     expect(bucketTotal(overview.distributions.spendingByPaymentChannel)).toBe(
       18000,
     );
-    expect(bucketTotal(overview.distributions.spendingBySpace)).toBe(18000);
     expect(overview.distributions.byCountry).toEqual([
       { key: "US", label: "美国", usdMinor: 15000, percentage: 50 },
       { key: "CN", label: "中国", usdMinor: 12000, percentage: 40 },
@@ -218,24 +222,33 @@ describe("dashboard overview aggregates (DASH-01 / DASH-02 / DASH-03 / DASH-04)"
         percentage: 27.8,
       },
     ]);
-    expect(overview.distributions.spendingBySpace).toEqual([
+    expect(overview.spacePerformance).toEqual([
       {
-        key: String(expired.id),
-        label: "Expired US Visa",
-        usdMinor: 10000,
-        percentage: 55.6,
+        id: expired.id,
+        name: "Expired US Visa",
+        spacePaymentUsdMinor: 10000,
+        rentedRevenueUsdMinor: 5000,
+        netUsdMinor: -5000,
+        rentedChildAccounts: 2,
+        status: "cost_uncovered",
       },
       {
-        key: String(soon.id),
-        label: "Soon CN Alipay",
-        usdMinor: 5000,
-        percentage: 27.8,
+        id: normal.id,
+        name: "Normal JP Visa",
+        spacePaymentUsdMinor: 3000,
+        rentedRevenueUsdMinor: 0,
+        netUsdMinor: -3000,
+        rentedChildAccounts: 0,
+        status: "no_rental_income",
       },
       {
-        key: expect.any(String),
-        label: "Normal JP Visa",
-        usdMinor: 3000,
-        percentage: 16.7,
+        id: soon.id,
+        name: "Soon CN Alipay",
+        spacePaymentUsdMinor: 5000,
+        rentedRevenueUsdMinor: 7000,
+        netUsdMinor: 2000,
+        rentedChildAccounts: 1,
+        status: "cost_covered",
       },
     ]);
   });
@@ -393,7 +406,7 @@ describe("dashboard overview aggregates (DASH-01 / DASH-02 / DASH-03 / DASH-04)"
     expect(overview.distributions.byCurrency).toEqual([]);
     expect(overview.distributions.byPaymentChannel).toEqual([]);
     expect(overview.distributions.spendingByPaymentChannel).toEqual([]);
-    expect(overview.distributions.spendingBySpace).toEqual([]);
+    expect(overview.spacePerformance).toEqual([]);
     expect(overview.counts.spacesByExpiryStatus).toEqual({
       expired: 0,
       soon: 0,
