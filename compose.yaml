@@ -1,7 +1,6 @@
 services:
   app:
-    build:
-      context: ${APP_CONTEXT:-.}
+    image: ${APP_IMAGE:-team-account-manager:latest}
     restart: unless-stopped
     env_file: .env.production
     environment:

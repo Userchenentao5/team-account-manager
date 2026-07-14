@@ -12,6 +12,7 @@ permissions:
 
 env:
   NODE_VERSION: 24.18.0
+  IMAGE_NAME: team-account-manager
 
 jobs:
   verify:
@@ -40,6 +41,9 @@ jobs:
         run: mkdir -p data && npm run db:migrate
       - name: Build application
         run: npm run build
+      - name: Validate deployment image
+        if: github.event_name == 'pull_request'
+        run: docker build .
 
   deploy:
     needs: verify
@@ -97,7 +101,9 @@ jobs:
           ECS_PATH=/data/team-account-manager
 
           command -v docker
+          docker info >/dev/null
           docker compose version
+          command -v gzip
           command -v rsync
           test -d "$ECS_PATH" && test ! -L "$ECS_PATH"
           test -f "$ECS_PATH/.env.production" && test ! -L "$ECS_PATH/.env.production"
@@ -106,32 +112,44 @@ jobs:
             *) echo "Unsafe .env.production permissions" >&2; exit 1 ;;
           esac
           test "$(stat -c '%U' "$ECS_PATH/.env.production")" = "$(id -un)"
-          mkdir -p "$ECS_PATH/app" "$ECS_PATH/data"
-          test -d "$ECS_PATH/app" && test ! -L "$ECS_PATH/app"
+          mkdir -p "$ECS_PATH/data"
           test -d "$ECS_PATH/data" && test ! -L "$ECS_PATH/data"
-          test "$(stat -c '%U' "$ECS_PATH/app")" = "$(id -un)"
           test "$(stat -c '%U' "$ECS_PATH/data")" = "$(id -un)"
           REMOTE
-      - name: Synchronize source
+      - name: Build deployment image
+        run: docker build --tag "$IMAGE_NAME:${{ github.sha }}" .
+      - name: Synchronize deployment config
         run: |
-          rsync -az --delete-delay --delay-updates --timeout=120 --no-owner --no-group --exclude='.env*' --exclude='data/' --exclude='.git/' --exclude='node_modules/' --exclude='.next/' --exclude='.planning/' --exclude='graphify-out/' --exclude='compose.yaml' -e "ssh -F $RUNNER_TEMP/ssh/config" ./ ecs-deploy:"$ECS_PATH/app/"
           rsync -az --timeout=120 --no-owner --no-group -e "ssh -F $RUNNER_TEMP/ssh/config" ./compose.yaml ecs-deploy:"$ECS_PATH/compose.yaml"
-      - name: Build and start
+      - name: Transfer deployment image
         run: |
-          ssh -F "$RUNNER_TEMP/ssh/config" ecs-deploy "bash -se -- '${{ github.sha }}'" <<'REMOTE'
+          set -o pipefail
+          docker save "$IMAGE_NAME:${{ github.sha }}" \
+            | gzip -1 \
+            | ssh -F "$RUNNER_TEMP/ssh/config" ecs-deploy 'gzip -dc | docker load'
+      - name: Start deployment image
+        run: |
+          ssh -F "$RUNNER_TEMP/ssh/config" ecs-deploy "bash -se -- '${{ github.sha }}' '$IMAGE_NAME:${{ github.sha }}'" <<'REMOTE'
           set -Eeuo pipefail
           revision="$1"
+          image="$2"
           ECS_PATH=/data/team-account-manager
           cd "$ECS_PATH"
+          export APP_IMAGE="$image"
           trap 'docker compose ps >&2' ERR
 
-          APP_CONTEXT=./app docker compose --env-file .env.production config --quiet
-          APP_CONTEXT=./app docker compose up -d --build --wait --wait-timeout 60 --remove-orphans
+          docker compose --env-file .env.production config --quiet
+          previous_container_id="$(docker compose ps --all -q app || true)"
+          previous_image="$(docker inspect -f '{{.Config.Image}}' "$previous_container_id" 2>/dev/null || true)"
+          docker compose up -d --no-build --wait --wait-timeout 60 --remove-orphans
           container_id="$(docker compose ps -q app)"
           test -n "$container_id"
           test "$(docker inspect -f '{{.State.Health.Status}}' "$container_id")" = healthy
           docker compose exec -T app node -e "fetch('http://127.0.0.1:3000/api/health').then((response) => process.exit(response.ok ? 0 : 1)).catch(() => process.exit(1))"
           printf '%s\n' "$revision" > "$ECS_PATH/DEPLOYED_REVISION"
+          case "$previous_image" in
+            team-account-manager:*) test "$previous_image" = "$image" || docker image rm "$previous_image" || true ;;
+          esac
           REMOTE
       - name: Verify public health endpoint
         run: |
