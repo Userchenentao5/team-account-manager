@@ -38,9 +38,7 @@ export function SpacePerformanceList({
       <CardHeader className="border-b border-border/70 pb-3">
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
-            <CardTitle>
-              <h3>空间经营表现</h3>
-            </CardTitle>
+            <CardTitle as="h3">空间经营表现</CardTitle>
             <CardDescription className="mt-1 leading-5">
               出租账号应收减去空间支出，优先展示需要核对的空间。
             </CardDescription>
