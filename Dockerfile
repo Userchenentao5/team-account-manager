@@ -2,7 +2,11 @@ FROM node:24.18.0-bookworm-slim AS build
 
 WORKDIR /app
 
-RUN apt-get update \
+RUN sed -i \
+      -e 's|deb.debian.org|mirrors.cloud.aliyuncs.com|g' \
+      -e 's|security.debian.org|mirrors.cloud.aliyuncs.com|g' \
+      /etc/apt/sources.list.d/debian.sources \
+  && apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=30 update \
   && apt-get install -y --no-install-recommends python3 make g++ \
   && rm -rf /var/lib/apt/lists/*
 
