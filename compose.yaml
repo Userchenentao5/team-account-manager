@@ -5,6 +5,7 @@ services:
     env_file: .env.production
     environment:
       DB_FILE_NAME: /app/data/app.db
+      TZ: Asia/Shanghai
     volumes:
       - ./data:/app/data
     ports:
