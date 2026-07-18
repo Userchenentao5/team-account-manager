@@ -434,7 +434,7 @@
   "432": "updateChildAccount Row Helper",
   "433": "validateContactForStatus",
   "434": "Zero-Price Self-Use Snapshot",
-  "435": "scripts",
+  "435": "Theme-Aware Semantic Toast Icons",
   "436": "Q: 根据当前项目当前分支之前执行的记录继续任务",
   "437": "Q: 设置提醒中的时间选择器检查ui风格是否一致",
   "438": "Frontend Source Aliases",
@@ -1035,7 +1035,5 @@
   "1035": "route.ts",
   "1036": "layout.tsx",
   "1037": "260711-jr0-PLAN.md",
-  "1039": "ECS deployment hardening",
-  "1040": "metric-card.tsx",
-  "1041": "Theme-Aware Semantic Toast Icons"
+  "1039": "ECS deployment hardening"
 }
