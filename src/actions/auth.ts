@@ -15,6 +15,8 @@ import {
   recordLoginFailure,
   recordLoginSuccess,
 } from "@/lib/login-rate-limit";
+import { db } from "@/db";
+import { verifyMfaLoginCode } from "@/db/mfa";
 
 function loginRedirect(error: "config" | "invalid" | "locked"): never {
   redirect(`/login?error=${error}`);
@@ -37,6 +39,7 @@ export async function login(formData: FormData): Promise<void> {
   }
 
   const key = formData.get("key");
+  const mfaCode = formData.get("mfaCode");
   if (typeof key !== "string" || key.length === 0) {
     recordLoginFailure(clientId);
     loginRedirect("invalid");
@@ -44,7 +47,9 @@ export async function login(formData: FormData): Promise<void> {
 
   let ok = false;
   try {
-    ok = await verifyLoginKey(key);
+    ok =
+      (await verifyLoginKey(key)) &&
+      verifyMfaLoginCode(db, typeof mfaCode === "string" ? mfaCode : "");
   } catch {
     loginRedirect("config");
   }
