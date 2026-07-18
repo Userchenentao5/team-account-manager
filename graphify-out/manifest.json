@@ -105,8 +105,8 @@
     "semantic_hash": "025f4fcb6024b3524d19492cf7ce54a2"
   },
   "package.json": {
-    "mtime": 1783758718.5123584,
-    "ast_hash": "4f07ddbd7fb1b93e7ca42f4d0e0cbbe0",
+    "mtime": 1784387931.9949603,
+    "ast_hash": "fc21633f34fe80261e40c8e43ce8d2ae",
     "semantic_hash": ""
   },
   "postcss.config.mjs": {
@@ -990,8 +990,8 @@
     "semantic_hash": "21ceb6533048be51308e69e7b74a35cf"
   },
   "README.md": {
-    "mtime": 1783862092.5140176,
-    "ast_hash": "6acd03ae46768c7692ec72426bb313b3",
+    "mtime": 1784388887.5059323,
+    "ast_hash": "43af8e47286e8478e061d4bb7c96bc01",
     "semantic_hash": ""
   },
   "public/file.svg": {
@@ -1205,13 +1205,13 @@
     "semantic_hash": ""
   },
   "src/actions/auth.ts": {
-    "mtime": 1783738696.0388007,
-    "ast_hash": "343649ed1c75e0aab7a3d8023e18bf0a",
+    "mtime": 1784388137.815735,
+    "ast_hash": "7a6c673bb267b0127255a4e00b5b9054",
     "semantic_hash": ""
   },
   "src/app/login/page.tsx": {
-    "mtime": 1784070400.289304,
-    "ast_hash": "146ef2a07bd1b37d23471075f4c4ab68",
+    "mtime": 1784388887.5039206,
+    "ast_hash": "2ad25d2ab5a565b3377ca32fcb80c722",
     "semantic_hash": ""
   },
   "src/lib/auth.test.ts": {
@@ -1255,8 +1255,8 @@
     "semantic_hash": "a29188b3d1cc3ee4b2a51e5b099823c8"
   },
   "src/app/(protected)/settings/page.tsx": {
-    "mtime": 1784070400.2846732,
-    "ast_hash": "99ff579b0a485c4d3ee3bf750fe47cef",
+    "mtime": 1784389894.0880058,
+    "ast_hash": "14d45c2724f454424255b0f95859c097",
     "semantic_hash": ""
   },
   "src/app/(protected)/spaces/[id]/page.tsx": {
@@ -1402,6 +1402,36 @@
   "graphify-out/memory/query_20260718_142738_\u521a\u521a\u7684\u8c03\u6574\u540e\u611f\u89c9\u91d1\u989d\u5217\u592a\u62e5\u6324\u4e86_\u5e2e\u6211\u91cd\u65b0\u8bbe\u8ba1.md": {
     "mtime": 1784384858.9232645,
     "ast_hash": "86ef8e43e198e46c6b2780f50e3cc028",
+    "semantic_hash": ""
+  },
+  "src/actions/mfa.ts": {
+    "mtime": 1784388137.815735,
+    "ast_hash": "668b841dfe517dfe1cbf7a2ed00b279a",
+    "semantic_hash": ""
+  },
+  "src/components/settings/mfa-settings.tsx": {
+    "mtime": 1784389547.1267858,
+    "ast_hash": "b0f96147b4caff66d236c1c201b18ff3",
+    "semantic_hash": ""
+  },
+  "src/db/mfa.test.ts": {
+    "mtime": 1784388234.290006,
+    "ast_hash": "53a6a9faf1b8af318e87879b1f79f085",
+    "semantic_hash": ""
+  },
+  "src/db/mfa.ts": {
+    "mtime": 1784388051.7701542,
+    "ast_hash": "ed75a6a794afeb2fac173317b19303d7",
+    "semantic_hash": ""
+  },
+  "src/lib/mfa.test.ts": {
+    "mtime": 1784388234.2890036,
+    "ast_hash": "c4933c6ff892cb6e110f09dbb02b5bea",
+    "semantic_hash": ""
+  },
+  "src/lib/mfa.ts": {
+    "mtime": 1784388051.7691636,
+    "ast_hash": "fa74809ca2d5d73194b5de73db2a6a98",
     "semantic_hash": ""
   }
 }

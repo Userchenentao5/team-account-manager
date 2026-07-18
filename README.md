@@ -74,7 +74,11 @@ nano .env.local
 ```dotenv
 APP_AUTH_SECRET=粘贴第一段命令生成的内容
 APP_LOGIN_KEY_HASH=粘贴第二段命令生成的内容
+APP_MFA_ISSUER=Team Account Manager
+APP_MFA_ACCOUNT_NAME=admin
 ```
+
+后两项用于 Authenticator App 中显示的服务名和账号名，可按需修改。
 
 保存并关闭文本编辑器。
 
@@ -110,7 +114,7 @@ http://localhost:3000
 2. 打开“汇率”，等待首次自动刷新完成，或点击“刷新汇率”。此步骤需要服务器能够访问 Frankfurter 汇率服务。
 3. 打开“空间”，新增每一项订阅空间，填写成本、到期日和支付渠道。
 4. 进入空间详情，添加母账号和子账号。出租账号会计入应收，自用账号只计数量。
-5. 打开“设置”，按需要调整到期天数、提醒邮箱和邮件发送配置。
+5. 打开“设置”，按需要绑定 Authenticator、调整到期天数、提醒邮箱和邮件发送配置。MFA 只有在首次动态安全码验证通过后才会启用。
 6. 回到“仪表盘”，优先处理续费工作台列出的空间与出租账号。
 
 ## 日常使用说明
@@ -255,7 +259,15 @@ npm run dev -- -p 3001
 
 ### 登录失败
 
-确认输入的是原始登录密钥，而不是 SHA-256 哈希值。连续输错 5 次后，当前网络地址会被锁定 15 分钟。
+确认输入的是原始登录密钥，而不是 SHA-256 哈希值。若已启用 MFA，还需输入 Authenticator App 当前显示的 6 位动态安全码。连续输错 5 次后，当前网络地址会被锁定 15 分钟。
+
+### Authenticator 设备丢失
+
+先停止应用并备份 `data` 文件夹，再由服务器管理员执行下面的本地命令重置 MFA；之后可仅凭原始登录密钥登录并重新绑定。
+
+```shell
+node -e "const Database=require('better-sqlite3');const db=new Database('./data/app.db');db.prepare(\"DELETE FROM app_setting WHERE key LIKE 'auth.mfa.%'\").run();db.close();console.log('MFA reset');"
+```
 
 ### 为什么没有币种、汇率或 CNY 换算值
 
