@@ -1,6 +1,6 @@
 import { and, asc, eq } from "drizzle-orm";
 import type { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
-import { differenceInCalendarDays } from "date-fns";
+import { differenceInCalendarDays, format } from "date-fns";
 import { paymentChannel, space, spaceExpiryReminderLog } from "./schema";
 
 type Db = BetterSQLite3Database<Record<string, unknown>>;
@@ -62,14 +62,17 @@ export function listDueSpaceExpiryReminders(
   thresholdDays: number,
   today = new Date(),
 ): SpaceExpiryReminderRow[] {
+  const reminderDate = format(today, "yyyy-MM-dd");
+
   return listSpaceExpiryReminderCandidates(db, thresholdDays, today).filter(
     (row) =>
-      row.daysUntilExpiry === thresholdDays &&
+      row.daysUntilExpiry > 0 &&
       !wasSpaceExpiryReminderSent(
         db,
         row.id,
         row.expiryDate,
         thresholdDays,
+        reminderDate,
       ),
   );
 }
@@ -79,6 +82,7 @@ export function wasSpaceExpiryReminderSent(
   spaceId: number,
   expiryDate: string,
   thresholdDays: number,
+  reminderDate: string,
 ): boolean {
   const row = db
     .select({ id: spaceExpiryReminderLog.id })
@@ -88,6 +92,7 @@ export function wasSpaceExpiryReminderSent(
         eq(spaceExpiryReminderLog.spaceId, spaceId),
         eq(spaceExpiryReminderLog.expiryDate, expiryDate),
         eq(spaceExpiryReminderLog.thresholdDays, thresholdDays),
+        eq(spaceExpiryReminderLog.reminderDate, reminderDate),
       ),
     )
     .get();
@@ -110,6 +115,7 @@ export function recordSpaceExpiryReminderSent(
       spaceId: input.spaceId,
       expiryDate: input.expiryDate,
       thresholdDays: input.thresholdDays,
+      reminderDate: format(input.sentAt, "yyyy-MM-dd"),
       recipientEmail: input.recipientEmail,
       sentAt: input.sentAt.toISOString(),
     })

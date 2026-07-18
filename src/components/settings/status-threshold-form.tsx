@@ -289,7 +289,7 @@ export function StatusThresholdForm({
       <Card>
         <CardHeader className="border-b">
           <CardTitle>空间邮件提醒</CardTitle>
-          <CardDescription>到达空间阈值当天按指定时间自动发送。</CardDescription>
+          <CardDescription>到达空间阈值后，在到期前每天按指定时间自动发送。</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={onEmailSubmit} className="space-y-5">
@@ -299,7 +299,7 @@ export function StatusThresholdForm({
                   开启空间邮件提醒
                 </Label>
                 <p className="text-sm text-muted-foreground">
-                  仅在空间剩余天数等于空间阈值当天发送一次。
+                  若空间尚未续费，将在提醒窗口内每天发送一次。
                 </p>
               </div>
               <Switch
