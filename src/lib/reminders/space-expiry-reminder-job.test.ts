@@ -5,7 +5,7 @@ import {
   setSpaceEmailReminderSettings,
   setStatusThresholds,
 } from "@/db/settings";
-import { insertSpaceWithMother } from "@/db/spaces";
+import { insertSpaceWithMother, updateSpaceRow } from "@/db/spaces";
 import { runSpaceExpiryReminderJob } from "@/lib/reminders/space-expiry-reminder-job";
 import { createTestDb } from "@/test/db-harness";
 
@@ -45,7 +45,7 @@ describe("space expiry reminder job", () => {
     );
   }
 
-  it("sends once at the configured time when a space reaches the threshold day", async () => {
+  it("sends daily in the reminder window until the space is renewed", async () => {
     setStatusThresholds(ctx.db, {
       spaceSoonDays: 7,
       childAccountSoonDays: 7,
@@ -60,8 +60,8 @@ describe("space expiry reminder job", () => {
       templateBody:
         "{spaceName} 还有 {daysUntilExpiry} 天到期，{paymentChannelName} 支付 {amountUsd} USD。",
     });
-    makeSpace("Threshold Team", "2026-07-14");
-    makeSpace("Not Yet", "2026-07-15");
+    const space = makeSpace("Threshold Team", "2026-07-14");
+    makeSpace("Not Yet", "2026-08-15");
     const sendEmail = vi.fn().mockResolvedValue(undefined);
 
     await expect(
@@ -102,5 +102,24 @@ describe("space expiry reminder job", () => {
       ),
     ).resolves.toMatchObject({ checked: true, sent: 0 });
     expect(sendEmail).toHaveBeenCalledTimes(1);
+
+    await expect(
+      runSpaceExpiryReminderJob(
+        ctx.db,
+        new Date(2026, 6, 8, 9, 30),
+        sendEmail,
+      ),
+    ).resolves.toMatchObject({ checked: true, sent: 1 });
+    expect(sendEmail).toHaveBeenCalledTimes(2);
+
+    updateSpaceRow(ctx.db, space.id, { expiryDate: "2026-08-14" });
+    await expect(
+      runSpaceExpiryReminderJob(
+        ctx.db,
+        new Date(2026, 6, 9, 9, 30),
+        sendEmail,
+      ),
+    ).resolves.toMatchObject({ checked: true, sent: 0 });
+    expect(sendEmail).toHaveBeenCalledTimes(2);
   });
 });

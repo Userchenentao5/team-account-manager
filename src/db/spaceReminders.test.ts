@@ -67,26 +67,35 @@ describe("space expiry reminder queries", () => {
     });
   });
 
-  it("returns threshold-day reminders and excludes already sent spaces", () => {
+  it("returns each pre-expiry day in the window and deduplicates per day", () => {
     const dueOnThreshold = makeSpace("Threshold Day", "2026-07-14");
-    makeSpace("Inside Window", "2026-07-10");
+    const insideWindow = makeSpace("Inside Window", "2026-07-10");
+    makeSpace("Due Today", "2026-07-07");
 
     expect(
       listDueSpaceExpiryReminders(ctx.db, 7, new Date(2026, 6, 7)).map(
         (row) => row.id,
       ),
-    ).toEqual([dueOnThreshold.id]);
+    ).toEqual([insideWindow.id, dueOnThreshold.id]);
 
-    recordSpaceExpiryReminderSent(ctx.db, {
-      spaceId: dueOnThreshold.id,
-      expiryDate: "2026-07-14",
-      thresholdDays: 7,
-      recipientEmail: "billing@example.com",
-      sentAt: new Date(2026, 6, 7, 9, 0),
-    });
+    for (const candidate of [insideWindow, dueOnThreshold]) {
+      recordSpaceExpiryReminderSent(ctx.db, {
+        spaceId: candidate.id,
+        expiryDate:
+          candidate.id === insideWindow.id ? "2026-07-10" : "2026-07-14",
+        thresholdDays: 7,
+        recipientEmail: "billing@example.com",
+        sentAt: new Date(2026, 6, 7, 9, 0),
+      });
+    }
 
     expect(
       listDueSpaceExpiryReminders(ctx.db, 7, new Date(2026, 6, 7)),
     ).toEqual([]);
+    expect(
+      listDueSpaceExpiryReminders(ctx.db, 7, new Date(2026, 6, 8)).map(
+        (row) => row.id,
+      ),
+    ).toEqual([insideWindow.id, dueOnThreshold.id]);
   });
 });

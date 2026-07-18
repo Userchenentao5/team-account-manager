@@ -192,6 +192,7 @@ export const spaceExpiryReminderLog = sqliteTable(
       .references(() => space.id, { onDelete: "cascade" }),
     expiryDate: text("expiry_date").notNull(),
     thresholdDays: integer("threshold_days").notNull(),
+    reminderDate: text("reminder_date"),
     recipientEmail: text("recipient_email").notNull(),
     sentAt: text("sent_at").notNull(),
   },
@@ -200,6 +201,7 @@ export const spaceExpiryReminderLog = sqliteTable(
       table.spaceId,
       table.expiryDate,
       table.thresholdDays,
+      table.reminderDate,
     ),
   ],
 );
