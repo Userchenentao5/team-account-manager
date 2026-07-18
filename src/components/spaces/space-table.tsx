@@ -57,7 +57,7 @@ type SpaceTableProps = {
 
 const PAGE_SIZE = 10;
 
-type SortKey = "name" | "country" | "channel" | "amount" | "usd" | "expiry";
+type SortKey = "name" | "country" | "channel" | "amount" | "expiry";
 type SortDirection = "asc" | "desc";
 
 type SortState = {
@@ -125,11 +125,6 @@ function compareRows(
       return compareText(left.paymentChannel.name, right.paymentChannel.name);
     case "amount":
       return left.space.amountMinor - right.space.amountMinor;
-    case "usd":
-      if (left.space.amountUsd === right.space.amountUsd) return 0;
-      if (left.space.amountUsd === null) return 1;
-      if (right.space.amountUsd === null) return -1;
-      return left.space.amountUsd - right.space.amountUsd;
     case "expiry":
       return compareNullableText(left.space.expiryDate, right.space.expiryDate);
     default:
@@ -350,6 +345,9 @@ export function SpaceTable({
                 sort={sort}
                 onSort={setSortKey}
               />
+              <TableHead scope="col" className="text-center">
+                母号邮箱
+              </TableHead>
               <SortableHead
                 label="国家/地区"
                 sortKey="country"
@@ -363,14 +361,8 @@ export function SpaceTable({
                 onSort={setSortKey}
               />
               <SortableHead
-                label="原始金额"
+                label="金额"
                 sortKey="amount"
-                sort={sort}
-                onSort={setSortKey}
-              />
-              <SortableHead
-                label="USD"
-                sortKey="usd"
                 sort={sort}
                 onSort={setSortKey}
               />
@@ -387,7 +379,7 @@ export function SpaceTable({
           </TableHeader>
           <TableBody>
             {visibleSpaces.map((row) => {
-              const { space, paymentChannel, currency } = row;
+              const { space, motherAccount, paymentChannel, currency } = row;
               return (
                 <TableRow key={space.id}>
                   <TableCell className="text-center font-medium">
@@ -398,22 +390,28 @@ export function SpaceTable({
                       {space.name}
                     </Link>
                   </TableCell>
+                  <TableCell className="text-center font-mono">
+                    {motherAccount.email}
+                  </TableCell>
                   <TableCell className="text-center">
                     {formatCountryLabel(space.country)}
                   </TableCell>
                   <TableCell className="text-center">{paymentChannel.name}</TableCell>
                   <TableCell className="text-center font-mono">
-                    {formatCurrencyMinor(space.amountMinor, currency)}
-                  </TableCell>
-                  <TableCell className="text-center font-mono">
-                    <div className="flex flex-col items-center gap-1">
-                      <span>
-                        {space.amountUsd === null
-                          ? "-"
-                          : `$${formatMinor(space.amountUsd, 2)} USD`}
+                    <div className="inline-flex flex-col items-start gap-1.5 text-left tabular-nums">
+                      <span className="font-medium text-foreground">
+                        {formatCurrencyMinor(space.amountMinor, currency)}
                       </span>
-                      <span className="text-xs text-muted-foreground">
-                        当前 CNY 参考：{cnyReferences[space.id] ?? "暂无 CNY 参考"}
+                      <span className="flex items-center gap-2 whitespace-nowrap text-xs text-muted-foreground">
+                        <span>
+                          {space.amountUsd === null
+                            ? "暂无 USD"
+                            : `$${formatMinor(space.amountUsd, 2)} USD`}
+                        </span>
+                        <span aria-hidden className="h-3 w-px bg-border" />
+                        <span>
+                          {cnyReferences[space.id] ?? "暂无 CNY 参考"}
+                        </span>
                       </span>
                     </div>
                   </TableCell>
