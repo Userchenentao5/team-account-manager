@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useTransition } from "react";
+import { useRef, useState, useTransition } from "react";
 import { Copy, LockKeyhole, ShieldCheck, Smartphone } from "lucide-react";
 import { toast } from "sonner";
 import {
@@ -15,7 +15,6 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
@@ -30,7 +29,7 @@ export function MfaSettings({ status }: { status: MfaStatus }) {
   const [enabled, setEnabled] = useState(status.enabled);
   const [enrollment, setEnrollment] = useState<Enrollment | null>(null);
   const [showDisableConfirm, setShowDisableConfirm] = useState(false);
-  const [code, setCode] = useState("");
+  const [code, setCode] = useState<string[]>(() => Array(6).fill(""));
   const [loginKey, setLoginKey] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
@@ -45,14 +44,14 @@ export function MfaSettings({ status }: { status: MfaStatus }) {
         return;
       }
       setEnrollment(result.enrollment);
-      setCode("");
+      setCode(Array(6).fill(""));
     });
   }
 
   function confirmEnrollment() {
     setError(null);
     startTransition(async () => {
-      const result = await enableMfa(code);
+      const result = await enableMfa(code.join(""));
       if (!result.ok) {
         setError(result.error);
         toast.error(result.error);
@@ -60,7 +59,7 @@ export function MfaSettings({ status }: { status: MfaStatus }) {
       }
       setEnabled(true);
       setEnrollment(null);
-      setCode("");
+      setCode(Array(6).fill(""));
       toast.success("MFA 已启用");
     });
   }
@@ -81,14 +80,9 @@ export function MfaSettings({ status }: { status: MfaStatus }) {
     });
   }
 
-  function updateCode(value: string) {
-    setCode(value.replace(/\D/gu, "").slice(0, 6));
-    setError(null);
-  }
-
   function cancelEnrollment() {
     setEnrollment(null);
-    setCode("");
+    setCode(Array(6).fill(""));
     setError(null);
   }
 
@@ -202,104 +196,97 @@ export function MfaSettings({ status }: { status: MfaStatus }) {
           if (!open && !isPending) cancelEnrollment();
         }}
       >
-        <DialogContent className="sm:max-w-lg" showCloseButton={!isPending}>
-          <DialogHeader>
-            <DialogTitle>设置身份验证器</DialogTitle>
-            <DialogDescription>
-              扫描二维码并输入当前动态安全码。验证通过后，MFA 才会启用。
-            </DialogDescription>
-          </DialogHeader>
+        <DialogContent
+          className="gap-0 overflow-hidden rounded-xl p-0 sm:max-w-md"
+          showCloseButton={false}
+        >
+          <div className="px-5 pb-5 pt-7 sm:px-7 sm:pb-7">
+            <div className="mx-auto flex size-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+              <ShieldCheck className="size-5" aria-hidden="true" />
+            </div>
+            <DialogHeader className="mt-4 items-center text-center">
+              <DialogTitle className="text-xl font-semibold leading-tight">
+                设置多重身份验证
+              </DialogTitle>
+              <DialogDescription className="max-w-sm leading-6">
+                扫描二维码，然后输入身份验证器 App 显示的 6 位验证码。
+              </DialogDescription>
+            </DialogHeader>
 
-          {enrollment ? (
-            <div className="space-y-5 py-1">
-              <section className="grid grid-cols-[2rem_minmax(0,1fr)] gap-3">
-                <div className="flex size-7 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
-                  1
-                </div>
-                <div className="min-w-0">
-                  <h3 className="font-semibold">扫描二维码</h3>
-                  <p className="mt-1 text-sm leading-6 text-muted-foreground">
-                    使用 Google Authenticator、Microsoft Authenticator 等应用添加账号。
-                  </p>
-                  <div className="mt-4 flex justify-center">
-                    <div className="overflow-hidden rounded-lg bg-white p-3 ring-1 ring-border">
-                      <Image
-                        src={enrollment.qrCodeDataUrl}
-                        width={176}
-                        height={176}
-                        alt="Authenticator 绑定二维码"
-                        unoptimized
-                        className="size-44"
-                      />
-                    </div>
-                  </div>
-                  <div className="mt-4 space-y-2">
-                    <Label>无法扫描？手动输入密钥</Label>
-                    <div className="flex items-center gap-2 rounded-lg border bg-muted/20 px-3 py-2">
-                      <code className="min-w-0 flex-1 break-all text-xs font-semibold tracking-wider">
-                        {enrollment.manualKey}
-                      </code>
-                      <Button
-                        type="button"
-                        size="icon-sm"
-                        variant="ghost"
-                        onClick={copyManualKey}
-                        aria-label="复制手动设置密钥"
-                      >
-                        <Copy className="size-4" />
-                      </Button>
-                    </div>
+            {enrollment ? (
+              <div className="mt-6 space-y-5">
+                <div className="flex justify-center">
+                  <div className="overflow-hidden rounded-xl bg-white p-3 ring-1 ring-border">
+                    <Image
+                      src={enrollment.qrCodeDataUrl}
+                      width={160}
+                      height={160}
+                      alt="Authenticator 绑定二维码"
+                      unoptimized
+                      className="size-40"
+                    />
                   </div>
                 </div>
-              </section>
 
-              <section className="grid grid-cols-[2rem_minmax(0,1fr)] gap-3 border-t pt-5">
-                <div className="flex size-7 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
-                  2
+                <div className="space-y-2">
+                  <Label>无法扫描？手动输入密钥</Label>
+                  <div className="flex items-center gap-2 rounded-lg border bg-muted/20 px-3 py-2.5">
+                    <code className="min-w-0 flex-1 break-all text-xs font-semibold tracking-wider">
+                      {enrollment.manualKey}
+                    </code>
+                    <Button
+                      type="button"
+                      size="icon-sm"
+                      variant="ghost"
+                      onClick={copyManualKey}
+                      aria-label="复制手动设置密钥"
+                    >
+                      <Copy className="size-4" />
+                    </Button>
+                  </div>
                 </div>
-                <div>
-                  <Label htmlFor="enableMfaCode" className="font-semibold text-foreground">
-                    输入 6 位动态安全码
-                  </Label>
-                  <p className="mt-1 text-sm leading-6 text-muted-foreground">
-                    输入 App 当前显示的数字完成验证。
-                  </p>
+
+                <div className="space-y-3">
+                  <Label className="block text-center">6 位动态安全码</Label>
                   <CodeInput
-                    id="enableMfaCode"
                     value={code}
-                    onChange={updateCode}
+                    onChange={(value) => {
+                      setCode(value);
+                      setError(null);
+                    }}
                     disabled={isPending}
-                    className="mt-3"
                     autoFocus
                   />
                 </div>
-              </section>
 
-              {error ? (
-                <p role="alert" className="text-sm text-destructive">
-                  {error}
-                </p>
-              ) : null}
-            </div>
-          ) : null}
+                {error ? (
+                  <p role="alert" className="text-center text-sm text-destructive">
+                    {error}
+                  </p>
+                ) : null}
 
-          <DialogFooter>
-            <Button
-              type="button"
-              variant="outline"
-              onClick={cancelEnrollment}
-              disabled={isPending}
-            >
-              取消
-            </Button>
-            <Button
-              type="button"
-              onClick={confirmEnrollment}
-              disabled={isPending || code.length !== 6}
-            >
-              {isPending ? "正在验证..." : "验证并启用"}
-            </Button>
-          </DialogFooter>
+                <div className="grid gap-2 pt-1">
+                  <Button
+                    type="button"
+                    size="lg"
+                    onClick={confirmEnrollment}
+                    disabled={isPending || code.some((digit) => !digit)}
+                  >
+                    {isPending ? "正在验证..." : "验证并启用"}
+                  </Button>
+                  <Button
+                    type="button"
+                    size="lg"
+                    variant="outline"
+                    onClick={cancelEnrollment}
+                    disabled={isPending}
+                  >
+                    取消
+                  </Button>
+                </div>
+              </div>
+            ) : null}
+          </div>
         </DialogContent>
       </Dialog>
 
@@ -309,57 +296,67 @@ export function MfaSettings({ status }: { status: MfaStatus }) {
           if (!open && !isPending) closeDisableConfirm();
         }}
       >
-        <DialogContent showCloseButton={!isPending}>
-          <DialogHeader>
-            <div className="mb-1 flex size-10 items-center justify-center rounded-full bg-destructive/10 text-destructive">
+        <DialogContent
+          className="gap-0 overflow-hidden rounded-xl p-0 sm:max-w-md"
+          showCloseButton={false}
+        >
+          <div className="px-5 pb-5 pt-7 sm:px-7 sm:pb-7">
+            <div className="mx-auto flex size-12 items-center justify-center rounded-full bg-destructive/10 text-destructive">
               <LockKeyhole className="size-5" aria-hidden="true" />
             </div>
-            <DialogTitle>关闭多重身份验证？</DialogTitle>
-            <DialogDescription>
-              关闭后，登录将只验证访问密钥。请输入当前登录使用的访问密钥核验身份。
-            </DialogDescription>
-          </DialogHeader>
+            <DialogHeader className="mt-4 items-center text-center">
+              <DialogTitle className="text-xl font-semibold leading-tight">
+                关闭多重身份验证？
+              </DialogTitle>
+              <DialogDescription className="max-w-sm leading-6">
+                关闭后，登录将只验证访问密钥。请输入当前访问密钥核验身份。
+              </DialogDescription>
+            </DialogHeader>
 
-          <div className="space-y-3 py-1">
-            <Label htmlFor="disableMfaLoginKey">访问密钥</Label>
-            <Input
-              id="disableMfaLoginKey"
-              type="password"
-              value={loginKey}
-              onChange={(event) => {
-                setLoginKey(event.target.value);
-                setError(null);
-              }}
-              autoComplete="current-password"
-              placeholder="输入访问密钥"
-              disabled={isPending}
-              autoFocus
-            />
-            {error ? (
-              <p role="alert" className="text-sm text-destructive">
-                {error}
-              </p>
-            ) : null}
+            <div className="mt-6 space-y-2">
+              <Label htmlFor="disableMfaLoginKey">访问密钥</Label>
+              <Input
+                id="disableMfaLoginKey"
+                type="password"
+                value={loginKey}
+                onChange={(event) => {
+                  setLoginKey(event.target.value);
+                  setError(null);
+                }}
+                autoComplete="current-password"
+                placeholder="输入访问密钥"
+                disabled={isPending}
+                autoFocus
+                className="h-11"
+              />
+              {error ? (
+                <p role="alert" className="pt-1 text-center text-sm text-destructive">
+                  {error}
+                </p>
+              ) : null}
+            </div>
+
+            <div className="mt-6 grid gap-2">
+              <Button
+                type="button"
+                size="lg"
+                variant="destructive"
+                onClick={turnOffMfa}
+                disabled={isPending || loginKey.length === 0}
+              >
+                {isPending ? "正在关闭..." : "确认关闭"}
+              </Button>
+              <Button
+                type="button"
+                size="lg"
+                variant="outline"
+                onClick={closeDisableConfirm}
+                disabled={isPending}
+              >
+                取消
+              </Button>
+            </div>
           </div>
-
-          <DialogFooter>
-            <Button
-              type="button"
-              variant="outline"
-              onClick={closeDisableConfirm}
-              disabled={isPending}
-            >
-              取消
-            </Button>
-            <Button
-              type="button"
-              variant="destructive"
-              onClick={turnOffMfa}
-              disabled={isPending || loginKey.length === 0}
-            >
-              {isPending ? "正在关闭..." : "确认关闭"}
-            </Button>
-          </DialogFooter>
         </DialogContent>
       </Dialog>
     </>
@@ -367,23 +364,85 @@ export function MfaSettings({ status }: { status: MfaStatus }) {
 }
 
 function CodeInput({
+  value,
   onChange,
-  className,
-  ...props
-}: Omit<React.ComponentProps<typeof Input>, "onChange"> & {
-  onChange(value: string): void;
+  disabled,
+  autoFocus,
+}: {
+  value: string[];
+  onChange(value: string[]): void;
+  disabled?: boolean;
+  autoFocus?: boolean;
 }) {
+  const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
+
+  function updateDigit(index: number, rawValue: string) {
+    const digit = rawValue.replace(/\D/gu, "").slice(-1);
+    const next = [...value];
+    next[index] = digit;
+    onChange(next);
+    if (digit && index < 5) inputRefs.current[index + 1]?.focus();
+  }
+
+  function handleKeyDown(index: number, event: React.KeyboardEvent<HTMLInputElement>) {
+    if (event.key === "Backspace" && !value[index] && index > 0) {
+      event.preventDefault();
+      const next = [...value];
+      next[index - 1] = "";
+      onChange(next);
+      inputRefs.current[index - 1]?.focus();
+    }
+    if (event.key === "ArrowLeft" && index > 0) {
+      inputRefs.current[index - 1]?.focus();
+    }
+    if (event.key === "ArrowRight" && index < 5) {
+      inputRefs.current[index + 1]?.focus();
+    }
+  }
+
+  function handlePaste(event: React.ClipboardEvent<HTMLDivElement>) {
+    const digits = event.clipboardData
+      .getData("text")
+      .replace(/\D/gu, "")
+      .slice(0, 6)
+      .split("");
+    if (digits.length === 0) return;
+    event.preventDefault();
+    const next = Array(6).fill("");
+    digits.forEach((digit, index) => {
+      next[index] = digit;
+    });
+    onChange(next);
+    inputRefs.current[Math.min(digits.length, 5)]?.focus();
+  }
+
   return (
-    <Input
-      {...props}
-      type="text"
-      inputMode="numeric"
-      autoComplete="one-time-code"
-      pattern="[0-9]{6}"
-      maxLength={6}
-      placeholder="000000"
-      onChange={(event) => onChange(event.target.value)}
-      className={`w-full font-mono text-base tracking-[0.24em] ${className ?? ""}`}
-    />
+    <div
+      role="group"
+      aria-label="6 位动态安全码"
+      className="flex justify-center gap-2"
+      onPaste={handlePaste}
+    >
+      {value.map((digit, index) => (
+        <Input
+          key={index}
+          ref={(element) => {
+            inputRefs.current[index] = element;
+          }}
+          type="text"
+          inputMode="numeric"
+          autoComplete={index === 0 ? "one-time-code" : "off"}
+          pattern="[0-9]"
+          maxLength={1}
+          value={digit}
+          onChange={(event) => updateDigit(index, event.target.value)}
+          onKeyDown={(event) => handleKeyDown(index, event)}
+          disabled={disabled}
+          autoFocus={autoFocus && index === 0}
+          aria-label={`验证码第 ${index + 1} 位`}
+          className="size-11 rounded-lg px-0 text-center font-mono text-lg font-semibold tracking-normal shadow-none"
+        />
+      ))}
+    </div>
   );
 }

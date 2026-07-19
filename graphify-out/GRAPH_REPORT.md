@@ -1,16 +1,16 @@
 # Graph Report - team-account-manager  (2026-07-19)
 
 ## Corpus Check
-- 281 files · ~199,412 words
+- 281 files · ~199,597 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 3108 nodes · 3819 edges · 1046 communities (185 shown, 861 thin omitted)
+- 3108 nodes · 3818 edges · 1046 communities (185 shown, 861 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 7 edges (avg confidence: 0.86)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `3ef2fc26`
+- Built from commit: `8dc82a1e`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -1044,6 +1044,7 @@
 - [[_COMMUNITY_Q 优化该问题|Q: 优化该问题]]
 - [[_COMMUNITY_index.ts|index.ts]]
 - [[_COMMUNITY_Q 优化设置中的时间选择器，点击展开后的风格与当前系统的UI风格明显不一致|Q: 优化设置中的时间选择器，点击展开后的风格与当前系统的UI风格明显不一致]]
+- [[_COMMUNITY_Theme-Aware Semantic Toast Icons|Theme-Aware Semantic Toast Icons]]
 - [[_COMMUNITY_devDependencies|devDependencies]]
 - [[_COMMUNITY_layout.tsx|layout.tsx]]
 - [[_COMMUNITY_rate-table.tsx|rate-table.tsx]]
@@ -1054,7 +1055,6 @@
 - [[_COMMUNITY_scripts|scripts]]
 - [[_COMMUNITY_package.json|package.json]]
 - [[_COMMUNITY_countries.ts|countries.ts]]
-- [[_COMMUNITY_sonner|sonner]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `cn()` - 103 edges
@@ -1071,10 +1071,10 @@
 ## Surprising Connections (you probably didn't know these)
 - `beginMfaEnrollment()` --references--> `qrcode`  [EXTRACTED]
   src/actions/mfa.ts → package.json
-- `middleware()` --calls--> `verifySessionToken()`  [EXTRACTED]
-  middleware.ts → src/lib/auth.ts
 - `useFormField()` --references--> `react`  [EXTRACTED]
   src/components/ui/form.tsx → package.json
+- `middleware()` --calls--> `verifySessionToken()`  [EXTRACTED]
+  middleware.ts → src/lib/auth.ts
 - `Sidebar()` --references--> `react`  [EXTRACTED]
   src/components/ui/sidebar.tsx → package.json
 - `SidebarMenuSkeleton()` --references--> `react`  [EXTRACTED]
@@ -1087,11 +1087,11 @@
 
 ### Community 0 - "UI Layout Utilities"
 Cohesion: 0.08
-Nodes (48): react, MetricCard(), MetricCardProps, toneClassNames, valueClassNames, AppSidebar(), referenceChildren, topLevel (+40 more)
+Nodes (46): react, MetricCard(), MetricCardProps, toneClassNames, valueClassNames, AppSidebar(), referenceChildren, topLevel (+38 more)
 
 ### Community 3 - "FX Rate Runtime"
 Cohesion: 0.13
-Nodes (25): CnyDisplayRate, cnyFromUsd(), DashboardPage(), usd(), CurrenciesPage(), formatAsOf(), formatPeriodLabel(), SpaceDetailPage() (+17 more)
+Nodes (26): CnyDisplayRate, cnyFromUsd(), DashboardPage(), usd(), CurrenciesPage(), formatAsOf(), formatPeriodLabel(), SpaceDetailPage() (+18 more)
 
 ### Community 4 - "Money Formatting and Pages"
 Cohesion: 0.14
@@ -1099,7 +1099,7 @@ Nodes (25): computeSnapshot(), createSpace(), deleteSpace(), deleteSpaceSchema, 
 
 ### Community 5 - "Form and Dialog System"
 Cohesion: 0.08
-Nodes (51): ChannelDialogProps, CurrencyDialogProps, Enrollment, BILLING_PERIOD_OPTIONS, ChildAccountForm(), ChildAccountFormProps, ChildAccountFormValue, defaultValues() (+43 more)
+Nodes (53): ChannelDialog(), ChannelDialogProps, CurrencyDialogProps, Enrollment, BILLING_PERIOD_OPTIONS, ChildAccountForm(), ChildAccountFormProps, ChildAccountFormValue (+45 more)
 
 ### Community 6 - "Authentication and Rate Limits"
 Cohesion: 0.07
@@ -1131,7 +1131,7 @@ Nodes (38): Authentication, Destructive Confirmations, Dialog Forms, `drizzle/00
 
 ### Community 13 - "Data Tables and Tooltips"
 Cohesion: 0.08
-Nodes (46): ArchiveDialog(), ChannelDialog(), ChannelStatusFilter, ChannelTableProps, DialogState, CurrencyDeleteDialog(), CurrencyDialog(), CurrencyTableProps (+38 more)
+Nodes (45): ArchiveDialog(), ChannelStatusFilter, ChannelTableProps, DialogState, CurrencyDeleteDialog(), CurrencyDialog(), CurrencyTableProps, DialogState (+37 more)
 
 ### Community 14 - "Space Server Actions"
 Cohesion: 0.18
@@ -1182,8 +1182,8 @@ Cohesion: 0.09
 Nodes (38): addCurrency(), CURRENCY_PATHS, CurrencyActionResult, deleteCurrency(), updateCurrency(), refreshRates(), RefreshRatesResult, RatesPage() (+30 more)
 
 ### Community 30 - "Settings Data and Page"
-Cohesion: 0.17
-Nodes (17): SettingsPage(), ChildAccountReminderForm(), MfaSettings(), StatusThresholdForm(), ChildAccountEmailReminderSettings, Db, DEFAULT_STATUS_THRESHOLDS, getChildAccountEmailReminderSettings() (+9 more)
+Cohesion: 0.22
+Nodes (12): SettingsPage(), MfaSettings(), ChildAccountEmailReminderSettings, Db, DEFAULT_STATUS_THRESHOLDS, getChildAccountEmailReminderSettings(), getSpaceEmailReminderSettings(), LEGACY_CHILD_ACCOUNT_EMAIL_TEMPLATE_BODIES (+4 more)
 
 ### Community 42 - "Phase One Reference Data"
 Cohesion: 0.14
@@ -1198,8 +1198,8 @@ Cohesion: 0.29
 Nodes (6): Accepted Risks Log, Phase 05 - Security, Security Audit Trail, Sign-Off, Threat Register, Trust Boundaries
 
 ### Community 72 - "auth.ts"
-Cohesion: 0.26
-Nodes (13): renderPreview(), ChildAccountReminderEmail, ChildAccountReminderTemplate, renderChildAccountReminderTemplate(), templateValues(), decodeHtmlEntities(), escapeHtml(), htmlToText() (+5 more)
+Cohesion: 0.19
+Nodes (17): ChildAccountReminderForm(), renderPreview(), StatusThresholdForm(), ChildAccountReminderEmail, ChildAccountReminderTemplate, renderChildAccountReminderTemplate(), templateValues(), ALLOWED_TAGS (+9 more)
 
 ### Community 73 - "sheet.tsx"
 Cohesion: 0.40
@@ -1782,8 +1782,8 @@ Cohesion: 0.17
 Nodes (12): dbHolder, fxMock, seedChild(), ChildAccountInsert, ChildAccountUpdate, Db, deleteChildAccount(), listChildAccounts() (+4 more)
 
 ### Community 1041 - "insertChannel"
-Cohesion: 0.19
-Nodes (13): SpaceForm(), SpaceFormValue, compareNullableText(), compareRows(), compareText(), SortDirection, SortKey, SortState (+5 more)
+Cohesion: 0.18
+Nodes (14): SpaceForm(), SpaceFormValue, compareNullableText(), compareRows(), compareText(), SortDirection, SortKey, SortState (+6 more)
 
 ### Community 1042 - "expiry.ts"
 Cohesion: 0.23
@@ -1828,8 +1828,8 @@ _Questions this graph is uniquely positioned to answer:_
 - **What connects `$schema`, `style`, `rsc` to the rest of the system?**
   _2172 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `UI Layout Utilities` be split into smaller, more focused modules?**
-  _Cohesion score 0.07740112994350283 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.08166969147005444 - nodes in this community are weakly interconnected._
 - **Should `FX Rate Runtime` be split into smaller, more focused modules?**
-  _Cohesion score 0.13445378151260504 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.13333333333333333 - nodes in this community are weakly interconnected._
 - **Should `Money Formatting and Pages` be split into smaller, more focused modules?**
   _Cohesion score 0.14022988505747128 - nodes in this community are weakly interconnected._

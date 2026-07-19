@@ -1410,8 +1410,8 @@
     "semantic_hash": ""
   },
   "src/components/settings/mfa-settings.tsx": {
-    "mtime": 1784427780.7628753,
-    "ast_hash": "2a7d8c78e812617d7d338b1bad9087d2",
+    "mtime": 1784428310.305068,
+    "ast_hash": "4ce3d514c486b2176b08f2d2d4d00444",
     "semantic_hash": ""
   },
   "src/db/mfa.test.ts": {

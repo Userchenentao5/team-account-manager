@@ -2200,7 +2200,7 @@
       "source_location": "L40",
       "_origin": "ast",
       "id": "src_components_channels_channel_dialog_channeldialog",
-      "community": 13,
+      "community": 5,
       "norm_label": "channeldialog()"
     },
     {
@@ -2690,7 +2690,7 @@
       "source_location": "L47",
       "_origin": "ast",
       "id": "src_components_settings_child_account_reminder_form_childaccountreminderform",
-      "community": 30,
+      "community": 72,
       "norm_label": "childaccountreminderform()"
     },
     {
@@ -2717,7 +2717,7 @@
       "label": "Enrollment",
       "file_type": "code",
       "source_file": "src/components/settings/mfa-settings.tsx",
-      "source_location": "L27",
+      "source_location": "L26",
       "_origin": "ast",
       "id": "src_components_settings_mfa_settings_enrollment",
       "community": 5,
@@ -2727,7 +2727,7 @@
       "label": "MfaSettings()",
       "file_type": "code",
       "source_file": "src/components/settings/mfa-settings.tsx",
-      "source_location": "L29",
+      "source_location": "L28",
       "_origin": "ast",
       "id": "src_components_settings_mfa_settings_mfasettings",
       "community": 30,
@@ -2737,7 +2737,7 @@
       "label": "CodeInput()",
       "file_type": "code",
       "source_file": "src/components/settings/mfa-settings.tsx",
-      "source_location": "L369",
+      "source_location": "L366",
       "_origin": "ast",
       "id": "src_components_settings_mfa_settings_codeinput",
       "community": 5,
@@ -2770,7 +2770,7 @@
       "source_location": "L52",
       "_origin": "ast",
       "id": "src_components_settings_status_threshold_form_statusthresholdform",
-      "community": 30,
+      "community": 72,
       "norm_label": "statusthresholdform()"
     },
     {
@@ -3860,7 +3860,7 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "src_components_ui_dialog_dialogoverlay",
-      "community": 0,
+      "community": 5,
       "norm_label": "dialogoverlay()"
     },
     {
@@ -3960,7 +3960,7 @@
       "source_location": "L42",
       "_origin": "ast",
       "id": "src_components_ui_form_useformfield",
-      "community": 0,
+      "community": 5,
       "norm_label": "useformfield()"
     },
     {
@@ -4880,7 +4880,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "src_db_channels_channelrow",
-      "community": 5,
+      "community": 1041,
       "norm_label": "channelrow"
     },
     {
@@ -6300,7 +6300,7 @@
       "source_location": "L90",
       "_origin": "ast",
       "id": "src_db_settings_getstatusthresholds",
-      "community": 30,
+      "community": 3,
       "norm_label": "getstatusthresholds()"
     },
     {
@@ -7020,7 +7020,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "src_lib_email_rich_text_allowed_tags",
-      "community": 30,
+      "community": 72,
       "norm_label": "allowed_tags"
     },
     {
@@ -7070,7 +7070,7 @@
       "source_location": "L59",
       "_origin": "ast",
       "id": "src_lib_email_rich_text_sanitizerichtexthtml",
-      "community": 30,
+      "community": 72,
       "norm_label": "sanitizerichtexthtml()"
     },
     {
@@ -30381,7 +30381,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1046,
+      "community": 435,
       "norm_label": "toaster",
       "id": "c9_toaster"
     },
@@ -30394,7 +30394,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 435,
+      "community": 1031,
       "norm_label": "theme-aware semantic toast icons",
       "id": "c9_theme_aware_toasts"
     },
@@ -34561,7 +34561,7 @@
       "weight": 1.0,
       "context": "import",
       "source": "package_dependencies_sonner",
-      "target": "c9_theme_aware_toasts",
+      "target": "c9_toaster",
       "confidence_score": 1.0
     },
     {
@@ -45814,7 +45814,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/settings/mfa-settings.tsx",
-      "source_location": "L369",
+      "source_location": "L366",
       "weight": 1.0,
       "source": "src_components_settings_mfa_settings",
       "target": "src_components_settings_mfa_settings_codeinput",
@@ -45824,7 +45824,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/settings/mfa-settings.tsx",
-      "source_location": "L27",
+      "source_location": "L26",
       "weight": 1.0,
       "source": "src_components_settings_mfa_settings",
       "target": "src_components_settings_mfa_settings_enrollment",
@@ -45834,7 +45834,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/settings/mfa-settings.tsx",
-      "source_location": "L29",
+      "source_location": "L28",
       "weight": 1.0,
       "source": "src_components_settings_mfa_settings",
       "target": "src_components_settings_mfa_settings_mfasettings",
@@ -45936,17 +45936,6 @@
       "source_location": "L14",
       "weight": 1.0,
       "source": "src_components_settings_mfa_settings",
-      "target": "src_components_ui_dialog_dialogfooter",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/settings/mfa-settings.tsx",
-      "source_location": "L14",
-      "weight": 1.0,
-      "source": "src_components_settings_mfa_settings",
       "target": "src_components_ui_dialog_dialogheader",
       "confidence_score": 1.0
     },
@@ -45966,7 +45955,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/components/settings/mfa-settings.tsx",
-      "source_location": "L22",
+      "source_location": "L21",
       "weight": 1.0,
       "source": "src_components_settings_mfa_settings",
       "target": "src_components_ui_input",
@@ -45977,7 +45966,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/components/settings/mfa-settings.tsx",
-      "source_location": "L22",
+      "source_location": "L21",
       "weight": 1.0,
       "source": "src_components_settings_mfa_settings",
       "target": "src_components_ui_input_input",
@@ -45988,7 +45977,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/components/settings/mfa-settings.tsx",
-      "source_location": "L23",
+      "source_location": "L22",
       "weight": 1.0,
       "source": "src_components_settings_mfa_settings",
       "target": "src_components_ui_label",
@@ -45999,7 +45988,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/components/settings/mfa-settings.tsx",
-      "source_location": "L23",
+      "source_location": "L22",
       "weight": 1.0,
       "source": "src_components_settings_mfa_settings",
       "target": "src_components_ui_label_label",
@@ -46010,7 +45999,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/components/settings/mfa-settings.tsx",
-      "source_location": "L24",
+      "source_location": "L23",
       "weight": 1.0,
       "source": "src_components_settings_mfa_settings",
       "target": "src_components_ui_switch",
@@ -46021,7 +46010,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/components/settings/mfa-settings.tsx",
-      "source_location": "L24",
+      "source_location": "L23",
       "weight": 1.0,
       "source": "src_components_settings_mfa_settings",
       "target": "src_components_ui_switch_switch",
@@ -46032,7 +46021,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/components/settings/mfa-settings.tsx",
-      "source_location": "L25",
+      "source_location": "L24",
       "weight": 1.0,
       "source": "src_components_settings_mfa_settings",
       "target": "src_db_mfa",
@@ -46043,7 +46032,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/components/settings/mfa-settings.tsx",
-      "source_location": "L25",
+      "source_location": "L24",
       "weight": 1.0,
       "source": "src_components_settings_mfa_settings",
       "target": "src_db_mfa_mfastatus",
@@ -73844,5 +73833,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "3ef2fc26906216648513e55223e034d8bde621eb"
+  "built_at_commit": "8dc82a1e806270ed2ba1d5358ab1cf2580d1717c"
 }
