@@ -1,5 +1,7 @@
 export const AUTH_COOKIE_NAME = "tam_session";
 export const SESSION_MAX_AGE_SECONDS = 60 * 60 * 24 * 7;
+export const MFA_CHALLENGE_COOKIE_NAME = "tam_mfa_challenge";
+export const MFA_CHALLENGE_MAX_AGE_SECONDS = 5 * 60;
 
 export function shouldUseSecureSessionCookie(
   nodeEnv: string | undefined,
@@ -77,4 +79,28 @@ export async function verifySessionToken(
 
   const payload = parts.slice(0, 3).join(".");
   return constantTimeEqual(await hmac(payload), parts[3]);
+}
+
+export async function createMfaChallengeToken(now = Date.now()): Promise<string> {
+  const expiresAt = now + MFA_CHALLENGE_MAX_AGE_SECONDS * 1000;
+  const payload = `v1.mfa.${expiresAt}.${crypto.randomUUID()}`;
+  return `${payload}.${await hmac(payload)}`;
+}
+
+export async function verifyMfaChallengeToken(
+  token: string | undefined,
+  now = Date.now(),
+): Promise<boolean> {
+  if (!token) return false;
+
+  const parts = token.split(".");
+  if (parts.length !== 5 || parts[0] !== "v1" || parts[1] !== "mfa") {
+    return false;
+  }
+
+  const expiresAt = Number(parts[2]);
+  if (!Number.isSafeInteger(expiresAt) || expiresAt <= now) return false;
+
+  const payload = parts.slice(0, 4).join(".");
+  return constantTimeEqual(await hmac(payload), parts[4]);
 }

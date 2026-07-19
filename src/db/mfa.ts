@@ -93,10 +93,7 @@ export function verifyMfaLoginCode(
   });
 }
 
-export function disableMfa(db: Db, code: string, now = Date.now()): boolean {
-  if (!getMfaStatus(db).enabled) return true;
-  if (!verifyMfaLoginCode(db, code, now)) return false;
-
+export function disableMfa(db: Db): void {
   db.delete(appSetting)
     .where(
       inArray(appSetting.key, [
@@ -107,7 +104,6 @@ export function disableMfa(db: Db, code: string, now = Date.now()): boolean {
       ]),
     )
     .run();
-  return true;
 }
 
 function clearPendingEnrollment(db: Db): void {

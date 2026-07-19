@@ -105,7 +105,7 @@
     "semantic_hash": "025f4fcb6024b3524d19492cf7ce54a2"
   },
   "package.json": {
-    "mtime": 1784387931.9949603,
+    "mtime": 1784427036.9816003,
     "ast_hash": "fc21633f34fe80261e40c8e43ce8d2ae",
     "semantic_hash": ""
   },
@@ -265,8 +265,8 @@
     "semantic_hash": ""
   },
   "src/components/spaces/space-table.tsx": {
-    "mtime": 1784384801.3544312,
-    "ast_hash": "75f8a7dce77151068e92e0f04b7bb7ea",
+    "mtime": 1784427036.9937527,
+    "ast_hash": "cec3bc2941411868e808880a192574d1",
     "semantic_hash": ""
   },
   "src/components/ui/alert-dialog.tsx": {
@@ -990,8 +990,8 @@
     "semantic_hash": "21ceb6533048be51308e69e7b74a35cf"
   },
   "README.md": {
-    "mtime": 1784388887.5059323,
-    "ast_hash": "43af8e47286e8478e061d4bb7c96bc01",
+    "mtime": 1784427036.9263742,
+    "ast_hash": "4fd2bc05826d6e33b09cf53466ec5ca6",
     "semantic_hash": ""
   },
   "public/file.svg": {
@@ -1205,23 +1205,23 @@
     "semantic_hash": ""
   },
   "src/actions/auth.ts": {
-    "mtime": 1784388137.815735,
-    "ast_hash": "7a6c673bb267b0127255a4e00b5b9054",
+    "mtime": 1784430559.731142,
+    "ast_hash": "4d8f79b4a8f3267d17c5e46db975185a",
     "semantic_hash": ""
   },
   "src/app/login/page.tsx": {
-    "mtime": 1784388887.5039206,
-    "ast_hash": "2ad25d2ab5a565b3377ca32fcb80c722",
+    "mtime": 1784430327.9005306,
+    "ast_hash": "6f20e2d76bc6d98d6b5dd32a60924329",
     "semantic_hash": ""
   },
   "src/lib/auth.test.ts": {
-    "mtime": 1783738696.0401978,
-    "ast_hash": "22e53f5cd7b6b2a5b29b5b83021cfd7f",
+    "mtime": 1784430129.9109423,
+    "ast_hash": "0da2a8ef7dee4ec0d4c0daa75b9c9974",
     "semantic_hash": ""
   },
   "src/lib/auth.ts": {
-    "mtime": 1783738696.036951,
-    "ast_hash": "7127c8efde01dca81a70451e672b5870",
+    "mtime": 1784430464.4916725,
+    "ast_hash": "1c81444c85c5d1b8b56c63051e790648",
     "semantic_hash": ""
   },
   "src/lib/login-rate-limit.ts": {
@@ -1255,8 +1255,8 @@
     "semantic_hash": "a29188b3d1cc3ee4b2a51e5b099823c8"
   },
   "src/app/(protected)/settings/page.tsx": {
-    "mtime": 1784389894.0880058,
-    "ast_hash": "14d45c2724f454424255b0f95859c097",
+    "mtime": 1784427036.986859,
+    "ast_hash": "d14b5fe0fb92304e1325f238b729b0ba",
     "semantic_hash": ""
   },
   "src/app/(protected)/spaces/[id]/page.tsx": {
@@ -1405,33 +1405,53 @@
     "semantic_hash": ""
   },
   "src/actions/mfa.ts": {
-    "mtime": 1784388137.815735,
-    "ast_hash": "668b841dfe517dfe1cbf7a2ed00b279a",
+    "mtime": 1784427780.7588565,
+    "ast_hash": "e58bcbcbb2b1c573d04c0506a4978297",
     "semantic_hash": ""
   },
   "src/components/settings/mfa-settings.tsx": {
-    "mtime": 1784389547.1267858,
-    "ast_hash": "b0f96147b4caff66d236c1c201b18ff3",
+    "mtime": 1784430238.3966851,
+    "ast_hash": "ed7d06740f090ef73fb7afd85f9d8012",
     "semantic_hash": ""
   },
   "src/db/mfa.test.ts": {
-    "mtime": 1784388234.290006,
-    "ast_hash": "53a6a9faf1b8af318e87879b1f79f085",
+    "mtime": 1784427780.7606504,
+    "ast_hash": "f359da0c006833323909f19e5a5fc05e",
     "semantic_hash": ""
   },
   "src/db/mfa.ts": {
-    "mtime": 1784388051.7701542,
-    "ast_hash": "ed75a6a794afeb2fac173317b19303d7",
+    "mtime": 1784427780.7606504,
+    "ast_hash": "ee4fd4d261303b9671081ae7f242ee66",
     "semantic_hash": ""
   },
   "src/lib/mfa.test.ts": {
-    "mtime": 1784388234.2890036,
-    "ast_hash": "c4933c6ff892cb6e110f09dbb02b5bea",
+    "mtime": 1784427037.0003204,
+    "ast_hash": "044c51df9a33a29e13b768123cd09f84",
     "semantic_hash": ""
   },
   "src/lib/mfa.ts": {
-    "mtime": 1784388051.7691636,
-    "ast_hash": "fa74809ca2d5d73194b5de73db2a6a98",
+    "mtime": 1784427037.0013206,
+    "ast_hash": "7809ef3bacd10d20d3ebe3567d861649",
+    "semantic_hash": ""
+  },
+  "src/actions/mfa.test.ts": {
+    "mtime": 1784427885.2705426,
+    "ast_hash": "ca0e40f988b9ceb0ac08e77061e41a2e",
+    "semantic_hash": ""
+  },
+  "src/actions/auth.test.ts": {
+    "mtime": 1784430354.0059988,
+    "ast_hash": "75b23b0ebd7578e4f339029a8e89d2e1",
+    "semantic_hash": ""
+  },
+  "src/components/auth/login-form.tsx": {
+    "mtime": 1784430559.731142,
+    "ast_hash": "3b34daa707c40a97dc600690b06b5d48",
+    "semantic_hash": ""
+  },
+  "src/components/auth/mfa-code-input.tsx": {
+    "mtime": 1784430559.731142,
+    "ast_hash": "15208f06eab67a140295aa017e3e3571",
     "semantic_hash": ""
   }
 }

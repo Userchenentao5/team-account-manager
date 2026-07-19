@@ -54,7 +54,7 @@ describe("MFA settings", () => {
     expect(verifyMfaLoginCode(ctx.db, nextCode, 90_000)).toBe(false);
   });
 
-  it("requires a fresh code to disable MFA", () => {
+  it("removes stored MFA settings when disabled", () => {
     const enrollment = startMfaEnrollment(ctx.db, {
       issuer: "Team Account Manager",
       accountName: "admin",
@@ -63,9 +63,7 @@ describe("MFA settings", () => {
     const enrollmentCode = generateTotp(enrollment.secret, { timestamp: 59_000 });
     expect(confirmMfaEnrollment(ctx.db, enrollmentCode, 59_000)).toBe(true);
 
-    expect(disableMfa(ctx.db, "000000", 90_000)).toBe(false);
-    const disableCode = generateTotp(enrollment.secret, { timestamp: 90_000 });
-    expect(disableMfa(ctx.db, disableCode, 90_000)).toBe(true);
+    disableMfa(ctx.db);
     expect(getMfaStatus(ctx.db)).toEqual({ enabled: false });
     expect(verifyMfaLoginCode(ctx.db, "", 90_000)).toBe(true);
   });
