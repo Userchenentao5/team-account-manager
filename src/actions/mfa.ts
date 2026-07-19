@@ -9,7 +9,11 @@ import {
   disableMfa as disableStoredMfa,
   startMfaEnrollment,
 } from "@/db/mfa";
-import { AUTH_COOKIE_NAME, verifySessionToken } from "@/lib/auth";
+import {
+  AUTH_COOKIE_NAME,
+  verifyLoginKey,
+  verifySessionToken,
+} from "@/lib/auth";
 
 type MfaActionResult = { ok: true } | { ok: false; error: string };
 
@@ -62,17 +66,18 @@ export async function enableMfa(code: string): Promise<MfaActionResult> {
   }
 }
 
-export async function disableMfa(code: string): Promise<MfaActionResult> {
+export async function disableMfa(loginKey: string): Promise<MfaActionResult> {
   if (!(await hasAuthenticatedSession())) return unauthorized();
 
   try {
-    if (!disableStoredMfa(db, code)) {
-      return { ok: false, error: "请输入 Authenticator 中最新且未使用的安全码。" };
+    if (!(await verifyLoginKey(loginKey))) {
+      return { ok: false, error: "访问密钥不正确。" };
     }
+    disableStoredMfa(db);
     revalidatePath("/settings");
     return { ok: true };
   } catch {
-    return { ok: false, error: "无法关闭 MFA，请检查安全密钥配置。" };
+    return { ok: false, error: "无法关闭 MFA，请检查登录密钥配置。" };
   }
 }
 

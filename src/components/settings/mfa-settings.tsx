@@ -31,6 +31,7 @@ export function MfaSettings({ status }: { status: MfaStatus }) {
   const [enrollment, setEnrollment] = useState<Enrollment | null>(null);
   const [showDisableConfirm, setShowDisableConfirm] = useState(false);
   const [code, setCode] = useState("");
+  const [loginKey, setLoginKey] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
 
@@ -67,7 +68,7 @@ export function MfaSettings({ status }: { status: MfaStatus }) {
   function turnOffMfa() {
     setError(null);
     startTransition(async () => {
-      const result = await disableMfa(code);
+      const result = await disableMfa(loginKey);
       if (!result.ok) {
         setError(result.error);
         toast.error(result.error);
@@ -75,7 +76,7 @@ export function MfaSettings({ status }: { status: MfaStatus }) {
       }
       setEnabled(false);
       setShowDisableConfirm(false);
-      setCode("");
+      setLoginKey("");
       toast.success("MFA 已关闭");
     });
   }
@@ -93,7 +94,7 @@ export function MfaSettings({ status }: { status: MfaStatus }) {
 
   function closeDisableConfirm() {
     setShowDisableConfirm(false);
-    setCode("");
+    setLoginKey("");
     setError(null);
   }
 
@@ -109,7 +110,7 @@ export function MfaSettings({ status }: { status: MfaStatus }) {
     }
 
     if (enabled) {
-      setCode("");
+      setLoginKey("");
       setError(null);
       setShowDisableConfirm(true);
     }
@@ -315,16 +316,22 @@ export function MfaSettings({ status }: { status: MfaStatus }) {
             </div>
             <DialogTitle>关闭多重身份验证？</DialogTitle>
             <DialogDescription>
-              关闭后，登录将只验证访问密钥。请输入一个最新且未使用的动态安全码确认操作。
+              关闭后，登录将只验证访问密钥。请输入当前登录使用的访问密钥核验身份。
             </DialogDescription>
           </DialogHeader>
 
           <div className="space-y-3 py-1">
-            <Label htmlFor="disableMfaCode">6 位动态安全码</Label>
-            <CodeInput
-              id="disableMfaCode"
-              value={code}
-              onChange={updateCode}
+            <Label htmlFor="disableMfaLoginKey">访问密钥</Label>
+            <Input
+              id="disableMfaLoginKey"
+              type="password"
+              value={loginKey}
+              onChange={(event) => {
+                setLoginKey(event.target.value);
+                setError(null);
+              }}
+              autoComplete="current-password"
+              placeholder="输入访问密钥"
               disabled={isPending}
               autoFocus
             />
@@ -348,7 +355,7 @@ export function MfaSettings({ status }: { status: MfaStatus }) {
               type="button"
               variant="destructive"
               onClick={turnOffMfa}
-              disabled={isPending || code.length !== 6}
+              disabled={isPending || loginKey.length === 0}
             >
               {isPending ? "正在关闭..." : "确认关闭"}
             </Button>
