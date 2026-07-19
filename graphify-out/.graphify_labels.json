@@ -1044,5 +1044,7 @@
   "1042": "expiry.ts",
   "1043": "scripts",
   "1044": "package.json",
-  "1045": "countries.ts"
+  "1045": "countries.ts",
+  "1046": "channel-table.tsx",
+  "1047": "currencies.ts"
 }

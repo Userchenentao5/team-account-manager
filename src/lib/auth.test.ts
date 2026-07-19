@@ -1,9 +1,12 @@
 import { afterEach, describe, expect, it } from "vitest";
 import {
+  MFA_CHALLENGE_MAX_AGE_SECONDS,
+  createMfaChallengeToken,
   createSessionToken,
   hashLoginKey,
   shouldUseSecureSessionCookie,
   verifyLoginKey,
+  verifyMfaChallengeToken,
   verifySessionToken,
 } from "@/lib/auth";
 import {
@@ -46,6 +49,21 @@ describe("auth", () => {
       false,
     );
     await expect(verifySessionToken(`${token}x`, 2_000)).resolves.toBe(false);
+  });
+
+  it("keeps short-lived MFA challenges separate from sessions", async () => {
+    process.env.APP_AUTH_SECRET = "test-signing-secret";
+
+    const token = await createMfaChallengeToken(1_000);
+
+    await expect(verifyMfaChallengeToken(token, 2_000)).resolves.toBe(true);
+    await expect(verifySessionToken(token, 2_000)).resolves.toBe(false);
+    await expect(
+      verifyMfaChallengeToken(
+        token,
+        1_000 + MFA_CHALLENGE_MAX_AGE_SECONDS * 1_000,
+      ),
+    ).resolves.toBe(false);
   });
 
   it("locks repeated failed login attempts and clears them after success", () => {
