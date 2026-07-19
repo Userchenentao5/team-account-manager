@@ -2,16 +2,7 @@
 
 import Image from "next/image";
 import { useState, useTransition } from "react";
-import {
-  Check,
-  CircleDashed,
-  Copy,
-  KeyRound,
-  LockKeyhole,
-  Plus,
-  ShieldCheck,
-  Smartphone,
-} from "lucide-react";
+import { Copy, LockKeyhole, ShieldCheck, Smartphone } from "lucide-react";
 import { toast } from "sonner";
 import {
   beginMfaEnrollment,
@@ -20,6 +11,14 @@ import {
 } from "@/actions/mfa";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
@@ -92,6 +91,12 @@ export function MfaSettings({ status }: { status: MfaStatus }) {
     setError(null);
   }
 
+  function closeDisableConfirm() {
+    setShowDisableConfirm(false);
+    setCode("");
+    setError(null);
+  }
+
   function changeMfaEnabled(checked: boolean) {
     if (checked) {
       if (!enabled && !enrollment) beginEnrollment();
@@ -120,223 +125,237 @@ export function MfaSettings({ status }: { status: MfaStatus }) {
     }
   }
 
+  const statusLabel = isPending && !enrollment && !enabled
+    ? "正在准备"
+    : enabled
+      ? "已启用"
+      : enrollment
+        ? "正在设置"
+        : "未启用";
+
   return (
-    <Card className="gap-0 py-0">
-      <div className="grid sm:grid-cols-[minmax(0,1fr)_13rem]">
-        <div className="p-5 sm:p-6">
-          <div className="flex items-start gap-4">
-            <div className="flex size-11 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary ring-1 ring-primary/15">
-              <ShieldCheck className="size-5" aria-hidden="true" />
+    <>
+      <Card className="gap-0 py-0">
+        <section aria-labelledby="mfa-title">
+          <div className="flex flex-col gap-5 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+            <div className="flex min-w-0 items-start gap-4">
+              <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                <ShieldCheck className="size-5" aria-hidden="true" />
+              </div>
+              <div className="min-w-0">
+                <h2 id="mfa-title" className="font-heading text-base font-semibold">
+                  多重身份验证
+                </h2>
+                <p id="mfa-description" className="mt-1 max-w-xl text-sm leading-6 text-muted-foreground">
+                  使用身份验证器 App 生成动态安全码，为登录增加一道验证。
+                </p>
+              </div>
             </div>
-            <div className="min-w-0">
-              <h2 className="font-heading text-lg font-semibold tracking-tight">
-                多重身份验证
-              </h2>
-              <p className="mt-1 max-w-lg text-sm leading-6 text-muted-foreground">
-                登录时同时验证访问密钥和 Authenticator 动态安全码。
-              </p>
-            </div>
-          </div>
 
-          <div className="mt-5 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
-            <span className="flex items-center gap-1.5">
-              <KeyRound className="size-3.5" aria-hidden="true" />
-              访问密钥
-            </span>
-            <Plus className="size-3.5 text-border" aria-hidden="true" />
-            <span className="flex items-center gap-1.5">
-              <Smartphone className="size-3.5" aria-hidden="true" />
-              6 位动态安全码
-            </span>
-          </div>
-        </div>
-
-        <div className="flex flex-col justify-between gap-5 border-t bg-muted/30 p-5 sm:border-l sm:border-t-0">
-          <div className="flex items-start justify-between gap-3">
-            <div>
-              <Label htmlFor="mfaEnabled" className="text-xs text-muted-foreground">
-                开启 MFA
+            <div className="flex shrink-0 items-center justify-between gap-4 pl-14 sm:pl-0">
+              <Label
+                htmlFor="mfaEnabled"
+                className="flex items-center gap-2 text-sm font-medium text-muted-foreground"
+              >
+                <span
+                  className={`size-2 rounded-full ${enabled ? "bg-emerald-500" : "bg-muted-foreground/35"}`}
+                  aria-hidden="true"
+                />
+                {statusLabel}
               </Label>
-            <div
-              className={
-                enabled
-                  ? "mt-2 flex items-center gap-2 text-sm font-semibold text-emerald-700 dark:text-emerald-400"
-                  : "mt-2 flex items-center gap-2 text-sm font-semibold text-foreground"
-              }
-            >
-              {enabled ? (
-                <Check className="size-4" aria-hidden="true" />
-              ) : enrollment ? (
-                <CircleDashed className="size-4" aria-hidden="true" />
-              ) : (
-                <LockKeyhole className="size-4 text-muted-foreground" aria-hidden="true" />
-              )}
-              {enabled ? "已启用" : enrollment ? "正在设置" : "未启用"}
-            </div>
-            </div>
-            <Switch
-              id="mfaEnabled"
-              checked={enabled || Boolean(enrollment)}
-              onCheckedChange={changeMfaEnabled}
-              disabled={isPending}
-              aria-label="开启多重身份验证"
-            />
-          </div>
-          {!enabled && !enrollment ? (
-            <p className="text-xs leading-5 text-muted-foreground">
-              开启后需要扫描二维码并验证动态安全码。
-            </p>
-          ) : null}
-        </div>
-      </div>
-
-      {enrollment ? (
-        <div className="grid border-t md:grid-cols-[16rem_minmax(0,1fr)]">
-          <div className="bg-muted/20 p-5 sm:p-6 md:border-r">
-            <p className="text-sm font-semibold">扫描二维码</p>
-            <p className="mt-1 text-sm leading-6 text-muted-foreground">
-              使用 Authenticator App 添加账号。
-            </p>
-            <div className="mt-4 overflow-hidden rounded-lg bg-white p-3 ring-1 ring-border">
-              <Image
-                src={enrollment.qrCodeDataUrl}
-                width={224}
-                height={224}
-                alt="Authenticator 绑定二维码"
-                unoptimized
-                className="aspect-square w-full"
+              <Switch
+                id="mfaEnabled"
+                checked={enabled || Boolean(enrollment)}
+                onCheckedChange={changeMfaEnabled}
+                disabled={isPending}
+                aria-label="开启多重身份验证"
+                aria-describedby="mfa-description"
               />
             </div>
-            <div className="mt-4 space-y-2">
-              <Label>手动设置密钥</Label>
-              <div className="flex items-center gap-2 rounded-lg border bg-background px-3 py-2">
-                <code className="min-w-0 flex-1 break-all text-xs font-semibold tracking-wider">
-                  {enrollment.manualKey}
-                </code>
-                <Button
-                  type="button"
-                  size="icon-sm"
-                  variant="ghost"
-                  onClick={copyManualKey}
-                  aria-label="复制手动设置密钥"
-                >
-                  <Copy className="size-4" />
-                </Button>
-              </div>
-            </div>
           </div>
 
-          <div className="flex flex-col justify-center p-5 sm:p-6 md:p-8">
-            <div className="max-w-md">
-              <p className="text-base font-semibold">验证动态安全码</p>
-              <p className="mt-1 text-sm leading-6 text-muted-foreground">
-                输入 App 当前显示的 6 位数字，验证通过后 MFA 才会启用。
-              </p>
-              <div className="mt-5 space-y-2">
-                <Label htmlFor="enableMfaCode">动态安全码</Label>
-                <CodeInput
-                  id="enableMfaCode"
-                  value={code}
-                  onChange={updateCode}
-                  disabled={isPending}
-                  autoFocus
-                />
-              </div>
-              <div className="mt-4 flex flex-col gap-2 sm:flex-row">
-                <Button
-                  type="button"
-                  onClick={confirmEnrollment}
-                  disabled={isPending || code.length !== 6}
-                >
-                  {isPending ? "正在验证..." : "验证并启用"}
-                </Button>
-                <Button
-                  type="button"
-                  variant="ghost"
-                  onClick={cancelEnrollment}
-                  disabled={isPending}
-                >
-                  取消
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      ) : null}
-
-      {enabled ? (
-        <div className="border-t">
-          <div className="p-5 sm:p-6">
-            <p className="text-base font-semibold">Authenticator 保护已生效</p>
-            <p className="mt-1 max-w-lg text-sm leading-6 text-muted-foreground">
-              下次登录必须输入 App 中显示的 6 位动态安全码。
+          <div className="flex gap-3 border-t bg-muted/15 px-5 py-3.5 text-xs leading-5 text-muted-foreground sm:px-6">
+            {enabled ? (
+              <Smartphone className="mt-0.5 size-3.5 shrink-0" aria-hidden="true" />
+            ) : (
+              <LockKeyhole className="mt-0.5 size-3.5 shrink-0" aria-hidden="true" />
+            )}
+            <p>
+              {enabled
+                ? "Authenticator 已连接。下次登录需要输入 App 中的 6 位动态安全码。"
+                : "开启后需要扫描二维码并验证动态安全码；设备丢失后需由服务器管理员重置。"}
             </p>
-            <dl className="mt-5 grid gap-4 sm:grid-cols-2">
-              <div>
-                <dt className="text-xs text-muted-foreground">验证方式</dt>
-                <dd className="mt-1 text-sm font-medium">访问密钥 + 动态码</dd>
-              </div>
-              <div>
-                <dt className="text-xs text-muted-foreground">更新周期</dt>
-                <dd className="mt-1 text-sm font-medium">每 30 秒</dd>
-              </div>
-            </dl>
           </div>
 
-          {showDisableConfirm ? (
-            <div className="border-t bg-muted/20 p-5 sm:p-6">
-              <div className="max-w-sm">
-                <Label htmlFor="disableMfaCode">确认关闭 MFA</Label>
-                <p className="mt-1 text-sm leading-6 text-muted-foreground">
-                  输入一个最新且未使用的安全码确认操作。
-                </p>
-                <CodeInput
-                  id="disableMfaCode"
-                  value={code}
-                  onChange={updateCode}
-                  disabled={isPending}
-                  className="mt-4"
-                  autoFocus
-                />
-                <div className="mt-3 flex gap-2">
-                  <Button
-                    type="button"
-                    variant="destructive"
-                    onClick={turnOffMfa}
-                    disabled={isPending || code.length !== 6}
-                  >
-                    {isPending ? "正在关闭..." : "确认关闭"}
-                  </Button>
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    onClick={() => {
-                      setShowDisableConfirm(false);
-                      setCode("");
-                      setError(null);
-                    }}
-                    disabled={isPending}
-                  >
-                    取消
-                  </Button>
+          {error && !enrollment && !showDisableConfirm ? (
+            <p role="alert" className="border-t px-5 py-3 text-sm text-destructive sm:px-6">
+              {error}
+            </p>
+          ) : null}
+        </section>
+      </Card>
+
+      <Dialog
+        open={Boolean(enrollment)}
+        onOpenChange={(open) => {
+          if (!open && !isPending) cancelEnrollment();
+        }}
+      >
+        <DialogContent className="sm:max-w-lg" showCloseButton={!isPending}>
+          <DialogHeader>
+            <DialogTitle>设置身份验证器</DialogTitle>
+            <DialogDescription>
+              扫描二维码并输入当前动态安全码。验证通过后，MFA 才会启用。
+            </DialogDescription>
+          </DialogHeader>
+
+          {enrollment ? (
+            <div className="space-y-5 py-1">
+              <section className="grid grid-cols-[2rem_minmax(0,1fr)] gap-3">
+                <div className="flex size-7 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
+                  1
                 </div>
-              </div>
+                <div className="min-w-0">
+                  <h3 className="font-semibold">扫描二维码</h3>
+                  <p className="mt-1 text-sm leading-6 text-muted-foreground">
+                    使用 Google Authenticator、Microsoft Authenticator 等应用添加账号。
+                  </p>
+                  <div className="mt-4 flex justify-center">
+                    <div className="overflow-hidden rounded-lg bg-white p-3 ring-1 ring-border">
+                      <Image
+                        src={enrollment.qrCodeDataUrl}
+                        width={176}
+                        height={176}
+                        alt="Authenticator 绑定二维码"
+                        unoptimized
+                        className="size-44"
+                      />
+                    </div>
+                  </div>
+                  <div className="mt-4 space-y-2">
+                    <Label>无法扫描？手动输入密钥</Label>
+                    <div className="flex items-center gap-2 rounded-lg border bg-muted/20 px-3 py-2">
+                      <code className="min-w-0 flex-1 break-all text-xs font-semibold tracking-wider">
+                        {enrollment.manualKey}
+                      </code>
+                      <Button
+                        type="button"
+                        size="icon-sm"
+                        variant="ghost"
+                        onClick={copyManualKey}
+                        aria-label="复制手动设置密钥"
+                      >
+                        <Copy className="size-4" />
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section className="grid grid-cols-[2rem_minmax(0,1fr)] gap-3 border-t pt-5">
+                <div className="flex size-7 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
+                  2
+                </div>
+                <div>
+                  <Label htmlFor="enableMfaCode" className="font-semibold text-foreground">
+                    输入 6 位动态安全码
+                  </Label>
+                  <p className="mt-1 text-sm leading-6 text-muted-foreground">
+                    输入 App 当前显示的数字完成验证。
+                  </p>
+                  <CodeInput
+                    id="enableMfaCode"
+                    value={code}
+                    onChange={updateCode}
+                    disabled={isPending}
+                    className="mt-3"
+                    autoFocus
+                  />
+                </div>
+              </section>
+
+              {error ? (
+                <p role="alert" className="text-sm text-destructive">
+                  {error}
+                </p>
+              ) : null}
             </div>
           ) : null}
-        </div>
-      ) : null}
 
-      {error ? (
-        <p role="alert" className="border-t px-5 py-3 text-sm text-destructive sm:px-6">
-          {error}
-        </p>
-      ) : null}
+          <DialogFooter>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={cancelEnrollment}
+              disabled={isPending}
+            >
+              取消
+            </Button>
+            <Button
+              type="button"
+              onClick={confirmEnrollment}
+              disabled={isPending || code.length !== 6}
+            >
+              {isPending ? "正在验证..." : "验证并启用"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
-      <div className="flex gap-2.5 border-t bg-muted/15 px-5 py-3.5 text-xs leading-5 text-muted-foreground sm:px-6">
-        <LockKeyhole className="mt-0.5 size-3.5 shrink-0" aria-hidden="true" />
-        <p>请妥善保管绑定设备；设备丢失后需要由服务器管理员重置 MFA。</p>
-      </div>
-    </Card>
+      <Dialog
+        open={showDisableConfirm}
+        onOpenChange={(open) => {
+          if (!open && !isPending) closeDisableConfirm();
+        }}
+      >
+        <DialogContent showCloseButton={!isPending}>
+          <DialogHeader>
+            <div className="mb-1 flex size-10 items-center justify-center rounded-full bg-destructive/10 text-destructive">
+              <LockKeyhole className="size-5" aria-hidden="true" />
+            </div>
+            <DialogTitle>关闭多重身份验证？</DialogTitle>
+            <DialogDescription>
+              关闭后，登录将只验证访问密钥。请输入一个最新且未使用的动态安全码确认操作。
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="space-y-3 py-1">
+            <Label htmlFor="disableMfaCode">6 位动态安全码</Label>
+            <CodeInput
+              id="disableMfaCode"
+              value={code}
+              onChange={updateCode}
+              disabled={isPending}
+              autoFocus
+            />
+            {error ? (
+              <p role="alert" className="text-sm text-destructive">
+                {error}
+              </p>
+            ) : null}
+          </div>
+
+          <DialogFooter>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={closeDisableConfirm}
+              disabled={isPending}
+            >
+              取消
+            </Button>
+            <Button
+              type="button"
+              variant="destructive"
+              onClick={turnOffMfa}
+              disabled={isPending || code.length !== 6}
+            >
+              {isPending ? "正在关闭..." : "确认关闭"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }
 
@@ -357,7 +376,7 @@ function CodeInput({
       maxLength={6}
       placeholder="000000"
       onChange={(event) => onChange(event.target.value)}
-      className={`w-full font-mono text-base tracking-[0.24em] sm:w-40 ${className ?? ""}`}
+      className={`w-full font-mono text-base tracking-[0.24em] ${className ?? ""}`}
     />
   );
 }
