@@ -186,7 +186,7 @@ export default function DashboardPage() {
               </p>
             </div>
             <div className="grid gap-8 xl:grid-cols-2">
-              <div className="space-y-3">
+              <div className="min-w-0 space-y-3">
                 <div className="flex items-baseline justify-between gap-4">
                   <h3 className="text-sm font-semibold">空间续费</h3>
                   <span className="text-xs text-muted-foreground">
@@ -198,7 +198,7 @@ export default function DashboardPage() {
                   soonDays={thresholds.spaceSoonDays}
                 />
               </div>
-              <div className="space-y-3">
+              <div className="min-w-0 space-y-3">
                 <div className="flex items-baseline justify-between gap-4">
                   <h3 className="text-sm font-semibold">出租账号收款</h3>
                   <span className="text-xs text-muted-foreground">
