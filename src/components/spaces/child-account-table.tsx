@@ -436,7 +436,7 @@ function InlineChildAccountRow({
             expireOnDate
           />
         </TableCell>
-        <TableCell className="text-right">
+        <TableCell className="sticky right-0 z-10 min-w-24 border-l bg-muted text-right">
           <div className="flex justify-center gap-1">
             <Tooltip>
               <TooltipTrigger asChild>
@@ -559,7 +559,10 @@ export function ChildAccountTable({
               <TableHead scope="col">周期 / 付款日</TableHead>
               <TableHead scope="col">到期日</TableHead>
               <TableHead scope="col">状态</TableHead>
-              <TableHead scope="col" className="text-right">
+              <TableHead
+                scope="col"
+                className="sticky right-0 z-10 min-w-24 border-l bg-background text-right"
+              >
                 操作
               </TableHead>
             </TableRow>
@@ -630,7 +633,7 @@ export function ChildAccountTable({
                       expireOnDate
                     />
                   </TableCell>
-                  <TableCell className="text-right">
+                  <TableCell className="sticky right-0 z-10 min-w-24 border-l bg-background text-right">
                     <div className="flex justify-center gap-1">
                       {isSelfUse ? null : (
                         <Tooltip>
