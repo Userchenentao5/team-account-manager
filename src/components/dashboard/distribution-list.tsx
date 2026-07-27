@@ -49,15 +49,19 @@ export function DistributionList({
           </div>
         ) : (
           <div className="overflow-x-auto pb-1">
-            <div className="grid min-w-[23rem] grid-cols-[2rem_minmax(0,1fr)] gap-3">
+            <p className="mb-2 ml-[3.25rem] h-3 text-[10px] font-medium text-muted-foreground">
+              占总支出比例
+            </p>
+            <div className="grid min-w-[23rem] grid-cols-[2.5rem_minmax(0,1fr)] gap-3">
               <div
                 aria-hidden="true"
-                className="grid h-44 grid-rows-4 text-right font-mono text-[10px] text-muted-foreground"
+                className="relative h-44 text-right font-mono text-[10px] text-muted-foreground"
               >
-                <span className="-translate-y-1">100</span>
-                <span className="-translate-y-1">75</span>
-                <span className="-translate-y-1">50</span>
-                <span className="-translate-y-1">25</span>
+                <span className="absolute right-0 top-0 -translate-y-1/2">100%</span>
+                <span className="absolute right-0 top-1/4 -translate-y-1/2">75%</span>
+                <span className="absolute right-0 top-1/2 -translate-y-1/2">50%</span>
+                <span className="absolute right-0 top-3/4 -translate-y-1/2">25%</span>
+                <span className="absolute bottom-0 right-0 translate-y-1/2">0%</span>
               </div>
               <div
                 className="flex min-w-0 gap-3"
@@ -68,12 +72,13 @@ export function DistributionList({
                   <div
                     key={bucket.key}
                     role="listitem"
+                    aria-label={`${bucket.label}，${formatMinor(bucket.usdMinor, 2)} 美元，占总支出 ${bucket.percentage}%`}
                     className="flex min-w-[4.75rem] flex-1 flex-col gap-2"
                   >
                     <div className="relative h-44">
                       <div
                         aria-hidden="true"
-                        className="pointer-events-none absolute inset-0 grid grid-rows-4"
+                        className="pointer-events-none absolute inset-0 grid grid-rows-4 border-b border-border/65"
                       >
                         <span className="border-t border-border/65" />
                         <span className="border-t border-border/45" />
@@ -82,6 +87,7 @@ export function DistributionList({
                       </div>
                       <div className="absolute inset-x-0 bottom-0 top-1 flex items-end px-1">
                         <div
+                          aria-hidden="true"
                           className="min-h-1 w-full rounded-t-sm bg-primary/85"
                           style={{
                             height: `${Math.min(100, Math.max(0, bucket.percentage))}%`,
@@ -91,8 +97,13 @@ export function DistributionList({
                       </div>
                     </div>
                     <div className="min-h-10 text-center">
-                      <p className="truncate font-mono text-[11px] font-medium tabular-nums text-foreground">
-                        ${formatMinor(bucket.usdMinor, 2)}
+                      <p className="flex items-baseline justify-center gap-1.5 whitespace-nowrap font-mono tabular-nums">
+                        <span className="text-[11px] font-medium text-foreground">
+                          ${formatMinor(bucket.usdMinor, 2)}
+                        </span>
+                        <span className="text-[10px] font-semibold text-primary">
+                          {bucket.percentage}%
+                        </span>
                       </p>
                       <p className="line-clamp-2 text-xs leading-4 text-muted-foreground">
                         {bucket.label}
@@ -101,10 +112,6 @@ export function DistributionList({
                   </div>
                 ))}
               </div>
-            </div>
-            <div className="ml-11 mt-1 flex justify-between font-mono text-[10px] text-muted-foreground">
-              <span>占总支出比例</span>
-              <span>0%</span>
             </div>
           </div>
         )}
