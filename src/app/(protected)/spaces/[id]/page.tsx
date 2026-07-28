@@ -262,6 +262,7 @@ export default async function SpaceDetailPage({
         <CardContent className="p-6">
           <ChildAccountTable
             spaceId={space.id}
+            canChangeSeatType={motherAccount.canChangeSeatType}
             accounts={childAccounts}
             currencies={currencies}
             childAccountSoonDays={thresholds.childAccountSoonDays}

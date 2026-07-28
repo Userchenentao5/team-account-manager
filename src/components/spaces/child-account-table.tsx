@@ -55,6 +55,7 @@ import { ExpiryBadge } from "./expiry-badge";
 
 type ChildAccountTableProps = {
   spaceId: number;
+  canChangeSeatType: boolean;
   accounts: ChildAccountListRow[];
   currencies: CurrencyRow[];
   childAccountSoonDays: number;
@@ -81,6 +82,7 @@ type BillingPeriodValue = {
 type InlineChildAccountRowProps = {
   mode: "add" | "edit";
   spaceId: number;
+  canChangeSeatType: boolean;
   initialValue: ChildAccountFormValue;
   currencies: readonly CurrencyRow[];
   childAccountSoonDays: number;
@@ -188,6 +190,7 @@ function parseBillingPeriod(value: string) {
 function InlineChildAccountRow({
   mode,
   spaceId,
+  canChangeSeatType,
   initialValue,
   currencies,
   childAccountSoonDays,
@@ -200,7 +203,10 @@ function InlineChildAccountRow({
     field?: keyof ChildAccountFormInput;
     message: string;
   } | null>(null);
-  const [draft, setDraft] = useState<ChildAccountFormValue>(initialValue);
+  const [draft, setDraft] = useState<ChildAccountFormValue>({
+    ...initialValue,
+    seatType: canChangeSeatType ? initialValue.seatType : "chatgpt",
+  });
   const initialCurrency = currencies.find(
     (currency) => currency.code === initialValue.monthlyCurrencyCode,
   );
@@ -302,6 +308,7 @@ function InlineChildAccountRow({
                 value as ChildAccountFormInput["seatType"],
               )
             }
+            disabled={!canChangeSeatType || isPending}
           >
             <SelectTrigger className="w-24" aria-label="席位类型">
               <SelectValue />
@@ -485,6 +492,7 @@ function InlineChildAccountRow({
 
 export function ChildAccountTable({
   spaceId,
+  canChangeSeatType,
   accounts,
   currencies,
   childAccountSoonDays,
@@ -533,7 +541,9 @@ export function ChildAccountTable({
         <div>
           <h2 className="text-base font-semibold">子账号</h2>
           <p className="text-sm text-muted-foreground">
-            在当前空间下管理 codex 或 chatgpt 子账号。
+            {canChangeSeatType
+              ? "在当前空间下管理 codex 或 chatgpt 子账号。"
+              : "当前空间的所有席位类型固定为 chatgpt。"}
           </p>
         </div>
         <Button
@@ -573,6 +583,7 @@ export function ChildAccountTable({
                 key="add"
                 mode="add"
                 spaceId={spaceId}
+                canChangeSeatType={canChangeSeatType}
                 initialValue={defaultFormValue(currencies)}
                 currencies={currencies}
                 childAccountSoonDays={childAccountSoonDays}
@@ -593,6 +604,7 @@ export function ChildAccountTable({
                     key={child.id}
                     mode="edit"
                     spaceId={spaceId}
+                    canChangeSeatType={canChangeSeatType}
                     initialValue={formState.child}
                     currencies={currencies}
                     childAccountSoonDays={childAccountSoonDays}

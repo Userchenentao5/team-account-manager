@@ -23,6 +23,16 @@ export type ChildAccountListRow = {
   currency: typeof currency.$inferSelect;
 };
 
+function isSeatTypeLocked(db: Db, spaceId: number): boolean {
+  return (
+    db
+      .select({ canChangeSeatType: motherAccount.canChangeSeatType })
+      .from(motherAccount)
+      .where(eq(motherAccount.spaceId, spaceId))
+      .get()?.canChangeSeatType === false
+  );
+}
+
 export function listChildAccounts(
   db: Db,
   spaceId: number,
@@ -50,7 +60,15 @@ export function insertChildAccount(
   db: Db,
   values: ChildAccountInsert,
 ): ChildAccountRow {
-  return db.insert(childAccount).values(values).returning().get();
+  return db
+    .insert(childAccount)
+    .values(
+      isSeatTypeLocked(db, values.spaceId)
+        ? { ...values, seatType: "chatgpt" }
+        : values,
+    )
+    .returning()
+    .get();
 }
 
 export function updateChildAccount(
@@ -58,9 +76,24 @@ export function updateChildAccount(
   id: number,
   values: ChildAccountUpdate,
 ): ChildAccountRow {
+  const spaceId =
+    typeof values.spaceId === "number"
+      ? values.spaceId
+      : db
+          .select({ spaceId: childAccount.spaceId })
+          .from(childAccount)
+          .where(eq(childAccount.id, id))
+          .get()?.spaceId;
+  const nextValues =
+    values.seatType !== undefined &&
+    spaceId !== undefined &&
+    isSeatTypeLocked(db, spaceId)
+      ? { ...values, seatType: "chatgpt" }
+      : values;
+
   return db
     .update(childAccount)
-    .set(values)
+    .set(nextValues)
     .where(eq(childAccount.id, id))
     .returning()
     .get();
@@ -75,8 +108,20 @@ export function updateMotherSeat(
   spaceId: number,
   values: MotherSeatUpdate,
 ): void {
-  db.update(motherAccount)
-    .set(values)
-    .where(eq(motherAccount.spaceId, spaceId))
-    .run();
+  db.transaction((tx) => {
+    tx.update(motherAccount)
+      .set({
+        ...values,
+        seatType: values.canChangeSeatType ? values.seatType : "chatgpt",
+      })
+      .where(eq(motherAccount.spaceId, spaceId))
+      .run();
+
+    if (!values.canChangeSeatType) {
+      tx.update(childAccount)
+        .set({ seatType: "chatgpt" })
+        .where(eq(childAccount.spaceId, spaceId))
+        .run();
+    }
+  });
 }

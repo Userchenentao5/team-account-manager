@@ -325,18 +325,34 @@ describe("child account server actions (ACCT-02 / ACCT-03)", () => {
     expect(ctx.db.select().from(space).all()).toHaveLength(1);
   });
 
-  it("updates mother seat metadata only", async () => {
-    const res = await updateMotherSeat(spaceId, {
-      seatType: "chatgpt",
+  it("locks every seat to chatgpt when seat types cannot change", async () => {
+    seedUsdRate();
+    const existing = seedChild();
+
+    const lockResult = await updateMotherSeat(spaceId, {
+      seatType: "codex",
       canChangeSeatType: false,
     });
+    const createResult = await createChildAccount(
+      spaceId,
+      validInput({ email: "new@example.com", seatType: "codex" }),
+    );
+    const updateResult = await updateChildAccount(
+      existing.id,
+      validInput({ seatType: "codex" }),
+    );
     const mother = ctx.db.select().from(motherAccount).get();
+    const children = ctx.db.select().from(childAccount).all();
 
-    expect(res.ok).toBe(true);
+    expect(lockResult.ok).toBe(true);
+    expect(createResult.ok).toBe(true);
+    expect(updateResult.ok).toBe(true);
     expect(mother).toMatchObject({
       seatType: "chatgpt",
       canChangeSeatType: false,
     });
+    expect(children).toHaveLength(2);
+    expect(children.every((child) => child.seatType === "chatgpt")).toBe(true);
   });
 
   it("rejects invalid IDs and ignores credential-looking mass-assignment keys", async () => {
