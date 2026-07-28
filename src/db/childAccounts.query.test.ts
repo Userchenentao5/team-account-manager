@@ -104,7 +104,7 @@ describe("child account queries (ACCT-02 / ACCT-03 / SPACE-05)", () => {
     expect(rows[0]?.currency.code).toBe("USD");
   });
 
-  it("updates only mother seat metadata and does not add child-level can_change_seat_type", () => {
+  it("locks mother and child seat types without adding child-level changeability", () => {
     const row = makeSpace("Mother Seat");
     const child = makeChild(row.id);
 
@@ -122,6 +122,7 @@ describe("child account queries (ACCT-02 / ACCT-03 / SPACE-05)", () => {
 
     expect(mother?.seatType).toBe("chatgpt");
     expect(mother?.canChangeSeatType).toBe(false);
+    expect(childRow?.seatType).toBe("chatgpt");
     expect(childRow).not.toHaveProperty("canChangeSeatType");
   });
 

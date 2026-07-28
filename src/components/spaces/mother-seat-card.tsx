@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Pencil, X } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { toast } from "sonner";
 import { updateMotherSeat } from "@/actions/childAccounts";
 import type { MotherAccountRow } from "@/db/schema";
@@ -60,14 +60,22 @@ export function MotherSeatCard({
   const form = useForm<MotherSeatFormInput>({
     resolver: zodResolver(motherSeatFormSchema),
     defaultValues: {
-      seatType: motherAccount.seatType as MotherSeatFormInput["seatType"],
+      seatType: motherAccount.canChangeSeatType
+        ? (motherAccount.seatType as MotherSeatFormInput["seatType"])
+        : "chatgpt",
       canChangeSeatType: motherAccount.canChangeSeatType,
     },
+  });
+  const canChangeSeatType = useWatch({
+    control: form.control,
+    name: "canChangeSeatType",
   });
 
   useEffect(() => {
     form.reset({
-      seatType: motherAccount.seatType as MotherSeatFormInput["seatType"],
+      seatType: motherAccount.canChangeSeatType
+        ? (motherAccount.seatType as MotherSeatFormInput["seatType"])
+        : "chatgpt",
       canChangeSeatType: motherAccount.canChangeSeatType,
     });
   }, [
@@ -147,7 +155,11 @@ export function MotherSeatCard({
                 render={({ field }) => (
                   <FormItem className="min-h-[92px] rounded-md border bg-muted/20 p-3">
                     <FormLabel>席位类型</FormLabel>
-                    <Select value={field.value} onValueChange={field.onChange}>
+                    <Select
+                      value={field.value}
+                      onValueChange={field.onChange}
+                      disabled={!canChangeSeatType || isPending}
+                    >
                       <FormControl>
                         <SelectTrigger className="w-full">
                           <SelectValue />
@@ -170,13 +182,21 @@ export function MotherSeatCard({
                     <div>
                       <FormLabel>可变更席位类型</FormLabel>
                       <p className="text-sm text-muted-foreground">
-                        仅母账号有此标记，子账号不包含该字段。
+                        关闭后，当前空间内所有席位类型固定为 chatgpt。
                       </p>
                     </div>
                     <FormControl>
                       <Switch
                         checked={field.value}
-                        onCheckedChange={field.onChange}
+                        onCheckedChange={(checked) => {
+                          field.onChange(checked);
+                          if (!checked) {
+                            form.setValue("seatType", "chatgpt", {
+                              shouldDirty: true,
+                            });
+                          }
+                        }}
+                        disabled={isPending}
                       />
                     </FormControl>
                     <FormMessage />

@@ -24,9 +24,9 @@
   "22": "Child Reminder Rich Text",
   "23": "Migrations and Dashboard Accounting",
   "24": "Child Account Server Actions",
-  "25": "Currency Server Actions",
+  "25": "space-table.tsx",
   "26": "TypeScript Configuration",
-  "27": "currencies.ts",
+  "27": "layout.tsx",
   "28": "Explicit Database Helpers",
   "29": "Project Research and Dashboard",
   "30": "Settings Data and Page",
@@ -1030,7 +1030,6 @@
   "1028": "Q: 优化该问题",
   "1029": "index.ts",
   "1030": "Q: 优化设置中的时间选择器，点击展开后的风格与当前系统的UI风格明显不一致",
-  "1031": "Theme-Aware Semantic Toast Icons",
   "1032": "260711-f5r-PLAN.md",
   "1033": "devDependencies",
   "1034": "260711-d5p-PLAN.md",
@@ -1040,11 +1039,6 @@
   "1038": "rate-table.tsx",
   "1039": "ECS deployment hardening",
   "1040": "childAccounts.test.ts",
-  "1041": "insertChannel",
-  "1042": "expiry.ts",
   "1043": "scripts",
-  "1044": "package.json",
-  "1045": "countries.ts",
-  "1046": "channel-table.tsx",
-  "1047": "currencies.ts"
+  "1044": "package.json"
 }
