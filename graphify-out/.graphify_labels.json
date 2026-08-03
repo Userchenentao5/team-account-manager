@@ -1030,6 +1030,7 @@
   "1028": "Q: 优化该问题",
   "1029": "index.ts",
   "1030": "Q: 优化设置中的时间选择器，点击展开后的风格与当前系统的UI风格明显不一致",
+  "1031": "childAccounts.ts",
   "1032": "260711-f5r-PLAN.md",
   "1033": "devDependencies",
   "1034": "260711-d5p-PLAN.md",
@@ -1039,6 +1040,11 @@
   "1038": "rate-table.tsx",
   "1039": "ECS deployment hardening",
   "1040": "childAccounts.test.ts",
+  "1041": "formatMinor",
+  "1042": "money.ts",
   "1043": "scripts",
-  "1044": "package.json"
+  "1044": "package.json",
+  "1045": "mfa-settings.tsx",
+  "1046": "index.ts",
+  "1047": "Q: 新开分支修正，如果不支持修改席位类型，当前空间下的所有席位类型都固定为chatgpt"
 }

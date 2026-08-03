@@ -300,33 +300,48 @@ function InlineChildAccountRow({
     <>
       <TableRow className="bg-muted/30 hover:bg-muted/30">
         <TableCell className="min-w-28">
-          <Select
-            value={draft.seatType}
-            onValueChange={(value) =>
-              updateDraft(
-                "seatType",
-                value as ChildAccountFormInput["seatType"],
-              )
-            }
-            disabled={!canChangeSeatType || isPending}
-          >
-            <SelectTrigger className="w-24" aria-label="席位类型">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="codex">codex</SelectItem>
-              <SelectItem value="chatgpt">chatgpt</SelectItem>
-            </SelectContent>
-          </Select>
+          <div className="space-y-1">
+            <Select
+              value={draft.seatType}
+              onValueChange={(value) =>
+                updateDraft(
+                  "seatType",
+                  value as ChildAccountFormInput["seatType"],
+                )
+              }
+              disabled={!canChangeSeatType || isPending}
+            >
+              <SelectTrigger
+                className="w-24"
+                aria-label="席位类型"
+                aria-invalid={error?.field === "seatType"}
+              >
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="codex">codex</SelectItem>
+                <SelectItem value="chatgpt">chatgpt</SelectItem>
+              </SelectContent>
+            </Select>
+            {error?.field === "seatType" ? (
+              <p className="text-xs text-destructive">{error.message}</p>
+            ) : null}
+          </div>
         </TableCell>
         <TableCell className="min-w-64">
-          <Input
-            value={draft.email}
-            onChange={(event) => updateDraft("email", event.target.value)}
-            placeholder="child@example.com"
-            disabled={isPending}
-            className="font-mono"
-          />
+          <div className="space-y-1">
+            <Input
+              value={draft.email}
+              onChange={(event) => updateDraft("email", event.target.value)}
+              placeholder="child@example.com"
+              disabled={isPending}
+              className="font-mono"
+              aria-invalid={error?.field === "email"}
+            />
+            {error?.field === "email" ? (
+              <p className="text-xs text-destructive">{error.message}</p>
+            ) : null}
+          </div>
         </TableCell>
         <TableCell className="min-w-48">
           <div className="space-y-1">
@@ -343,44 +358,61 @@ function InlineChildAccountRow({
           </div>
         </TableCell>
         <TableCell className="min-w-40">
-          <Input
-            type="date"
-            value={draft.joinedDate}
-            onChange={(event) => updateDraft("joinedDate", event.target.value)}
-            disabled={isPending}
-            className="font-mono"
-          />
+          <div className="space-y-1">
+            <Input
+              type="date"
+              value={draft.joinedDate}
+              onChange={(event) => updateDraft("joinedDate", event.target.value)}
+              disabled={isPending}
+              className="font-mono"
+              aria-invalid={error?.field === "joinedDate"}
+            />
+            {error?.field === "joinedDate" ? (
+              <p className="text-xs text-destructive">{error.message}</p>
+            ) : null}
+          </div>
         </TableCell>
         <TableCell className="min-w-56">
-          <div className="flex justify-center gap-2">
-            <Input
-              inputMode="decimal"
-              value={amountInput}
-              onChange={(event) => {
-                setAmountInput(event.target.value);
-                setError(null);
-              }}
-              placeholder="20.00"
-              disabled={isPending}
-              className="w-24 text-right font-mono"
-            />
-            <Select
-              value={draft.monthlyCurrencyCode}
-              onValueChange={(value) =>
-                updateDraft("monthlyCurrencyCode", value)
-              }
-            >
-              <SelectTrigger className="w-24" aria-label="订阅币种">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent className="max-h-64" position="popper">
-                {currencies.map((currency) => (
-                  <SelectItem key={currency.code} value={currency.code}>
-                    {currency.symbol} {currency.code}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+          <div className="space-y-1">
+            <div className="flex justify-center gap-2">
+              <Input
+                inputMode="decimal"
+                value={amountInput}
+                onChange={(event) => {
+                  setAmountInput(event.target.value);
+                  setError(null);
+                }}
+                placeholder="20.00"
+                disabled={isPending}
+                className="w-24 text-right font-mono"
+                aria-invalid={error?.field === "monthlyAmountMinor"}
+              />
+              <Select
+                value={draft.monthlyCurrencyCode}
+                onValueChange={(value) =>
+                  updateDraft("monthlyCurrencyCode", value)
+                }
+              >
+                <SelectTrigger
+                  className="w-24"
+                  aria-label="订阅币种"
+                  aria-invalid={error?.field === "monthlyCurrencyCode"}
+                >
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent className="max-h-64" position="popper">
+                  {currencies.map((currency) => (
+                    <SelectItem key={currency.code} value={currency.code}>
+                      {currency.symbol} {currency.code}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            {error?.field === "monthlyAmountMinor" ||
+            error?.field === "monthlyCurrencyCode" ? (
+              <p className="text-xs text-destructive">{error.message}</p>
+            ) : null}
           </div>
         </TableCell>
         <TableCell className="min-w-44">
@@ -398,7 +430,11 @@ function InlineChildAccountRow({
                   setError(null);
                 }}
               >
-                <SelectTrigger className="w-20" aria-label="订阅周期">
+                <SelectTrigger
+                  className="w-20"
+                  aria-label="订阅周期"
+                  aria-invalid={error?.field === "billingPeriodCount"}
+                >
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
