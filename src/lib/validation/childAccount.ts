@@ -9,7 +9,9 @@ export const childAccountFormSchema = z
     email: z.string().trim().min(1, "请输入子账号邮箱/登录名。"),
     contact: z.string().trim(),
     label: z.string().trim(),
-    joinedDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+    joinedDate: z
+      .string()
+      .regex(/^\d{4}-\d{2}-\d{2}$/, "请输入有效的加入日期。"),
     monthlyAmountMinor: z.number().int().nonnegative("请输入有效的订阅金额。"),
     monthlyCurrencyCode: z.string().length(3, "请选择有效的订阅币种。"),
     monthlyPaymentDay: z
