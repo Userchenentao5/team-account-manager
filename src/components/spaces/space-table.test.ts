@@ -1,5 +1,11 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { matchesAccountEmail } from "./space-table";
+
+vi.mock("@/actions/spaces", () => ({
+  createSpace: vi.fn(),
+  deleteSpace: vi.fn(),
+  updateSpace: vi.fn(),
+}));
 
 describe("space email search", () => {
   const row = {
