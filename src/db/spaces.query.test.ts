@@ -163,9 +163,19 @@ describe("space queries (SPACE-02 / SPACE-03 / ACCT-01)", () => {
       .run();
 
     const rows = listSpaceDetails(ctx.db);
+    const counted = rows.find((row) => row.space.id === first.id);
 
-    expect(rows.find((row) => row.space.id === first.id)?.childCount).toBe(2);
+    expect(counted?.childCount).toBe(2);
+    expect(counted?.childEmails).toEqual(
+      expect.arrayContaining([
+        "first-child@example.com",
+        "second-child@example.com",
+      ]),
+    );
     expect(rows.find((row) => row.space.id === second.id)?.childCount).toBe(0);
+    expect(rows.find((row) => row.space.id === second.id)?.childEmails).toEqual(
+      [],
+    );
   });
 
   it("rejects a second mother account for the same space_id", () => {

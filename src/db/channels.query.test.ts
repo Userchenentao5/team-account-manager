@@ -1,12 +1,14 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { createTestDb } from "@/test/db-harness";
 import {
+  countSpacesByChannel,
   insertChannel,
   setChannelActive,
   renameChannelRow,
   listChannels,
 } from "@/db/channels";
-import { paymentChannel } from "@/db/schema";
+import { seedCurrencies } from "@/db/seed";
+import { paymentChannel, space } from "@/db/schema";
 
 describe("channel queries (REF-01 / D-05..D-08)", () => {
   let ctx: ReturnType<typeof createTestDb>;
@@ -64,5 +66,42 @@ describe("channel queries (REF-01 / D-05..D-08)", () => {
     const active = listChannels(ctx.db, false);
     expect(active).toHaveLength(1);
     expect(active[0].id).toBe(a.id);
+  });
+
+  it("counts spaces bound to each channel", () => {
+    seedCurrencies(ctx.db);
+    const visa = insertChannel(ctx.db, "Visa");
+    const alipay = insertChannel(ctx.db, "Alipay");
+    ctx.db
+      .insert(space)
+      .values([
+        {
+          name: "First Visa Space",
+          country: "US",
+          paymentChannelId: visa.id,
+          currencyCode: "USD",
+          amountMinor: 1000,
+        },
+        {
+          name: "Second Visa Space",
+          country: "US",
+          paymentChannelId: visa.id,
+          currencyCode: "USD",
+          amountMinor: 2000,
+        },
+        {
+          name: "Alipay Space",
+          country: "CN",
+          paymentChannelId: alipay.id,
+          currencyCode: "CNY",
+          amountMinor: 3000,
+        },
+      ])
+      .run();
+
+    expect(countSpacesByChannel(ctx.db)).toEqual({
+      [visa.id]: 2,
+      [alipay.id]: 1,
+    });
   });
 });
