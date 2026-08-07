@@ -1,6 +1,6 @@
-import { and, eq } from "drizzle-orm";
+import { and, count, eq } from "drizzle-orm";
 import type { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
-import { paymentChannel } from "./schema";
+import { paymentChannel, space } from "./schema";
 
 /**
  * REF-01 — parameterized payment-channel data access (T-03-SQLI / T-03-DEL).
@@ -29,6 +29,20 @@ export function listChannels(
     .where(eq(paymentChannel.isActive, true))
     .orderBy(paymentChannel.id)
     .all();
+}
+
+export function countSpacesByChannel(db: ChannelDb): Record<number, number> {
+  return Object.fromEntries(
+    db
+      .select({
+        channelId: space.paymentChannelId,
+        value: count(),
+      })
+      .from(space)
+      .groupBy(space.paymentChannelId)
+      .all()
+      .map((row) => [row.channelId, row.value]),
+  );
 }
 
 /** Insert a new channel (new surrogate id, is_active defaults to true). */

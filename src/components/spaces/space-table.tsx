@@ -21,6 +21,8 @@ import { formatCountryLabel } from "@/lib/countries";
 import { formatCurrencyMinor } from "@/lib/currencies";
 import { formatMinor } from "@/lib/money";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -64,6 +66,20 @@ type SortState = {
   key: SortKey;
   direction: SortDirection;
 };
+
+export function matchesAccountEmail(
+  row: { motherAccount: { email: string }; childEmails: string[] },
+  query: string,
+): boolean {
+  const normalizedQuery = query.trim().toLowerCase();
+  if (!normalizedQuery) return true;
+  return (
+    row.motherAccount.email.toLowerCase().includes(normalizedQuery) ||
+    row.childEmails.some((email) =>
+      email.toLowerCase().includes(normalizedQuery),
+    )
+  );
+}
 
 function toFormValue(row: SpaceListRow): SpaceFormValue {
   const { space, motherAccount } = row;
@@ -193,6 +209,7 @@ export function SpaceTable({
     direction: "asc",
   });
   const [page, setPage] = useState(1);
+  const [emailQuery, setEmailQuery] = useState("");
   const countryOptions = useMemo(() => {
     const rows = selectedChannel
       ? filterSpaces.filter(
@@ -219,13 +236,19 @@ export function SpaceTable({
       left.name.localeCompare(right.name, "zh-Hans-CN"),
     );
   }, [filterSpaces, selectedCountry]);
-  const hasFilters = Boolean(selectedCountry || selectedChannel);
+  const hasEmailQuery = emailQuery.trim().length > 0;
+  const emailFilteredSpaces = useMemo(() => {
+    return spaces.filter((row) => matchesAccountEmail(row, emailQuery));
+  }, [emailQuery, spaces]);
+  const hasFilters = Boolean(
+    selectedCountry || selectedChannel || hasEmailQuery,
+  );
   const sortedSpaces = useMemo(() => {
-    return [...spaces].sort((left, right) => {
+    return [...emailFilteredSpaces].sort((left, right) => {
       const result = compareRows(left, right, sort.key);
       return sort.direction === "asc" ? result : -result;
     });
-  }, [spaces, sort]);
+  }, [emailFilteredSpaces, sort]);
   const pageCount = Math.max(1, Math.ceil(sortedSpaces.length / PAGE_SIZE));
   const currentPage = Math.min(page, pageCount);
   const pageStart = (currentPage - 1) * PAGE_SIZE;
@@ -267,10 +290,26 @@ export function SpaceTable({
         <div>
           <h1 className="text-3xl font-semibold tracking-tight">空间</h1>
           <p className="mt-2 text-sm leading-6 text-muted-foreground">
-            按国家/地区、支付渠道筛选空间，并查看冻结成本与到期状态。
+            按母号或子号邮箱搜索，按国家/地区、支付渠道筛选空间，并查看冻结成本与到期状态。
           </p>
         </div>
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-end gap-2">
+          <div className="w-full sm:w-72">
+            <Label htmlFor="space-email-filter" className="sr-only">
+              母号/子号邮箱
+            </Label>
+            <Input
+              id="space-email-filter"
+              type="search"
+              value={emailQuery}
+              onChange={(event) => {
+                setEmailQuery(event.target.value);
+                setPage(1);
+              }}
+              placeholder="母号/子号邮箱"
+              autoComplete="off"
+            />
+          </div>
           <Select value={selectedCountry ?? "all"} onValueChange={setCountry}>
             <SelectTrigger className="w-40" aria-label="按国家/地区筛选">
               <SelectValue placeholder="全部国家/地区" />
@@ -308,7 +347,7 @@ export function SpaceTable({
       </div>
       </div>
 
-      {spaces.length === 0 ? (
+      {emailFilteredSpaces.length === 0 ? (
         <div className="min-h-0 flex-1 overflow-auto p-4 sm:p-6 lg:px-8">
           {hasFilters ? (
             <div className="flex flex-col items-center justify-center gap-3 rounded-lg border border-dashed bg-muted/20 py-12 text-center">

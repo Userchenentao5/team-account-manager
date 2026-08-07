@@ -1,4 +1,4 @@
-import { and, asc, count, eq, inArray } from "drizzle-orm";
+import { and, asc, eq, inArray } from "drizzle-orm";
 import type { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
 import { childAccount, currency, motherAccount, paymentChannel, space } from "./schema";
 
@@ -30,6 +30,7 @@ export type SpaceListRow = {
   paymentChannel: typeof paymentChannel.$inferSelect;
   currency: typeof currency.$inferSelect;
   childCount: number;
+  childEmails: string[];
 };
 
 export function insertSpaceWithMother(
@@ -91,23 +92,29 @@ export function listSpaceDetails(
 
   if (rows.length === 0) return [];
 
-  const childCounts = db
+  const children = db
     .select({
       spaceId: childAccount.spaceId,
-      value: count(),
+      email: childAccount.email,
     })
     .from(childAccount)
     .where(inArray(childAccount.spaceId, rows.map((row) => row.space.id)))
-    .groupBy(childAccount.spaceId)
     .all();
-  const childCountBySpace = new Map(
-    childCounts.map((row) => [row.spaceId, row.value]),
-  );
+  const childEmailsBySpace = new Map<number, string[]>();
+  for (const child of children) {
+    const emails = childEmailsBySpace.get(child.spaceId) ?? [];
+    emails.push(child.email);
+    childEmailsBySpace.set(child.spaceId, emails);
+  }
 
-  return rows.map((row) => ({
-    ...row,
-    childCount: childCountBySpace.get(row.space.id) ?? 0,
-  }));
+  return rows.map((row) => {
+    const childEmails = childEmailsBySpace.get(row.space.id) ?? [];
+    return {
+      ...row,
+      childCount: childEmails.length,
+      childEmails,
+    };
+  });
 }
 
 export function getSpaceDetail(db: Db, id: number) {

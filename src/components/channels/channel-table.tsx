@@ -41,11 +41,16 @@ type DialogState =
 type ChannelTableProps = {
   channels: ChannelRow[];
   showArchived: boolean;
+  spaceCounts: Record<number, number>;
 };
 
 type ChannelStatusFilter = "all" | "active" | "archived";
 
-export function ChannelTable({ channels, showArchived }: ChannelTableProps) {
+export function ChannelTable({
+  channels,
+  showArchived,
+  spaceCounts,
+}: ChannelTableProps) {
   const router = useRouter();
   const [dialog, setDialog] = useState<DialogState>(null);
   const [archiveTarget, setArchiveTarget] =
@@ -175,6 +180,7 @@ export function ChannelTable({ channels, showArchived }: ChannelTableProps) {
             <TableHeader className="sticky top-0 z-20 bg-background shadow-sm [&_th]:bg-background">
               <TableRow>
                 <TableHead scope="col">名称</TableHead>
+                <TableHead scope="col">绑定空间数</TableHead>
                 <TableHead scope="col">状态</TableHead>
                 <TableHead scope="col" className="text-right">
                   操作
@@ -190,6 +196,9 @@ export function ChannelTable({ channels, showArchived }: ChannelTableProps) {
                     className={archived ? "bg-muted/50" : undefined}
                   >
                     <TableCell className="font-medium">{channel.name}</TableCell>
+                    <TableCell className="font-mono tabular-nums">
+                      {spaceCounts[channel.id] ?? 0}
+                    </TableCell>
                     <TableCell>
                       {archived ? (
                         <Badge variant="secondary">已归档</Badge>
@@ -257,7 +266,7 @@ export function ChannelTable({ channels, showArchived }: ChannelTableProps) {
               {visibleChannels.length === 0 ? (
                 <TableRow>
                   <TableCell
-                    colSpan={3}
+                    colSpan={4}
                     className="py-8 text-center text-sm text-muted-foreground"
                   >
                     没有匹配的支付渠道

@@ -1,5 +1,5 @@
 import { db } from "@/db";
-import { listChannels } from "@/db/channels";
+import { countSpacesByChannel, listChannels } from "@/db/channels";
 import { ChannelTable } from "@/components/channels/channel-table";
 
 // better-sqlite3 is a native module — keep this RSC on the Node runtime.
@@ -16,6 +16,13 @@ export default async function ChannelsPage({
   // Fetch all rows once so the client-side name/status filters can switch
   // instantly while the archived URL param still controls the initial view.
   const channels = listChannels(db, true);
+  const spaceCounts = countSpacesByChannel(db);
 
-  return <ChannelTable channels={channels} showArchived={showArchived} />;
+  return (
+    <ChannelTable
+      channels={channels}
+      showArchived={showArchived}
+      spaceCounts={spaceCounts}
+    />
+  );
 }
