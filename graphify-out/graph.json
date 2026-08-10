@@ -3544,20 +3544,20 @@
       "norm_label": "sortstate"
     },
     {
-      "label": "matchesAccountEmail()",
+      "label": "matchesAccountSearch()",
       "file_type": "code",
       "source_file": "src/components/spaces/space-table.tsx",
       "source_location": "L70",
       "_origin": "ast",
-      "id": "src_components_spaces_space_table_matchesaccountemail",
+      "id": "src_components_spaces_space_table_matchesaccountsearch",
       "community": 3,
-      "norm_label": "matchesaccountemail()"
+      "norm_label": "matchesaccountsearch()"
     },
     {
       "label": "toFormValue()",
       "file_type": "code",
       "source_file": "src/components/spaces/space-table.tsx",
-      "source_location": "L84",
+      "source_location": "L87",
       "_origin": "ast",
       "id": "src_components_spaces_space_table_toformvalue",
       "community": 3,
@@ -3567,7 +3567,7 @@
       "label": "buildHref()",
       "file_type": "code",
       "source_file": "src/components/spaces/space-table.tsx",
-      "source_location": "L102",
+      "source_location": "L105",
       "_origin": "ast",
       "id": "src_components_spaces_space_table_buildhref",
       "community": 3,
@@ -3577,7 +3577,7 @@
       "label": "compareText()",
       "file_type": "code",
       "source_file": "src/components/spaces/space-table.tsx",
-      "source_location": "L110",
+      "source_location": "L113",
       "_origin": "ast",
       "id": "src_components_spaces_space_table_comparetext",
       "community": 3,
@@ -3587,7 +3587,7 @@
       "label": "compareNullableText()",
       "file_type": "code",
       "source_file": "src/components/spaces/space-table.tsx",
-      "source_location": "L117",
+      "source_location": "L120",
       "_origin": "ast",
       "id": "src_components_spaces_space_table_comparenullabletext",
       "community": 3,
@@ -3597,7 +3597,7 @@
       "label": "compareRows()",
       "file_type": "code",
       "source_file": "src/components/spaces/space-table.tsx",
-      "source_location": "L127",
+      "source_location": "L130",
       "_origin": "ast",
       "id": "src_components_spaces_space_table_comparerows",
       "community": 3,
@@ -3607,7 +3607,7 @@
       "label": "SortableHead()",
       "file_type": "code",
       "source_file": "src/components/spaces/space-table.tsx",
-      "source_location": "L151",
+      "source_location": "L154",
       "_origin": "ast",
       "id": "src_components_spaces_space_table_sortablehead",
       "community": 3,
@@ -3617,7 +3617,7 @@
       "label": "SpaceTable()",
       "file_type": "code",
       "source_file": "src/components/spaces/space-table.tsx",
-      "source_location": "L191",
+      "source_location": "L194",
       "_origin": "ast",
       "id": "src_components_spaces_space_table_spacetable",
       "community": 3,
@@ -5140,7 +5140,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "src_db_childaccountreminders_childaccountpaymentreminderrow",
-      "community": 72,
+      "community": 1036,
       "norm_label": "childaccountpaymentreminderrow"
     },
     {
@@ -6570,7 +6570,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "src_db_spacereminders_spaceexpiryreminderrow",
-      "community": 1036,
+      "community": 72,
       "norm_label": "spaceexpiryreminderrow"
     },
     {
@@ -6727,7 +6727,7 @@
       "label": "insertSpaceWithMother()",
       "file_type": "code",
       "source_file": "src/db/spaces.ts",
-      "source_location": "L36",
+      "source_location": "L37",
       "_origin": "ast",
       "id": "src_db_spaces_insertspacewithmother",
       "community": 1040,
@@ -6737,7 +6737,7 @@
       "label": "listSpaces()",
       "file_type": "code",
       "source_file": "src/db/spaces.ts",
-      "source_location": "L48",
+      "source_location": "L49",
       "_origin": "ast",
       "id": "src_db_spaces_listspaces",
       "community": 4,
@@ -6747,7 +6747,7 @@
       "label": "listSpaceDetails()",
       "file_type": "code",
       "source_file": "src/db/spaces.ts",
-      "source_location": "L67",
+      "source_location": "L68",
       "_origin": "ast",
       "id": "src_db_spaces_listspacedetails",
       "community": 3,
@@ -6757,7 +6757,7 @@
       "label": "getSpaceDetail()",
       "file_type": "code",
       "source_file": "src/db/spaces.ts",
-      "source_location": "L120",
+      "source_location": "L128",
       "_origin": "ast",
       "id": "src_db_spaces_getspacedetail",
       "community": 4,
@@ -6767,7 +6767,7 @@
       "label": "updateSpaceRow()",
       "file_type": "code",
       "source_file": "src/db/spaces.ts",
-      "source_location": "L136",
+      "source_location": "L144",
       "_origin": "ast",
       "id": "src_db_spaces_updatespacerow",
       "community": 4,
@@ -6777,7 +6777,7 @@
       "label": "updateMotherAccountEmail()",
       "file_type": "code",
       "source_file": "src/db/spaces.ts",
-      "source_location": "L144",
+      "source_location": "L152",
       "_origin": "ast",
       "id": "src_db_spaces_updatemotheraccountemail",
       "community": 4,
@@ -6787,7 +6787,7 @@
       "label": "deleteSpaceCascade()",
       "file_type": "code",
       "source_file": "src/db/spaces.ts",
-      "source_location": "L155",
+      "source_location": "L163",
       "_origin": "ast",
       "id": "src_db_spaces_deletespacecascade",
       "community": 4,
@@ -7100,7 +7100,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_lib_email_child_account_reminder",
-      "community": 72,
+      "community": 1036,
       "norm_label": "child-account-reminder.ts"
     },
     {
@@ -7110,7 +7110,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "src_lib_email_child_account_reminder_childaccountreminderemail",
-      "community": 72,
+      "community": 1036,
       "norm_label": "childaccountreminderemail"
     },
     {
@@ -7120,7 +7120,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "src_lib_email_child_account_reminder_childaccountremindertemplate",
-      "community": 72,
+      "community": 1036,
       "norm_label": "childaccountremindertemplate"
     },
     {
@@ -7130,7 +7130,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "src_lib_email_child_account_reminder_templatevalues",
-      "community": 72,
+      "community": 1036,
       "norm_label": "templatevalues()"
     },
     {
@@ -7140,7 +7140,7 @@
       "source_location": "L40",
       "_origin": "ast",
       "id": "src_lib_email_child_account_reminder_renderchildaccountremindertemplate",
-      "community": 72,
+      "community": 1036,
       "norm_label": "renderchildaccountremindertemplate()"
     },
     {
@@ -7150,7 +7150,7 @@
       "source_location": "L54",
       "_origin": "ast",
       "id": "src_lib_email_child_account_reminder_composechildaccountreminderemail",
-      "community": 72,
+      "community": 1036,
       "norm_label": "composechildaccountreminderemail()"
     },
     {
@@ -7350,7 +7350,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_lib_email_space_expiry_reminder_test",
-      "community": 1036,
+      "community": 72,
       "norm_label": "space-expiry-reminder.test.ts"
     },
     {
@@ -7360,7 +7360,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_lib_email_space_expiry_reminder",
-      "community": 1036,
+      "community": 72,
       "norm_label": "space-expiry-reminder.ts"
     },
     {
@@ -7370,7 +7370,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "src_lib_email_space_expiry_reminder_spaceexpiryreminderemail",
-      "community": 1036,
+      "community": 72,
       "norm_label": "spaceexpiryreminderemail"
     },
     {
@@ -7380,7 +7380,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "src_lib_email_space_expiry_reminder_spaceexpiryremindertemplate",
-      "community": 1036,
+      "community": 72,
       "norm_label": "spaceexpiryremindertemplate"
     },
     {
@@ -7390,7 +7390,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "src_lib_email_space_expiry_reminder_templatevalues",
-      "community": 1036,
+      "community": 72,
       "norm_label": "templatevalues()"
     },
     {
@@ -7400,7 +7400,7 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "src_lib_email_space_expiry_reminder_renderspaceexpiryremindertemplate",
-      "community": 1036,
+      "community": 72,
       "norm_label": "renderspaceexpiryremindertemplate()"
     },
     {
@@ -7410,7 +7410,7 @@
       "source_location": "L47",
       "_origin": "ast",
       "id": "src_lib_email_space_expiry_reminder_composespaceexpiryreminderemail",
-      "community": 1036,
+      "community": 30,
       "norm_label": "composespaceexpiryreminderemail()"
     },
     {
@@ -8190,7 +8190,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_lib_reminders_space_expiry_reminder_job",
-      "community": 1036,
+      "community": 30,
       "norm_label": "space-expiry-reminder-job.ts"
     },
     {
@@ -8200,7 +8200,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "src_lib_reminders_space_expiry_reminder_job_db",
-      "community": 1036,
+      "community": 30,
       "norm_label": "db"
     },
     {
@@ -8210,7 +8210,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "src_lib_reminders_space_expiry_reminder_job_emailsender",
-      "community": 1036,
+      "community": 30,
       "norm_label": "emailsender"
     },
     {
@@ -8220,7 +8220,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "src_lib_reminders_space_expiry_reminder_job_spaceexpiryreminderjobresult",
-      "community": 1036,
+      "community": 30,
       "norm_label": "spaceexpiryreminderjobresult"
     },
     {
@@ -8230,7 +8230,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "src_lib_reminders_space_expiry_reminder_job_timetext",
-      "community": 1036,
+      "community": 30,
       "norm_label": "timetext()"
     },
     {
@@ -8240,7 +8240,7 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "src_lib_reminders_space_expiry_reminder_job_runspaceexpiryreminderjob",
-      "community": 1036,
+      "community": 30,
       "norm_label": "runspaceexpiryreminderjob()"
     },
     {
@@ -50366,14 +50366,14 @@
       "source_location": "L2",
       "weight": 1.0,
       "source": "src_components_spaces_space_table_test",
-      "target": "src_components_spaces_space_table_matchesaccountemail",
+      "target": "src_components_spaces_space_table_matchesaccountsearch",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/spaces/space-table.tsx",
-      "source_location": "L102",
+      "source_location": "L105",
       "weight": 1.0,
       "source": "src_components_spaces_space_table",
       "target": "src_components_spaces_space_table_buildhref",
@@ -50383,7 +50383,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/spaces/space-table.tsx",
-      "source_location": "L117",
+      "source_location": "L120",
       "weight": 1.0,
       "source": "src_components_spaces_space_table",
       "target": "src_components_spaces_space_table_comparenullabletext",
@@ -50393,7 +50393,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/spaces/space-table.tsx",
-      "source_location": "L127",
+      "source_location": "L130",
       "weight": 1.0,
       "source": "src_components_spaces_space_table",
       "target": "src_components_spaces_space_table_comparerows",
@@ -50403,7 +50403,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/spaces/space-table.tsx",
-      "source_location": "L110",
+      "source_location": "L113",
       "weight": 1.0,
       "source": "src_components_spaces_space_table",
       "target": "src_components_spaces_space_table_comparetext",
@@ -50416,14 +50416,14 @@
       "source_location": "L70",
       "weight": 1.0,
       "source": "src_components_spaces_space_table",
-      "target": "src_components_spaces_space_table_matchesaccountemail",
+      "target": "src_components_spaces_space_table_matchesaccountsearch",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/spaces/space-table.tsx",
-      "source_location": "L151",
+      "source_location": "L154",
       "weight": 1.0,
       "source": "src_components_spaces_space_table",
       "target": "src_components_spaces_space_table_sortablehead",
@@ -50463,7 +50463,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/spaces/space-table.tsx",
-      "source_location": "L191",
+      "source_location": "L194",
       "weight": 1.0,
       "source": "src_components_spaces_space_table",
       "target": "src_components_spaces_space_table_spacetable",
@@ -50483,7 +50483,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/spaces/space-table.tsx",
-      "source_location": "L84",
+      "source_location": "L87",
       "weight": 1.0,
       "source": "src_components_spaces_space_table",
       "target": "src_components_spaces_space_table_toformvalue",
@@ -50868,10 +50868,10 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/components/spaces/space-table.tsx",
-      "source_location": "L241",
+      "source_location": "L244",
       "weight": 1.0,
       "source": "src_components_spaces_space_table_spacetable",
-      "target": "src_components_spaces_space_table_matchesaccountemail",
+      "target": "src_components_spaces_space_table_matchesaccountsearch",
       "confidence_score": 1.0
     },
     {
@@ -50879,7 +50879,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/components/spaces/space-table.tsx",
-      "source_location": "L496",
+      "source_location": "L499",
       "weight": 1.0,
       "source": "src_components_spaces_space_table_spacetable",
       "target": "src_components_spaces_space_table_toformvalue",
@@ -50890,7 +50890,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/components/spaces/space-table.tsx",
-      "source_location": "L124",
+      "source_location": "L127",
       "weight": 1.0,
       "source": "src_components_spaces_space_table_comparenullabletext",
       "target": "src_components_spaces_space_table_comparetext",
@@ -50901,7 +50901,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/components/spaces/space-table.tsx",
-      "source_location": "L134",
+      "source_location": "L137",
       "weight": 1.0,
       "source": "src_components_spaces_space_table_comparerows",
       "target": "src_components_spaces_space_table_comparetext",
@@ -50913,7 +50913,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/spaces/space-table.tsx",
-      "source_location": "L111",
+      "source_location": "L114",
       "weight": 1.0,
       "source": "src_components_spaces_space_table_comparetext",
       "target": "src_db_spaces_spacelistrow"
@@ -50923,7 +50923,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/components/spaces/space-table.tsx",
-      "source_location": "L145",
+      "source_location": "L148",
       "weight": 1.0,
       "source": "src_components_spaces_space_table_comparerows",
       "target": "src_components_spaces_space_table_comparenullabletext",
@@ -50934,7 +50934,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/components/spaces/space-table.tsx",
-      "source_location": "L137",
+      "source_location": "L140",
       "weight": 1.0,
       "source": "src_components_spaces_space_table_comparerows",
       "target": "src_lib_countries_formatcountrylabel",
@@ -50945,7 +50945,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/components/spaces/space-table.tsx",
-      "source_location": "L248",
+      "source_location": "L251",
       "weight": 1.0,
       "source": "src_components_spaces_space_table_spacetable",
       "target": "src_components_spaces_space_table_comparerows",
@@ -50957,7 +50957,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/spaces/space-table.tsx",
-      "source_location": "L221",
+      "source_location": "L224",
       "weight": 1.0,
       "source": "src_components_spaces_space_table_spacetable",
       "target": "src_lib_countries_formatcountrylabel"
@@ -50968,7 +50968,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/spaces/space-table.tsx",
-      "source_location": "L442",
+      "source_location": "L445",
       "weight": 1.0,
       "source": "src_components_spaces_space_table_spacetable",
       "target": "src_lib_currencies_formatcurrencyminor"
@@ -50979,7 +50979,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/spaces/space-table.tsx",
-      "source_location": "L448",
+      "source_location": "L451",
       "weight": 1.0,
       "source": "src_components_spaces_space_table_spacetable",
       "target": "src_lib_money_formatminor"
@@ -58635,7 +58635,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/db/spaces.ts",
-      "source_location": "L155",
+      "source_location": "L163",
       "weight": 1.0,
       "source": "src_db_spaces",
       "target": "src_db_spaces_deletespacecascade",
@@ -58655,7 +58655,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/db/spaces.ts",
-      "source_location": "L120",
+      "source_location": "L128",
       "weight": 1.0,
       "source": "src_db_spaces",
       "target": "src_db_spaces_getspacedetail",
@@ -58665,7 +58665,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/db/spaces.ts",
-      "source_location": "L36",
+      "source_location": "L37",
       "weight": 1.0,
       "source": "src_db_spaces",
       "target": "src_db_spaces_insertspacewithmother",
@@ -58675,7 +58675,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/db/spaces.ts",
-      "source_location": "L67",
+      "source_location": "L68",
       "weight": 1.0,
       "source": "src_db_spaces",
       "target": "src_db_spaces_listspacedetails",
@@ -58685,7 +58685,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/db/spaces.ts",
-      "source_location": "L48",
+      "source_location": "L49",
       "weight": 1.0,
       "source": "src_db_spaces",
       "target": "src_db_spaces_listspaces",
@@ -58745,7 +58745,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/db/spaces.ts",
-      "source_location": "L144",
+      "source_location": "L152",
       "weight": 1.0,
       "source": "src_db_spaces",
       "target": "src_db_spaces_updatemotheraccountemail",
@@ -58755,7 +58755,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/db/spaces.ts",
-      "source_location": "L136",
+      "source_location": "L144",
       "weight": 1.0,
       "source": "src_db_spaces",
       "target": "src_db_spaces_updatespacerow",
@@ -75109,5 +75109,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "6efc08f2c510bcc473452f7ff912bc379fb485b7"
+  "built_at_commit": "927f9ac0ca360745b1bf416e5539af0541149e0d"
 }

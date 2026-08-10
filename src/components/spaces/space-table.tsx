@@ -67,18 +67,21 @@ type SortState = {
   direction: SortDirection;
 };
 
-export function matchesAccountEmail(
-  row: { motherAccount: { email: string }; childEmails: string[] },
+export function matchesAccountSearch(
+  row: {
+    motherAccount: { email: string };
+    childEmails: string[];
+    childContacts: string[];
+  },
   query: string,
 ): boolean {
   const normalizedQuery = query.trim().toLowerCase();
   if (!normalizedQuery) return true;
-  return (
-    row.motherAccount.email.toLowerCase().includes(normalizedQuery) ||
-    row.childEmails.some((email) =>
-      email.toLowerCase().includes(normalizedQuery),
-    )
-  );
+  return [
+    row.motherAccount.email,
+    ...row.childEmails,
+    ...row.childContacts,
+  ].some((value) => value.toLowerCase().includes(normalizedQuery));
 }
 
 function toFormValue(row: SpaceListRow): SpaceFormValue {
@@ -209,7 +212,7 @@ export function SpaceTable({
     direction: "asc",
   });
   const [page, setPage] = useState(1);
-  const [emailQuery, setEmailQuery] = useState("");
+  const [accountQuery, setAccountQuery] = useState("");
   const countryOptions = useMemo(() => {
     const rows = selectedChannel
       ? filterSpaces.filter(
@@ -236,19 +239,19 @@ export function SpaceTable({
       left.name.localeCompare(right.name, "zh-Hans-CN"),
     );
   }, [filterSpaces, selectedCountry]);
-  const hasEmailQuery = emailQuery.trim().length > 0;
-  const emailFilteredSpaces = useMemo(() => {
-    return spaces.filter((row) => matchesAccountEmail(row, emailQuery));
-  }, [emailQuery, spaces]);
+  const hasAccountQuery = accountQuery.trim().length > 0;
+  const accountFilteredSpaces = useMemo(() => {
+    return spaces.filter((row) => matchesAccountSearch(row, accountQuery));
+  }, [accountQuery, spaces]);
   const hasFilters = Boolean(
-    selectedCountry || selectedChannel || hasEmailQuery,
+    selectedCountry || selectedChannel || hasAccountQuery,
   );
   const sortedSpaces = useMemo(() => {
-    return [...emailFilteredSpaces].sort((left, right) => {
+    return [...accountFilteredSpaces].sort((left, right) => {
       const result = compareRows(left, right, sort.key);
       return sort.direction === "asc" ? result : -result;
     });
-  }, [emailFilteredSpaces, sort]);
+  }, [accountFilteredSpaces, sort]);
   const pageCount = Math.max(1, Math.ceil(sortedSpaces.length / PAGE_SIZE));
   const currentPage = Math.min(page, pageCount);
   const pageStart = (currentPage - 1) * PAGE_SIZE;
@@ -290,23 +293,23 @@ export function SpaceTable({
         <div>
           <h1 className="text-3xl font-semibold tracking-tight">空间</h1>
           <p className="mt-2 text-sm leading-6 text-muted-foreground">
-            按母号或子号邮箱搜索，按国家/地区、支付渠道筛选空间，并查看冻结成本与到期状态。
+            按母号/子号邮箱或子号联系方式搜索，按国家/地区、支付渠道筛选空间，并查看冻结成本与到期状态。
           </p>
         </div>
         <div className="flex flex-wrap items-end gap-2">
           <div className="w-full sm:w-72">
-            <Label htmlFor="space-email-filter" className="sr-only">
-              母号/子号邮箱
+            <Label htmlFor="space-account-filter" className="sr-only">
+              母号/子号邮箱或子号联系方式
             </Label>
             <Input
-              id="space-email-filter"
+              id="space-account-filter"
               type="search"
-              value={emailQuery}
+              value={accountQuery}
               onChange={(event) => {
-                setEmailQuery(event.target.value);
+                setAccountQuery(event.target.value);
                 setPage(1);
               }}
-              placeholder="母号/子号邮箱"
+              placeholder="邮箱/子号联系方式"
               autoComplete="off"
             />
           </div>
@@ -347,7 +350,7 @@ export function SpaceTable({
       </div>
       </div>
 
-      {emailFilteredSpaces.length === 0 ? (
+      {accountFilteredSpaces.length === 0 ? (
         <div className="min-h-0 flex-1 overflow-auto p-4 sm:p-6 lg:px-8">
           {hasFilters ? (
             <div className="flex flex-col items-center justify-center gap-3 rounded-lg border border-dashed bg-muted/20 py-12 text-center">

@@ -31,6 +31,7 @@ export type SpaceListRow = {
   currency: typeof currency.$inferSelect;
   childCount: number;
   childEmails: string[];
+  childContacts: string[];
 };
 
 export function insertSpaceWithMother(
@@ -96,15 +97,21 @@ export function listSpaceDetails(
     .select({
       spaceId: childAccount.spaceId,
       email: childAccount.email,
+      contact: childAccount.contact,
     })
     .from(childAccount)
     .where(inArray(childAccount.spaceId, rows.map((row) => row.space.id)))
     .all();
   const childEmailsBySpace = new Map<number, string[]>();
+  const childContactsBySpace = new Map<number, string[]>();
   for (const child of children) {
     const emails = childEmailsBySpace.get(child.spaceId) ?? [];
     emails.push(child.email);
     childEmailsBySpace.set(child.spaceId, emails);
+
+    const contacts = childContactsBySpace.get(child.spaceId) ?? [];
+    contacts.push(child.contact);
+    childContactsBySpace.set(child.spaceId, contacts);
   }
 
   return rows.map((row) => {
@@ -113,6 +120,7 @@ export function listSpaceDetails(
       ...row,
       childCount: childEmails.length,
       childEmails,
+      childContacts: childContactsBySpace.get(row.space.id) ?? [],
     };
   });
 }
