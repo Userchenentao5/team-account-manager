@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { ShieldCheck } from "lucide-react";
+import { Eye, EyeOff, ShieldCheck } from "lucide-react";
 import { login, loginWithMfa, type LoginResult } from "@/actions/auth";
 import { MfaCodeInput } from "@/components/auth/mfa-code-input";
 import { Button } from "@/components/ui/button";
@@ -23,6 +23,7 @@ const errorText: Record<Extract<LoginResult, { ok: false }>["error"], string> = 
 };
 
 export function LoginForm() {
+  const [showKey, setShowKey] = useState(false);
   const [mfaOpen, setMfaOpen] = useState(false);
   const [code, setCode] = useState<string[]>(() => Array(6).fill(""));
   const [keyError, setKeyError] = useState<string | null>(null);
@@ -76,15 +77,35 @@ export function LoginForm() {
       <form onSubmit={submitKey} className="space-y-5">
         <div className="space-y-2">
           <Label htmlFor="key">访问密钥</Label>
-          <Input
-            id="key"
-            name="key"
-            type="password"
-            autoComplete="current-password"
-            autoFocus
-            required
-            disabled={isPending}
-          />
+          <div className="relative">
+            <Input
+              id="key"
+              name="key"
+              type={showKey ? "text" : "password"}
+              autoComplete="current-password"
+              autoFocus
+              required
+              disabled={isPending}
+              className="pr-9"
+            />
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon-sm"
+              className="absolute right-0.5 top-0.5"
+              onClick={() => setShowKey((current) => !current)}
+              disabled={isPending}
+              aria-label={showKey ? "隐藏访问密钥" : "显示访问密钥"}
+              aria-pressed={showKey}
+              title={showKey ? "隐藏访问密钥" : "显示访问密钥"}
+            >
+              {showKey ? (
+                <EyeOff className="size-4" aria-hidden="true" />
+              ) : (
+                <Eye className="size-4" aria-hidden="true" />
+              )}
+            </Button>
+          </div>
           {keyError ? (
             <p role="alert" className="text-sm text-destructive">
               {keyError}

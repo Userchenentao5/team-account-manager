@@ -1,7 +1,7 @@
-# Graph Report - team-account-manager  (2026-08-07)
+# Graph Report - team-account-manager  (2026-08-10)
 
 ## Corpus Check
-- 290 files · ~202,791 words
+- 290 files · ~202,907 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `6efc08f2`
+- Built from commit: `927f9ac0`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -1177,8 +1177,8 @@ Cohesion: 0.25
 Nodes (6): sonner, geistMono, geistSans, metadata, Toaster(), TooltipProvider()
 
 ### Community 30 - "Settings Data and Page"
-Cohesion: 0.22
-Nodes (14): SettingsPage(), MfaSettings(), ChildAccountEmailReminderSettings, Db, DEFAULT_STATUS_THRESHOLDS, getChildAccountEmailReminderSettings(), getSpaceEmailReminderSettings(), getStatusThresholds() (+6 more)
+Cohesion: 0.16
+Nodes (20): SettingsPage(), MfaSettings(), ChildAccountEmailReminderSettings, Db, DEFAULT_STATUS_THRESHOLDS, getChildAccountEmailReminderSettings(), getSpaceEmailReminderSettings(), getStatusThresholds() (+12 more)
 
 ### Community 42 - "Phase One Reference Data"
 Cohesion: 0.14
@@ -1194,7 +1194,7 @@ Nodes (6): Accepted Risks Log, Phase 05 - Security, Security Audit Trail, Sign-O
 
 ### Community 72 - "auth.ts"
 Cohesion: 0.16
-Nodes (20): ChildAccountReminderForm(), renderPreview(), renderPreview(), StatusThresholdForm(), ChildAccountPaymentReminderRow, ChildAccountReminderEmail, ChildAccountReminderTemplate, composeChildAccountReminderEmail() (+12 more)
+Nodes (19): ChildAccountReminderForm(), renderPreview(), renderPreview(), StatusThresholdForm(), SpaceExpiryReminderRow, ALLOWED_TAGS, decodeHtmlEntities(), escapeHtml() (+11 more)
 
 ### Community 73 - "sheet.tsx"
 Cohesion: 0.40
@@ -1765,8 +1765,8 @@ Cohesion: 0.13
 Nodes (15): devDependencies, drizzle-kit, eslint, eslint-config-next, tailwindcss, @tailwindcss/postcss, tsx, @types/better-sqlite3 (+7 more)
 
 ### Community 1036 - "layout.tsx"
-Cohesion: 0.21
-Nodes (11): SpaceExpiryReminderRow, composeSpaceExpiryReminderEmail(), renderSpaceExpiryReminderTemplate(), SpaceExpiryReminderEmail, SpaceExpiryReminderTemplate, templateValues(), Db, EmailSender (+3 more)
+Cohesion: 0.38
+Nodes (6): ChildAccountPaymentReminderRow, ChildAccountReminderEmail, ChildAccountReminderTemplate, composeChildAccountReminderEmail(), renderChildAccountReminderTemplate(), templateValues()
 
 ### Community 1038 - "rate-table.tsx"
 Cohesion: 0.20

@@ -133,6 +133,7 @@ describe("space queries (SPACE-02 / SPACE-03 / ACCT-01)", () => {
         spaceId: first.id,
         seatType: "codex",
         email: "first-child@example.com",
+        contact: "wechat-first",
         label: "Seat",
         joinedDate: "2026-02-01",
         monthlyAmountMinor: 2000,
@@ -150,6 +151,7 @@ describe("space queries (SPACE-02 / SPACE-03 / ACCT-01)", () => {
         spaceId: first.id,
         seatType: "chatgpt",
         email: "second-child@example.com",
+        contact: "telegram-second",
         label: "Seat",
         joinedDate: "2026-02-01",
         monthlyAmountMinor: 2000,
@@ -172,8 +174,14 @@ describe("space queries (SPACE-02 / SPACE-03 / ACCT-01)", () => {
         "second-child@example.com",
       ]),
     );
+    expect(counted?.childContacts).toEqual(
+      expect.arrayContaining(["wechat-first", "telegram-second"]),
+    );
     expect(rows.find((row) => row.space.id === second.id)?.childCount).toBe(0);
     expect(rows.find((row) => row.space.id === second.id)?.childEmails).toEqual(
+      [],
+    );
+    expect(rows.find((row) => row.space.id === second.id)?.childContacts).toEqual(
       [],
     );
   });
