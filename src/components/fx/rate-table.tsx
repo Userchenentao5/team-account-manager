@@ -179,12 +179,8 @@ export function RateTable({ rates, fetchedAt, stale, base }: RateTableProps) {
             <TableRow>
               <TableHead scope="col">代码</TableHead>
               <TableHead scope="col">符号</TableHead>
-              <TableHead scope="col" className="text-right">
-                汇率 (1 {base} 可兑换)
-              </TableHead>
-              <TableHead scope="col" className="text-right">
-                更新时间
-              </TableHead>
+              <TableHead scope="col">汇率 (1 {base} 可兑换)</TableHead>
+              <TableHead scope="col">更新时间</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -199,10 +195,10 @@ export function RateTable({ rates, fetchedAt, stale, base }: RateTableProps) {
                     {rate.currencyCode}
                   </TableCell>
                   <TableCell className="font-mono">{currency.symbol}</TableCell>
-                  <TableCell className="text-right font-mono">
+                  <TableCell className="font-mono">
                     {formatRate(displayRate)}
                   </TableCell>
-                  <TableCell className="text-right font-mono">
+                  <TableCell className="font-mono">
                     {formatAsOf(rate.fetchedAt) ?? "—"}
                   </TableCell>
                 </TableRow>

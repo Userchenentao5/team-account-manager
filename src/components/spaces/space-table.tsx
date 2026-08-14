@@ -169,12 +169,12 @@ function SortableHead({
       : ArrowDown
     : ArrowUpDown;
   return (
-    <TableHead scope="col" className="text-center">
+    <TableHead scope="col">
       <Button
         type="button"
         variant="ghost"
         size="sm"
-        className="mx-auto h-8 px-1.5 font-medium"
+        className="h-8 px-1.5 font-medium"
         aria-sort={
           active
             ? sort.direction === "asc"
@@ -387,9 +387,7 @@ export function SpaceTable({
                 sort={sort}
                 onSort={setSortKey}
               />
-              <TableHead scope="col" className="text-center">
-                母号邮箱
-              </TableHead>
+              <TableHead scope="col">母号邮箱</TableHead>
               <SortableHead
                 label="国家/地区"
                 sortKey="country"
@@ -414,9 +412,7 @@ export function SpaceTable({
                 sort={sort}
                 onSort={setSortKey}
               />
-              <TableHead scope="col" className="text-center">
-                操作
-              </TableHead>
+              <TableHead scope="col">操作</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -424,7 +420,7 @@ export function SpaceTable({
               const { space, motherAccount, paymentChannel, currency } = row;
               return (
                 <TableRow key={space.id}>
-                  <TableCell className="text-center font-medium">
+                  <TableCell className="font-medium">
                     <Link
                       href={`/spaces/${space.id}`}
                       className="hover:underline"
@@ -432,15 +428,15 @@ export function SpaceTable({
                       {space.name}
                     </Link>
                   </TableCell>
-                  <TableCell className="text-center font-mono">
+                  <TableCell className="font-mono">
                     {motherAccount.email}
                   </TableCell>
-                  <TableCell className="text-center">
+                  <TableCell>
                     {formatCountryLabel(space.country)}
                   </TableCell>
-                  <TableCell className="text-center">{paymentChannel.name}</TableCell>
-                  <TableCell className="text-center font-mono">
-                    <div className="inline-flex flex-col items-start gap-1.5 text-left tabular-nums">
+                  <TableCell>{paymentChannel.name}</TableCell>
+                  <TableCell className="font-mono">
+                    <div className="inline-flex flex-col items-center gap-1.5 text-center tabular-nums">
                       <span className="font-medium text-foreground">
                         {formatCurrencyMinor(space.amountMinor, currency)}
                       </span>
@@ -457,7 +453,7 @@ export function SpaceTable({
                       </span>
                     </div>
                   </TableCell>
-                  <TableCell className="text-center">
+                  <TableCell>
                     <div className="flex items-center justify-center gap-2">
                       <span className="font-mono">
                         {space.expiryDate ?? "-"}
@@ -468,7 +464,7 @@ export function SpaceTable({
                       />
                     </div>
                   </TableCell>
-                  <TableCell className="text-center">
+                  <TableCell>
                     <div className="flex justify-center gap-1">
                       <Tooltip>
                         <TooltipTrigger asChild>

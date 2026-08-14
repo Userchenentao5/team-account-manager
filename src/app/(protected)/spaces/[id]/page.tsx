@@ -83,16 +83,30 @@ export default async function SpaceDetailPage({
   searchParams,
 }: {
   params: Promise<{ id: string }>;
-  searchParams?: Promise<{ edit?: string; editMotherSeat?: string }>;
+  searchParams?: Promise<{
+    edit?: string;
+    editMotherSeat?: string;
+    highlightSpace?: string;
+    highlightChild?: string;
+  }>;
 }) {
   const [{ id }, query] = await Promise.all([
     params,
-    searchParams ?? Promise.resolve<{ edit?: string; editMotherSeat?: string }>({}),
+    searchParams ??
+      Promise.resolve<{
+        edit?: string;
+        editMotherSeat?: string;
+        highlightSpace?: string;
+        highlightChild?: string;
+      }>({}),
   ]);
   const numericId = Number(id);
   if (!Number.isInteger(numericId) || numericId <= 0) notFound();
   const isEditing = query.edit === "1";
   const isMotherSeatEditing = query.editMotherSeat === "1";
+  const highlightedChildAccountId = query.highlightChild
+    ? Number(query.highlightChild)
+    : undefined;
 
   const detail = getSpaceDetail(db, numericId);
   if (!detail) notFound();
@@ -154,7 +168,12 @@ export default async function SpaceDetailPage({
         </div>
       </div>
 
-      <Card>
+      <Card
+        id="space-risk-record"
+        className={`risk-record-target${
+          query.highlightSpace === "1" ? " risk-record-highlight" : ""
+        }`}
+      >
         <CardHeader className="border-b">
           <CardTitle>{isEditing ? "编辑空间" : "空间详情"}</CardTitle>
           <CardDescription>
@@ -266,6 +285,7 @@ export default async function SpaceDetailPage({
             accounts={childAccounts}
             currencies={currencies}
             childAccountSoonDays={thresholds.childAccountSoonDays}
+            highlightedAccountId={highlightedChildAccountId}
           />
         </CardContent>
       </Card>

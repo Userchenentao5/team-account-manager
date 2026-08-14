@@ -9,11 +9,11 @@ type MetricCardProps = {
 };
 
 const toneClassNames = {
-  default: "border-primary/55",
-  warning: "border-amber-500/75",
-  risk: "border-destructive",
-  expense: "border-foreground/45",
-  income: "border-primary",
+  default: "before:bg-primary/55",
+  warning: "before:bg-amber-500/75",
+  risk: "before:bg-destructive",
+  expense: "before:bg-foreground/45",
+  income: "before:bg-primary",
 } as const;
 
 const valueClassNames = {
@@ -33,11 +33,13 @@ export function MetricCard({
   return (
     <div
       className={cn(
-        "min-h-28 border-t-2 py-4",
+        "relative min-h-28 py-4 pl-4 before:absolute before:inset-y-4 before:left-0 before:w-0.5 before:rounded-full",
         toneClassNames[tone],
       )}
     >
-      <div className="text-xs font-medium text-muted-foreground">{label}</div>
+      <div className="text-xs font-medium leading-5 text-muted-foreground">
+        {label}
+      </div>
       <div
         className={cn(
           "mt-3 whitespace-nowrap font-mono text-2xl font-semibold leading-none tabular-nums",

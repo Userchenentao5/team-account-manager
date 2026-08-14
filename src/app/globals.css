@@ -155,3 +155,30 @@
     scroll-behavior: auto;
   }
 }
+
+@keyframes risk-record-highlight {
+  0%,
+  35% {
+    background-color: color-mix(in oklab, var(--chart-2) 24%, var(--card));
+  }
+  100% {
+    background-color: var(--card);
+  }
+}
+
+.risk-record-target {
+  scroll-margin-top: 6rem;
+}
+
+.risk-record-highlight,
+tr.risk-record-highlight > [data-slot="table-cell"] {
+  animation: risk-record-highlight 2.4s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .risk-record-highlight,
+  tr.risk-record-highlight > [data-slot="table-cell"] {
+    animation: none;
+    background-color: color-mix(in oklab, var(--chart-2) 18%, var(--card));
+  }
+}
