@@ -59,6 +59,7 @@ type ChildAccountTableProps = {
   accounts: ChildAccountListRow[];
   currencies: CurrencyRow[];
   childAccountSoonDays: number;
+  highlightedAccountId?: number;
 };
 
 const CONTACT_REQUIRED_ERROR = "非自用子账号请输入联系方式。";
@@ -384,7 +385,7 @@ function InlineChildAccountRow({
                 }}
                 placeholder="20.00"
                 disabled={isPending}
-                className="w-24 text-right font-mono"
+                className="w-24 text-center font-mono"
                 aria-invalid={error?.field === "monthlyAmountMinor"}
               />
               <Select
@@ -479,7 +480,7 @@ function InlineChildAccountRow({
             expireOnDate
           />
         </TableCell>
-        <TableCell className="sticky right-0 z-10 min-w-24 border-l bg-muted text-right">
+        <TableCell className="sticky right-0 z-10 min-w-24 border-l bg-muted">
           <div className="flex justify-center gap-1">
             <Tooltip>
               <TooltipTrigger asChild>
@@ -532,6 +533,7 @@ export function ChildAccountTable({
   accounts,
   currencies,
   childAccountSoonDays,
+  highlightedAccountId,
 }: ChildAccountTableProps) {
   const [formState, setFormState] =
     useState<
@@ -592,22 +594,20 @@ export function ChildAccountTable({
       </div>
 
       {shouldShowTable ? (
-        <Table className="[&_td]:text-center [&_th]:text-center">
+        <Table>
           <TableHeader>
             <TableRow>
               <TableHead scope="col">类型</TableHead>
               <TableHead scope="col">邮箱/登录名</TableHead>
               <TableHead scope="col">联系方式</TableHead>
               <TableHead scope="col">加入日期</TableHead>
-              <TableHead scope="col" className="text-right">
-                订阅原价
-              </TableHead>
+              <TableHead scope="col">订阅原价</TableHead>
               <TableHead scope="col">周期 / 付款日</TableHead>
               <TableHead scope="col">到期日</TableHead>
               <TableHead scope="col">状态</TableHead>
               <TableHead
                 scope="col"
-                className="sticky right-0 z-10 min-w-24 border-l bg-background text-right"
+                className="sticky right-0 z-10 min-w-24 border-l bg-background"
               >
                 操作
               </TableHead>
@@ -651,7 +651,15 @@ export function ChildAccountTable({
               }
 
               return (
-                <TableRow key={child.id}>
+                <TableRow
+                  key={child.id}
+                  id={`child-account-${child.id}`}
+                  className={`risk-record-target${
+                    child.id === highlightedAccountId
+                      ? " risk-record-highlight"
+                      : ""
+                  }`}
+                >
                   <TableCell>
                     <Badge
                       variant={child.seatType === "codex" ? "secondary" : "outline"}
@@ -662,7 +670,7 @@ export function ChildAccountTable({
                   <TableCell className="font-mono">{child.email}</TableCell>
                   <TableCell>{child.contact || "-"}</TableCell>
                   <TableCell className="font-mono">{child.joinedDate}</TableCell>
-                  <TableCell className="text-right font-mono">
+                  <TableCell className="font-mono">
                     {formatCurrencyMinor(child.monthlyAmountMinor, row.currency)}
                   </TableCell>
                   <TableCell className="font-mono">
@@ -681,7 +689,7 @@ export function ChildAccountTable({
                       expireOnDate
                     />
                   </TableCell>
-                  <TableCell className="sticky right-0 z-10 min-w-24 border-l bg-background text-right">
+                  <TableCell className="sticky right-0 z-10 min-w-24 border-l bg-background">
                     <div className="flex justify-center gap-1">
                       {isSelfUse ? null : (
                         <Tooltip>

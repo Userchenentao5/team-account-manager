@@ -182,9 +182,7 @@ export function ChannelTable({
                 <TableHead scope="col">名称</TableHead>
                 <TableHead scope="col">绑定空间数</TableHead>
                 <TableHead scope="col">状态</TableHead>
-                <TableHead scope="col" className="text-right">
-                  操作
-                </TableHead>
+                <TableHead scope="col">操作</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -206,8 +204,8 @@ export function ChannelTable({
                         <Badge variant="outline">有效</Badge>
                       )}
                     </TableCell>
-                    <TableCell className="text-right">
-                      <div className="flex items-center justify-end gap-1">
+                    <TableCell>
+                      <div className="flex items-center justify-center gap-1">
                         {archived ? (
                           <Tooltip>
                             <TooltipTrigger asChild>

@@ -102,12 +102,8 @@ export function CurrencyTable({
             <TableHead scope="col">代码</TableHead>
             <TableHead scope="col">符号</TableHead>
             <TableHead scope="col">名称</TableHead>
-            <TableHead scope="col" className="text-right">
-              最小单位位数
-            </TableHead>
-            <TableHead scope="col" className="text-right">
-              操作
-            </TableHead>
+            <TableHead scope="col">最小单位位数</TableHead>
+            <TableHead scope="col">操作</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -117,11 +113,11 @@ export function CurrencyTable({
               <TableCell className="font-mono">{row.code}</TableCell>
               <TableCell className="font-mono">{row.symbol}</TableCell>
               <TableCell>{row.name}</TableCell>
-              <TableCell className="text-right font-mono">
+              <TableCell className="font-mono">
                 {row.minorUnit}
               </TableCell>
-              <TableCell className="text-right">
-                <div className="flex items-center justify-end gap-1">
+              <TableCell>
+                <div className="flex items-center justify-center gap-1">
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <Button

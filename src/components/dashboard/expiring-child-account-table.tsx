@@ -41,9 +41,9 @@ export function ExpiringChildAccountTable({
   if (accounts.length === 0) {
     return (
       <div className="flex min-h-48 flex-col items-center justify-center gap-3 rounded-lg border border-dashed bg-muted/20 px-6 py-12 text-center">
-        <h2 className="text-lg font-semibold tracking-tight">
+        <p className="text-lg font-semibold tracking-tight">
           非自用账号暂无到期风险
-        </h2>
+        </p>
         <p className="max-w-md text-sm leading-6 text-muted-foreground">
           当前没有已到期、逾期或 {soonDays} 天内到期的出租子账号。
         </p>
@@ -52,8 +52,18 @@ export function ExpiringChildAccountTable({
   }
 
   return (
-    <div className="overflow-x-auto rounded-lg border bg-card">
-      <Table className="min-w-[760px]">
+    <div className="rounded-lg border bg-card">
+      <Table className="min-w-[900px] table-fixed">
+        <colgroup>
+          <col className="w-[8%]" />
+          <col className="w-[23%]" />
+          <col className="w-[13%]" />
+          <col className="w-[12%]" />
+          <col className="w-[12%]" />
+          <col className="w-[12%]" />
+          <col className="w-[12%]" />
+          <col className="w-[8%]" />
+        </colgroup>
         <TableHeader>
           <TableRow>
             <TableHead scope="col">状态</TableHead>
@@ -61,13 +71,9 @@ export function ExpiringChildAccountTable({
             <TableHead scope="col">所属空间</TableHead>
             <TableHead scope="col">到期日</TableHead>
             <TableHead scope="col">剩余/逾期</TableHead>
-            <TableHead scope="col" className="text-right">
-              应收 USD
-            </TableHead>
+            <TableHead scope="col">应收 USD</TableHead>
             <TableHead scope="col">联系</TableHead>
-            <TableHead scope="col" className="text-right">
-              操作
-            </TableHead>
+            <TableHead scope="col">操作</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -80,10 +86,17 @@ export function ExpiringChildAccountTable({
                   expireOnDate
                 />
               </TableCell>
-              <TableCell className="font-medium">
-                <div className="flex items-center gap-2">
-                  <span className="font-mono">{row.email}</span>
-                  <Badge variant="outline">{row.seatType}</Badge>
+              <TableCell className="min-w-0 font-medium">
+                <div className="flex min-w-0 items-center gap-2">
+                  <span
+                    className="min-w-0 flex-1 truncate font-mono"
+                    title={row.email}
+                  >
+                    {row.email}
+                  </span>
+                  <Badge variant="outline" className="shrink-0">
+                    {row.seatType}
+                  </Badge>
                 </div>
                 {row.label ? (
                   <div className="mt-1 text-xs text-muted-foreground">
@@ -92,7 +105,10 @@ export function ExpiringChildAccountTable({
                 ) : null}
               </TableCell>
               <TableCell>
-                <Link href={`/spaces/${row.spaceId}`} className="hover:underline">
+                <Link
+                  href={`/spaces/${row.spaceId}`}
+                  className="hover:underline"
+                >
                   {row.spaceName}
                 </Link>
               </TableCell>
@@ -100,11 +116,18 @@ export function ExpiringChildAccountTable({
               <TableCell className="font-mono">
                 {formatDays(row.daysUntilExpiry)}
               </TableCell>
-              <TableCell className="text-right font-mono">
+              <TableCell className="font-mono">
                 ${formatMinor(row.revenueUsdMinor, 2)} USD
               </TableCell>
-              <TableCell>{row.contact || "-"}</TableCell>
-              <TableCell className="text-right">
+              <TableCell>
+                <span
+                  className="block truncate"
+                  title={row.contact || undefined}
+                >
+                  {row.contact || "-"}
+                </span>
+              </TableCell>
+              <TableCell>
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Button
@@ -114,7 +137,9 @@ export function ExpiringChildAccountTable({
                       className="size-11"
                       aria-label="查看所属空间"
                     >
-                      <Link href={`/spaces/${row.spaceId}`}>
+                      <Link
+                        href={`/spaces/${row.spaceId}?highlightChild=${row.id}#child-account-${row.id}`}
+                      >
                         <Eye className="size-4" />
                       </Link>
                     </Button>
