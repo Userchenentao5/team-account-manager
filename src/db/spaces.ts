@@ -30,9 +30,25 @@ export type SpaceListRow = {
   paymentChannel: typeof paymentChannel.$inferSelect;
   currency: typeof currency.$inferSelect;
   childCount: number;
+  occupiedSeatCount: number;
+  availableSeatCount: number;
   childEmails: string[];
   childContacts: string[];
 };
+
+export function calculateSeatAvailability(
+  seatCapacity: number,
+  seatTypes: string[],
+): { occupiedSeatCount: number; availableSeatCount: number } {
+  const occupiedSeatCount = seatTypes.filter(
+    (seatType) => seatType === "chatgpt",
+  ).length;
+  return {
+    occupiedSeatCount,
+    // ponytail: capacity is informational; enforce it at seat write boundaries if overbooking must be blocked.
+    availableSeatCount: Math.max(0, seatCapacity - occupiedSeatCount),
+  };
+}
 
 export function insertSpaceWithMother(
   db: Db,
@@ -98,12 +114,14 @@ export function listSpaceDetails(
       spaceId: childAccount.spaceId,
       email: childAccount.email,
       contact: childAccount.contact,
+      seatType: childAccount.seatType,
     })
     .from(childAccount)
     .where(inArray(childAccount.spaceId, rows.map((row) => row.space.id)))
     .all();
   const childEmailsBySpace = new Map<number, string[]>();
   const childContactsBySpace = new Map<number, string[]>();
+  const childSeatTypesBySpace = new Map<number, string[]>();
   for (const child of children) {
     const emails = childEmailsBySpace.get(child.spaceId) ?? [];
     emails.push(child.email);
@@ -112,13 +130,22 @@ export function listSpaceDetails(
     const contacts = childContactsBySpace.get(child.spaceId) ?? [];
     contacts.push(child.contact);
     childContactsBySpace.set(child.spaceId, contacts);
+
+    const seatTypes = childSeatTypesBySpace.get(child.spaceId) ?? [];
+    seatTypes.push(child.seatType);
+    childSeatTypesBySpace.set(child.spaceId, seatTypes);
   }
 
   return rows.map((row) => {
     const childEmails = childEmailsBySpace.get(row.space.id) ?? [];
+    const availability = calculateSeatAvailability(row.space.seatCapacity, [
+      row.motherAccount.seatType,
+      ...(childSeatTypesBySpace.get(row.space.id) ?? []),
+    ]);
     return {
       ...row,
       childCount: childEmails.length,
+      ...availability,
       childEmails,
       childContacts: childContactsBySpace.get(row.space.id) ?? [],
     };

@@ -79,6 +79,7 @@ export const space = sqliteTable("space", {
     .references(() => currency.code),
   // money as integer minor units (Pattern 3)
   amountMinor: integer("amount_minor").notNull(),
+  seatCapacity: integer("seat_capacity").notNull().default(1),
   // structured subscription period {unit, count} (locked names)
   periodUnit: text("period_unit"), // 'month' | 'quarter' | 'year'
   periodCount: integer("period_count"),

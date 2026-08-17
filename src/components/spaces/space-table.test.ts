@@ -1,4 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
+import { seatUsageStatus } from "./seat-usage";
 import { matchesAccountSearch } from "./space-table";
 
 vi.mock("@/actions/spaces", () => ({
@@ -20,5 +21,13 @@ describe("space account search", () => {
     expect(matchesAccountSearch(row, "wechat-alpha")).toBe(true);
     expect(matchesAccountSearch(row, "  TELEGRAM_BETA  ")).toBe(true);
     expect(matchesAccountSearch(row, "missing@example.com")).toBe(false);
+  });
+});
+
+describe("seat usage status", () => {
+  it("ranks over-capacity above under-capacity and treats full capacity as normal", () => {
+    expect(seatUsageStatus(3, 2)).toBe("over");
+    expect(seatUsageStatus(0, 2)).toBe("under");
+    expect(seatUsageStatus(2, 2)).toBe("full");
   });
 });

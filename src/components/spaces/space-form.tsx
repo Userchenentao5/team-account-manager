@@ -25,6 +25,7 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -90,6 +91,7 @@ function defaultValues(
     paymentChannelId: channels[0]?.id ?? 1,
     currencyCode: defaultCurrency?.code ?? "USD",
     amountMinor: 1,
+    seatCapacity: 1,
     openingDate: today,
     currentPeriodStartDate: today,
     periodUnit: "month",
@@ -275,6 +277,29 @@ function SpaceEditorForm({
                   <FormControl>
                     <Input placeholder="owner@example.com" {...field} />
                   </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="seatCapacity"
+              render={({ field }) => (
+                <FormItem className={detailCellClass}>
+                  <FormLabel>席位总数</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="number"
+                      min={1}
+                      {...field}
+                      onChange={(event) =>
+                        field.onChange(Number(event.target.value))
+                      }
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    仅 chatgpt 类型占用实际席位，codex 不计入已用席位。
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -619,7 +644,7 @@ export function SpaceForm({
         <DialogHeader>
           <DialogTitle>{mode === "add" ? "新增空间" : "编辑空间"}</DialogTitle>
           <DialogDescription>
-            记录归属国家、支付渠道、金额与订阅周期，系统会自动算出到期日，并在保存时按当前汇率固定 USD 成本。
+            记录席位总数、归属国家、支付渠道、金额与订阅周期，系统会自动算出到期日，并在保存时按当前汇率固定 USD 成本。
           </DialogDescription>
         </DialogHeader>
         <SpaceEditorForm
