@@ -14,6 +14,10 @@ export const spaceFormSchema = z.object({
   paymentChannelId: z.number().int().positive(),
   currencyCode: z.string().length(3),
   amountMinor: z.number().int().positive(),
+  seatCapacity: z
+    .number()
+    .int("席位数量必须是整数。")
+    .positive("席位数量至少为 1。"),
   openingDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   currentPeriodStartDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   periodUnit: z.enum(["month", "quarter", "year"]),

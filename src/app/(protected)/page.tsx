@@ -62,7 +62,6 @@ export default function DashboardPage() {
   const urgentRiskCount = spaceUrgentRiskCount + childAccountUrgentRiskCount;
   const upcomingRiskCount =
     spaceUpcomingRiskCount + childAccountUpcomingRiskCount;
-
   return (
     <div className="mx-auto w-full max-w-[1440px] px-4 py-7 sm:px-6 lg:px-8">
       <header className="flex flex-col gap-5 border-b border-border/80 pb-6 sm:flex-row sm:items-end sm:justify-between">
@@ -272,7 +271,7 @@ export default function DashboardPage() {
                 自用账号只计规模，出租账号同时进入应收计算。
               </p>
             </div>
-            <dl className="mt-6 grid gap-px overflow-hidden rounded-lg border bg-border sm:grid-cols-2 lg:grid-cols-4">
+            <dl className="mt-6 grid gap-px overflow-hidden rounded-lg border bg-border sm:grid-cols-2 lg:grid-cols-5">
               <div className="bg-card px-5 py-4">
                 <dt className="text-xs text-muted-foreground">空间总数</dt>
                 <dd className="mt-2 font-mono text-2xl font-semibold tabular-nums">
@@ -296,6 +295,45 @@ export default function DashboardPage() {
                 <dd className="mt-2 font-mono text-2xl font-semibold tabular-nums">
                   {totals.totalChildAccounts}
                 </dd>
+              </div>
+              <div className="bg-card px-5 py-4">
+                <dt className="text-xs text-muted-foreground">席位余量</dt>
+                <dd
+                  className="mt-2 grid grid-cols-2 gap-3"
+                  aria-label={`席位余量：空闲 ${totals.availableSeatCount} 个，超额 ${totals.overCapacitySeatCount} 个`}
+                >
+                  <span>
+                    <span className="block text-xs text-muted-foreground">
+                      空闲
+                    </span>
+                    <span
+                      className={`mt-1 block font-mono text-2xl font-semibold tabular-nums ${
+                        totals.availableSeatCount > 0
+                          ? "text-amber-700 dark:text-amber-300"
+                          : "text-foreground"
+                      }`}
+                    >
+                      {totals.availableSeatCount}
+                    </span>
+                  </span>
+                  <span className="border-l border-border/70 pl-3">
+                    <span className="block text-xs text-muted-foreground">
+                      超额
+                    </span>
+                    <span
+                      className={`mt-1 block font-mono text-2xl font-semibold tabular-nums ${
+                        totals.overCapacitySeatCount > 0
+                          ? "text-destructive"
+                          : "text-foreground"
+                      }`}
+                    >
+                      {totals.overCapacitySeatCount}
+                    </span>
+                  </span>
+                </dd>
+                <p className="mt-2 font-mono text-xs tabular-nums text-muted-foreground">
+                  已使用 {totals.occupiedSeatCount} / 总席位 {totals.seatCapacity}
+                </p>
               </div>
             </dl>
             <div className="mt-7 grid gap-4 border-t border-border/70 pt-5 text-sm sm:grid-cols-3">

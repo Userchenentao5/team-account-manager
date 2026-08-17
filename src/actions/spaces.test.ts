@@ -49,6 +49,7 @@ describe("space server actions (SPACE-01 / SPACE-04 / FX-02)", () => {
     paymentChannelId: 0,
     currencyCode: "USD",
     amountMinor: 1999,
+    seatCapacity: 5,
     openingDate: "2026-01-31",
     currentPeriodStartDate: "2026-01-31",
     periodUnit: "month" as const,
@@ -89,6 +90,14 @@ describe("space server actions (SPACE-01 / SPACE-04 / FX-02)", () => {
     expect(detail?.space.rateAsOf).toBe("2026-06-28T00:00:00.000Z");
     expect(detail?.space.rateSource).toBe("frankfurter");
     expect(detail?.space.amountUsd).toBe(1999);
+    expect(detail?.space.seatCapacity).toBe(5);
+  });
+
+  it("rejects a non-positive seat capacity", async () => {
+    const res = await createSpace(validInput({ seatCapacity: 0 }));
+
+    expect(res).toEqual({ ok: false, error: "席位数量至少为 1。" });
+    expect(ctx.db.select().from(space).all()).toHaveLength(0);
   });
 
   it("keeps first opening date separate from the current paid period", async () => {

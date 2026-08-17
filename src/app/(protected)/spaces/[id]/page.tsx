@@ -8,7 +8,7 @@ import { listChannels } from "@/db/channels";
 import { listCurrencies } from "@/db/currencies";
 import { getRate } from "@/db/fxRates";
 import { getStatusThresholds } from "@/db/settings";
-import { getSpaceDetail } from "@/db/spaces";
+import { calculateSeatAvailability, getSpaceDetail } from "@/db/spaces";
 import { formatCountryLabel } from "@/lib/countries";
 import { formatCurrencyMinor } from "@/lib/currencies";
 import { convertUsdMinorToCurrencyMinor, formatMinor } from "@/lib/money";
@@ -25,6 +25,7 @@ import { ChildAccountTable } from "@/components/spaces/child-account-table";
 import { ExpiryBadge } from "@/components/spaces/expiry-badge";
 import { FrozenAmountHelp } from "@/components/spaces/frozen-amount-help";
 import { MotherSeatCard } from "@/components/spaces/mother-seat-card";
+import { SeatUsage } from "@/components/spaces/seat-usage";
 import { SpaceDetailActions } from "@/components/spaces/space-detail-actions";
 import { SpaceInlineEditor } from "@/components/spaces/space-form";
 
@@ -129,6 +130,10 @@ export default async function SpaceDetailPage({
           ),
           cnyCurrency,
         );
+  const seatAvailability = calculateSeatAvailability(space.seatCapacity, [
+    motherAccount.seatType,
+    ...childAccounts.map(({ childAccount }) => childAccount.seatType),
+  ]);
   const formValue = {
     id: space.id,
     name: space.name,
@@ -136,6 +141,7 @@ export default async function SpaceDetailPage({
     paymentChannelId: space.paymentChannelId,
     currencyCode: space.currencyCode,
     amountMinor: space.amountMinor,
+    seatCapacity: space.seatCapacity,
     openingDate: space.openingDate ?? "",
     currentPeriodStartDate:
       space.currentPeriodStartDate ?? space.openingDate ?? "",
@@ -204,6 +210,12 @@ export default async function SpaceDetailPage({
               </DetailItem>
               <DetailItem label="母账号">
                 <span>{motherAccount.email}</span>
+              </DetailItem>
+              <DetailItem label="席位使用">
+                <SeatUsage
+                  occupiedSeatCount={seatAvailability.occupiedSeatCount}
+                  seatCapacity={space.seatCapacity}
+                />
               </DetailItem>
               <DetailItem label="国家/地区">
                 <span>{formatCountryLabel(space.country)}</span>

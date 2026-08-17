@@ -4,6 +4,7 @@ import { differenceInCalendarDays } from "date-fns";
 import { formatCountryLabel } from "@/lib/countries";
 import { expiryStatus, nextPaymentDueDate, type Period } from "@/lib/expiry";
 import { getStatusThresholds, type StatusThresholds } from "./settings";
+import { calculateSeatAvailability } from "./spaces";
 import {
   childAccount,
   currency,
@@ -107,6 +108,10 @@ export type DashboardOverview = {
     totalChildAccounts: number;
     rentedChildAccounts: number;
     selfUseChildAccounts: number;
+    seatCapacity: number;
+    occupiedSeatCount: number;
+    availableSeatCount: number;
+    overCapacitySeatCount: number;
   };
   expiringSpaces: DashboardExpiringSpaceRow[];
   expiringChildAccounts: DashboardExpiringChildAccountRow[];
@@ -130,6 +135,7 @@ type SpaceDashboardRow = {
   expiryDate: string | null;
   paymentChannelId: number;
   paymentChannelName: string;
+  seatCapacity: number;
 };
 
 type ChildDashboardRow = {
@@ -154,6 +160,7 @@ type ChildDashboardRow = {
 };
 
 type MotherDashboardRow = {
+  spaceId: number;
   seatType: string;
 };
 
@@ -283,6 +290,7 @@ export function getDashboardOverview(
       expiryDate: space.expiryDate,
       paymentChannelId: paymentChannel.id,
       paymentChannelName: paymentChannel.name,
+      seatCapacity: space.seatCapacity,
     })
     .from(space)
     .innerJoin(paymentChannel, eq(paymentChannel.id, space.paymentChannelId))
@@ -317,6 +325,7 @@ export function getDashboardOverview(
 
   const motherRows: MotherDashboardRow[] = db
     .select({
+      spaceId: motherAccount.spaceId,
       seatType: motherAccount.seatType,
     })
     .from(motherAccount)
@@ -357,12 +366,16 @@ export function getDashboardOverview(
   const spendingByPaymentChannelBuckets = new Map<string, BucketSeed>();
   const spacePerformanceById = new Map<number, SpacePerformanceSeed>();
   const childCountBySpace = new Map<number, number>();
+  const seatTypesBySpace = new Map<number, string[]>();
 
   for (const row of childRows) {
     childCountBySpace.set(
       row.spaceId,
       (childCountBySpace.get(row.spaceId) ?? 0) + 1,
     );
+    const seatTypes = seatTypesBySpace.get(row.spaceId) ?? [];
+    seatTypes.push(row.seatType);
+    seatTypesBySpace.set(row.spaceId, seatTypes);
   }
 
   let spacePaymentUsdMinor = 0;
@@ -494,6 +507,9 @@ export function getDashboardOverview(
   }
 
   for (const row of motherRows) {
+    const seatTypes = seatTypesBySpace.get(row.spaceId) ?? [];
+    seatTypes.push(row.seatType);
+    seatTypesBySpace.set(row.spaceId, seatTypes);
     if (row.seatType === "chatgpt") {
       counts.motherAccountsBySeatType.chatgpt += 1;
       counts.allAccountsBySeatType.chatgpt += 1;
@@ -501,6 +517,22 @@ export function getDashboardOverview(
       counts.motherAccountsBySeatType.codex += 1;
       counts.allAccountsBySeatType.codex += 1;
     }
+  }
+
+  let occupiedSeatCount = 0;
+  let availableSeatCount = 0;
+  let overCapacitySeatCount = 0;
+  for (const row of spaceRows) {
+    const availability = calculateSeatAvailability(
+      row.seatCapacity,
+      seatTypesBySpace.get(row.id) ?? [],
+    );
+    occupiedSeatCount += availability.occupiedSeatCount;
+    availableSeatCount += availability.availableSeatCount;
+    overCapacitySeatCount += Math.max(
+      0,
+      availability.occupiedSeatCount - row.seatCapacity,
+    );
   }
 
   expiringSpaces.sort((left, right) => {
@@ -531,6 +563,13 @@ export function getDashboardOverview(
       totalChildAccounts: childRows.length,
       rentedChildAccounts: counts.childAccountsByUse.rented,
       selfUseChildAccounts: counts.childAccountsByUse.selfUse,
+      seatCapacity: spaceRows.reduce(
+        (total, row) => total + row.seatCapacity,
+        0,
+      ),
+      occupiedSeatCount,
+      availableSeatCount,
+      overCapacitySeatCount,
     },
     expiringSpaces,
     expiringChildAccounts,

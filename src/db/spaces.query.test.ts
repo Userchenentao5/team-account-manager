@@ -41,6 +41,7 @@ describe("space queries (SPACE-02 / SPACE-03 / ACCT-01)", () => {
         paymentChannelId: channelId,
         currencyCode: overrides.currencyCode ?? "USD",
         amountMinor: overrides.amountMinor ?? 1000,
+        seatCapacity: overrides.seatCapacity ?? 1,
         periodUnit: overrides.periodUnit ?? "month",
         periodCount: overrides.periodCount ?? 1,
         rateUsed: overrides.rateUsed ?? "1",
@@ -122,11 +123,18 @@ describe("space queries (SPACE-02 / SPACE-03 / ACCT-01)", () => {
     const first = makeSpace({
       name: "Counted Team",
       expiryDate: "2026-01-01",
+      seatCapacity: 4,
     });
     const second = makeSpace({
       name: "Empty Team",
       expiryDate: "2026-02-01",
+      seatCapacity: 2,
     });
+    ctx.db
+      .update(motherAccount)
+      .set({ seatType: "chatgpt" })
+      .where(eq(motherAccount.spaceId, first.id))
+      .run();
     ctx.db
       .insert(childAccount)
       .values({
@@ -168,6 +176,8 @@ describe("space queries (SPACE-02 / SPACE-03 / ACCT-01)", () => {
     const counted = rows.find((row) => row.space.id === first.id);
 
     expect(counted?.childCount).toBe(2);
+    expect(counted?.occupiedSeatCount).toBe(2);
+    expect(counted?.availableSeatCount).toBe(2);
     expect(counted?.childEmails).toEqual(
       expect.arrayContaining([
         "first-child@example.com",
@@ -178,6 +188,12 @@ describe("space queries (SPACE-02 / SPACE-03 / ACCT-01)", () => {
       expect.arrayContaining(["wechat-first", "telegram-second"]),
     );
     expect(rows.find((row) => row.space.id === second.id)?.childCount).toBe(0);
+    expect(
+      rows.find((row) => row.space.id === second.id)?.occupiedSeatCount,
+    ).toBe(0);
+    expect(
+      rows.find((row) => row.space.id === second.id)?.availableSeatCount,
+    ).toBe(2);
     expect(rows.find((row) => row.space.id === second.id)?.childEmails).toEqual(
       [],
     );

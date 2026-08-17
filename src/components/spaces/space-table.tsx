@@ -43,6 +43,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { ExpiryBadge } from "./expiry-badge";
+import { SeatUsage } from "./seat-usage";
 import { SpaceDeleteDialog } from "./space-delete-dialog";
 import { SpaceForm, type SpaceFormValue } from "./space-form";
 
@@ -93,6 +94,7 @@ function toFormValue(row: SpaceListRow): SpaceFormValue {
     paymentChannelId: space.paymentChannelId,
     currencyCode: space.currencyCode,
     amountMinor: space.amountMinor,
+    seatCapacity: space.seatCapacity,
     openingDate: space.openingDate ?? "",
     currentPeriodStartDate:
       space.currentPeriodStartDate ?? space.openingDate ?? "",
@@ -258,6 +260,14 @@ export function SpaceTable({
   const visibleSpaces = sortedSpaces.slice(pageStart, pageStart + PAGE_SIZE);
   const rangeStart = sortedSpaces.length === 0 ? 0 : pageStart + 1;
   const rangeEnd = Math.min(pageStart + PAGE_SIZE, sortedSpaces.length);
+  const totalSeatCapacity = accountFilteredSpaces.reduce(
+    (total, row) => total + row.space.seatCapacity,
+    0,
+  );
+  const occupiedSeatCount = accountFilteredSpaces.reduce(
+    (total, row) => total + row.occupiedSeatCount,
+    0,
+  );
 
   function setCountry(value: string) {
     setPage(1);
@@ -294,6 +304,9 @@ export function SpaceTable({
           <h1 className="text-3xl font-semibold tracking-tight">空间</h1>
           <p className="mt-2 text-sm leading-6 text-muted-foreground">
             按母号/子号邮箱或子号联系方式搜索，按国家/地区、支付渠道筛选空间，并查看冻结成本与到期状态。
+            <span className="ml-2 whitespace-nowrap text-foreground">
+              席位使用 {occupiedSeatCount}/{totalSeatCapacity} 席
+            </span>
           </p>
         </div>
         <div className="flex flex-wrap items-end gap-2">
@@ -377,7 +390,7 @@ export function SpaceTable({
         <div className="min-h-0 flex-1 overflow-auto px-4 pb-4 sm:px-6 lg:px-8">
             <table
               data-slot="table"
-              className="w-full min-w-[980px] caption-bottom text-sm"
+              className="w-full min-w-[1080px] caption-bottom text-sm"
             >
           <TableHeader className="sticky top-0 z-20 bg-background shadow-sm [&_th]:bg-background">
             <TableRow>
@@ -388,6 +401,7 @@ export function SpaceTable({
                 onSort={setSortKey}
               />
               <TableHead scope="col">母号邮箱</TableHead>
+              <TableHead scope="col">席位使用</TableHead>
               <SortableHead
                 label="国家/地区"
                 sortKey="country"
@@ -430,6 +444,12 @@ export function SpaceTable({
                   </TableCell>
                   <TableCell className="font-mono">
                     {motherAccount.email}
+                  </TableCell>
+                  <TableCell>
+                    <SeatUsage
+                      occupiedSeatCount={row.occupiedSeatCount}
+                      seatCapacity={space.seatCapacity}
+                    />
                   </TableCell>
                   <TableCell>
                     {formatCountryLabel(space.country)}

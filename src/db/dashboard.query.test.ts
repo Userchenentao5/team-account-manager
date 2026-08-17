@@ -36,6 +36,7 @@ describe("dashboard overview aggregates (DASH-01 / DASH-02 / DASH-03 / DASH-04)"
         paymentChannelId: channelId,
         currencyCode: overrides.currencyCode ?? "USD",
         amountMinor: overrides.amountMinor ?? 1000,
+        seatCapacity: overrides.seatCapacity ?? 1,
         periodUnit: overrides.periodUnit ?? "month",
         periodCount: overrides.periodCount ?? 1,
         rateUsed: overrides.rateUsed ?? "1",
@@ -285,6 +286,12 @@ describe("dashboard overview aggregates (DASH-01 / DASH-02 / DASH-03 / DASH-04)"
 
     expect(overview.totals.totalSpaces).toBe(3);
     expect(overview.totals.totalChildAccounts).toBe(3);
+    expect(overview.totals).toMatchObject({
+      seatCapacity: 3,
+      occupiedSeatCount: 3,
+      availableSeatCount: 1,
+      overCapacitySeatCount: 1,
+    });
     expect(overview.counts.spacesByExpiryStatus).toEqual({
       expired: 1,
       soon: 1,
@@ -399,6 +406,10 @@ describe("dashboard overview aggregates (DASH-01 / DASH-02 / DASH-03 / DASH-04)"
       totalChildAccounts: 0,
       rentedChildAccounts: 0,
       selfUseChildAccounts: 0,
+      seatCapacity: 0,
+      occupiedSeatCount: 0,
+      availableSeatCount: 0,
+      overCapacitySeatCount: 0,
     });
     expect(overview.expiringSpaces).toEqual([]);
     expect(overview.expiringChildAccounts).toEqual([]);
