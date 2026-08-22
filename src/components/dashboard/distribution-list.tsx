@@ -21,6 +21,11 @@ export function DistributionList({
   buckets,
   totalUsdMinor,
 }: DistributionListProps) {
+  const barHeightClassName =
+    buckets.length <= 3 ? "h-20" : buckets.length <= 5 ? "h-12" : "h-8";
+  const barGapClassName =
+    buckets.length <= 3 ? "gap-7" : buckets.length <= 5 ? "gap-4" : "gap-3";
+
   return (
     <Card size="sm" className="min-h-full">
       <CardHeader className="border-b border-border/70 pb-3">
@@ -42,29 +47,19 @@ export function DistributionList({
           </div>
         </div>
       </CardHeader>
-      <CardContent className="pt-4">
+      <CardContent className="flex flex-1 pt-4">
         {buckets.length === 0 ? (
           <div className="rounded-lg border border-dashed bg-muted/35 p-5 text-sm text-muted-foreground">
             暂无支出分布
           </div>
         ) : (
-          <div className="overflow-x-auto pb-1">
-            <p className="mb-2 ml-[3.25rem] h-3 text-[10px] font-medium text-muted-foreground">
-              占总支出比例
-            </p>
-            <div className="grid min-w-[23rem] grid-cols-[2.5rem_minmax(0,1fr)] gap-3">
+          <div className="flex min-w-0 flex-1 overflow-x-auto pb-1">
+            <div className="flex min-w-[27rem] flex-1 flex-col">
+              <p className="ml-[7.25rem] text-[10px] font-medium text-muted-foreground">
+                占总支出比例
+              </p>
               <div
-                aria-hidden="true"
-                className="relative h-44 text-right font-mono text-[10px] text-muted-foreground"
-              >
-                <span className="absolute right-0 top-0 -translate-y-1/2">100%</span>
-                <span className="absolute right-0 top-1/4 -translate-y-1/2">75%</span>
-                <span className="absolute right-0 top-1/2 -translate-y-1/2">50%</span>
-                <span className="absolute right-0 top-3/4 -translate-y-1/2">25%</span>
-                <span className="absolute bottom-0 right-0 translate-y-1/2">0%</span>
-              </div>
-              <div
-                className="flex min-w-0 gap-3"
+                className={`flex flex-1 flex-col justify-center py-2 ${barGapClassName}`}
                 role="list"
                 aria-label={`${title}支出分布柱状图`}
               >
@@ -73,44 +68,52 @@ export function DistributionList({
                     key={bucket.key}
                     role="listitem"
                     aria-label={`${bucket.label}，${formatMinor(bucket.usdMinor, 2)} 美元，占总支出 ${bucket.percentage}%`}
-                    className="flex min-w-[4.75rem] flex-1 flex-col gap-2"
+                    className="grid grid-cols-[6.5rem_minmax(14rem,1fr)_3rem] items-center gap-3"
                   >
-                    <div className="relative h-44">
+                    <p
+                      className="truncate text-xs font-medium text-foreground"
+                      title={bucket.label}
+                    >
+                      {bucket.label}
+                    </p>
+                    <div className={`relative ${barHeightClassName}`}>
                       <div
                         aria-hidden="true"
-                        className="pointer-events-none absolute inset-0 grid grid-rows-4 border-b border-border/65"
+                        className="pointer-events-none absolute inset-0 grid grid-cols-4 border-x border-border/45"
                       >
-                        <span className="border-t border-border/65" />
-                        <span className="border-t border-border/45" />
-                        <span className="border-t border-border/45" />
-                        <span className="border-t border-border/45" />
+                        <span className="border-r border-border/45" />
+                        <span className="border-r border-border/45" />
+                        <span className="border-r border-border/45" />
+                        <span />
                       </div>
-                      <div className="absolute inset-x-0 bottom-0 top-1 flex items-end px-1">
-                        <div
-                          aria-hidden="true"
-                          className="min-h-1 w-full rounded-t-sm bg-primary/85"
-                          style={{
-                            height: `${Math.min(100, Math.max(0, bucket.percentage))}%`,
-                          }}
-                          title={`${bucket.label}: $${formatMinor(bucket.usdMinor, 2)} USD (${bucket.percentage}%)`}
-                        />
-                      </div>
+                      <div
+                        aria-hidden="true"
+                        className="absolute inset-y-0 left-0 min-w-px rounded-r-sm bg-primary/85"
+                        style={{
+                          width: `${Math.min(100, Math.max(0, bucket.percentage))}%`,
+                        }}
+                        title={`${bucket.label}: $${formatMinor(bucket.usdMinor, 2)} USD (${bucket.percentage}%)`}
+                      />
                     </div>
-                    <div className="min-h-10 text-center">
-                      <p className="flex items-baseline justify-center gap-1.5 whitespace-nowrap font-mono tabular-nums">
-                        <span className="text-[11px] font-medium text-foreground">
-                          ${formatMinor(bucket.usdMinor, 2)}
-                        </span>
-                        <span className="text-[10px] font-semibold text-primary">
-                          {bucket.percentage}%
-                        </span>
-                      </p>
-                      <p className="line-clamp-2 text-xs leading-4 text-muted-foreground">
-                        {bucket.label}
-                      </p>
-                    </div>
+                    <p className="font-mono text-xs font-semibold tabular-nums text-foreground">
+                      {bucket.percentage}%
+                    </p>
                   </div>
                 ))}
+              </div>
+              <div
+                aria-hidden="true"
+                className="mt-2 grid grid-cols-[6.5rem_minmax(14rem,1fr)_3rem] gap-3"
+              >
+                <span />
+                <div className="relative h-5 border-t border-border/65 font-mono text-[10px] text-muted-foreground">
+                  <span className="absolute left-0 top-1.5">0%</span>
+                  <span className="absolute left-1/4 top-1.5 -translate-x-1/2">25%</span>
+                  <span className="absolute left-1/2 top-1.5 -translate-x-1/2">50%</span>
+                  <span className="absolute left-3/4 top-1.5 -translate-x-1/2">75%</span>
+                  <span className="absolute right-0 top-1.5">100%</span>
+                </div>
+                <span />
               </div>
             </div>
           </div>
