@@ -215,8 +215,8 @@
     "semantic_hash": ""
   },
   "src/components/nav/sidebar.tsx": {
-    "mtime": 1784070400.295614,
-    "ast_hash": "d5fbacd8d3746760b860f35f9c5782d4",
+    "mtime": 1787761015.7481954,
+    "ast_hash": "be451c35b6f41738dc256d9596bcbec5",
     "semantic_hash": ""
   },
   "src/components/spaces/child-account-delete-dialog.tsx": {
@@ -325,8 +325,8 @@
     "semantic_hash": ""
   },
   "src/components/ui/sidebar.tsx": {
-    "mtime": 1784070400.304704,
-    "ast_hash": "2b8853e517049e5df0592e162d39c904",
+    "mtime": 1787761015.7519991,
+    "ast_hash": "9d13293339417946f8a0a5efbbb58695",
     "semantic_hash": ""
   },
   "src/components/ui/skeleton.tsx": {
@@ -1220,8 +1220,8 @@
     "semantic_hash": "7b8296294e3ffbbcc7d0d9c0f6a6eb04"
   },
   "src/app/(protected)/layout.tsx": {
-    "mtime": 1783943901.5306685,
-    "ast_hash": "4bbc290aab3858f001debb348f085186",
+    "mtime": 1787761015.7403133,
+    "ast_hash": "dc14f7fa6e9dc92e85abdf3eed880fe7",
     "semantic_hash": ""
   },
   "src/app/(protected)/page.tsx": {
@@ -1250,8 +1250,8 @@
     "semantic_hash": ""
   },
   "src/app/(protected)/spaces/[id]/page.tsx": {
-    "mtime": 1786972287.856745,
-    "ast_hash": "5b52b06c345addd2c2177a12dbbc1f05",
+    "mtime": 1787761015.7461908,
+    "ast_hash": "9a21d7bea54ffd524751b9dc44cafc45",
     "semantic_hash": ""
   },
   "src/app/(protected)/spaces/page.tsx": {

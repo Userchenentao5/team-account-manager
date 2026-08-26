@@ -29,6 +29,7 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
+  SidebarTrigger,
   useSidebar,
 } from "@/components/ui/sidebar";
 
@@ -146,6 +147,10 @@ export function AppSidebar() {
           </SidebarMenu>
         </form>
       </SidebarFooter>
+      <SidebarTrigger
+        aria-label="切换侧边栏"
+        className="absolute right-0 top-1/2 z-30 hidden h-[68px] w-8 -translate-y-1/2 translate-x-1/2 rounded-full border border-border/70 bg-card text-muted-foreground shadow-md hover:bg-card hover:text-foreground active:not-aria-[haspopup]:!-translate-y-1/2 aria-expanded:bg-card aria-expanded:text-muted-foreground md:flex"
+      />
     </Sidebar>
   );
 }
