@@ -1,16 +1,16 @@
-# Graph Report - team-account-manager  (2026-08-22)
+# Graph Report - team-account-manager  (2026-08-27)
 
 ## Corpus Check
-- 304 files · ~206,580 words
+- 304 files · ~206,625 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 3186 nodes · 3973 edges · 1056 communities (200 shown, 856 thin omitted)
+- 3186 nodes · 3974 edges · 1056 communities (200 shown, 856 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 7 edges (avg confidence: 0.86)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `6e677afe`
+- Built from commit: `fd8fedd5`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -1050,7 +1050,7 @@
 - [[_COMMUNITY_rate-table.tsx|rate-table.tsx]]
 - [[_COMMUNITY_ECS deployment hardening|ECS deployment hardening]]
 - [[_COMMUNITY_childAccounts.test.ts|childAccounts.test.ts]]
-- [[_COMMUNITY_reminder-template-placeholders.ts|reminder-template-placeholders.ts]]
+- [[_COMMUNITY_index.ts|index.ts]]
 - [[_COMMUNITY_Theme-Aware Semantic Toast Icons|Theme-Aware Semantic Toast Icons]]
 - [[_COMMUNITY_scripts|scripts]]
 - [[_COMMUNITY_package.json|package.json]]
@@ -1059,8 +1059,8 @@
 - [[_COMMUNITY_Q 新开分支修正，如果不支持修改席位类型，当前空间下的所有席位类型都固定为chatgpt|Q: 新开分支修正，如果不支持修改席位类型，当前空间下的所有席位类型都固定为chatgpt]]
 - [[_COMMUNITY_Q 风险页面列表列对齐问题修复，同时检查其他列表是否存在同样问题|Q: 风险页面列表列对齐问题修复，同时检查其他列表是否存在同样问题]]
 - [[_COMMUNITY_Q 继续调整为全部居中对齐|Q: 继续调整为全部居中对齐]]
-- [[_COMMUNITY_metric-card.tsx|metric-card.tsx]]
-- [[_COMMUNITY_space.ts|space.ts]]
+- [[_COMMUNITY_base.ts|base.ts]]
+- [[_COMMUNITY_fx.test.ts|fx.test.ts]]
 - [[_COMMUNITY_distribution-list.tsx|distribution-list.tsx]]
 - [[_COMMUNITY_Q 风险页选择风险记录点击操作后，跳转后页面中可以加一个动画高亮一下对应记录背景|Q: 风险页选择风险记录点击操作后，跳转后页面中可以加一个动画高亮一下对应记录背景]]
 - [[_COMMUNITY_metric-card.tsx|metric-card.tsx]]
@@ -1188,8 +1188,8 @@ Cohesion: 0.10
 Nodes (19): compilerOptions, allowJs, esModuleInterop, incremental, isolatedModules, jsx, lib, module (+11 more)
 
 ### Community 27 - "layout.tsx"
-Cohesion: 0.19
-Nodes (10): CurrenciesPage(), RenewalRisksPage(), CurrencyTable(), ExpiringChildAccountTable(), formatDays(), ExpiringSpaceTable(), formatDays(), listCurrencies() (+2 more)
+Cohesion: 0.12
+Nodes (16): seedUsdRate(), seedCache(), Db, FxRateInsert, FxRateListRow, FxRateRow, upsertRates(), fxRate (+8 more)
 
 ### Community 30 - "Settings Data and Page"
 Cohesion: 0.20
@@ -1768,16 +1768,12 @@ Cohesion: 0.40
 Nodes (4): Answer, Outcome, Q: dashboard中空间风险点，空间订阅和出租账号收款统计数字也希望使用需立即处理和近期关注的色号, Source Nodes
 
 ### Community 459 - "space.ts"
-Cohesion: 0.12
-Nodes (16): seedUsdRate(), seedCache(), Db, FxRateInsert, FxRateListRow, FxRateRow, upsertRates(), fxRate (+8 more)
+Cohesion: 0.29
+Nodes (12): refreshRates(), RefreshRatesResult, getMostRecentFetchedAt(), listRates(), RateBase, ensureFreshRates(), fallbackToCache(), FxResult (+4 more)
 
 ### Community 461 - "Toaster"
 Cohesion: 0.15
 Nodes (14): geistMono, geistSans, metadata, Toaster(), TooltipProvider(), recordSpaceExpiryReminderSent(), Db, EmailSender (+6 more)
-
-### Community 462 - "rate-table.tsx"
-Cohesion: 0.29
-Nodes (12): refreshRates(), RefreshRatesResult, getMostRecentFetchedAt(), listRates(), RateBase, ensureFreshRates(), fallbackToCache(), FxResult (+4 more)
 
 ### Community 1028 - "Q: 优化该问题"
 Cohesion: 0.40
@@ -1815,9 +1811,13 @@ Nodes (4): Completed, Deferred, ECS deployment hardening, Verification
 Cohesion: 0.11
 Nodes (24): ChildAccountInsert, ChildAccountListRow, ChildAccountRow, ChildAccountUpdate, Db, deleteChildAccount(), insertChildAccount(), isSeatTypeLocked() (+16 more)
 
-### Community 1041 - "reminder-template-placeholders.ts"
-Cohesion: 0.31
-Nodes (7): RatesPage(), isRateBase(), parseRateBase(), RATE_BASES, FrankfurterResponse, frankfurterResponseSchema, positiveRate
+### Community 1041 - "index.ts"
+Cohesion: 0.19
+Nodes (10): CurrenciesPage(), RenewalRisksPage(), CurrencyTable(), ExpiringChildAccountTable(), formatDays(), ExpiringSpaceTable(), formatDays(), listCurrencies() (+2 more)
+
+### Community 1042 - "Theme-Aware Semantic Toast Icons"
+Cohesion: 0.20
+Nodes (10): formatAsOf(), formatPeriodLabel(), SpaceDetailPage(), listChildAccounts(), calculateSeatAvailability(), Country, COUNTRY_LABELS, CountryCode (+2 more)
 
 ### Community 1043 - "scripts"
 Cohesion: 0.22
@@ -1847,11 +1847,11 @@ Nodes (4): Answer, Outcome, Q: 风险页面列表列对齐问题修复，同时�
 Cohesion: 0.40
 Nodes (4): Answer, Outcome, Q: 继续调整为全部居中对齐, Source Nodes
 
-### Community 1050 - "metric-card.tsx"
-Cohesion: 0.20
-Nodes (10): formatAsOf(), formatPeriodLabel(), SpaceDetailPage(), listChildAccounts(), calculateSeatAvailability(), Country, COUNTRY_LABELS, CountryCode (+2 more)
+### Community 1050 - "base.ts"
+Cohesion: 0.31
+Nodes (7): RatesPage(), isRateBase(), parseRateBase(), RATE_BASES, FrankfurterResponse, frankfurterResponseSchema, positiveRate
 
-### Community 1051 - "space.ts"
+### Community 1051 - "fx.test.ts"
 Cohesion: 0.25
 Nodes (5): dbHolder, FIXED_USD_RATES, USD_RATES, VALID_CNY_RESPONSE, VALID_RESPONSE
 
@@ -1885,7 +1885,7 @@ Nodes (9): billingPeriodUnitSchema, ChildAccountFormInput, childAccountFormSchem
 - `mother-seat-card.tsx` (2× useful, score=1.258880634)
 - `CardTitle()` (2× useful, score=0.891759128)
 - `Dialog()` (2× useful, score=0.891759128)
-- `SidebarInset()` (2× useful, score=0.891759128)
+- `SidebarInset()` (2× useful, score=0.891759128) _(code changed — re-verify)_
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
@@ -1894,12 +1894,12 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.011) - this node is a cross-community bridge._
 - **Why does `dependencies` connect `Test Database and FX` to `UI Layout Utilities`, `Card Based Settings UI`, `package.json`?**
   _High betweenness centrality (0.005) - this node is a cross-community bridge._
-- **Why does `db` connect `layout.tsx` to `FX Rate Runtime`, `Money Formatting and Pages`, `index.ts`, `Authentication and Rate Limits`, `childAccounts.ts`, `auth.ts`, `rate-table.tsx`, `Settings and SMTP Actions`, `Child Reminder Rich Text`, `space-table.tsx`?**
+- **Why does `db` connect `index.ts` to `FX Rate Runtime`, `Money Formatting and Pages`, `index.ts`, `Authentication and Rate Limits`, `childAccounts.ts`, `auth.ts`, `space.ts`, `Settings and SMTP Actions`, `Child Reminder Rich Text`, `space-table.tsx`?**
   _High betweenness centrality (0.004) - this node is a cross-community bridge._
 - **What connects `$schema`, `style`, `rsc` to the rest of the system?**
   _2203 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `UI Layout Utilities` be split into smaller, more focused modules?**
-  _Cohesion score 0.08735150244584207 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.0880503144654088 - nodes in this community are weakly interconnected._
 - **Should `FX Rate Runtime` be split into smaller, more focused modules?**
   _Cohesion score 0.11942959001782531 - nodes in this community are weakly interconnected._
 - **Should `Form and Dialog System` be split into smaller, more focused modules?**

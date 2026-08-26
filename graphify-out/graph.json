@@ -1130,7 +1130,7 @@
       "source_location": "L94",
       "_origin": "ast",
       "id": "src_actions_childaccounts_test_seedusdrate",
-      "community": 459,
+      "community": 27,
       "norm_label": "seedusdrate()"
     },
     {
@@ -1450,7 +1450,7 @@
       "source_location": "L61",
       "_origin": "ast",
       "id": "src_actions_fx_test_seedcache",
-      "community": 459,
+      "community": 27,
       "norm_label": "seedcache()"
     },
     {
@@ -1460,7 +1460,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_actions_fx",
-      "community": 462,
+      "community": 459,
       "norm_label": "fx.ts"
     },
     {
@@ -1470,7 +1470,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "src_actions_fx_refreshratesresult",
-      "community": 462,
+      "community": 459,
       "norm_label": "refreshratesresult"
     },
     {
@@ -1480,7 +1480,7 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "src_actions_fx_refreshrates",
-      "community": 462,
+      "community": 459,
       "norm_label": "refreshrates()"
     },
     {
@@ -2000,7 +2000,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_app_protected_reference_data_currencies_page",
-      "community": 27,
+      "community": 1041,
       "norm_label": "page.tsx"
     },
     {
@@ -2010,7 +2010,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "src_app_protected_reference_data_currencies_page_currenciespage",
-      "community": 27,
+      "community": 1041,
       "norm_label": "currenciespage()"
     },
     {
@@ -2020,7 +2020,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_app_protected_reference_data_rates_page",
-      "community": 1041,
+      "community": 1050,
       "norm_label": "page.tsx"
     },
     {
@@ -2030,7 +2030,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "src_app_protected_reference_data_rates_page_ratespage",
-      "community": 1041,
+      "community": 1050,
       "norm_label": "ratespage()"
     },
     {
@@ -2040,7 +2040,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_app_protected_renewal_risks_page",
-      "community": 27,
+      "community": 1041,
       "norm_label": "page.tsx"
     },
     {
@@ -2050,7 +2050,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "src_app_protected_renewal_risks_page_renewalriskspage",
-      "community": 27,
+      "community": 1041,
       "norm_label": "renewalriskspage()"
     },
     {
@@ -2090,7 +2090,7 @@
       "source_location": "L35",
       "_origin": "ast",
       "id": "src_app_protected_spaces_id_page_formatasof",
-      "community": 1050,
+      "community": 1042,
       "norm_label": "formatasof()"
     },
     {
@@ -2110,7 +2110,7 @@
       "source_location": "L76",
       "_origin": "ast",
       "id": "src_app_protected_spaces_id_page_formatperiodlabel",
-      "community": 1050,
+      "community": 1042,
       "norm_label": "formatperiodlabel()"
     },
     {
@@ -2120,7 +2120,7 @@
       "source_location": "L82",
       "_origin": "ast",
       "id": "src_app_protected_spaces_id_page_spacedetailpage",
-      "community": 1050,
+      "community": 1042,
       "norm_label": "spacedetailpage()"
     },
     {
@@ -2510,7 +2510,7 @@
       "source_location": "L35",
       "_origin": "ast",
       "id": "src_components_currencies_currency_table_currencytable",
-      "community": 27,
+      "community": 1041,
       "norm_label": "currencytable()"
     },
     {
@@ -2580,7 +2580,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "src_components_dashboard_expiring_child_account_table_formatdays",
-      "community": 27,
+      "community": 1041,
       "norm_label": "formatdays()"
     },
     {
@@ -2590,7 +2590,7 @@
       "source_location": "L37",
       "_origin": "ast",
       "id": "src_components_dashboard_expiring_child_account_table_expiringchildaccounttable",
-      "community": 27,
+      "community": 1041,
       "norm_label": "expiringchildaccounttable()"
     },
     {
@@ -2620,7 +2620,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "src_components_dashboard_expiring_space_table_formatdays",
-      "community": 27,
+      "community": 1041,
       "norm_label": "formatdays()"
     },
     {
@@ -2630,7 +2630,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "src_components_dashboard_expiring_space_table_expiringspacetable",
-      "community": 27,
+      "community": 1041,
       "norm_label": "expiringspacetable()"
     },
     {
@@ -2807,7 +2807,7 @@
       "label": "topLevel",
       "file_type": "code",
       "source_file": "src/components/nav/sidebar.tsx",
-      "source_location": "L35",
+      "source_location": "L36",
       "_origin": "ast",
       "id": "src_components_nav_sidebar_toplevel",
       "community": 0,
@@ -2817,7 +2817,7 @@
       "label": "referenceChildren",
       "file_type": "code",
       "source_file": "src/components/nav/sidebar.tsx",
-      "source_location": "L41",
+      "source_location": "L42",
       "_origin": "ast",
       "id": "src_components_nav_sidebar_referencechildren",
       "community": 0,
@@ -2827,7 +2827,7 @@
       "label": "AppSidebar()",
       "file_type": "code",
       "source_file": "src/components/nav/sidebar.tsx",
-      "source_location": "L50",
+      "source_location": "L51",
       "_origin": "ast",
       "id": "src_components_nav_sidebar_appsidebar",
       "community": 0,
@@ -4597,7 +4597,7 @@
       "label": "SidebarRail()",
       "file_type": "code",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L359",
+      "source_location": "L361",
       "_origin": "ast",
       "id": "src_components_ui_sidebar_sidebarrail",
       "community": 0,
@@ -4607,7 +4607,7 @@
       "label": "SidebarInset()",
       "file_type": "code",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L384",
+      "source_location": "L386",
       "_origin": "ast",
       "id": "src_components_ui_sidebar_sidebarinset",
       "community": 0,
@@ -4617,7 +4617,7 @@
       "label": "SidebarInput()",
       "file_type": "code",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L397",
+      "source_location": "L399",
       "_origin": "ast",
       "id": "src_components_ui_sidebar_sidebarinput",
       "community": 0,
@@ -4627,7 +4627,7 @@
       "label": "SidebarHeader()",
       "file_type": "code",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L411",
+      "source_location": "L413",
       "_origin": "ast",
       "id": "src_components_ui_sidebar_sidebarheader",
       "community": 0,
@@ -4637,7 +4637,7 @@
       "label": "SidebarFooter()",
       "file_type": "code",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L422",
+      "source_location": "L424",
       "_origin": "ast",
       "id": "src_components_ui_sidebar_sidebarfooter",
       "community": 0,
@@ -4647,7 +4647,7 @@
       "label": "SidebarSeparator()",
       "file_type": "code",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L433",
+      "source_location": "L435",
       "_origin": "ast",
       "id": "src_components_ui_sidebar_sidebarseparator",
       "community": 0,
@@ -4657,7 +4657,7 @@
       "label": "SidebarContent()",
       "file_type": "code",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L447",
+      "source_location": "L449",
       "_origin": "ast",
       "id": "src_components_ui_sidebar_sidebarcontent",
       "community": 0,
@@ -4667,7 +4667,7 @@
       "label": "SidebarGroup()",
       "file_type": "code",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L461",
+      "source_location": "L463",
       "_origin": "ast",
       "id": "src_components_ui_sidebar_sidebargroup",
       "community": 0,
@@ -4677,7 +4677,7 @@
       "label": "SidebarGroupLabel()",
       "file_type": "code",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L472",
+      "source_location": "L474",
       "_origin": "ast",
       "id": "src_components_ui_sidebar_sidebargrouplabel",
       "community": 0,
@@ -4687,7 +4687,7 @@
       "label": "SidebarGroupAction()",
       "file_type": "code",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L492",
+      "source_location": "L494",
       "_origin": "ast",
       "id": "src_components_ui_sidebar_sidebargroupaction",
       "community": 0,
@@ -4697,7 +4697,7 @@
       "label": "SidebarGroupContent()",
       "file_type": "code",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L512",
+      "source_location": "L514",
       "_origin": "ast",
       "id": "src_components_ui_sidebar_sidebargroupcontent",
       "community": 0,
@@ -4707,7 +4707,7 @@
       "label": "SidebarMenu()",
       "file_type": "code",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L526",
+      "source_location": "L528",
       "_origin": "ast",
       "id": "src_components_ui_sidebar_sidebarmenu",
       "community": 0,
@@ -4717,7 +4717,7 @@
       "label": "SidebarMenuItem()",
       "file_type": "code",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L537",
+      "source_location": "L539",
       "_origin": "ast",
       "id": "src_components_ui_sidebar_sidebarmenuitem",
       "community": 0,
@@ -4727,7 +4727,7 @@
       "label": "sidebarMenuButtonVariants",
       "file_type": "code",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L548",
+      "source_location": "L550",
       "_origin": "ast",
       "id": "src_components_ui_sidebar_sidebarmenubuttonvariants",
       "community": 0,
@@ -4737,7 +4737,7 @@
       "label": "SidebarMenuButton()",
       "file_type": "code",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L570",
+      "source_location": "L572",
       "_origin": "ast",
       "id": "src_components_ui_sidebar_sidebarmenubutton",
       "community": 0,
@@ -4747,7 +4747,7 @@
       "label": "SidebarMenuAction()",
       "file_type": "code",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L620",
+      "source_location": "L622",
       "_origin": "ast",
       "id": "src_components_ui_sidebar_sidebarmenuaction",
       "community": 0,
@@ -4757,7 +4757,7 @@
       "label": "SidebarMenuBadge()",
       "file_type": "code",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L646",
+      "source_location": "L648",
       "_origin": "ast",
       "id": "src_components_ui_sidebar_sidebarmenubadge",
       "community": 0,
@@ -4767,7 +4767,7 @@
       "label": "SidebarMenuSkeleton()",
       "file_type": "code",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L663",
+      "source_location": "L665",
       "_origin": "ast",
       "id": "src_components_ui_sidebar_sidebarmenuskeleton",
       "community": 0,
@@ -4777,7 +4777,7 @@
       "label": "SidebarMenuSub()",
       "file_type": "code",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L701",
+      "source_location": "L703",
       "_origin": "ast",
       "id": "src_components_ui_sidebar_sidebarmenusub",
       "community": 0,
@@ -4787,7 +4787,7 @@
       "label": "SidebarMenuSubItem()",
       "file_type": "code",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L715",
+      "source_location": "L717",
       "_origin": "ast",
       "id": "src_components_ui_sidebar_sidebarmenusubitem",
       "community": 0,
@@ -4797,7 +4797,7 @@
       "label": "SidebarMenuSubButton()",
       "file_type": "code",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L729",
+      "source_location": "L731",
       "_origin": "ast",
       "id": "src_components_ui_sidebar_sidebarmenusubbutton",
       "community": 0,
@@ -5410,7 +5410,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "src_db_childaccounts_listchildaccounts",
-      "community": 1050,
+      "community": 1042,
       "norm_label": "listchildaccounts()"
     },
     {
@@ -5530,7 +5530,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "src_db_currencies_listcurrencies",
-      "community": 27,
+      "community": 1041,
       "norm_label": "listcurrencies()"
     },
     {
@@ -5890,7 +5890,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_db_fxrates_query_test",
-      "community": 459,
+      "community": 27,
       "norm_label": "fxrates.query.test.ts"
     },
     {
@@ -5900,7 +5900,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "src_db_fxrates_query_test_defaultraterows",
-      "community": 459,
+      "community": 27,
       "norm_label": "defaultraterows()"
     },
     {
@@ -5910,7 +5910,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_db_fxrates",
-      "community": 459,
+      "community": 27,
       "norm_label": "fxrates.ts"
     },
     {
@@ -5920,7 +5920,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "src_db_fxrates_db",
-      "community": 459,
+      "community": 27,
       "norm_label": "db"
     },
     {
@@ -5930,7 +5930,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "src_db_fxrates_fxraterow",
-      "community": 459,
+      "community": 27,
       "norm_label": "fxraterow"
     },
     {
@@ -5940,7 +5940,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "src_db_fxrates_fxrateinsert",
-      "community": 459,
+      "community": 27,
       "norm_label": "fxrateinsert"
     },
     {
@@ -5950,7 +5950,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "src_db_fxrates_fxratelistrow",
-      "community": 459,
+      "community": 27,
       "norm_label": "fxratelistrow"
     },
     {
@@ -5960,7 +5960,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "src_db_fxrates_listrates",
-      "community": 462,
+      "community": 459,
       "norm_label": "listrates()"
     },
     {
@@ -5980,7 +5980,7 @@
       "source_location": "L48",
       "_origin": "ast",
       "id": "src_db_fxrates_getmostrecentfetchedat",
-      "community": 462,
+      "community": 459,
       "norm_label": "getmostrecentfetchedat()"
     },
     {
@@ -5990,7 +5990,7 @@
       "source_location": "L63",
       "_origin": "ast",
       "id": "src_db_fxrates_upsertrates",
-      "community": 459,
+      "community": 27,
       "norm_label": "upsertrates()"
     },
     {
@@ -6000,7 +6000,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_db_index",
-      "community": 27,
+      "community": 1041,
       "norm_label": "index.ts"
     },
     {
@@ -6010,7 +6010,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "src_db_index_globalfordb",
-      "community": 27,
+      "community": 1041,
       "norm_label": "globalfordb"
     },
     {
@@ -6020,7 +6020,7 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "src_db_index_db",
-      "community": 27,
+      "community": 1041,
       "norm_label": "db"
     },
     {
@@ -6230,7 +6230,7 @@
       "source_location": "L50",
       "_origin": "ast",
       "id": "src_db_schema_fxrate",
-      "community": 459,
+      "community": 27,
       "norm_label": "fxrate"
     },
     {
@@ -6790,7 +6790,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "src_db_spaces_calculateseatavailability",
-      "community": 1050,
+      "community": 1042,
       "norm_label": "calculateseatavailability()"
     },
     {
@@ -7040,7 +7040,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_lib_countries_test",
-      "community": 1050,
+      "community": 1042,
       "norm_label": "countries.test.ts"
     },
     {
@@ -7050,7 +7050,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_lib_countries",
-      "community": 1050,
+      "community": 1042,
       "norm_label": "countries.ts"
     },
     {
@@ -7060,7 +7060,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "src_lib_countries_country",
-      "community": 1050,
+      "community": 1042,
       "norm_label": "country"
     },
     {
@@ -7070,7 +7070,7 @@
       "source_location": "L50",
       "_origin": "ast",
       "id": "src_lib_countries_countrycode",
-      "community": 1050,
+      "community": 1042,
       "norm_label": "countrycode"
     },
     {
@@ -7080,7 +7080,7 @@
       "source_location": "L52",
       "_origin": "ast",
       "id": "src_lib_countries_country_labels",
-      "community": 1050,
+      "community": 1042,
       "norm_label": "country_labels"
     },
     {
@@ -7090,7 +7090,7 @@
       "source_location": "L56",
       "_origin": "ast",
       "id": "src_lib_countries_formatcountrylabel",
-      "community": 1050,
+      "community": 1042,
       "norm_label": "formatcountrylabel()"
     },
     {
@@ -7100,7 +7100,7 @@
       "source_location": "L60",
       "_origin": "ast",
       "id": "src_lib_countries_countryoptionsfromcurrencies",
-      "community": 1050,
+      "community": 1042,
       "norm_label": "countryoptionsfromcurrencies()"
     },
     {
@@ -7640,7 +7640,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_lib_fx_base",
-      "community": 1041,
+      "community": 1050,
       "norm_label": "base.ts"
     },
     {
@@ -7650,7 +7650,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_lib_fx_base_rate_bases",
-      "community": 1041,
+      "community": 1050,
       "norm_label": "rate_bases"
     },
     {
@@ -7660,7 +7660,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "src_lib_fx_base_ratebase",
-      "community": 462,
+      "community": 459,
       "norm_label": "ratebase"
     },
     {
@@ -7670,7 +7670,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "src_lib_fx_base_isratebase",
-      "community": 1041,
+      "community": 1050,
       "norm_label": "isratebase()"
     },
     {
@@ -7680,7 +7680,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "src_lib_fx_base_parseratebase",
-      "community": 1041,
+      "community": 1050,
       "norm_label": "parseratebase()"
     },
     {
@@ -7690,7 +7690,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_lib_fx_frankfurter_test",
-      "community": 459,
+      "community": 27,
       "norm_label": "frankfurter.test.ts"
     },
     {
@@ -7700,7 +7700,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "src_lib_fx_frankfurter_test_dbholder",
-      "community": 459,
+      "community": 27,
       "norm_label": "dbholder"
     },
     {
@@ -7710,7 +7710,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "src_lib_fx_frankfurter_test_db",
-      "community": 459,
+      "community": 27,
       "norm_label": "db()"
     },
     {
@@ -7720,7 +7720,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "src_lib_fx_frankfurter_test_fixed_usd_rates",
-      "community": 459,
+      "community": 27,
       "norm_label": "fixed_usd_rates"
     },
     {
@@ -7730,7 +7730,7 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "src_lib_fx_frankfurter_test_usd_rates",
-      "community": 459,
+      "community": 27,
       "norm_label": "usd_rates"
     },
     {
@@ -7740,7 +7740,7 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "src_lib_fx_frankfurter_test_valid_response",
-      "community": 459,
+      "community": 27,
       "norm_label": "valid_response"
     },
     {
@@ -7750,7 +7750,7 @@
       "source_location": "L42",
       "_origin": "ast",
       "id": "src_lib_fx_frankfurter_test_valid_cny_response",
-      "community": 459,
+      "community": 27,
       "norm_label": "valid_cny_response"
     },
     {
@@ -7760,7 +7760,7 @@
       "source_location": "L53",
       "_origin": "ast",
       "id": "src_lib_fx_frankfurter_test_okfetch",
-      "community": 459,
+      "community": 27,
       "norm_label": "okfetch()"
     },
     {
@@ -7770,7 +7770,7 @@
       "source_location": "L58",
       "_origin": "ast",
       "id": "src_lib_fx_frankfurter_test_seedcache",
-      "community": 459,
+      "community": 27,
       "norm_label": "seedcache()"
     },
     {
@@ -7780,7 +7780,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_lib_fx_frankfurter",
-      "community": 462,
+      "community": 459,
       "norm_label": "frankfurter.ts"
     },
     {
@@ -7790,7 +7790,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "src_lib_fx_frankfurter_fxresult",
-      "community": 462,
+      "community": 459,
       "norm_label": "fxresult"
     },
     {
@@ -7800,7 +7800,7 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "src_lib_fx_frankfurter_tosignificantdecimal",
-      "community": 462,
+      "community": 459,
       "norm_label": "tosignificantdecimal()"
     },
     {
@@ -7810,7 +7810,7 @@
       "source_location": "L42",
       "_origin": "ast",
       "id": "src_lib_fx_frankfurter_inverttousd",
-      "community": 462,
+      "community": 459,
       "norm_label": "inverttousd()"
     },
     {
@@ -7820,7 +7820,7 @@
       "source_location": "L46",
       "_origin": "ast",
       "id": "src_lib_fx_frankfurter_ratetousdfrombase",
-      "community": 462,
+      "community": 459,
       "norm_label": "ratetousdfrombase()"
     },
     {
@@ -7830,7 +7830,7 @@
       "source_location": "L66",
       "_origin": "ast",
       "id": "src_lib_fx_frankfurter_fallbacktocache",
-      "community": 462,
+      "community": 459,
       "norm_label": "fallbacktocache()"
     },
     {
@@ -7840,7 +7840,7 @@
       "source_location": "L81",
       "_origin": "ast",
       "id": "src_lib_fx_frankfurter_refreshfromapi",
-      "community": 462,
+      "community": 459,
       "norm_label": "refreshfromapi()"
     },
     {
@@ -7850,7 +7850,7 @@
       "source_location": "L137",
       "_origin": "ast",
       "id": "src_lib_fx_frankfurter_ensurefreshrates",
-      "community": 462,
+      "community": 459,
       "norm_label": "ensurefreshrates()"
     },
     {
@@ -8590,7 +8590,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_lib_validation_fx",
-      "community": 1041,
+      "community": 1050,
       "norm_label": "fx.ts"
     },
     {
@@ -8600,7 +8600,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "src_lib_validation_fx_positiverate",
-      "community": 1041,
+      "community": 1050,
       "norm_label": "positiverate"
     },
     {
@@ -8610,7 +8610,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "src_lib_validation_fx_frankfurterresponseschema",
-      "community": 1041,
+      "community": 1050,
       "norm_label": "frankfurterresponseschema"
     },
     {
@@ -8620,7 +8620,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "src_lib_validation_fx_frankfurterresponse",
-      "community": 1041,
+      "community": 1050,
       "norm_label": "frankfurterresponse"
     },
     {
@@ -23000,7 +23000,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "src_db_seed_currency_seed",
-      "community": 459,
+      "community": 27,
       "norm_label": "currency_seed"
     },
     {
@@ -23010,7 +23010,7 @@
       "source_location": "L50",
       "_origin": "ast",
       "id": "src_lib_currencies_currencies",
-      "community": 459,
+      "community": 27,
       "norm_label": "currencies"
     },
     {
@@ -31146,7 +31146,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 462,
       "norm_label": "toaster",
       "id": "c9_toaster"
     },
@@ -31159,7 +31159,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1042,
+      "community": 9,
       "norm_label": "theme-aware semantic toast icons",
       "id": "c9_theme_aware_toasts"
     },
@@ -35280,7 +35280,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L671",
+      "source_location": "L673",
       "weight": 1.0,
       "source": "src_components_ui_sidebar_sidebarmenuskeleton",
       "target": "package_dependencies_react"
@@ -35326,7 +35326,7 @@
       "weight": 1.0,
       "context": "import",
       "source": "package_dependencies_sonner",
-      "target": "c9_toaster",
+      "target": "c9_theme_aware_toasts",
       "confidence_score": 1.0
     },
     {
@@ -46782,7 +46782,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/nav/sidebar.tsx",
-      "source_location": "L50",
+      "source_location": "L51",
       "weight": 1.0,
       "source": "src_components_nav_sidebar",
       "target": "src_components_nav_sidebar_appsidebar",
@@ -46792,7 +46792,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/nav/sidebar.tsx",
-      "source_location": "L41",
+      "source_location": "L42",
       "weight": 1.0,
       "source": "src_components_nav_sidebar",
       "target": "src_components_nav_sidebar_referencechildren",
@@ -46802,7 +46802,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/nav/sidebar.tsx",
-      "source_location": "L35",
+      "source_location": "L36",
       "weight": 1.0,
       "source": "src_components_nav_sidebar",
       "target": "src_components_nav_sidebar_toplevel",
@@ -46970,6 +46970,17 @@
       "source_location": "L18",
       "weight": 1.0,
       "source": "src_components_nav_sidebar",
+      "target": "src_components_ui_sidebar_sidebartrigger",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/nav/sidebar.tsx",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "src_components_nav_sidebar",
       "target": "src_components_ui_sidebar_usesidebar",
       "confidence_score": 1.0
     },
@@ -46979,7 +46990,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/nav/sidebar.tsx",
-      "source_location": "L52",
+      "source_location": "L53",
       "weight": 1.0,
       "source": "src_components_nav_sidebar_appsidebar",
       "target": "src_components_ui_sidebar_usesidebar"
@@ -53446,7 +53457,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L447",
+      "source_location": "L449",
       "weight": 1.0,
       "source": "src_components_ui_sidebar",
       "target": "src_components_ui_sidebar_sidebarcontent",
@@ -53476,7 +53487,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L422",
+      "source_location": "L424",
       "weight": 1.0,
       "source": "src_components_ui_sidebar",
       "target": "src_components_ui_sidebar_sidebarfooter",
@@ -53486,7 +53497,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L461",
+      "source_location": "L463",
       "weight": 1.0,
       "source": "src_components_ui_sidebar",
       "target": "src_components_ui_sidebar_sidebargroup",
@@ -53496,7 +53507,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L492",
+      "source_location": "L494",
       "weight": 1.0,
       "source": "src_components_ui_sidebar",
       "target": "src_components_ui_sidebar_sidebargroupaction",
@@ -53506,7 +53517,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L512",
+      "source_location": "L514",
       "weight": 1.0,
       "source": "src_components_ui_sidebar",
       "target": "src_components_ui_sidebar_sidebargroupcontent",
@@ -53516,7 +53527,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L472",
+      "source_location": "L474",
       "weight": 1.0,
       "source": "src_components_ui_sidebar",
       "target": "src_components_ui_sidebar_sidebargrouplabel",
@@ -53526,7 +53537,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L411",
+      "source_location": "L413",
       "weight": 1.0,
       "source": "src_components_ui_sidebar",
       "target": "src_components_ui_sidebar_sidebarheader",
@@ -53536,7 +53547,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L397",
+      "source_location": "L399",
       "weight": 1.0,
       "source": "src_components_ui_sidebar",
       "target": "src_components_ui_sidebar_sidebarinput",
@@ -53546,7 +53557,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L384",
+      "source_location": "L386",
       "weight": 1.0,
       "source": "src_components_ui_sidebar",
       "target": "src_components_ui_sidebar_sidebarinset",
@@ -53556,7 +53567,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L526",
+      "source_location": "L528",
       "weight": 1.0,
       "source": "src_components_ui_sidebar",
       "target": "src_components_ui_sidebar_sidebarmenu",
@@ -53566,7 +53577,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L620",
+      "source_location": "L622",
       "weight": 1.0,
       "source": "src_components_ui_sidebar",
       "target": "src_components_ui_sidebar_sidebarmenuaction",
@@ -53576,7 +53587,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L646",
+      "source_location": "L648",
       "weight": 1.0,
       "source": "src_components_ui_sidebar",
       "target": "src_components_ui_sidebar_sidebarmenubadge",
@@ -53586,7 +53597,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L570",
+      "source_location": "L572",
       "weight": 1.0,
       "source": "src_components_ui_sidebar",
       "target": "src_components_ui_sidebar_sidebarmenubutton",
@@ -53596,7 +53607,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L548",
+      "source_location": "L550",
       "weight": 1.0,
       "source": "src_components_ui_sidebar",
       "target": "src_components_ui_sidebar_sidebarmenubuttonvariants",
@@ -53606,7 +53617,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L537",
+      "source_location": "L539",
       "weight": 1.0,
       "source": "src_components_ui_sidebar",
       "target": "src_components_ui_sidebar_sidebarmenuitem",
@@ -53616,7 +53627,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L663",
+      "source_location": "L665",
       "weight": 1.0,
       "source": "src_components_ui_sidebar",
       "target": "src_components_ui_sidebar_sidebarmenuskeleton",
@@ -53626,7 +53637,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L701",
+      "source_location": "L703",
       "weight": 1.0,
       "source": "src_components_ui_sidebar",
       "target": "src_components_ui_sidebar_sidebarmenusub",
@@ -53636,7 +53647,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L729",
+      "source_location": "L731",
       "weight": 1.0,
       "source": "src_components_ui_sidebar",
       "target": "src_components_ui_sidebar_sidebarmenusubbutton",
@@ -53646,7 +53657,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L715",
+      "source_location": "L717",
       "weight": 1.0,
       "source": "src_components_ui_sidebar",
       "target": "src_components_ui_sidebar_sidebarmenusubitem",
@@ -53666,7 +53677,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L359",
+      "source_location": "L361",
       "weight": 1.0,
       "source": "src_components_ui_sidebar",
       "target": "src_components_ui_sidebar_sidebarrail",
@@ -53676,7 +53687,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L433",
+      "source_location": "L435",
       "weight": 1.0,
       "source": "src_components_ui_sidebar",
       "target": "src_components_ui_sidebar_sidebarseparator",
@@ -53828,7 +53839,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L584",
+      "source_location": "L586",
       "weight": 1.0,
       "source": "src_components_ui_sidebar_sidebarmenubutton",
       "target": "src_components_ui_sidebar_usesidebar",
@@ -53839,7 +53850,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L360",
+      "source_location": "L362",
       "weight": 1.0,
       "source": "src_components_ui_sidebar_sidebarrail",
       "target": "src_components_ui_sidebar_usesidebar",
@@ -53895,7 +53906,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L346",
+      "source_location": "L347",
       "weight": 1.0,
       "source": "src_components_ui_sidebar_sidebartrigger",
       "target": "src_lib_utils_cn"
@@ -53906,7 +53917,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L370",
+      "source_location": "L372",
       "weight": 1.0,
       "source": "src_components_ui_sidebar_sidebarrail",
       "target": "src_lib_utils_cn"
@@ -53917,7 +53928,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L388",
+      "source_location": "L390",
       "weight": 1.0,
       "source": "src_components_ui_sidebar_sidebarinset",
       "target": "src_lib_utils_cn"
@@ -53928,7 +53939,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L405",
+      "source_location": "L407",
       "weight": 1.0,
       "source": "src_components_ui_sidebar_sidebarinput",
       "target": "src_lib_utils_cn"
@@ -53939,7 +53950,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L416",
+      "source_location": "L418",
       "weight": 1.0,
       "source": "src_components_ui_sidebar_sidebarheader",
       "target": "src_lib_utils_cn"
@@ -53950,7 +53961,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L427",
+      "source_location": "L429",
       "weight": 1.0,
       "source": "src_components_ui_sidebar_sidebarfooter",
       "target": "src_lib_utils_cn"
@@ -53961,7 +53972,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L441",
+      "source_location": "L443",
       "weight": 1.0,
       "source": "src_components_ui_sidebar_sidebarseparator",
       "target": "src_lib_utils_cn"
@@ -53972,7 +53983,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L452",
+      "source_location": "L454",
       "weight": 1.0,
       "source": "src_components_ui_sidebar_sidebarcontent",
       "target": "src_lib_utils_cn"
@@ -53983,7 +53994,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L466",
+      "source_location": "L468",
       "weight": 1.0,
       "source": "src_components_ui_sidebar_sidebargroup",
       "target": "src_lib_utils_cn"
@@ -53994,7 +54005,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L483",
+      "source_location": "L485",
       "weight": 1.0,
       "source": "src_components_ui_sidebar_sidebargrouplabel",
       "target": "src_lib_utils_cn"
@@ -54005,7 +54016,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L503",
+      "source_location": "L505",
       "weight": 1.0,
       "source": "src_components_ui_sidebar_sidebargroupaction",
       "target": "src_lib_utils_cn"
@@ -54016,7 +54027,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L520",
+      "source_location": "L522",
       "weight": 1.0,
       "source": "src_components_ui_sidebar_sidebargroupcontent",
       "target": "src_lib_utils_cn"
@@ -54027,7 +54038,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L531",
+      "source_location": "L533",
       "weight": 1.0,
       "source": "src_components_ui_sidebar_sidebarmenu",
       "target": "src_lib_utils_cn"
@@ -54038,7 +54049,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L542",
+      "source_location": "L544",
       "weight": 1.0,
       "source": "src_components_ui_sidebar_sidebarmenuitem",
       "target": "src_lib_utils_cn"
@@ -54048,7 +54059,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L592",
+      "source_location": "L594",
       "weight": 1.0,
       "source": "src_components_ui_sidebar_sidebarmenubutton",
       "target": "src_components_ui_sidebar_sidebarmenubuttonvariants",
@@ -54060,7 +54071,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L592",
+      "source_location": "L594",
       "weight": 1.0,
       "source": "src_components_ui_sidebar_sidebarmenubutton",
       "target": "src_lib_utils_cn"
@@ -54071,7 +54082,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L635",
+      "source_location": "L637",
       "weight": 1.0,
       "source": "src_components_ui_sidebar_sidebarmenuaction",
       "target": "src_lib_utils_cn"
@@ -54082,7 +54093,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L654",
+      "source_location": "L656",
       "weight": 1.0,
       "source": "src_components_ui_sidebar_sidebarmenubadge",
       "target": "src_lib_utils_cn"
@@ -54093,7 +54104,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L679",
+      "source_location": "L681",
       "weight": 1.0,
       "source": "src_components_ui_sidebar_sidebarmenuskeleton",
       "target": "src_lib_utils_cn"
@@ -54104,7 +54115,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L706",
+      "source_location": "L708",
       "weight": 1.0,
       "source": "src_components_ui_sidebar_sidebarmenusub",
       "target": "src_lib_utils_cn"
@@ -54115,7 +54126,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L723",
+      "source_location": "L725",
       "weight": 1.0,
       "source": "src_components_ui_sidebar_sidebarmenusubitem",
       "target": "src_lib_utils_cn"
@@ -54126,7 +54137,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/ui/sidebar.tsx",
-      "source_location": "L748",
+      "source_location": "L750",
       "weight": 1.0,
       "source": "src_components_ui_sidebar_sidebarmenusubbutton",
       "target": "src_lib_utils_cn"
@@ -76239,5 +76250,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "6e677afe33aeecb1f62eeff7327c35ae105a54b0"
+  "built_at_commit": "fd8fedd5f948529da16f055d26334ca4b4b21111"
 }

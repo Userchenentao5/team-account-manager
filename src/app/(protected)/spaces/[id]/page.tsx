@@ -154,7 +154,7 @@ export default async function SpaceDetailPage({
 
   return (
     <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-6 px-4 py-7 sm:px-6 lg:px-8">
-      <div className="sticky top-14 z-20 -mx-4 -mt-7 grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3 border-b bg-background/95 px-4 py-4 backdrop-blur-lg sm:relative sm:top-0 sm:mx-0 sm:mt-0 sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:rounded-lg sm:border sm:bg-card">
+      <div className="sticky top-14 z-20 -mx-4 -mt-7 grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3 border-b bg-background px-4 py-4 backdrop-blur-lg sm:mx-0 sm:mt-0 sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:rounded-lg sm:border sm:bg-card">
         <Button asChild variant="outline" className="h-9 gap-2 px-3">
           <Link href="/spaces">
             <ArrowLeft aria-hidden="true" className="size-4" />
