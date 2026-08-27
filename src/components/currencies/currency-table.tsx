@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Pencil, Plus, Trash2 } from "lucide-react";
 import type { CurrencyRow } from "@/db/currencies";
 import type { CurrencyMeta } from "@/lib/currencies";
+import { PageHeader } from "@/components/layout/page-header";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -56,21 +57,18 @@ export function CurrencyTable({
 
   return (
     <div className="flex h-[calc(100dvh-3.5rem)] min-h-0 flex-col overflow-hidden">
-      <div className="shrink-0 border-b bg-background/95 px-4 py-6 sm:px-6 lg:px-8">
-        <div className="flex flex-wrap items-start justify-between gap-4">
-          <div>
-            <h1 className="text-3xl font-semibold tracking-tight">币种</h1>
-            <p className="mt-2 max-w-3xl text-sm leading-6 text-muted-foreground">
-              币种是系统参考数据，用于金额输入、汇率缓存和 USD 成本折算。新增币种只保存元数据，不会自动生成汇率；没有缓存汇率时，创建空间会被阻断。
-            </p>
-          </div>
+      <PageHeader
+        sticky={false}
+        title="币种"
+        description="币种是系统参考数据，用于金额输入、汇率缓存和 USD 成本折算。新增币种只保存元数据，不会自动生成汇率；没有缓存汇率时，创建空间会被阻断。"
+        actions={
           <Button onClick={() => setDialog({ mode: "add" })}>
             <Plus className="size-4" />
             新增币种
           </Button>
-        </div>
-
-        <div className="mt-4 max-w-sm">
+        }
+      >
+        <div className="max-w-sm">
           <Label htmlFor="currency-country-filter" className="mb-2">
             国家/地区
           </Label>
@@ -84,7 +82,7 @@ export function CurrencyTable({
         <p className="mt-3 text-sm text-muted-foreground">
           最小单位位数表示金额允许的小数位数，以币种元数据为准。
         </p>
-      </div>
+      </PageHeader>
 
       <div className="min-h-0 flex-1 overflow-auto px-4 pb-4 sm:px-6 lg:px-8">
       <table data-slot="table" className="w-full min-w-[720px] table-fixed caption-bottom text-sm">
