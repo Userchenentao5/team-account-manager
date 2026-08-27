@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { Plus, Pencil, Archive, RotateCcw } from "lucide-react";
 import { reactivateChannel } from "@/actions/channels";
 import type { ChannelRow } from "@/db/channels";
+import { PageHeader } from "@/components/layout/page-header";
 import { ChannelDialog } from "./channel-dialog";
 import { ArchiveDialog } from "./archive-dialog";
 import { Button } from "@/components/ui/button";
@@ -107,15 +108,12 @@ export function ChannelTable({
 
   return (
     <div className="flex h-[calc(100dvh-3.5rem)] min-h-0 flex-col overflow-hidden">
-      <div className="shrink-0 border-b bg-background/95 px-4 py-6 sm:px-6 lg:px-8">
-        <div className="flex flex-wrap items-start justify-between gap-4">
-          <div>
-            <h1 className="text-3xl font-semibold tracking-tight">支付渠道</h1>
-            <p className="mt-2 max-w-3xl text-sm leading-6 text-muted-foreground">
-              管理创建空间时可选的支付渠道；归档后不会在新空间表单中出现，历史记录仍保留原渠道名称。
-            </p>
-          </div>
-          <div className="flex flex-wrap items-center gap-6">
+      <PageHeader
+        sticky={false}
+        title="支付渠道"
+        description="管理创建空间时可选的支付渠道；归档后不会在新空间表单中出现，历史记录仍保留原渠道名称。"
+        actions={
+          <>
             <div className="flex items-center gap-2">
               <Switch
                 id="show-archived"
@@ -130,10 +128,10 @@ export function ChannelTable({
               <Plus className="size-4" />
               新增渠道
             </Button>
-          </div>
-        </div>
-
-        <div className="mt-4 flex flex-wrap items-end gap-3">
+          </>
+        }
+      >
+        <div className="flex flex-wrap items-end gap-3">
           <div className="w-full max-w-sm">
             <Label htmlFor="channel-name-filter" className="mb-2">
               名称
@@ -161,7 +159,7 @@ export function ChannelTable({
             </Select>
           </div>
         </div>
-      </div>
+      </PageHeader>
 
       {showEmptyState ? (
         <div className="m-4 flex flex-col items-center justify-center gap-3 rounded-lg border border-dashed bg-muted/20 py-12 text-center sm:m-6">

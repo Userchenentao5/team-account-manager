@@ -7,6 +7,7 @@ import { convertUsdMinorToCurrencyMinor, formatMinor } from "@/lib/money";
 import { DistributionList } from "@/components/dashboard/distribution-list";
 import { MetricCard } from "@/components/dashboard/metric-card";
 import { SpacePerformanceList } from "@/components/dashboard/space-performance-list";
+import { PageHeader } from "@/components/layout/page-header";
 import { Button } from "@/components/ui/button";
 
 // better-sqlite3 is a native module - keep this RSC on the Node runtime.
@@ -64,19 +65,15 @@ export default function DashboardPage() {
     spaceUpcomingRiskCount + childAccountUpcomingRiskCount;
   return (
     <div className="mx-auto w-full max-w-[1440px] px-4 py-7 sm:px-6 lg:px-8">
-      <header className="flex flex-col gap-5 border-b border-border/80 pb-6 sm:flex-row sm:items-end sm:justify-between">
-        <div className="max-w-2xl">
-          <h1 className="text-3xl font-semibold tracking-tight">仪表盘</h1>
-          <p className="mt-2 text-sm leading-6 text-muted-foreground">
-            先处理续费风险，再核对本期成本与应收。
-          </p>
-        </div>
-        <div className="flex flex-wrap gap-2 sm:justify-end">
+      <PageHeader
+        title="仪表盘"
+        description="先处理续费风险，再核对本期成本与应收。"
+        actions={
           <Button asChild variant="outline" className="w-fit">
             <Link href="/spaces">管理空间</Link>
           </Button>
-        </div>
-      </header>
+        }
+      />
 
       {totals.totalSpaces === 0 ? (
         <div className="mt-8 flex flex-col items-center justify-center gap-3 rounded-lg border border-dashed bg-muted/20 px-6 py-14 text-center">
@@ -89,7 +86,7 @@ export default function DashboardPage() {
           </Button>
         </div>
       ) : (
-        <main className="space-y-8 py-6">
+        <div className="space-y-8 py-6">
           <section
             aria-label="重点概览"
             className="grid gap-5 xl:grid-cols-[minmax(0,1.08fr)_minmax(22rem,0.92fr)]"
@@ -384,7 +381,7 @@ export default function DashboardPage() {
               </div>
             )}
           </section>
-        </main>
+        </div>
       )}
     </div>
   );

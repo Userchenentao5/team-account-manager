@@ -461,7 +461,6 @@
   "459": "space.ts",
   "460": "Risk-Toned Dashboard Metric",
   "461": "Toaster",
-  "462": "rate-table.tsx",
   "463": "Space and Account Cascade Relations",
   "464": "app_setting Table",
   "465": "child_account Table",
@@ -1040,8 +1039,6 @@
   "1038": "rate-table.tsx",
   "1039": "ECS deployment hardening",
   "1040": "childAccounts.test.ts",
-  "1041": "index.ts",
-  "1042": "Theme-Aware Semantic Toast Icons",
   "1043": "scripts",
   "1044": "package.json",
   "1045": "spaceReminders.ts",
@@ -1049,10 +1046,5 @@
   "1047": "Q: 新开分支修正，如果不支持修改席位类型，当前空间下的所有席位类型都固定为chatgpt",
   "1048": "Q: 风险页面列表列对齐问题修复，同时检查其他列表是否存在同样问题",
   "1049": "Q: 继续调整为全部居中对齐",
-  "1050": "base.ts",
-  "1051": "fx.test.ts",
-  "1052": "distribution-list.tsx",
-  "1053": "Q: 风险页选择风险记录点击操作后，跳转后页面中可以加一个动画高亮一下对应记录背景",
-  "1054": "metric-card.tsx",
-  "1055": "childAccount.ts"
+  "1053": "Q: 风险页选择风险记录点击操作后，跳转后页面中可以加一个动画高亮一下对应记录背景"
 }

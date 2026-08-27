@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { RefreshCw, TriangleAlert } from "lucide-react";
 import { refreshRates } from "@/actions/fx";
 import type { FxRateListRow } from "@/db/fxRates";
+import { PageHeader } from "@/components/layout/page-header";
 import {
   DEFAULT_RATE_BASE,
   RATE_BASES,
@@ -100,15 +101,12 @@ export function RateTable({ rates, fetchedAt, stale, base }: RateTableProps) {
 
   return (
     <div className="flex h-[calc(100dvh-3.5rem)] min-h-0 flex-col overflow-hidden">
-      <div className="shrink-0 border-b bg-background/95 px-4 py-6 sm:px-6 lg:px-8">
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-semibold tracking-tight">汇率</h1>
-          <p className="mt-2 text-sm leading-6 text-muted-foreground">
-            汇率覆盖当前币种表，此页用于刷新缓存；新增币种后刷新一次即可获取对应汇率。
-          </p>
-        </div>
-        <div className="flex flex-wrap items-center gap-2">
+      <PageHeader
+        sticky={false}
+        title="汇率"
+        description="汇率覆盖当前币种表，此页用于刷新缓存；新增币种后刷新一次即可获取对应汇率。"
+        actions={
+          <>
           <Select value={base} onValueChange={onBaseChange}>
             <SelectTrigger className="w-36" aria-label="选择基准币种">
               <SelectValue placeholder="基准币" />
@@ -128,8 +126,9 @@ export function RateTable({ rates, fetchedAt, stale, base }: RateTableProps) {
             />
             刷新汇率
           </Button>
-        </div>
-      </div>
+          </>
+        }
+      >
 
       {/* As-of label is always shown whenever a cache exists, stale or not (D-05). */}
       {asOf && (
@@ -150,7 +149,7 @@ export function RateTable({ rates, fetchedAt, stale, base }: RateTableProps) {
           </AlertDescription>
         </Alert>
       )}
-      </div>
+      </PageHeader>
 
       {isEmpty ? (
         <div className="m-4 flex flex-col items-center justify-center gap-3 rounded-lg border border-dashed bg-muted/20 py-12 text-center sm:m-6">

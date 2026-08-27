@@ -20,6 +20,7 @@ import type { SpaceListRow } from "@/db/spaces";
 import { formatCountryLabel } from "@/lib/countries";
 import { formatCurrencyMinor } from "@/lib/currencies";
 import { formatMinor } from "@/lib/money";
+import { PageHeader } from "@/components/layout/page-header";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -298,18 +299,19 @@ export function SpaceTable({
 
   return (
     <div className="flex h-[calc(100dvh-3.5rem)] min-h-0 flex-col overflow-hidden">
-      <div className="shrink-0 border-b bg-background/95 px-4 py-6 sm:px-6 lg:px-8">
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-semibold tracking-tight">空间</h1>
-          <p className="mt-2 text-sm leading-6 text-muted-foreground">
+      <PageHeader
+        sticky={false}
+        title="空间"
+        description={
+          <>
             按母号/子号邮箱或子号联系方式搜索，按国家/地区、支付渠道筛选空间，并查看冻结成本与到期状态。
-            <span className="ml-2 whitespace-nowrap text-foreground">
+            <span className="mt-1 inline-block text-foreground sm:ml-2 sm:mt-0">
               席位使用 {occupiedSeatCount}/{totalSeatCapacity} 席
             </span>
-          </p>
-        </div>
-        <div className="flex flex-wrap items-end gap-2">
+          </>
+        }
+        actions={
+          <>
           <div className="w-full sm:w-72">
             <Label htmlFor="space-account-filter" className="sr-only">
               母号/子号邮箱或子号联系方式
@@ -359,9 +361,9 @@ export function SpaceTable({
             <Plus className="size-4" />
             新增空间
           </Button>
-        </div>
-      </div>
-      </div>
+          </>
+        }
+      />
 
       {accountFilteredSpaces.length === 0 ? (
         <div className="min-h-0 flex-1 overflow-auto p-4 sm:p-6 lg:px-8">
