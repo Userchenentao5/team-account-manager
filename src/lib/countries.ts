@@ -1,9 +1,9 @@
 /**
  * Static country labels for display and older rows.
  *
- * Space form/filter options are derived from the DB-backed currency list via
- * `countryOptionsFromCurrencies`, because the country -> currency mapping is
- * maintained on currency metadata.
+ * Space form/filter options merge these labels with the DB-backed currency
+ * list so countries can remain selectable when the rate provider has no local
+ * currency support.
  */
 export interface Country {
   /** ISO-3166 alpha-2 code, stored on the space row. */
@@ -28,6 +28,7 @@ export const COUNTRIES = [
   { code: "CZ", label: "捷克" },
   { code: "DK", label: "丹麦" },
   { code: "DE", label: "德国" },
+  { code: "EG", label: "埃及" },
   { code: "FR", label: "法国" },
   { code: "HU", label: "匈牙利" },
   { code: "ID", label: "印度尼西亚" },
@@ -60,7 +61,9 @@ export function formatCountryLabel(code: string): string {
 export function countryOptionsFromCurrencies<
   T extends { countryCode: string; countryName: string },
 >(currencies: readonly T[]): Country[] {
-  const options = new Map<string, string>();
+  const options = new Map<string, string>(
+    COUNTRIES.map((country) => [country.code, country.label]),
+  );
   for (const currency of currencies) {
     if (!currency.countryCode || !currency.countryName) continue;
     options.set(currency.countryCode, currency.countryName);

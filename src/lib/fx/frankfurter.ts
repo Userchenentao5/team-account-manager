@@ -19,7 +19,7 @@ import { frankfurterResponseSchema } from "@/lib/validation/fx";
  * never Edge.
  */
 
-const FRANKFURTER_URL = "https://api.frankfurter.dev/v1/latest";
+const FRANKFURTER_URL = "https://api.frankfurter.dev/v2/rates";
 const TIMEOUT_MS = 4000; // D-09 blocking budget (~3–5s discretion)
 const ONE_DAY_MS = 24 * 60 * 60 * 1000; // D-07 lazy-refresh age gate
 
@@ -97,7 +97,7 @@ export async function refreshFromApi(
       return { rates: listRates(db), fetchedAt, stale: false };
     }
 
-    const url = `${FRANKFURTER_URL}?base=${base}&symbols=${symbols.join(",")}`;
+    const url = `${FRANKFURTER_URL}?base=${base}&quotes=${symbols.join(",")}`;
     const res = await fetch(url, {
       signal: AbortSignal.timeout(TIMEOUT_MS),
       cache: "no-store",
@@ -105,10 +105,12 @@ export async function refreshFromApi(
     if (!res.ok) throw new Error(`Frankfurter ${res.status}`);
 
     const data = frankfurterResponseSchema.parse(await res.json()); // throws → caught below
-    if (data.base !== base) {
-      throw new Error(`Frankfurter response base mismatch: ${data.base}`);
+    const mismatchedBase = data.find((row) => row.base !== base);
+    if (mismatchedBase) {
+      throw new Error(`Frankfurter response base mismatch: ${mismatchedBase.base}`);
     }
-    const missing = symbols.filter((code) => data.rates[code] === undefined);
+    const rates = Object.fromEntries(data.map((row) => [row.quote, row.rate]));
+    const missing = symbols.filter((code) => rates[code] === undefined);
     if (missing.length > 0) {
       throw new Error(`Frankfurter response missing rates: ${missing.join(",")}`);
     }
@@ -116,7 +118,7 @@ export async function refreshFromApi(
     const fetchedAt = new Date().toISOString();
     const rows = currencyCodes.map((code) => ({
       currencyCode: code,
-      rateToUsd: rateToUsdFromBase(code, base, data.rates), // D-02/D-03
+      rateToUsd: rateToUsdFromBase(code, base, rates), // D-02/D-03
       fetchedAt,
     }));
     upsertRates(db, rows); // atomic all-or-nothing write (Pitfall 1)
@@ -137,12 +139,15 @@ export async function refreshFromApi(
 export async function ensureFreshRates(
   base: RateBase = DEFAULT_RATE_BASE,
 ): Promise<FxResult> {
+  const currencies = listCurrencies(db);
+  const cachedRates = listRates(db);
   const fetchedAt = getMostRecentFetchedAt(db);
   const isFresh =
+    cachedRates.length === currencies.length &&
     fetchedAt != null && new Date(fetchedAt).getTime() > Date.now() - ONE_DAY_MS;
 
   if (isFresh) {
-    return { rates: listRates(db), fetchedAt, stale: false };
+    return { rates: cachedRates, fetchedAt, stale: false };
   }
   return refreshFromApi(base);
 }

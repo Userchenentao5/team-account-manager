@@ -18,7 +18,7 @@ describe("currency seed (REF-02 / D-02 / D-03)", () => {
   it("seeds all supported currencies by default", () => {
     seedCurrencies(ctx.db);
     const rows = ctx.db.select().from(currency).all();
-    expect(rows).toHaveLength(30);
+    expect(rows).toHaveLength(31);
     expect(rows.map((r) => r.code).sort()).toEqual([
       "AUD",
       "BRL",
@@ -27,6 +27,7 @@ describe("currency seed (REF-02 / D-02 / D-03)", () => {
       "CNY",
       "CZK",
       "DKK",
+      "EGP",
       "EUR",
       "GBP",
       "HKD",
@@ -67,7 +68,7 @@ describe("currency seed (REF-02 / D-02 / D-03)", () => {
       .from(currency)
       .where(ne(currency.code, "JPY"))
       .all();
-    expect(others).toHaveLength(29);
+    expect(others).toHaveLength(30);
     expect(rowsByCode(others, ["ISK", "KRW"]).every((r) => r.minorUnit === 0)).toBe(true);
     expect(
       others
@@ -86,6 +87,7 @@ describe("currency seed (REF-02 / D-02 / D-03)", () => {
       CAD: "CA$",
       CHF: "CHF",
       CNY: "￥",
+      EGP: "ج.م",
       EUR: "€",
       GBP: "£",
       HKD: "HK$",
@@ -107,6 +109,7 @@ describe("currency seed (REF-02 / D-02 / D-03)", () => {
       CAD: "加拿大元",
       CHF: "瑞士法郎",
       CNY: "人民币",
+      EGP: "埃及镑",
       EUR: "欧元",
       GBP: "英镑",
       HKD: "港元",
@@ -127,6 +130,7 @@ describe("currency seed (REF-02 / D-02 / D-03)", () => {
       BRL: "巴西",
       CHF: "瑞士",
       CNY: "中国",
+      EGP: "埃及",
       EUR: "法国",
       GBP: "英国",
       HKD: "中国香港",
@@ -142,7 +146,7 @@ describe("currency seed (REF-02 / D-02 / D-03)", () => {
     seedCurrencies(ctx.db);
     seedCurrencies(ctx.db);
     const rows = ctx.db.select().from(currency).all();
-    expect(rows).toHaveLength(30);
+    expect(rows).toHaveLength(31);
   });
 });
 

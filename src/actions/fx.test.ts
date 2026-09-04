@@ -20,6 +20,7 @@ import { CURRENCY_SEED, seedCurrencies } from "@/db/seed";
 
 const FIXED_USD_RATES: Record<string, number> = {
   CNY: 6.7982,
+  EGP: 51.011,
   EUR: 0.87712,
   JPY: 161.65,
 };
@@ -33,25 +34,23 @@ const USD_RATES = Object.fromEntries(
   ),
 );
 
-/** Verified Frankfurter v1 response shape (USD→X), USD not echoed in `rates`. */
-const VALID_RESPONSE = {
-  amount: 1.0,
+/** Verified Frankfurter v2 response shape (USD→X), USD not echoed in rows. */
+const VALID_RESPONSE = Object.entries(USD_RATES).map(([quote, rate]) => ({
+  date: "2026-06-26",
   base: "USD",
-  date: "2026-06-26",
-  rates: USD_RATES,
-};
+  quote,
+  rate,
+}));
 
-const CNY_TO_USD = 1 / VALID_RESPONSE.rates.CNY;
-const VALID_CNY_RESPONSE = {
-  amount: 1.0,
-  base: "CNY",
-  date: "2026-06-26",
-  rates: Object.fromEntries(
-    Object.entries({ ...VALID_RESPONSE.rates, USD: 1 })
-      .filter(([code]) => code !== "CNY")
-      .map(([code, usdToCode]) => [code, CNY_TO_USD * usdToCode]),
-  ),
-};
+const CNY_TO_USD = 1 / USD_RATES.CNY;
+const VALID_CNY_RESPONSE = Object.entries({ ...USD_RATES, USD: 1 })
+  .filter(([quote]) => quote !== "CNY")
+  .map(([quote, usdToCode]) => ({
+    date: "2026-06-26",
+    base: "CNY",
+    quote,
+    rate: CNY_TO_USD * usdToCode,
+  }));
 
 function okFetch(body: unknown) {
   return vi.fn().mockResolvedValue({ ok: true, json: async () => body });
@@ -100,6 +99,9 @@ describe("refreshRates server action (FX-01 / FX-03)", () => {
     const rows = listRates(ctx.db);
     expect(rows).toHaveLength(CURRENCY_SEED.length);
     expect(rows.find(({ rate }) => rate.currencyCode === "USD")?.rate.rateToUsd).toBe("1");
+    expect(
+      Number(rows.find(({ rate }) => rate.currencyCode === "EGP")?.rate.rateToUsd),
+    ).toBeCloseTo(1 / 51.011, 8);
     // revalidatePath was called for the rates route
     expect(revalidatePath).toHaveBeenCalledWith("/reference-data/rates");
   });

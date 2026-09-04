@@ -2,20 +2,21 @@ import { describe, expect, it } from "vitest";
 import { countryOptionsFromCurrencies } from "./countries";
 
 describe("country options", () => {
-  it("derives selectable countries from currency metadata", () => {
+  it("merges static countries with currency metadata", () => {
     const currencyCountries = countryOptionsFromCurrencies([
-      { countryCode: "FR", countryName: "法国" },
+      { countryCode: "XX", countryName: "测试地区" },
     ]);
 
-    expect(currencyCountries).toEqual([{ code: "FR", label: "法国" }]);
+    expect(currencyCountries).toContainEqual({ code: "XX", label: "测试地区" });
+    expect(currencyCountries).toContainEqual({ code: "EG", label: "埃及" });
   });
 
   it("deduplicates repeated country metadata", () => {
-    expect(
-      countryOptionsFromCurrencies([
-        { countryCode: "FR", countryName: "法国" },
-        { countryCode: "FR", countryName: "法国" },
-      ]),
-    ).toEqual([{ code: "FR", label: "法国" }]);
+    const options = countryOptionsFromCurrencies([
+      { countryCode: "XX", countryName: "测试地区" },
+      { countryCode: "XX", countryName: "测试地区" },
+    ]);
+
+    expect(options.filter((country) => country.code === "XX")).toHaveLength(1);
   });
 });

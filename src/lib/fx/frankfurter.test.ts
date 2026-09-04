@@ -17,11 +17,12 @@ import { CURRENCY_SEED, seedCurrencies } from "@/db/seed";
 
 const FIXED_USD_RATES: Record<string, number> = {
   CNY: 6.7982,
+  EGP: 51.011,
   EUR: 0.87712,
   JPY: 161.65,
 };
 
-/** Verified Frankfurter v1 response shape (USD→X), USD not echoed in `rates`. */
+/** Verified Frankfurter v2 response shape (USD→X), USD not echoed in rows. */
 const USD_RATES = Object.fromEntries(
   CURRENCY_SEED.filter((currency) => currency.code !== "USD").map(
     (currency, index) => [
@@ -31,38 +32,38 @@ const USD_RATES = Object.fromEntries(
   ),
 );
 
-const VALID_RESPONSE = {
-  amount: 1.0,
+const VALID_RESPONSE = Object.entries(USD_RATES).map(([quote, rate]) => ({
+  date: "2026-06-26",
   base: "USD",
-  date: "2026-06-26",
-  rates: USD_RATES,
-};
+  quote,
+  rate,
+}));
 
-const CNY_TO_USD = 1 / VALID_RESPONSE.rates.CNY;
-const VALID_CNY_RESPONSE = {
-  amount: 1.0,
-  base: "CNY",
-  date: "2026-06-26",
-  rates: Object.fromEntries(
-    Object.entries({ ...VALID_RESPONSE.rates, USD: 1 })
-      .filter(([code]) => code !== "CNY")
-      .map(([code, usdToCode]) => [code, CNY_TO_USD * usdToCode]),
-  ),
-};
+const CNY_TO_USD = 1 / USD_RATES.CNY;
+const VALID_CNY_RESPONSE = Object.entries({ ...USD_RATES, USD: 1 })
+  .filter(([quote]) => quote !== "CNY")
+  .map(([quote, usdToCode]) => ({
+    date: "2026-06-26",
+    base: "CNY",
+    quote,
+    rate: CNY_TO_USD * usdToCode,
+  }));
 
 function okFetch(body: unknown) {
   return vi.fn().mockResolvedValue({ ok: true, json: async () => body });
 }
 
 /** Pre-populate a non-empty cache so fallback tests have something to fall back to. */
-function seedCache(db: TestDb, fetchedAt: string) {
+function seedCache(db: TestDb, fetchedAt: string, excludeCode?: string) {
   upsertRates(
     db,
-    CURRENCY_SEED.map((currency) => ({
-      currencyCode: currency.code,
-      rateToUsd: currency.code === "USD" ? "1" : "0.14000",
-      fetchedAt,
-    })),
+    CURRENCY_SEED.filter((currency) => currency.code !== excludeCode).map(
+      (currency) => ({
+        currencyCode: currency.code,
+        rateToUsd: currency.code === "USD" ? "1" : "0.14000",
+        fetchedAt,
+      }),
+    ),
   );
 }
 
@@ -100,15 +101,17 @@ describe("frankfurter FX service (FX-01 / FX-03)", () => {
     }
   });
 
-  it("inversion precision: CNY 6.7982 → ~0.147098, JPY 161.65 → ~0.006186 (Pitfall 2)", async () => {
+  it("inversion precision includes EGP from the v2 feed (Pitfall 2)", async () => {
     vi.stubGlobal("fetch", okFetch(VALID_RESPONSE));
 
     await refreshFromApi();
     const rows = listRates(ctx.db);
 
     const cny = rows.find(({ rate }) => rate.currencyCode === "CNY")!.rate;
+    const egp = rows.find(({ rate }) => rate.currencyCode === "EGP")!.rate;
     const jpy = rows.find(({ rate }) => rate.currencyCode === "JPY")!.rate;
     expect(Number(cny.rateToUsd)).toBeCloseTo(1 / 6.7982, 8);
+    expect(Number(egp.rateToUsd)).toBeCloseTo(1 / 51.011, 8);
     expect(Number(jpy.rateToUsd)).toBeCloseTo(1 / 161.65, 8);
     // decimal string, not full float noise — bounded significant figures
     expect(cny.rateToUsd.replace(/[-.]/g, "").replace(/^0+/, "").length).toBeLessThanOrEqual(12);
@@ -166,10 +169,13 @@ describe("frankfurter FX service (FX-01 / FX-03)", () => {
 
   it("malformed / 0 / negative rate → Zod rejects, NO write, falls back to cache (Pitfall 1)", async () => {
     seedCache(ctx.db, "2026-06-20T00:00:00.000Z");
-    const POISONED = {
-      ...VALID_RESPONSE,
-      rates: { ...VALID_RESPONSE.rates, CNY: 0, EUR: -1 },
-    };
+    const POISONED = VALID_RESPONSE.map((row) =>
+      row.quote === "CNY"
+        ? { ...row, rate: 0 }
+        : row.quote === "EUR"
+          ? { ...row, rate: -1 }
+          : row,
+    );
     vi.stubGlobal("fetch", okFetch(POISONED));
 
     const before = listRates(ctx.db);
@@ -238,6 +244,22 @@ describe("frankfurter FX service (FX-01 / FX-03)", () => {
 
     const calledUrl = String(fetchSpy.mock.calls[0]?.[0]);
     expect(calledUrl).toContain("api.frankfurter.dev");
+    expect(calledUrl).toContain("/v2/rates");
     expect(calledUrl).toContain("base=USD");
+    expect(calledUrl).toContain("quotes=");
+    expect(calledUrl).toContain("EGP");
+  });
+
+  it("ensureFreshRates: fresh but incomplete cache triggers a refresh", async () => {
+    seedCache(ctx.db, new Date().toISOString(), "EGP");
+    const fetchSpy = okFetch(VALID_RESPONSE);
+    vi.stubGlobal("fetch", fetchSpy);
+
+    const result = await ensureFreshRates();
+
+    expect(fetchSpy).toHaveBeenCalledTimes(1);
+    expect(result.rates.some(({ rate }) => rate.currencyCode === "EGP")).toBe(
+      true,
+    );
   });
 });

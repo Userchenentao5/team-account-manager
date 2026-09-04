@@ -14,11 +14,13 @@ import { RATE_BASES } from "@/lib/fx/base";
  */
 const positiveRate = z.number().finite().positive(); // rejects 0, negative, NaN, Infinity
 
-export const frankfurterResponseSchema = z.object({
-  amount: z.literal(1).or(z.number().positive()),
-  base: z.enum(RATE_BASES),
-  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
-  rates: z.record(z.string().length(3), positiveRate),
-});
+export const frankfurterResponseSchema = z.array(
+  z.object({
+    date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+    base: z.enum(RATE_BASES),
+    quote: z.string().length(3),
+    rate: positiveRate,
+  }),
+);
 
 export type FrankfurterResponse = z.infer<typeof frankfurterResponseSchema>;
