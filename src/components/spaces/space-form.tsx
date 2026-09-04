@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { createSpace, updateSpace } from "@/actions/spaces";
 import type { ChannelRow } from "@/db/channels";
 import type { CurrencyRow } from "@/db/currencies";
+import { countryOptionsFromCurrencies } from "@/lib/countries";
 import { cn } from "@/lib/utils";
 import { formatMinor, parseToMinor } from "@/lib/money";
 import {
@@ -47,9 +48,9 @@ export type SpaceFormValue = SpaceFormInput & {
 type CountryCurrencyOption = {
   code: string;
   label: string;
-  currencyCode: string;
-  currencyName: string;
-  symbol: string;
+  currencyCode?: string;
+  currencyName?: string;
+  symbol?: string;
 };
 
 type SpaceFormProps = {
@@ -120,23 +121,18 @@ function SpaceEditorForm({
     (item) => item.code === initialValues.currencyCode,
   );
   const countryOptions = useMemo<CountryCurrencyOption[]>(() => {
-    const seen = new Set<string>();
-    const options: CountryCurrencyOption[] = [];
-    for (const currency of currencies) {
-      if (!currency.countryCode || !currency.countryName) continue;
-      if (seen.has(currency.countryCode)) continue;
-      seen.add(currency.countryCode);
-      options.push({
-        code: currency.countryCode,
-        label: currency.countryName,
-        currencyCode: currency.code,
-        currencyName: currency.name,
-        symbol: currency.symbol,
-      });
-    }
-    return options.sort((left, right) =>
-      left.label.localeCompare(right.label, "zh-Hans-CN"),
+    const currenciesByCountry = new Map(
+      currencies.map((currency) => [currency.countryCode, currency]),
     );
+    return countryOptionsFromCurrencies(currencies).map((country) => {
+      const currency = currenciesByCountry.get(country.code);
+      return {
+        ...country,
+        currencyCode: currency?.code,
+        currencyName: currency?.name,
+        symbol: currency?.symbol,
+      };
+    });
   }, [currencies]);
   const normalizedCountryQuery = countryQuery.trim().toLowerCase();
   const filteredCountryOptions = normalizedCountryQuery
@@ -144,8 +140,8 @@ function SpaceEditorForm({
         [
           option.label,
           option.code,
-          option.currencyCode,
-          option.currencyName,
+          option.currencyCode ?? "",
+          option.currencyName ?? "",
         ].some((value) =>
           value.toLowerCase().includes(normalizedCountryQuery),
         ),
@@ -189,14 +185,6 @@ function SpaceEditorForm({
     );
     if (currency) {
       form.setValue("currencyCode", currency.code, { shouldValidate: true });
-    }
-  }
-
-  function setCurrencyAndCountry(currencyCode: string) {
-    form.setValue("currencyCode", currencyCode, { shouldValidate: true });
-    const currency = currencies.find((item) => item.code === currencyCode);
-    if (currency) {
-      form.setValue("country", currency.countryCode, { shouldValidate: true });
     }
   }
 
@@ -377,8 +365,9 @@ function SpaceEditorForm({
                               </span>
                             </span>
                             <span className="ml-auto max-w-[52%] shrink-0 truncate text-right font-mono text-xs text-muted-foreground">
-                              {country.symbol} {country.currencyCode} ·{" "}
-                              {country.currencyName}
+                              {country.currencyCode
+                                ? `${country.symbol} ${country.currencyCode} · ${country.currencyName}`
+                                : "币种另选"}
                             </span>
                           </span>
                         </SelectItem>
@@ -457,7 +446,7 @@ function SpaceEditorForm({
                   <FormLabel>币种</FormLabel>
                   <Select
                     value={field.value}
-                    onValueChange={setCurrencyAndCountry}
+                    onValueChange={field.onChange}
                   >
                     <FormControl>
                       <SelectTrigger className="w-full">

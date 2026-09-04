@@ -21,6 +21,7 @@ export const RATE_SUPPORTED_CURRENCIES = [
   { code: "CNY", name: "人民币", minorUnit: 2, symbol: "￥", countryCode: "CN", countryName: "中国" },
   { code: "CZK", name: "捷克克朗", minorUnit: 2, symbol: "Kč", countryCode: "CZ", countryName: "捷克" },
   { code: "DKK", name: "丹麦克朗", minorUnit: 2, symbol: "kr", countryCode: "DK", countryName: "丹麦" },
+  { code: "EGP", name: "埃及镑", minorUnit: 2, symbol: "ج.م", countryCode: "EG", countryName: "埃及" },
   { code: "EUR", name: "欧元", minorUnit: 2, symbol: "€", countryCode: "FR", countryName: "法国" },
   { code: "GBP", name: "英镑", minorUnit: 2, symbol: "£", countryCode: "GB", countryName: "英国" },
   { code: "HKD", name: "港元", minorUnit: 2, symbol: "HK$", countryCode: "HK", countryName: "中国香港" },

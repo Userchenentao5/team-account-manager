@@ -19,6 +19,7 @@ function defaultRateRows(fetchedAt: string) {
     CNY: "0.14709",
     CZK: "0.0460",
     DKK: "0.1450",
+    EGP: "0.0196",
     EUR: "1.0832",
     GBP: "1.2654",
     HUF: "0.0028",
