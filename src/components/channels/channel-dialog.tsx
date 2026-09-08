@@ -33,7 +33,7 @@ type ChannelDialogProps = {
   open: boolean;
   mode: "add" | "rename";
   /** Present when renaming; absent when adding. */
-  channel?: Pick<ChannelRow, "id" | "name">;
+  channel?: Pick<ChannelRow, "id" | "name" | "bankCardLast4">;
   onOpenChange: (open: boolean) => void;
 };
 
@@ -46,26 +46,34 @@ export function ChannelDialog({
   const [isPending, startTransition] = useTransition();
   const form = useForm<ChannelInput>({
     resolver: zodResolver(channelSchema),
-    defaultValues: { name: "" },
+    defaultValues: { name: "", bankCardLast4: "" },
   });
 
   // Reset the field whenever the dialog (re)opens for a different target.
   useEffect(() => {
     if (open) {
-      form.reset({ name: mode === "rename" ? (channel?.name ?? "") : "" });
+      form.reset({
+        name: mode === "rename" ? (channel?.name ?? "") : "",
+        bankCardLast4:
+          mode === "rename" ? (channel?.bankCardLast4 ?? "") : "",
+      });
     }
-  }, [open, mode, channel?.name, form]);
+  }, [open, mode, channel?.name, channel?.bankCardLast4, form]);
 
   function onSubmit(values: ChannelInput) {
     startTransition(async () => {
       try {
         const res =
           mode === "add"
-            ? await addChannel(values.name)
-            : await renameChannel(channel!.id, values.name);
+            ? await addChannel(values.name, values.bankCardLast4)
+            : await renameChannel(
+                channel!.id,
+                values.name,
+                values.bankCardLast4,
+              );
 
         if (res.ok) {
-          toast.success(mode === "add" ? "已添加渠道" : "已重命名");
+          toast.success(mode === "add" ? "已添加渠道" : "已更新渠道");
           onOpenChange(false);
         } else {
           // Validation / duplicate errors surface inline on the field.
@@ -81,11 +89,11 @@ export function ChannelDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>{mode === "add" ? "新增渠道" : "重命名渠道"}</DialogTitle>
+          <DialogTitle>{mode === "add" ? "新增渠道" : "编辑渠道"}</DialogTitle>
           <DialogDescription>
             {mode === "add"
-              ? "为支付渠道起一个名称，之后创建空间时就能选择它。"
-              : "修改渠道名称；它的引用关系（ID）不会改变。"}
+              ? "填写支付渠道名称和银行卡尾号，之后创建空间时就能选择它。"
+              : "修改渠道名称或银行卡尾号；它的引用关系（ID）不会改变。"}
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
@@ -103,6 +111,24 @@ export function ChannelDialog({
                     <Input
                       autoFocus
                       placeholder="例如:支付宝"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="bankCardLast4"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>银行卡尾号</FormLabel>
+                  <FormControl>
+                    <Input
+                      inputMode="numeric"
+                      maxLength={4}
+                      placeholder="选填，如 3509"
                       {...field}
                     />
                   </FormControl>

@@ -13,7 +13,7 @@ export default async function ChannelsPage({
   const { archived } = await searchParams;
   const showArchived = archived === "1";
 
-  // Fetch all rows once so the client-side name/status filters can switch
+  // Fetch all rows once so the client-side name/tail/status filters can switch
   // instantly while the archived URL param still controls the initial view.
   const channels = listChannels(db, true);
   const spaceCounts = countSpacesByChannel(db);

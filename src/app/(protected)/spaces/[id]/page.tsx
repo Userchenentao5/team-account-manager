@@ -12,6 +12,7 @@ import { calculateSeatAvailability, getSpaceDetail } from "@/db/spaces";
 import { formatCountryLabel } from "@/lib/countries";
 import { formatCurrencyMinor } from "@/lib/currencies";
 import { convertUsdMinorToCurrencyMinor, formatMinor } from "@/lib/money";
+import { formatPaymentChannelLabel } from "@/lib/payment-channel";
 import { PageHeader } from "@/components/layout/page-header";
 import { Button } from "@/components/ui/button";
 import {
@@ -223,7 +224,12 @@ export default async function SpaceDetailPage({
                 <span>{formatCountryLabel(space.country)}</span>
               </DetailItem>
               <DetailItem label="支付渠道">
-                <span>{paymentChannel.name}</span>
+                <span>
+                  {formatPaymentChannelLabel(
+                    paymentChannel.name,
+                    paymentChannel.bankCardLast4,
+                  )}
+                </span>
               </DetailItem>
               <DetailItem label="金额">
                 <span className="font-mono">

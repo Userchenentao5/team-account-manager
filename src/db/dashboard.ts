@@ -3,6 +3,7 @@ import type { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
 import { differenceInCalendarDays } from "date-fns";
 import { formatCountryLabel } from "@/lib/countries";
 import { expiryStatus, nextPaymentDueDate, type Period } from "@/lib/expiry";
+import { formatPaymentChannelLabel } from "@/lib/payment-channel";
 import { getStatusThresholds, type StatusThresholds } from "./settings";
 import { calculateSeatAvailability } from "./spaces";
 import {
@@ -135,6 +136,7 @@ type SpaceDashboardRow = {
   expiryDate: string | null;
   paymentChannelId: number;
   paymentChannelName: string;
+  paymentChannelBankCardLast4: string;
   seatCapacity: number;
 };
 
@@ -157,6 +159,7 @@ type ChildDashboardRow = {
   spaceCountry: string;
   paymentChannelId: number;
   paymentChannelName: string;
+  paymentChannelBankCardLast4: string;
 };
 
 type MotherDashboardRow = {
@@ -290,6 +293,7 @@ export function getDashboardOverview(
       expiryDate: space.expiryDate,
       paymentChannelId: paymentChannel.id,
       paymentChannelName: paymentChannel.name,
+      paymentChannelBankCardLast4: paymentChannel.bankCardLast4,
       seatCapacity: space.seatCapacity,
     })
     .from(space)
@@ -317,6 +321,7 @@ export function getDashboardOverview(
       spaceCountry: space.country,
       paymentChannelId: paymentChannel.id,
       paymentChannelName: paymentChannel.name,
+      paymentChannelBankCardLast4: paymentChannel.bankCardLast4,
     })
     .from(childAccount)
     .innerJoin(space, eq(space.id, childAccount.spaceId))
@@ -394,13 +399,19 @@ export function getDashboardOverview(
     addBucket(
       paymentChannelBuckets,
       String(row.paymentChannelId),
-      row.paymentChannelName,
+      formatPaymentChannelLabel(
+        row.paymentChannelName,
+        row.paymentChannelBankCardLast4,
+      ),
       amountUsdMinor,
     );
     addBucket(
       spendingByPaymentChannelBuckets,
       String(row.paymentChannelId),
-      row.paymentChannelName,
+      formatPaymentChannelLabel(
+        row.paymentChannelName,
+        row.paymentChannelBankCardLast4,
+      ),
       amountUsdMinor,
     );
     spacePerformanceById.set(row.id, {
@@ -423,7 +434,10 @@ export function getDashboardOverview(
         id: row.id,
         name: row.name,
         country: formatCountryLabel(row.country),
-        paymentChannelName: row.paymentChannelName,
+        paymentChannelName: formatPaymentChannelLabel(
+          row.paymentChannelName,
+          row.paymentChannelBankCardLast4,
+        ),
         expiryDate: row.expiryDate,
         daysUntilExpiry: daysUntilExpiry(row.expiryDate, today),
         status,
@@ -466,7 +480,10 @@ export function getDashboardOverview(
     addBucket(
       paymentChannelBuckets,
       String(row.paymentChannelId),
-      row.paymentChannelName,
+      formatPaymentChannelLabel(
+        row.paymentChannelName,
+        row.paymentChannelBankCardLast4,
+      ),
       row.monthlyAmountUsd,
     );
 

@@ -36,7 +36,10 @@ import {
 
 type DialogState =
   | { mode: "add" }
-  | { mode: "rename"; channel: Pick<ChannelRow, "id" | "name"> }
+  | {
+      mode: "rename";
+      channel: Pick<ChannelRow, "id" | "name" | "bankCardLast4">;
+    }
   | null;
 
 type ChannelTableProps = {
@@ -101,7 +104,8 @@ export function ChannelTable({
     if (statusFilter === "active" && archived) return false;
     if (statusFilter === "archived" && !archived) return false;
     return normalizedNameQuery
-      ? channel.name.toLowerCase().includes(normalizedNameQuery)
+      ? channel.name.toLowerCase().includes(normalizedNameQuery) ||
+        channel.bankCardLast4.includes(normalizedNameQuery)
       : true;
   });
   const showEmptyState = channels.length === 0 && !includeArchived;
@@ -111,7 +115,7 @@ export function ChannelTable({
       <PageHeader
         sticky={false}
         title="支付渠道"
-        description="管理创建空间时可选的支付渠道；归档后不会在新空间表单中出现，历史记录仍保留原渠道名称。"
+        description="管理创建空间时可选的支付渠道和银行卡尾号；归档后不会在新空间表单中出现，历史记录仍保留。"
         actions={
           <>
             <div className="flex items-center gap-2">
@@ -134,13 +138,13 @@ export function ChannelTable({
         <div className="flex flex-wrap items-end gap-3">
           <div className="w-full max-w-sm">
             <Label htmlFor="channel-name-filter" className="mb-2">
-              名称
+              名称/尾号
             </Label>
             <Input
               id="channel-name-filter"
               value={nameQuery}
               onChange={(event) => setNameQuery(event.target.value)}
-              placeholder="按名称筛选"
+              placeholder="按名称或尾号筛选"
             />
           </div>
           <div>
@@ -178,6 +182,7 @@ export function ChannelTable({
             <TableHeader className="sticky top-0 z-20 bg-background shadow-sm [&_th]:bg-background">
               <TableRow>
                 <TableHead scope="col">名称</TableHead>
+                <TableHead scope="col">银行卡尾号</TableHead>
                 <TableHead scope="col">绑定空间数</TableHead>
                 <TableHead scope="col">状态</TableHead>
                 <TableHead scope="col">操作</TableHead>
@@ -192,6 +197,9 @@ export function ChannelTable({
                     className={archived ? "bg-muted/50" : undefined}
                   >
                     <TableCell className="font-medium">{channel.name}</TableCell>
+                    <TableCell className="font-mono tabular-nums">
+                      {channel.bankCardLast4 || "-"}
+                    </TableCell>
                     <TableCell className="font-mono tabular-nums">
                       {spaceCounts[channel.id] ?? 0}
                     </TableCell>
@@ -228,7 +236,7 @@ export function ChannelTable({
                                   variant="ghost"
                                   size="icon"
                                   className="size-11"
-                                  aria-label={`重命名 ${channel.name}`}
+                                  aria-label={`编辑 ${channel.name}`}
                                   onClick={() =>
                                     setDialog({ mode: "rename", channel })
                                   }
@@ -236,7 +244,7 @@ export function ChannelTable({
                                   <Pencil className="size-4" />
                                 </Button>
                               </TooltipTrigger>
-                              <TooltipContent>重命名</TooltipContent>
+                              <TooltipContent>编辑</TooltipContent>
                             </Tooltip>
                             <Tooltip>
                               <TooltipTrigger asChild>
@@ -262,7 +270,7 @@ export function ChannelTable({
               {visibleChannels.length === 0 ? (
                 <TableRow>
                   <TableCell
-                    colSpan={4}
+                    colSpan={5}
                     className="py-8 text-center text-sm text-muted-foreground"
                   >
                     没有匹配的支付渠道

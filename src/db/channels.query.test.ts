@@ -22,10 +22,20 @@ describe("channel queries (REF-01 / D-05..D-08)", () => {
   });
 
   it("insert creates an active row with a new surrogate id", () => {
-    const row = insertChannel(ctx.db, "支付宝");
+    const row = insertChannel(ctx.db, "支付宝", "3509");
     expect(row.id).toBeGreaterThan(0);
     expect(row.isActive).toBe(true);
     expect(row.name).toBe("支付宝");
+    expect(row.bankCardLast4).toBe("3509");
+  });
+
+  it("keeps the card tail separate and allows different cards for one channel", () => {
+    const first = insertChannel(ctx.db, "Roogoo", "3509");
+    const second = insertChannel(ctx.db, "Roogoo", "0523");
+
+    expect(first.name).toBe(second.name);
+    expect(first.bankCardLast4).toBe("3509");
+    expect(second.bankCardLast4).toBe("0523");
   });
 
   it("archive (soft-delete) preserves the row but excludes it from the active list (D-06)", () => {

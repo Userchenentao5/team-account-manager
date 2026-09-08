@@ -31,6 +31,7 @@ export const currency = sqliteTable("currency", {
 export const paymentChannel = sqliteTable("payment_channel", {
   id: integer("id").primaryKey({ autoIncrement: true }),
   name: text("name").notNull(),
+  bankCardLast4: text("bank_card_last4").notNull().default(""),
   isActive: integer("is_active", { mode: "boolean" }).notNull().default(true),
   createdAt: text("created_at")
     .notNull()
