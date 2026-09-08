@@ -17,6 +17,7 @@ import type { SpaceExpiryReminderRow } from "@/db/spaceReminders";
 import { renderChildAccountReminderTemplate } from "@/lib/email/child-account-reminder";
 import { renderSpaceExpiryReminderTemplate } from "@/lib/email/space-expiry-reminder";
 import { sendEmail } from "@/lib/email/smtp";
+import { formatPaymentChannelLabel } from "@/lib/payment-channel";
 import {
   childAccountEmailReminderSchema,
   spaceEmailReminderSchema,
@@ -175,6 +176,7 @@ function randomSpaceReminderRow(): SpaceExpiryReminderRow | null {
       id: space.id,
       name: space.name,
       paymentChannelName: paymentChannel.name,
+      paymentChannelBankCardLast4: paymentChannel.bankCardLast4,
       expiryDate: space.expiryDate,
       amountUsd: space.amountUsd,
     })
@@ -189,7 +191,10 @@ function randomSpaceReminderRow(): SpaceExpiryReminderRow | null {
   return {
     id: row.id,
     name: row.name,
-    paymentChannelName: row.paymentChannelName,
+    paymentChannelName: formatPaymentChannelLabel(
+      row.paymentChannelName,
+      row.paymentChannelBankCardLast4,
+    ),
     expiryDate: row.expiryDate,
     daysUntilExpiry: differenceInCalendarDays(
       localDateFromIsoDate(row.expiryDate),

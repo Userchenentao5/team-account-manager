@@ -46,8 +46,16 @@ export function countSpacesByChannel(db: ChannelDb): Record<number, number> {
 }
 
 /** Insert a new channel (new surrogate id, is_active defaults to true). */
-export function insertChannel(db: ChannelDb, name: string): ChannelRow {
-  return db.insert(paymentChannel).values({ name }).returning().get();
+export function insertChannel(
+  db: ChannelDb,
+  name: string,
+  bankCardLast4 = "",
+): ChannelRow {
+  return db
+    .insert(paymentChannel)
+    .values({ name, bankCardLast4 })
+    .returning()
+    .get();
 }
 
 /** Rename a channel by id — the surrogate id is unchanged (D-05). */
@@ -55,10 +63,11 @@ export function renameChannelRow(
   db: ChannelDb,
   id: number,
   name: string,
+  bankCardLast4 = "",
 ): ChannelRow {
   return db
     .update(paymentChannel)
-    .set({ name })
+    .set({ name, bankCardLast4 })
     .where(eq(paymentChannel.id, id))
     .returning()
     .get();
@@ -78,14 +87,21 @@ export function setChannelActive(
     .get();
 }
 
-/** Look up an ACTIVE channel by exact name (duplicate-name guard). */
+/** Look up an ACTIVE channel by exact name and card tail (duplicate guard). */
 export function findActiveByName(
   db: ChannelDb,
   name: string,
+  bankCardLast4 = "",
 ): ChannelRow | undefined {
   return db
     .select()
     .from(paymentChannel)
-    .where(and(eq(paymentChannel.name, name), eq(paymentChannel.isActive, true)))
+    .where(
+      and(
+        eq(paymentChannel.name, name),
+        eq(paymentChannel.bankCardLast4, bankCardLast4),
+        eq(paymentChannel.isActive, true),
+      ),
+    )
     .get();
 }

@@ -1,15 +1,23 @@
 import { z } from "zod";
 
 /**
- * REF-01 — shared channel-name validation (T-03-INPUT / T-03-MASS).
+ * REF-01 — shared payment-channel validation (T-03-INPUT / T-03-MASS).
  *
  * Used by BOTH the client form (RHF `zodResolver`) and the Server Actions,
  * which re-parse server-side because Server Actions are public endpoints — the
  * client validation is convenience only, never a trust boundary (ASVS V5).
- * Parsing only the known `name` field also blocks mass-assignment.
+ * Parsing only the known fields also blocks mass-assignment.
  */
 export const channelSchema = z.object({
   name: z.string().trim().min(1, "请输入渠道名称。"),
+  bankCardLast4: z
+    .string()
+    .trim()
+    .refine(
+      (value) => value === "" || /^\d{4}$/.test(value),
+      "银行卡尾号必须是4位数字。",
+    )
+    .optional(),
 });
 
 export type ChannelInput = z.infer<typeof channelSchema>;

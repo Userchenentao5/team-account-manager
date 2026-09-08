@@ -11,6 +11,7 @@ import type { CurrencyRow } from "@/db/currencies";
 import { countryOptionsFromCurrencies } from "@/lib/countries";
 import { cn } from "@/lib/utils";
 import { formatMinor, parseToMinor } from "@/lib/money";
+import { formatPaymentChannelLabel } from "@/lib/payment-channel";
 import {
   spaceFormSchema,
   type SpaceFormInput,
@@ -57,7 +58,7 @@ type SpaceFormProps = {
   open: boolean;
   mode: "add" | "edit";
   space?: SpaceFormValue;
-  channels: Pick<ChannelRow, "id" | "name">[];
+  channels: Pick<ChannelRow, "id" | "name" | "bankCardLast4">[];
   currencies: readonly CurrencyRow[];
   onOpenChange: (open: boolean) => void;
 };
@@ -65,7 +66,7 @@ type SpaceFormProps = {
 type SpaceEditorFormProps = {
   mode: "add" | "edit";
   space?: SpaceFormValue;
-  channels: Pick<ChannelRow, "id" | "name">[];
+  channels: Pick<ChannelRow, "id" | "name" | "bankCardLast4">[];
   currencies: readonly CurrencyRow[];
   onCancel: () => void;
   onSaved?: () => void;
@@ -401,7 +402,10 @@ function SpaceEditorForm({
                     <SelectContent>
                       {channels.map((channel) => (
                         <SelectItem key={channel.id} value={String(channel.id)}>
-                          {channel.name}
+                          {formatPaymentChannelLabel(
+                            channel.name,
+                            channel.bankCardLast4,
+                          )}
                         </SelectItem>
                       ))}
                     </SelectContent>

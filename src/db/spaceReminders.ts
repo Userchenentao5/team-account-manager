@@ -1,6 +1,7 @@
 import { and, asc, eq } from "drizzle-orm";
 import type { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
 import { differenceInCalendarDays, format } from "date-fns";
+import { formatPaymentChannelLabel } from "@/lib/payment-channel";
 import { paymentChannel, space, spaceExpiryReminderLog } from "./schema";
 
 type Db = BetterSQLite3Database<Record<string, unknown>>;
@@ -29,6 +30,7 @@ export function listSpaceExpiryReminderCandidates(
       id: space.id,
       name: space.name,
       paymentChannelName: paymentChannel.name,
+      paymentChannelBankCardLast4: paymentChannel.bankCardLast4,
       expiryDate: space.expiryDate,
       amountUsd: space.amountUsd,
     })
@@ -48,7 +50,10 @@ export function listSpaceExpiryReminderCandidates(
         {
           id: row.id,
           name: row.name,
-          paymentChannelName: row.paymentChannelName,
+          paymentChannelName: formatPaymentChannelLabel(
+            row.paymentChannelName,
+            row.paymentChannelBankCardLast4,
+          ),
           expiryDate: row.expiryDate,
           daysUntilExpiry,
           amountUsdMinor: row.amountUsd ?? 0,

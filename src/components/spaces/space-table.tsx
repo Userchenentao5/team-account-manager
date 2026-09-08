@@ -20,6 +20,7 @@ import type { SpaceListRow } from "@/db/spaces";
 import { formatCountryLabel } from "@/lib/countries";
 import { formatCurrencyMinor } from "@/lib/currencies";
 import { formatMinor } from "@/lib/money";
+import { formatPaymentChannelLabel } from "@/lib/payment-channel";
 import { PageHeader } from "@/components/layout/page-header";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -144,7 +145,16 @@ function compareRows(
         formatCountryLabel(right.space.country),
       );
     case "channel":
-      return compareText(left.paymentChannel.name, right.paymentChannel.name);
+      return compareText(
+        formatPaymentChannelLabel(
+          left.paymentChannel.name,
+          left.paymentChannel.bankCardLast4,
+        ),
+        formatPaymentChannelLabel(
+          right.paymentChannel.name,
+          right.paymentChannel.bankCardLast4,
+        ),
+      );
     case "amount":
       return left.space.amountMinor - right.space.amountMinor;
     case "expiry":
@@ -236,7 +246,13 @@ export function SpaceTable({
       : filterSpaces;
     const options = new Map<number, string>();
     for (const { paymentChannel } of rows) {
-      options.set(paymentChannel.id, paymentChannel.name);
+      options.set(
+        paymentChannel.id,
+        formatPaymentChannelLabel(
+          paymentChannel.name,
+          paymentChannel.bankCardLast4,
+        ),
+      );
     }
     return Array.from(options, ([id, name]) => ({ id, name })).sort((left, right) =>
       left.name.localeCompare(right.name, "zh-Hans-CN"),
@@ -456,7 +472,12 @@ export function SpaceTable({
                   <TableCell>
                     {formatCountryLabel(space.country)}
                   </TableCell>
-                  <TableCell>{paymentChannel.name}</TableCell>
+                  <TableCell>
+                    {formatPaymentChannelLabel(
+                      paymentChannel.name,
+                      paymentChannel.bankCardLast4,
+                    )}
+                  </TableCell>
                   <TableCell className="font-mono">
                     <div className="inline-flex flex-col items-center gap-1.5 text-center tabular-nums">
                       <span className="font-medium text-foreground">
