@@ -54,7 +54,7 @@ export function AppSidebar() {
 
   return (
     <Sidebar collapsible="icon" className="border-r">
-      <SidebarHeader className="h-14 justify-center border-b px-3">
+      <SidebarHeader className="h-14 justify-center border-b px-3 group-data-[collapsible=icon]:px-1.5">
         <div className="flex items-center gap-2.5 overflow-hidden">
           <div className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm">
             <Layers3 aria-hidden="true" className="size-4" />
@@ -102,9 +102,15 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton tooltip="参考数据">
-                  <Database aria-hidden="true" />
-                  <span>参考数据</span>
+                <SidebarMenuButton asChild tooltip="参考数据">
+                  <Link
+                    href={referenceChildren[0].href}
+                    aria-label="参考数据"
+                    onClick={() => setOpenMobile(false)}
+                  >
+                    <Database aria-hidden="true" />
+                    <span>参考数据</span>
+                  </Link>
                 </SidebarMenuButton>
                 <SidebarMenuSub>
                   {referenceChildren.map((child) => {
