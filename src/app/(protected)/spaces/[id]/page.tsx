@@ -3,15 +3,13 @@ import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { db } from "@/db";
-import { listChildAccounts } from "@/db/childAccounts";
 import { listChannels } from "@/db/channels";
 import { listCurrencies } from "@/db/currencies";
-import { getRate } from "@/db/fxRates";
 import { getStatusThresholds } from "@/db/settings";
-import { calculateSeatAvailability, getSpaceDetail } from "@/db/spaces";
+import { getSpaceOverview } from "@/db/space-overview";
 import { formatCountryLabel } from "@/lib/countries";
 import { formatCurrencyMinor } from "@/lib/currencies";
-import { convertUsdMinorToCurrencyMinor, formatMinor } from "@/lib/money";
+import { formatMinor } from "@/lib/money";
 import { formatPaymentChannelLabel } from "@/lib/payment-channel";
 import { PageHeader } from "@/components/layout/page-header";
 import { Button } from "@/components/ui/button";
@@ -111,31 +109,14 @@ export default async function SpaceDetailPage({
     ? Number(query.highlightChild)
     : undefined;
 
-  const detail = getSpaceDetail(db, numericId);
-  if (!detail) notFound();
+  const overview = getSpaceOverview(db, numericId);
+  if (!overview) notFound();
 
   const channels = listChannels(db);
   const currencies = listCurrencies(db);
-  const childAccounts = listChildAccounts(db, numericId);
   const thresholds = getStatusThresholds(db);
-  const cnyCurrency = currencies.find((item) => item.code === "CNY");
-  const cnyRate = getRate(db, "CNY");
-  const { space, motherAccount, paymentChannel, currency } = detail;
-  const cnyReference =
-    space.amountUsd === null || !cnyCurrency || !cnyRate
-      ? "暂无 CNY 参考"
-      : formatCurrencyMinor(
-          convertUsdMinorToCurrencyMinor(
-            space.amountUsd,
-            cnyCurrency.minorUnit,
-            cnyRate.rateToUsd,
-          ),
-          cnyCurrency,
-        );
-  const seatAvailability = calculateSeatAvailability(space.seatCapacity, [
-    motherAccount.seatType,
-    ...childAccounts.map(({ childAccount }) => childAccount.seatType),
-  ]);
+  const { space, motherAccount, paymentChannel, currency } = overview;
+  const { childAccounts, seatAvailability, cnyReference } = overview;
   const formValue = {
     id: space.id,
     name: space.name,
