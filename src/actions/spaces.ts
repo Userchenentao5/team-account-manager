@@ -4,8 +4,6 @@ import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { db } from "@/db";
 import { listChannels } from "@/db/channels";
-import { getCurrencyMinorUnit } from "@/db/currencies";
-import { getRate } from "@/db/fxRates";
 import {
   deleteSpaceCascade,
   getSpaceDetail,
@@ -14,8 +12,7 @@ import {
   updateSpaceRow,
 } from "@/db/spaces";
 import { addPeriod } from "@/lib/expiry";
-import { ensureFreshRates } from "@/lib/fx/frankfurter";
-import { freezeUsdMinor } from "@/lib/money";
+import { freezeUsdSnapshot } from "@/lib/usd-snapshot";
 import { spaceFormSchema, spaceIdSchema } from "@/lib/validation/space";
 
 /**
@@ -30,8 +27,6 @@ import { spaceFormSchema, spaceIdSchema } from "@/lib/validation/space";
  */
 
 const SPACES_PATH = "/spaces";
-const NO_RATE_ERROR =
-  "该币种暂无汇率,无法折算 USD。请先到「汇率」页刷新汇率后重试。";
 const DELETE_MISMATCH_ERROR = "空间名称不匹配，未删除。";
 
 const deleteSpaceSchema = z.object({
@@ -54,17 +49,12 @@ function validationError(message = "空间信息无效。"): SpaceActionResult {
 
 function validateReferences(
   paymentChannelId: number,
-  currencyCode: string,
 ): SpaceActionResult | null {
   const activeChannel = listChannels(db).some(
     (channel) => channel.id === paymentChannelId,
   );
   if (!activeChannel) {
     return { ok: false, error: "请选择有效的付款渠道。" };
-  }
-
-  if (getCurrencyMinorUnit(db, currencyCode) === undefined) {
-    return { ok: false, error: "请选择有效的币种。" };
   }
 
   return null;
@@ -74,34 +64,9 @@ async function computeSnapshot(input: {
   amountMinor: number;
   currencyCode: string;
 }): Promise<
-  | {
-      ok: true;
-      rateUsed: string;
-      rateAsOf: string;
-      rateSource: "frankfurter";
-      amountUsd: number;
-    }
-  | { ok: false; error: string }
+  Awaited<ReturnType<typeof freezeUsdSnapshot>>
 > {
-  await ensureFreshRates();
-
-  const rate = getRate(db, input.currencyCode);
-  if (!rate) {
-    return { ok: false, error: NO_RATE_ERROR };
-  }
-
-  const srcExp = getCurrencyMinorUnit(db, input.currencyCode);
-  if (srcExp === undefined) {
-    return { ok: false, error: "请选择有效的币种。" };
-  }
-
-  return {
-    ok: true,
-    rateUsed: rate.rateToUsd,
-    rateAsOf: rate.fetchedAt,
-    rateSource: "frankfurter",
-    amountUsd: freezeUsdMinor(input.amountMinor, srcExp, rate.rateToUsd),
-  };
+  return freezeUsdSnapshot(db, input);
 }
 
 export async function createSpace(
@@ -113,10 +78,7 @@ export async function createSpace(
   }
 
   const data = parsed.data;
-  const referenceError = validateReferences(
-    data.paymentChannelId,
-    data.currencyCode,
-  );
+  const referenceError = validateReferences(data.paymentChannelId);
   if (referenceError) return referenceError;
 
   const snapshot = await computeSnapshot(data);
@@ -173,10 +135,7 @@ export async function updateSpace(
     return { ok: false, error: "空间不存在。" };
   }
 
-  const referenceError = validateReferences(
-    data.paymentChannelId,
-    data.currencyCode,
-  );
+  const referenceError = validateReferences(data.paymentChannelId);
   if (referenceError) return referenceError;
 
   const expiryDate = addPeriod(data.currentPeriodStartDate, {

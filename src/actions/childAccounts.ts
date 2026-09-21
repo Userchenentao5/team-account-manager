@@ -9,16 +9,13 @@ import {
   updateChildAccount as updateChildAccountRow,
   updateMotherSeat as updateMotherSeatRow,
 } from "@/db/childAccounts";
-import { getCurrencyMinorUnit } from "@/db/currencies";
-import { getRate } from "@/db/fxRates";
 import { getSpaceDetail } from "@/db/spaces";
 import {
   nextPaymentDueDate,
   renewPaymentDueDate,
   type Period,
 } from "@/lib/expiry";
-import { ensureFreshRates } from "@/lib/fx/frankfurter";
-import { freezeUsdMinor } from "@/lib/money";
+import { freezeUsdSnapshot } from "@/lib/usd-snapshot";
 import {
   childAccountFormSchema,
   childAccountIdSchema,
@@ -36,8 +33,6 @@ import { spaceIdSchema } from "@/lib/validation/space";
  */
 
 const SPACES_PATH = "/spaces";
-const NO_RATE_ERROR =
-  "该币种暂无汇率，无法折算 USD。请先到「汇率」页刷新汇率后重试。";
 const SELF_USE_RATE_SOURCE = "self-use";
 
 export type ChildAccountActionResult =
@@ -77,38 +72,22 @@ async function computeMonthlySnapshot(input: {
     }
   | { ok: false; error: string }
 > {
-  const srcExp = getCurrencyMinorUnit(db, input.monthlyCurrencyCode);
-  if (srcExp === undefined) {
-    return { ok: false, error: "请选择有效的币种。" };
-  }
-
-  if (input.monthlyAmountMinor === 0) {
-    return {
-      ok: true,
-      monthlyRateUsed: "1",
-      monthlyRateAsOf: new Date().toISOString(),
-      monthlyRateSource: SELF_USE_RATE_SOURCE,
-      monthlyAmountUsd: 0,
-    };
-  }
-
-  await ensureFreshRates();
-
-  const rate = getRate(db, input.monthlyCurrencyCode);
-  if (!rate) {
-    return { ok: false, error: NO_RATE_ERROR };
-  }
+  const snapshot = await freezeUsdSnapshot(
+    db,
+    {
+      amountMinor: input.monthlyAmountMinor,
+      currencyCode: input.monthlyCurrencyCode,
+    },
+    { zeroAmountSource: SELF_USE_RATE_SOURCE },
+  );
+  if (!snapshot.ok) return snapshot;
 
   return {
     ok: true,
-    monthlyRateUsed: rate.rateToUsd,
-    monthlyRateAsOf: rate.fetchedAt,
-    monthlyRateSource: "frankfurter",
-    monthlyAmountUsd: freezeUsdMinor(
-      input.monthlyAmountMinor,
-      srcExp,
-      rate.rateToUsd,
-    ),
+    monthlyRateUsed: snapshot.rateUsed,
+    monthlyRateAsOf: snapshot.rateAsOf,
+    monthlyRateSource: snapshot.rateSource,
+    monthlyAmountUsd: snapshot.amountUsd,
   };
 }
 
