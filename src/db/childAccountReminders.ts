@@ -154,6 +154,42 @@ export function listDueChildAccountPaymentReminders(
     });
 }
 
+/** Pick a real row for the settings-page test message without duplicating the join. */
+export function getRandomChildAccountPaymentReminderRow(
+  db: Db,
+  today = new Date(),
+): ChildAccountPaymentReminderRow | null {
+  const rows = db
+    .select({
+      childAccountId: childAccount.id,
+      spaceName: space.name,
+      childAccountEmail: childAccount.email,
+      childAccountContact: childAccount.contact,
+      childAccountLabel: childAccount.label,
+      nextPaymentDate: childAccount.nextPaymentDate,
+      amountMinor: childAccount.monthlyAmountMinor,
+      currencyCode: childAccount.monthlyCurrencyCode,
+      currencyMinorUnit: currency.minorUnit,
+    })
+    .from(childAccount)
+    .innerJoin(space, eq(space.id, childAccount.spaceId))
+    .innerJoin(currency, eq(currency.code, childAccount.monthlyCurrencyCode))
+    .all()
+    .flatMap((row) => {
+      if (!row.nextPaymentDate || row.amountMinor <= 0) return [];
+      return [{
+        ...row,
+        nextPaymentDate: row.nextPaymentDate,
+        daysUntilPayment: differenceInCalendarDays(
+          localDateFromIsoDate(row.nextPaymentDate),
+          today,
+        ),
+      }];
+    });
+
+  return rows[Math.floor(Math.random() * rows.length)] ?? null;
+}
+
 export function wasChildAccountReminderSent(
   db: Db,
   childAccountId: number,
