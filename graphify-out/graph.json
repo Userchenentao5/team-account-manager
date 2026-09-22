@@ -32046,7 +32046,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 1045,
       "norm_label": "toaster",
       "id": "c9_toaster"
     },
@@ -32059,7 +32059,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1045,
+      "community": 9,
       "norm_label": "theme-aware semantic toast icons",
       "id": "c9_theme_aware_toasts"
     },
@@ -36226,7 +36226,7 @@
       "weight": 1.0,
       "context": "import",
       "source": "package_dependencies_sonner",
-      "target": "c9_toaster",
+      "target": "c9_theme_aware_toasts",
       "confidence_score": 1.0
     },
     {
@@ -79540,5 +79540,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "c693664d4173459f95b84a9a5a02653c9bcb0ecb"
+  "built_at_commit": "8aa78064d86ee2cef8f230afd8bcb25154cd0756"
 }

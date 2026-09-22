@@ -100,9 +100,9 @@
     "semantic_hash": "6c4307ffa009658f5c97f5629094c0c2"
   },
   "next.config.ts": {
-    "mtime": 1783612050.1218262,
-    "ast_hash": "025f4fcb6024b3524d19492cf7ce54a2",
-    "semantic_hash": "025f4fcb6024b3524d19492cf7ce54a2"
+    "mtime": 1790089929.2992964,
+    "ast_hash": "be63acb0985472a159f2e06adeda9106",
+    "semantic_hash": ""
   },
   "package.json": {
     "mtime": 1784427036.9816003,
