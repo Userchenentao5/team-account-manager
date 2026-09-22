@@ -9,7 +9,11 @@ export const SPACE_REMINDER_TEMPLATE_PLACEHOLDERS = [
   { key: "daysUntilExpiry", label: "距到期天数", example: "7" },
   { key: "paymentChannelName", label: "支付渠道", example: "Visa" },
   { key: "amountUsd", label: "订阅金额（美元）", example: "25.99" },
-  { key: "expiryDate", label: "到期日期", example: "2026-07-14" },
+  {
+    key: "expiryDate",
+    label: "到期时间",
+    example: "2026-07-14 00:00:00",
+  },
 ] as const satisfies readonly ReminderTemplatePlaceholder[];
 
 export const CHILD_ACCOUNT_REMINDER_TEMPLATE_PLACEHOLDERS = [

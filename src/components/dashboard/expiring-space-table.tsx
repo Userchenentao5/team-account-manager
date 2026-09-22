@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Eye } from "lucide-react";
 import type { DashboardExpiringSpaceRow } from "@/db/dashboard";
 import { formatMinor } from "@/lib/money";
+import { formatSpaceDateTime } from "@/lib/space-date-time";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -65,7 +66,7 @@ export function ExpiringSpaceTable({
           <TableRow>
             <TableHead scope="col">状态</TableHead>
             <TableHead scope="col">空间</TableHead>
-            <TableHead scope="col">到期日</TableHead>
+            <TableHead scope="col">到期时间</TableHead>
             <TableHead scope="col">剩余/逾期</TableHead>
             <TableHead scope="col">空间支出 USD</TableHead>
             <TableHead scope="col">子账号</TableHead>
@@ -87,7 +88,9 @@ export function ExpiringSpaceTable({
                   {row.country}
                 </div>
               </TableCell>
-              <TableCell className="font-mono">{row.expiryDate}</TableCell>
+              <TableCell className="font-mono">
+                {formatSpaceDateTime(row.expiryDate)}
+              </TableCell>
               <TableCell className="font-mono">
                 {formatDays(row.daysUntilExpiry)}
               </TableCell>

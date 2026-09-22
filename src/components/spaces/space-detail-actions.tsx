@@ -49,7 +49,7 @@ export function SpaceDetailActions({
       try {
         const res = await renewSpace(space.id!);
         if (res.ok) {
-          toast.success("已续费并更新到期日");
+          toast.success("已续费并更新到期时间");
           setRenewOpen(false);
           router.refresh();
         } else {
@@ -74,7 +74,7 @@ export function SpaceDetailActions({
           </Button>
         </TooltipTrigger>
         <TooltipContent>
-          {isEditing ? "编辑时暂不可续费" : "按当前周期推进到期日"}
+          {isEditing ? "编辑时暂不可续费" : "按当前周期推进到期时间"}
         </TooltipContent>
       </Tooltip>
       <AlertDialog open={renewOpen} onOpenChange={setRenewOpen}>
@@ -82,7 +82,7 @@ export function SpaceDetailActions({
           <AlertDialogHeader>
             <AlertDialogTitle>确认续费空间</AlertDialogTitle>
             <AlertDialogDescription>
-              将为「{space.name}」按当前订阅周期推进到期日，并刷新本期冻结成本。请确认不是误触。
+              将为「{space.name}」按当前订阅周期推进到期时间，并刷新本期冻结成本。请确认不是误触。
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

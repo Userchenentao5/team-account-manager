@@ -89,9 +89,9 @@ export const space = sqliteTable("space", {
   rateAsOf: text("rate_as_of"),
   rateSource: text("rate_source"),
   amountUsd: integer("amount_usd"), // USD minor units, frozen at payment
-  openingDate: text("opening_date"), // first activation date, YYYY-MM-DD
-  currentPeriodStartDate: text("current_period_start_date"), // current paid period start, YYYY-MM-DD
-  expiryDate: text("expiry_date"), // derived from currentPeriodStartDate + period
+  openingDate: text("opening_date"), // first activation time, local YYYY-MM-DDTHH:mm:ss
+  currentPeriodStartDate: text("current_period_start_date"), // current paid period start, local YYYY-MM-DDTHH:mm:ss
+  expiryDate: text("expiry_date"), // derived from currentPeriodStartDate + period, local YYYY-MM-DDTHH:mm:ss
 });
 
 export const motherAccount = sqliteTable("mother_account", {

@@ -21,6 +21,10 @@ import { formatCountryLabel } from "@/lib/countries";
 import { formatCurrencyMinor } from "@/lib/currencies";
 import { formatMinor } from "@/lib/money";
 import { formatPaymentChannelLabel } from "@/lib/payment-channel";
+import {
+  formatSpaceDateTime,
+  toSpaceDateTimeInput,
+} from "@/lib/space-date-time";
 import { PageHeader } from "@/components/layout/page-header";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -97,9 +101,10 @@ function toFormValue(row: SpaceListRow): SpaceFormValue {
     currencyCode: space.currencyCode,
     amountMinor: space.amountMinor,
     seatCapacity: space.seatCapacity,
-    openingDate: space.openingDate ?? "",
-    currentPeriodStartDate:
-      space.currentPeriodStartDate ?? space.openingDate ?? "",
+    openingDate: toSpaceDateTimeInput(space.openingDate),
+    currentPeriodStartDate: toSpaceDateTimeInput(
+      space.currentPeriodStartDate ?? space.openingDate,
+    ),
     periodUnit: (space.periodUnit ?? "month") as SpaceFormValue["periodUnit"],
     periodCount: space.periodCount ?? 1,
     motherEmail: motherAccount.email,
@@ -394,7 +399,7 @@ export function SpaceTable({
             <div className="flex flex-col items-center justify-center gap-3 rounded-lg border border-dashed bg-muted/20 py-12 text-center">
             <h2 className="text-lg font-semibold">还没有空间</h2>
             <p className="max-w-md text-sm text-muted-foreground">
-              创建你的第一个空间，记录归属国家、支付渠道、金额与订阅周期，系统会自动算出到期日并冻结 USD 金额。
+              创建你的第一个空间，记录归属国家、支付渠道、金额与订阅周期，系统会自动算出到期时间并冻结 USD 金额。
             </p>
             <Button onClick={() => setFormState({ mode: "add" })}>
               <Plus className="size-4" />
@@ -439,7 +444,7 @@ export function SpaceTable({
                 onSort={setSortKey}
               />
               <SortableHead
-                label="到期日"
+                label="到期时间"
                 sortKey="expiry"
                 sort={sort}
                 onSort={setSortKey}
@@ -499,7 +504,7 @@ export function SpaceTable({
                   <TableCell>
                     <div className="flex items-center justify-center gap-2">
                       <span className="font-mono">
-                        {space.expiryDate ?? "-"}
+                        {formatSpaceDateTime(space.expiryDate)}
                       </span>
                       <ExpiryBadge
                         expiryDate={space.expiryDate}

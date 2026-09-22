@@ -11,6 +11,10 @@ import { formatCountryLabel } from "@/lib/countries";
 import { formatCurrencyMinor } from "@/lib/currencies";
 import { formatMinor } from "@/lib/money";
 import { formatPaymentChannelLabel } from "@/lib/payment-channel";
+import {
+  formatSpaceDateTime,
+  toSpaceDateTimeInput,
+} from "@/lib/space-date-time";
 import { PageHeader } from "@/components/layout/page-header";
 import { Button } from "@/components/ui/button";
 import {
@@ -125,9 +129,10 @@ export default async function SpaceDetailPage({
     currencyCode: space.currencyCode,
     amountMinor: space.amountMinor,
     seatCapacity: space.seatCapacity,
-    openingDate: space.openingDate ?? "",
-    currentPeriodStartDate:
-      space.currentPeriodStartDate ?? space.openingDate ?? "",
+    openingDate: toSpaceDateTimeInput(space.openingDate),
+    currentPeriodStartDate: toSpaceDateTimeInput(
+      space.currentPeriodStartDate ?? space.openingDate,
+    ),
     periodUnit: (space.periodUnit ?? "month") as "month" | "quarter" | "year",
     periodCount: space.periodCount ?? 1,
     motherEmail: motherAccount.email,
@@ -168,7 +173,7 @@ export default async function SpaceDetailPage({
           <CardTitle>{isEditing ? "编辑空间" : "空间详情"}</CardTitle>
           <CardDescription>
             {isEditing
-              ? "修改空间资料后会重新计算到期日；金额或币种变化会重新冻结 USD 成本。"
+              ? "修改空间资料后会重新计算到期时间；金额或币种变化会重新冻结 USD 成本。"
               : "查看当前周期、到期状态和冻结成本。"}
           </CardDescription>
           <CardAction>
@@ -222,12 +227,16 @@ export default async function SpaceDetailPage({
                   {currency.symbol} {currency.code}
                 </span>
               </DetailItem>
-              <DetailItem label="首次开通日">
-                <span className="font-mono">{space.openingDate ?? "-"}</span>
-              </DetailItem>
-              <DetailItem label="当前周期开始日">
+              <DetailItem label="首次开通时间">
                 <span className="font-mono">
-                  {space.currentPeriodStartDate ?? space.openingDate ?? "-"}
+                  {formatSpaceDateTime(space.openingDate)}
+                </span>
+              </DetailItem>
+              <DetailItem label="当前周期开始时间">
+                <span className="font-mono">
+                  {formatSpaceDateTime(
+                    space.currentPeriodStartDate ?? space.openingDate,
+                  )}
                 </span>
               </DetailItem>
               <DetailItem label="订阅周期">
@@ -238,8 +247,10 @@ export default async function SpaceDetailPage({
 
           <div className="border-t pt-6">
             <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-              <DetailItem label="到期日">
-                <span className="font-mono">{space.expiryDate ?? "-"}</span>
+              <DetailItem label="到期时间">
+                <span className="font-mono">
+                  {formatSpaceDateTime(space.expiryDate)}
+                </span>
               </DetailItem>
               <DetailItem
                 label="冻结 USD 金额"

@@ -211,7 +211,7 @@ export default function DashboardPage() {
                 </div>
                 <div className="mt-auto flex flex-col gap-3 border-t border-border/70 bg-muted/15 px-5 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
                   <p className="text-xs leading-5 text-muted-foreground">
-                    空间管理默认按到期日排序，可继续查看并处理具体项目。
+                    空间管理默认按到期时间排序，可继续查看并处理具体项目。
                   </p>
                   <Button asChild size="sm" variant={hasAnyRisk ? "default" : "outline"}>
                     <Link href={hasAnyRisk ? "/renewal-risks" : "/spaces"}>

@@ -2,6 +2,7 @@ import { and, asc, eq } from "drizzle-orm";
 import type { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
 import { differenceInCalendarDays, format } from "date-fns";
 import { formatPaymentChannelLabel } from "@/lib/payment-channel";
+import { spaceDateTimeToDate } from "@/lib/space-date-time";
 import { paymentChannel, space, spaceExpiryReminderLog } from "./schema";
 
 type Db = BetterSQLite3Database<Record<string, unknown>>;
@@ -14,11 +15,6 @@ export type SpaceExpiryReminderRow = {
   daysUntilExpiry: number;
   amountUsdMinor: number;
 };
-
-function localDateFromIsoDate(value: string): Date {
-  const [year, month, day] = value.split("-").map(Number);
-  return new Date(year, month - 1, day);
-}
 
 export function listSpaceExpiryReminderCandidates(
   db: Db,
@@ -41,7 +37,7 @@ export function listSpaceExpiryReminderCandidates(
     .flatMap((row) => {
       if (!row.expiryDate) return [];
       const daysUntilExpiry = differenceInCalendarDays(
-        localDateFromIsoDate(row.expiryDate),
+        spaceDateTimeToDate(row.expiryDate),
         today,
       );
       if (daysUntilExpiry < 0 || daysUntilExpiry > thresholdDays) return [];
@@ -110,7 +106,7 @@ export function getRandomSpaceExpiryReminderRow(
         ),
         expiryDate: row.expiryDate,
         daysUntilExpiry: differenceInCalendarDays(
-          localDateFromIsoDate(row.expiryDate),
+          spaceDateTimeToDate(row.expiryDate),
           today,
         ),
         amountUsdMinor: row.amountUsd ?? 0,
