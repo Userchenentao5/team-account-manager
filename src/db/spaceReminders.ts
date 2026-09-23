@@ -82,6 +82,44 @@ export function listDueSpaceExpiryReminders(
   );
 }
 
+/** Pick a real row for the settings-page test message without duplicating the join. */
+export function getRandomSpaceExpiryReminderRow(
+  db: Db,
+  today = new Date(),
+): SpaceExpiryReminderRow | null {
+  const rows = db
+    .select({
+      id: space.id,
+      name: space.name,
+      paymentChannelName: paymentChannel.name,
+      paymentChannelBankCardLast4: paymentChannel.bankCardLast4,
+      expiryDate: space.expiryDate,
+      amountUsd: space.amountUsd,
+    })
+    .from(space)
+    .innerJoin(paymentChannel, eq(paymentChannel.id, space.paymentChannelId))
+    .all()
+    .flatMap((row) => {
+      if (!row.expiryDate) return [];
+      return [{
+        id: row.id,
+        name: row.name,
+        paymentChannelName: formatPaymentChannelLabel(
+          row.paymentChannelName,
+          row.paymentChannelBankCardLast4,
+        ),
+        expiryDate: row.expiryDate,
+        daysUntilExpiry: differenceInCalendarDays(
+          localDateFromIsoDate(row.expiryDate),
+          today,
+        ),
+        amountUsdMinor: row.amountUsd ?? 0,
+      }];
+    });
+
+  return rows[Math.floor(Math.random() * rows.length)] ?? null;
+}
+
 export function wasSpaceExpiryReminderSent(
   db: Db,
   spaceId: number,

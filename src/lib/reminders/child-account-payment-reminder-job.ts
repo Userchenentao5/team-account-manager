@@ -7,26 +7,15 @@ import {
 import { getChildAccountEmailReminderSettings } from "@/db/settings";
 import { composeChildAccountReminderEmail } from "@/lib/email/child-account-reminder";
 import { sendEmail } from "@/lib/email/smtp";
+import { runReminderDispatch } from "@/lib/reminders/reminder-dispatch";
 
 type Db = BetterSQLite3Database<Record<string, unknown>>;
 
 type EmailSender = typeof sendEmail;
 
-export type ChildAccountPaymentReminderJobResult = {
-  checked: boolean;
-  sent: number;
-  reason?:
-    | "disabled"
-    | "missing-recipient"
-    | "missing-smtp"
-    | "not-scheduled-time";
-};
-
-function timeText(date: Date): string {
-  return `${String(date.getHours()).padStart(2, "0")}:${String(
-    date.getMinutes(),
-  ).padStart(2, "0")}`;
-}
+export type ChildAccountPaymentReminderJobResult = Awaited<
+  ReturnType<typeof runReminderDispatch>
+>;
 
 export async function runChildAccountPaymentReminderJob(
   db: Db,
@@ -34,55 +23,29 @@ export async function runChildAccountPaymentReminderJob(
   emailSender: EmailSender = sendEmail,
 ): Promise<ChildAccountPaymentReminderJobResult> {
   const emailSettings = getChildAccountEmailReminderSettings(db);
-  if (!emailSettings.enabled) {
-    return { checked: false, sent: 0, reason: "disabled" };
-  }
-  if (!emailSettings.recipientEmail) {
-    return { checked: false, sent: 0, reason: "missing-recipient" };
-  }
-  if (!emailSettings.smtpUrl || !emailSettings.smtpFrom) {
-    return { checked: false, sent: 0, reason: "missing-smtp" };
-  }
-  if (timeText(now) !== emailSettings.sendTime) {
-    return { checked: false, sent: 0, reason: "not-scheduled-time" };
-  }
-
-  const candidates = listDueChildAccountPaymentReminders(db, now);
-  let sent = 0;
-
-  for (const candidate of candidates) {
-    const message = composeChildAccountReminderEmail(candidate, {
-      subject: emailSettings.templateSubject,
-      body: emailSettings.templateBody,
-    });
-    const recipientEmail = emailSettings.recipientEmail;
-    if (
+  return runReminderDispatch({
+    settings: emailSettings,
+    now,
+    emailSender,
+    listCandidates: () => listDueChildAccountPaymentReminders(db, now),
+    composeMessage: (candidate) =>
+      composeChildAccountReminderEmail(candidate, {
+        subject: emailSettings.templateSubject,
+        body: emailSettings.templateBody,
+      }),
+    wasSent: (candidate, recipientEmail) =>
       wasChildAccountReminderSent(
         db,
         candidate.childAccountId,
         candidate.nextPaymentDate,
         recipientEmail,
-      )
-    ) {
-      continue;
-    }
-
-    await emailSender({
-      smtpUrl: emailSettings.smtpUrl,
-      from: emailSettings.smtpFrom,
-      to: recipientEmail,
-      subject: message.subject,
-      text: message.text,
-      html: message.html,
-    });
-    recordChildAccountReminderSent(db, {
-      childAccountId: candidate.childAccountId,
-      nextPaymentDate: candidate.nextPaymentDate,
-      recipientEmail,
-      sentAt: now,
-    });
-    sent += 1;
-  }
-
-  return { checked: true, sent };
+      ),
+    recordSent: (candidate, recipientEmail, sentAt) =>
+      recordChildAccountReminderSent(db, {
+        childAccountId: candidate.childAccountId,
+        nextPaymentDate: candidate.nextPaymentDate,
+        recipientEmail,
+        sentAt,
+      }),
+  });
 }

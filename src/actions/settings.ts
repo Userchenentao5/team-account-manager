@@ -1,8 +1,6 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { eq } from "drizzle-orm";
-import { differenceInCalendarDays } from "date-fns";
 import { db } from "@/db";
 import {
   getChildAccountEmailReminderSettings,
@@ -11,13 +9,11 @@ import {
   setSpaceEmailReminderSettings,
   setStatusThresholds,
 } from "@/db/settings";
-import { childAccount, currency, paymentChannel, space } from "@/db/schema";
-import type { ChildAccountPaymentReminderRow } from "@/db/childAccountReminders";
-import type { SpaceExpiryReminderRow } from "@/db/spaceReminders";
+import { getRandomChildAccountPaymentReminderRow } from "@/db/childAccountReminders";
+import { getRandomSpaceExpiryReminderRow } from "@/db/spaceReminders";
 import { renderChildAccountReminderTemplate } from "@/lib/email/child-account-reminder";
 import { renderSpaceExpiryReminderTemplate } from "@/lib/email/space-expiry-reminder";
 import { sendEmail } from "@/lib/email/smtp";
-import { formatPaymentChannelLabel } from "@/lib/payment-channel";
 import {
   childAccountEmailReminderSchema,
   spaceEmailReminderSchema,
@@ -96,7 +92,7 @@ export async function sendSpaceEmailReminderTest(
   }
 
   try {
-    const row = randomSpaceReminderRow();
+    const row = getRandomSpaceExpiryReminderRow(db);
     if (!row) {
       return { ok: false, error: "没有可用于测试发送的空间。" };
     }
@@ -140,7 +136,7 @@ export async function sendChildAccountEmailReminderTest(
   }
 
   try {
-    const row = randomChildAccountReminderRow();
+    const row = getRandomChildAccountPaymentReminderRow(db);
     if (!row) {
       return { ok: false, error: "没有可用于测试发送的子账号。" };
     }
@@ -168,75 +164,4 @@ export async function sendChildAccountEmailReminderTest(
       error: error instanceof Error ? error.message : "测试邮件发送失败。",
     };
   }
-}
-
-function randomSpaceReminderRow(): SpaceExpiryReminderRow | null {
-  const rows = db
-    .select({
-      id: space.id,
-      name: space.name,
-      paymentChannelName: paymentChannel.name,
-      paymentChannelBankCardLast4: paymentChannel.bankCardLast4,
-      expiryDate: space.expiryDate,
-      amountUsd: space.amountUsd,
-    })
-    .from(space)
-    .innerJoin(paymentChannel, eq(paymentChannel.id, space.paymentChannelId))
-    .all()
-    .filter((row) => row.expiryDate);
-
-  const row = rows[Math.floor(Math.random() * rows.length)];
-  if (!row?.expiryDate) return null;
-
-  return {
-    id: row.id,
-    name: row.name,
-    paymentChannelName: formatPaymentChannelLabel(
-      row.paymentChannelName,
-      row.paymentChannelBankCardLast4,
-    ),
-    expiryDate: row.expiryDate,
-    daysUntilExpiry: differenceInCalendarDays(
-      localDateFromIsoDate(row.expiryDate),
-      new Date(),
-    ),
-    amountUsdMinor: row.amountUsd ?? 0,
-  };
-}
-
-function randomChildAccountReminderRow(): ChildAccountPaymentReminderRow | null {
-  const rows = db
-    .select({
-      childAccountId: childAccount.id,
-      spaceName: space.name,
-      childAccountEmail: childAccount.email,
-      childAccountContact: childAccount.contact,
-      childAccountLabel: childAccount.label,
-      nextPaymentDate: childAccount.nextPaymentDate,
-      amountMinor: childAccount.monthlyAmountMinor,
-      currencyCode: childAccount.monthlyCurrencyCode,
-      currencyMinorUnit: currency.minorUnit,
-    })
-    .from(childAccount)
-    .innerJoin(space, eq(space.id, childAccount.spaceId))
-    .innerJoin(currency, eq(currency.code, childAccount.monthlyCurrencyCode))
-    .all()
-    .filter((row) => row.nextPaymentDate && row.amountMinor > 0);
-
-  const row = rows[Math.floor(Math.random() * rows.length)];
-  if (!row?.nextPaymentDate) return null;
-
-  return {
-    ...row,
-    nextPaymentDate: row.nextPaymentDate,
-    daysUntilPayment: differenceInCalendarDays(
-      localDateFromIsoDate(row.nextPaymentDate),
-      new Date(),
-    ),
-  };
-}
-
-function localDateFromIsoDate(value: string): Date {
-  const [year, month, day] = value.split("-").map(Number);
-  return new Date(year, month - 1, day);
 }

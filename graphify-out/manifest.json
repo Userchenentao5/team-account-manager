@@ -100,9 +100,9 @@
     "semantic_hash": "6c4307ffa009658f5c97f5629094c0c2"
   },
   "next.config.ts": {
-    "mtime": 1783612050.1218262,
-    "ast_hash": "025f4fcb6024b3524d19492cf7ce54a2",
-    "semantic_hash": "025f4fcb6024b3524d19492cf7ce54a2"
+    "mtime": 1790089929.2992964,
+    "ast_hash": "be63acb0985472a159f2e06adeda9106",
+    "semantic_hash": ""
   },
   "package.json": {
     "mtime": 1784427036.9816003,
@@ -130,8 +130,8 @@
     "semantic_hash": ""
   },
   "src/actions/childAccounts.ts": {
-    "mtime": 1785239647.6186662,
-    "ast_hash": "00747ad47b52f138c198fea216756e1b",
+    "mtime": 1790006400.2940147,
+    "ast_hash": "2465f35236b89b614bd6c734d25d052d",
     "semantic_hash": ""
   },
   "src/actions/currencies.test.ts": {
@@ -160,8 +160,8 @@
     "semantic_hash": ""
   },
   "src/actions/spaces.ts": {
-    "mtime": 1786970644.125497,
-    "ast_hash": "d33c00730b2d60d7e41f03b488fb6a59",
+    "mtime": 1790006362.6326315,
+    "ast_hash": "640cb08d7d0e4ba5860043f396349a31",
     "semantic_hash": ""
   },
   "src/app/layout.tsx": {
@@ -215,8 +215,8 @@
     "semantic_hash": ""
   },
   "src/components/nav/sidebar.tsx": {
-    "mtime": 1789190494.6650965,
-    "ast_hash": "397b485d10b89b24be0f4b5790247ae4",
+    "mtime": 1789190892.968707,
+    "ast_hash": "55c78529e7df5ee8705dd3f153f9cfb2",
     "semantic_hash": ""
   },
   "src/components/spaces/child-account-delete-dialog.tsx": {
@@ -325,8 +325,8 @@
     "semantic_hash": ""
   },
   "src/components/ui/sidebar.tsx": {
-    "mtime": 1789190494.6650965,
-    "ast_hash": "ae46d93083944501d9ef4738444a3d99",
+    "mtime": 1789190892.971284,
+    "ast_hash": "711b93ca031eb4606678d1d5248bc9d5",
     "semantic_hash": ""
   },
   "src/components/ui/skeleton.tsx": {
@@ -980,9 +980,9 @@
     "semantic_hash": "8f835343b4f91a4c28b192e1ba275995"
   },
   "AGENTS.md": {
-    "mtime": 1783612143.0990481,
-    "ast_hash": "21ceb6533048be51308e69e7b74a35cf",
-    "semantic_hash": "21ceb6533048be51308e69e7b74a35cf"
+    "mtime": 1789191824.4666817,
+    "ast_hash": "3bab13124bb2e19b7209cadba46efb34",
+    "semantic_hash": ""
   },
   "README.md": {
     "mtime": 1784427036.9263742,
@@ -1030,8 +1030,8 @@
     "semantic_hash": "243c2f131197267d34cd5d42e2271edf"
   },
   "src/actions/settings.ts": {
-    "mtime": 1788880826.2564173,
-    "ast_hash": "cb92473d7d7e9b0c390adb784a803af7",
+    "mtime": 1790003731.1495285,
+    "ast_hash": "0d384fba1884178b94547ece4d8c4174",
     "semantic_hash": ""
   },
   "src/components/settings/status-threshold-form.tsx": {
@@ -1090,8 +1090,8 @@
     "semantic_hash": ""
   },
   "src/db/spaceReminders.ts": {
-    "mtime": 1788880826.274328,
-    "ast_hash": "61d9630e01219a06fcf92f65fe0cfa5a",
+    "mtime": 1790003162.4514759,
+    "ast_hash": "693e6dfb5da4c983613962bc9400144e",
     "semantic_hash": ""
   },
   "src/lib/email/smtp.ts": {
@@ -1125,9 +1125,9 @@
     "semantic_hash": ""
   },
   "src/lib/reminders/space-expiry-reminder-job.ts": {
-    "mtime": 1783612144.5956323,
-    "ast_hash": "3f349017909503b65e7023ce04bd8893",
-    "semantic_hash": "3f349017909503b65e7023ce04bd8893"
+    "mtime": 1790003162.4514759,
+    "ast_hash": "e5978ada0178408e3c1977696df63176",
+    "semantic_hash": ""
   },
   "src/lib/reminders/space-expiry-reminder-scheduler.ts": {
     "mtime": 1783612144.597636,
@@ -1160,9 +1160,9 @@
     "semantic_hash": ""
   },
   "src/db/childAccountReminders.ts": {
-    "mtime": 1783612145.0684204,
-    "ast_hash": "83074bec48b2fbf34560327201ab7934",
-    "semantic_hash": "83074bec48b2fbf34560327201ab7934"
+    "mtime": 1790003162.449472,
+    "ast_hash": "0931fbb4c21478cae2a45f56377ca4c0",
+    "semantic_hash": ""
   },
   "src/lib/email/child-account-reminder.ts": {
     "mtime": 1783946797.1986163,
@@ -1175,9 +1175,9 @@
     "semantic_hash": "825ce48b58853cfcbe3161bc269e4ff5"
   },
   "src/lib/reminders/child-account-payment-reminder-job.ts": {
-    "mtime": 1783612145.1290708,
-    "ast_hash": "00456e31bfcfa349c106cf4f6d97b1af",
-    "semantic_hash": "00456e31bfcfa349c106cf4f6d97b1af"
+    "mtime": 1790003162.4514759,
+    "ast_hash": "bfa0601b23e4ef499d51aada9714669b",
+    "semantic_hash": ""
   },
   ".planning/quick/260708-x2b-child-account-email-reminders/PLAN.md": {
     "mtime": 1783612144.5009634,
@@ -1250,18 +1250,18 @@
     "semantic_hash": ""
   },
   "src/app/(protected)/spaces/[id]/page.tsx": {
-    "mtime": 1788880826.2605288,
-    "ast_hash": "55ec521d333a75178e0da53663b3b64e",
+    "mtime": 1790003162.4473355,
+    "ast_hash": "1a2233e6cc7cbf1004c242c230dd2cff",
     "semantic_hash": ""
   },
   "src/app/(protected)/spaces/page.tsx": {
-    "mtime": 1783612145.0549552,
-    "ast_hash": "8f229a348d0bf9813a868f854375915f",
-    "semantic_hash": "8f229a348d0bf9813a868f854375915f"
+    "mtime": 1790003162.449472,
+    "ast_hash": "f319ba3f4425d9bf7dfd12d42e494e4d",
+    "semantic_hash": ""
   },
   ".github/workflows/deploy.yml": {
-    "mtime": 1784070400.2314057,
-    "ast_hash": "c2640083385308f11f6cc71ea1b214c9",
+    "mtime": 1790090615.5441198,
+    "ast_hash": "b4320e7429ba4e5cc28f3510bbed5441",
     "semantic_hash": ""
   },
   ".planning/quick/260710-wm6-team-account-manager-docker-compose-gith/260710-wm6-PLAN.md": {
@@ -1582,6 +1582,66 @@
   "graphify-out/memory/query_20260904_000109_\u5e01\u79cd\u8fd8\u662f\u6ca1\u6709\u57c3\u53ca_\u5bfc\u81f4\u6570\u636e\u4e0d\u5b8c\u6574.md": {
     "mtime": 1788480069.8308446,
     "ast_hash": "993f9d2deaff551e8236a167ff9be8cf",
+    "semantic_hash": ""
+  },
+  "src/lib/usd-snapshot.test.ts": {
+    "mtime": 1790003162.5666547,
+    "ast_hash": "e72805b0c18b329a1f550c5238aa3c4e",
+    "semantic_hash": ""
+  },
+  "src/lib/usd-snapshot.ts": {
+    "mtime": 1790003162.5689375,
+    "ast_hash": "0267b0ad6bab47bc69d9f20a0b5ae768",
+    "semantic_hash": ""
+  },
+  "docs/agents/domain.md": {
+    "mtime": 1789191824.4677093,
+    "ast_hash": "5c554b97de22d1765176bc82093ca190",
+    "semantic_hash": ""
+  },
+  "docs/agents/issue-tracker.md": {
+    "mtime": 1789191824.4666817,
+    "ast_hash": "baeb17ea4994cfb4286bdc1f1d286b36",
+    "semantic_hash": ""
+  },
+  "docs/agents/triage-labels.md": {
+    "mtime": 1789191824.4677093,
+    "ast_hash": "22add54cb98451c55b20e6b7992d4a85",
+    "semantic_hash": ""
+  },
+  "src/db/space-overview.test.ts": {
+    "mtime": 1790003162.5639405,
+    "ast_hash": "500a5d85f241020e359d8791c01ec0e4",
+    "semantic_hash": ""
+  },
+  "src/db/space-overview.ts": {
+    "mtime": 1790003162.5658214,
+    "ast_hash": "a0a13cccd71ec2fcd211962eebdb3c5d",
+    "semantic_hash": ""
+  },
+  "src/lib/reminders/reminder-dispatch.ts": {
+    "mtime": 1790003162.5666547,
+    "ast_hash": "06f5028b97db29e5fbb31b83b4f16521",
+    "semantic_hash": ""
+  },
+  "src/lib/mutations/child-accounts.test.ts": {
+    "mtime": 1790006656.2272096,
+    "ast_hash": "cc70237e729870889a698877a2e2bf45",
+    "semantic_hash": ""
+  },
+  "src/lib/mutations/child-accounts.ts": {
+    "mtime": 1790006597.2232938,
+    "ast_hash": "4665c400b2039dc1fa88dadbf75c130d",
+    "semantic_hash": ""
+  },
+  "src/lib/mutations/spaces.test.ts": {
+    "mtime": 1790006656.2272096,
+    "ast_hash": "6b470cc753b4dd82c252517f7d359379",
+    "semantic_hash": ""
+  },
+  "src/lib/mutations/spaces.ts": {
+    "mtime": 1790006589.6607347,
+    "ast_hash": "0b34ba61f61667c0bbddeea62673fa2a",
     "semantic_hash": ""
   }
 }
