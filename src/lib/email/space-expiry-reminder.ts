@@ -8,6 +8,7 @@ import {
   renderTemplateText,
 } from "@/lib/email/rich-text";
 import { formatMinor } from "@/lib/money";
+import { formatSpaceDateTime } from "@/lib/space-date-time";
 
 export type SpaceExpiryReminderEmail = {
   subject: string;
@@ -24,7 +25,7 @@ function templateValues(row: SpaceExpiryReminderRow): Record<string, string> {
   return {
     amountUsd: formatMinor(row.amountUsdMinor, 2),
     daysUntilExpiry: String(row.daysUntilExpiry),
-    expiryDate: row.expiryDate,
+    expiryDate: formatSpaceDateTime(row.expiryDate),
     paymentChannelName: row.paymentChannelName,
     spaceName: row.name,
   };

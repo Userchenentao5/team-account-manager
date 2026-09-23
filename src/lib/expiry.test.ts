@@ -9,17 +9,23 @@ import {
 
 describe("expiry helpers", () => {
   it.each([
-    ["2025-01-31", { unit: "month" as const, count: 1 }, "2025-02-28"],
-    ["2024-01-31", { unit: "month" as const, count: 1 }, "2024-02-29"],
-    ["2025-01-31", { unit: "month" as const, count: 3 }, "2025-04-30"],
-    ["2025-08-31", { unit: "month" as const, count: 6 }, "2026-02-28"],
-    ["2025-03-15", { unit: "month" as const, count: 1 }, "2025-04-15"],
-    ["2025-11-30", { unit: "quarter" as const, count: 1 }, "2026-02-28"],
-    ["2024-02-29", { unit: "year" as const, count: 1 }, "2025-02-28"],
-    ["2024-02-29", { unit: "year" as const, count: 4 }, "2028-02-29"],
-    ["2025-12-31", { unit: "month" as const, count: 1 }, "2026-01-31"],
+    ["2025-01-31", { unit: "month" as const, count: 1 }, "2025-02-28T00:00:00"],
+    ["2024-01-31", { unit: "month" as const, count: 1 }, "2024-02-29T00:00:00"],
+    ["2025-01-31", { unit: "month" as const, count: 3 }, "2025-04-30T00:00:00"],
+    ["2025-08-31", { unit: "month" as const, count: 6 }, "2026-02-28T00:00:00"],
+    ["2025-03-15", { unit: "month" as const, count: 1 }, "2025-04-15T00:00:00"],
+    ["2025-11-30", { unit: "quarter" as const, count: 1 }, "2026-02-28T00:00:00"],
+    ["2024-02-29", { unit: "year" as const, count: 1 }, "2025-02-28T00:00:00"],
+    ["2024-02-29", { unit: "year" as const, count: 4 }, "2028-02-29T00:00:00"],
+    ["2025-12-31", { unit: "month" as const, count: 1 }, "2026-01-31T00:00:00"],
   ])("adds %j to %s as %s", (openingDate, period, expected) => {
     expect(addPeriod(openingDate, period)).toBe(expected);
+  });
+
+  it("preserves the start time when adding a period", () => {
+    expect(
+      addPeriod("2026-01-31T23:59:58", { unit: "month", count: 1 }),
+    ).toBe("2026-02-28T23:59:58");
   });
 
   it.each([

@@ -1,4 +1,13 @@
 import { z } from "zod";
+import {
+  isValidSpaceDateTime,
+  toSpaceDateTimeStorage,
+} from "@/lib/space-date-time";
+
+const spaceDateTime = z
+  .string()
+  .refine(isValidSpaceDateTime, "请输入有效的日期时间（精确到秒）。")
+  .transform(toSpaceDateTimeStorage);
 
 /**
  * SPACE-01 — shared space form validation (T-03-INPUT / T-03-MASS).
@@ -18,8 +27,8 @@ export const spaceFormSchema = z.object({
     .number()
     .int("席位数量必须是整数。")
     .positive("席位数量至少为 1。"),
-  openingDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
-  currentPeriodStartDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+  openingDate: spaceDateTime,
+  currentPeriodStartDate: spaceDateTime,
   periodUnit: z.enum(["month", "quarter", "year"]),
   periodCount: z.number().int().positive(),
   motherEmail: z.string().trim().min(1, "请输入母账号邮箱/登录名。"),

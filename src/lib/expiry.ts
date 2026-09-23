@@ -5,12 +5,17 @@ import {
   differenceInCalendarDays,
   format,
 } from "date-fns";
+import {
+  SPACE_DATE_TIME_INPUT_FORMAT,
+  spaceDateTimeToDate,
+} from "@/lib/space-date-time";
 
 /**
  * Expiry helpers — calendar-aware period math and display status.
  *
- * Date-only strings are split into local Date parts before using date-fns so
- * UTC parsing cannot shift the base date in negative-offset runtimes.
+ * Space lifecycle values are split into local Date parts before using date-fns
+ * so UTC parsing cannot shift the base date in negative-offset runtimes. The
+ * parser also accepts legacy date-only values at local midnight.
  */
 export type PeriodUnit = "month" | "quarter" | "year";
 
@@ -22,13 +27,8 @@ export type Period = {
 export type ExpiryStatus = "expired" | "soon" | "normal";
 export type ExpiryStatusWithDue = ExpiryStatus | "due";
 
-function localDateFromIsoDate(value: string): Date {
-  const [year, month, day] = value.split("-").map(Number);
-  return new Date(year, month - 1, day);
-}
-
 export function addPeriod(openingDate: string, period: Period): string {
-  const base = localDateFromIsoDate(openingDate);
+  const base = spaceDateTimeToDate(openingDate);
   const next =
     period.unit === "month"
       ? addMonths(base, period.count)
@@ -36,7 +36,7 @@ export function addPeriod(openingDate: string, period: Period): string {
         ? addQuarters(base, period.count)
         : addYears(base, period.count);
 
-  return format(next, "yyyy-MM-dd");
+  return format(next, SPACE_DATE_TIME_INPUT_FORMAT);
 }
 
 export function expiryStatus(
@@ -63,7 +63,7 @@ export function expiryStatus(
   soonDays = 7,
   expireOnDate = false,
 ): ExpiryStatusWithDue {
-  const days = differenceInCalendarDays(localDateFromIsoDate(expiry), today);
+  const days = differenceInCalendarDays(spaceDateTimeToDate(expiry), today);
   if (days < 0) return "expired";
   if (expireOnDate && days === 0) return "due";
   if (days <= soonDays) return "soon";
@@ -103,7 +103,7 @@ export function nextPaymentDueDate(
   period: Period,
   from: string | Date = new Date(),
 ): string {
-  const base = typeof from === "string" ? localDateFromIsoDate(from) : from;
+  const base = typeof from === "string" ? spaceDateTimeToDate(from) : from;
   const dueThisMonth = paymentDateInMonth(base, paymentDay);
   const due =
     differenceInCalendarDays(dueThisMonth, base) <= 0

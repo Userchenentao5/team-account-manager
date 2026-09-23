@@ -13,6 +13,10 @@ import { cn } from "@/lib/utils";
 import { formatMinor, parseToMinor } from "@/lib/money";
 import { formatPaymentChannelLabel } from "@/lib/payment-channel";
 import {
+  currentSpaceDateTimeInput,
+  toSpaceDateTimeInput,
+} from "@/lib/space-date-time";
+import {
   spaceFormSchema,
   type SpaceFormInput,
 } from "@/lib/validation/space";
@@ -86,7 +90,7 @@ function defaultValues(
 ): SpaceFormInput {
   const defaultCurrency =
     currencies.find((currency) => currency.code === "USD") ?? currencies[0];
-  const today = new Date().toISOString().slice(0, 10);
+  const now = currentSpaceDateTimeInput();
   return {
     name: "",
     country: defaultCurrency?.countryCode ?? "US",
@@ -94,8 +98,8 @@ function defaultValues(
     currencyCode: defaultCurrency?.code ?? "USD",
     amountMinor: 1,
     seatCapacity: 1,
-    openingDate: today,
-    currentPeriodStartDate: today,
+    openingDate: now,
+    currentPeriodStartDate: now,
     periodUnit: "month",
     periodCount: 1,
     motherEmail: "",
@@ -117,7 +121,15 @@ function SpaceEditorForm({
   const isComposingCountryQuery = useRef(false);
   const [countryInputValue, setCountryInputValue] = useState("");
   const [countryQuery, setCountryQuery] = useState("");
-  const initialValues = space ?? defaultValues(channels, currencies);
+  const initialValues = space
+    ? {
+        ...space,
+        openingDate: toSpaceDateTimeInput(space.openingDate),
+        currentPeriodStartDate: toSpaceDateTimeInput(
+          space.currentPeriodStartDate,
+        ),
+      }
+    : defaultValues(channels, currencies);
   const initialCurrency = currencies.find(
     (item) => item.code === initialValues.currencyCode,
   );
@@ -475,10 +487,10 @@ function SpaceEditorForm({
               render={({ field }) => (
                 <FormItem className={detailCellClass}>
                   <FormLabel>
-                    {isDetailLayout ? "首次开通日" : "首次开通日期"}
+                    {isDetailLayout ? "首次开通时间" : "首次开通日期时间"}
                   </FormLabel>
                   <FormControl>
-                    <Input type="date" {...field} />
+                    <Input type="datetime-local" step={1} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -489,9 +501,9 @@ function SpaceEditorForm({
               name="currentPeriodStartDate"
               render={({ field }) => (
                 <FormItem className={detailCellClass}>
-                  <FormLabel>当前周期开始日</FormLabel>
+                  <FormLabel>当前周期开始时间</FormLabel>
                   <FormControl>
-                    <Input type="date" {...field} />
+                    <Input type="datetime-local" step={1} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -637,7 +649,7 @@ export function SpaceForm({
         <DialogHeader>
           <DialogTitle>{mode === "add" ? "新增空间" : "编辑空间"}</DialogTitle>
           <DialogDescription>
-            记录席位总数、归属国家、支付渠道、金额与订阅周期，系统会自动算出到期日，并在保存时按当前汇率固定 USD 成本。
+            记录席位总数、归属国家、支付渠道、金额与订阅周期，系统会自动算出到期时间，并在保存时按当前汇率固定 USD 成本。
           </DialogDescription>
         </DialogHeader>
         <SpaceEditorForm

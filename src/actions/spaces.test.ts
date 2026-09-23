@@ -50,8 +50,8 @@ describe("space server actions (SPACE-01 / SPACE-04 / FX-02)", () => {
     currencyCode: "USD",
     amountMinor: 1999,
     seatCapacity: 5,
-    openingDate: "2026-01-31",
-    currentPeriodStartDate: "2026-01-31",
+    openingDate: "2026-01-31T08:15:42",
+    currentPeriodStartDate: "2026-01-31T08:15:42",
     periodUnit: "month" as const,
     periodCount: 1,
     motherEmail: "owner@example.com",
@@ -83,9 +83,9 @@ describe("space server actions (SPACE-01 / SPACE-04 / FX-02)", () => {
 
     expect(res.ok).toBe(true);
     expect(detail?.motherAccount.email).toBe("owner@example.com");
-    expect(detail?.space.openingDate).toBe("2026-01-31");
-    expect(detail?.space.currentPeriodStartDate).toBe("2026-01-31");
-    expect(detail?.space.expiryDate).toBe("2026-02-28");
+    expect(detail?.space.openingDate).toBe("2026-01-31T08:15:42");
+    expect(detail?.space.currentPeriodStartDate).toBe("2026-01-31T08:15:42");
+    expect(detail?.space.expiryDate).toBe("2026-02-28T08:15:42");
     expect(detail?.space.rateUsed).toBe("1");
     expect(detail?.space.rateAsOf).toBe("2026-06-28T00:00:00.000Z");
     expect(detail?.space.rateSource).toBe("frankfurter");
@@ -111,16 +111,16 @@ describe("space server actions (SPACE-01 / SPACE-04 / FX-02)", () => {
 
     const res = await createSpace(
       validInput({
-        openingDate: "2026-06-02",
-        currentPeriodStartDate: "2026-07-02",
+        openingDate: "2026-06-02T07:08:09",
+        currentPeriodStartDate: "2026-07-02T09:10:11",
       }),
     );
     const row = ctx.db.select().from(space).get()!;
 
     expect(res.ok).toBe(true);
-    expect(row.openingDate).toBe("2026-06-02");
-    expect(row.currentPeriodStartDate).toBe("2026-07-02");
-    expect(row.expiryDate).toBe("2026-08-02");
+    expect(row.openingDate).toBe("2026-06-02T07:08:09");
+    expect(row.currentPeriodStartDate).toBe("2026-07-02T09:10:11");
+    expect(row.expiryDate).toBe("2026-08-02T09:10:11");
   });
 
   it("preserves frozen snapshot on name-only update", async () => {
@@ -192,8 +192,8 @@ describe("space server actions (SPACE-01 / SPACE-04 / FX-02)", () => {
     await createSpace(
       validInput({
         amountMinor: 2000,
-        openingDate: "2026-06-02",
-        currentPeriodStartDate: "2026-06-02",
+        openingDate: "2026-06-02T07:08:09",
+        currentPeriodStartDate: "2026-06-02T07:08:09",
       }),
     );
     const row = ctx.db.select().from(space).get()!;
@@ -209,9 +209,9 @@ describe("space server actions (SPACE-01 / SPACE-04 / FX-02)", () => {
     const renewed = getSpaceDetail(ctx.db, row.id);
 
     expect(res.ok).toBe(true);
-    expect(renewed?.space.openingDate).toBe("2026-06-02");
-    expect(renewed?.space.currentPeriodStartDate).toBe("2026-07-02");
-    expect(renewed?.space.expiryDate).toBe("2026-08-02");
+    expect(renewed?.space.openingDate).toBe("2026-06-02T07:08:09");
+    expect(renewed?.space.currentPeriodStartDate).toBe("2026-07-02T07:08:09");
+    expect(renewed?.space.expiryDate).toBe("2026-08-02T07:08:09");
     expect(renewed?.space.rateUsed).toBe("1.25");
     expect(renewed?.space.rateAsOf).toBe("2026-07-02T00:00:00.000Z");
     expect(renewed?.space.amountUsd).toBe(2500);

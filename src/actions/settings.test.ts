@@ -93,8 +93,8 @@ describe("settings server actions", () => {
       from: "sender@example.com",
       to: "billing@example.com",
       subject: "Real Team reminder",
-      text: "Real Team has 6 days left via Visa: 25.99 USD on 2026-07-14",
-      html: "<p>Real Team has 6 days left via Visa: 25.99 USD on 2026-07-14</p>",
+      text: "Real Team has 6 days left via Visa: 25.99 USD on 2026-07-14 00:00:00",
+      html: "<p>Real Team has 6 days left via Visa: 25.99 USD on 2026-07-14 00:00:00</p>",
     });
   });
 

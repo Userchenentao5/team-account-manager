@@ -19,7 +19,7 @@ describe("space expiry reminder email", () => {
         },
       ),
     ).toEqual({
-      subject: "JP Team / 2026-08-01",
+      subject: "JP Team / 2026-08-01 00:00:00",
       text: "JP Team has 7 days left via Wise: 32.90 USD.",
       html: "<p>JP Team has 7 days left via Wise: 32.90 USD.</p>",
     });

@@ -590,7 +590,7 @@ function renderPreview(
   const values: Record<string, string> = {
     amountUsd: "25.99",
     daysUntilExpiry: thresholdDays.trim() || "7",
-    expiryDate: "2026-07-14",
+    expiryDate: "2026-07-14 00:00:00",
     paymentChannelName: "Visa",
     spaceName: "US Team",
   };

@@ -4,6 +4,7 @@ import { differenceInCalendarDays } from "date-fns";
 import { formatCountryLabel } from "@/lib/countries";
 import { expiryStatus, nextPaymentDueDate, type Period } from "@/lib/expiry";
 import { formatPaymentChannelLabel } from "@/lib/payment-channel";
+import { spaceDateTimeToDate } from "@/lib/space-date-time";
 import { getStatusThresholds, type StatusThresholds } from "./settings";
 import { calculateSeatAvailability } from "./spaces";
 import {
@@ -245,13 +246,8 @@ function statusWeight(status: ExpiryStatus) {
   return 2;
 }
 
-function localDateFromIsoDate(value: string): Date {
-  const [year, month, day] = value.split("-").map(Number);
-  return new Date(year, month - 1, day);
-}
-
 function daysUntilExpiry(expiryDate: string, today: Date): number {
-  return differenceInCalendarDays(localDateFromIsoDate(expiryDate), today);
+  return differenceInCalendarDays(spaceDateTimeToDate(expiryDate), today);
 }
 
 function childBillingPeriod(row: ChildDashboardRow): Period {
