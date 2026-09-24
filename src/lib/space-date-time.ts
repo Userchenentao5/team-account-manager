@@ -10,7 +10,7 @@ const SPACE_DATE_TIME_DISPLAY_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
 const DATE_ONLY_PATTERN = /^(\d{4})-(\d{2})-(\d{2})$/;
 const DATE_TIME_PATTERN =
-  /^(\d{4})-(\d{2})-(\d{2})[T ](\d{2}):(\d{2}):(\d{2})$/;
+  /^(\d{4})-(\d{2})-(\d{2})[T ](\d{2}):(\d{2}):(\d{2})(?:\.0{1,3})?$/;
 
 function localDateFromParts(
   year: number,
@@ -84,6 +84,24 @@ export function toSpaceDateTimeInput(
 /** Stores a valid legacy or datetime-local value in canonical form. */
 export function toSpaceDateTimeStorage(value: string): string {
   return format(spaceDateTimeToDate(value), SPACE_DATE_TIME_INPUT_FORMAT);
+}
+
+/**
+ * Copies the local time-of-day from the opening timestamp to another space
+ * lifecycle timestamp while preserving the target's calendar date.
+ * Incomplete datetime-local values leave the target unchanged.
+ */
+export function syncSpaceDateTimeTimeOfDay(
+  source: string,
+  target: string,
+): string {
+  if (!parseSpaceDateTime(source) || !parseSpaceDateTime(target)) {
+    return target;
+  }
+
+  const sourceInput = toSpaceDateTimeInput(source);
+  const targetInput = toSpaceDateTimeInput(target);
+  return `${targetInput.slice(0, 10)}T${sourceInput.slice(11)}`;
 }
 
 /** Formats a database value for user-facing space lifecycle displays. */
