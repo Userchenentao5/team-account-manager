@@ -4,6 +4,7 @@ import {
   addYears,
   differenceInCalendarDays,
   format,
+  subDays,
 } from "date-fns";
 import {
   SPACE_DATE_TIME_INPUT_FORMAT,
@@ -41,33 +42,41 @@ export function addPeriod(openingDate: string, period: Period): string {
 
 export function expiryStatus(
   expiry: string,
-  today?: Date,
+  now?: Date,
   soonDays?: number,
   expireOnDate?: false,
 ): ExpiryStatus;
 export function expiryStatus(
   expiry: string,
-  today: Date | undefined,
+  now: Date | undefined,
   soonDays: number | undefined,
   expireOnDate: true,
 ): ExpiryStatusWithDue;
 export function expiryStatus(
   expiry: string,
-  today: Date | undefined,
+  now: Date | undefined,
   soonDays: number | undefined,
   expireOnDate: boolean,
 ): ExpiryStatusWithDue;
 export function expiryStatus(
   expiry: string,
-  today = new Date(),
+  now = new Date(),
   soonDays = 7,
   expireOnDate = false,
 ): ExpiryStatusWithDue {
-  const days = differenceInCalendarDays(spaceDateTimeToDate(expiry), today);
+  const expiryDate = spaceDateTimeToDate(expiry);
+  const days = differenceInCalendarDays(expiryDate, now);
   if (days < 0) return "expired";
   if (expireOnDate && days === 0) return "due";
-  if (days <= soonDays) return "soon";
-  return "normal";
+
+  if (expireOnDate) {
+    return days <= soonDays ? "soon" : "normal";
+  }
+
+  // Space warnings begin at the expiry wall-clock time minus the configured
+  // number of calendar days. Child-account due dates above remain day-based.
+  const warningStartsAt = subDays(expiryDate, soonDays);
+  return now >= warningStartsAt ? "soon" : "normal";
 }
 
 export function monthlyPaymentDueDate(
