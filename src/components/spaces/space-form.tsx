@@ -14,6 +14,7 @@ import { formatMinor, parseToMinor } from "@/lib/money";
 import { formatPaymentChannelLabel } from "@/lib/payment-channel";
 import {
   currentSpaceDateTimeInput,
+  syncSpaceDateTimeTimeOfDay,
   toSpaceDateTimeInput,
 } from "@/lib/space-date-time";
 import {
@@ -490,7 +491,23 @@ function SpaceEditorForm({
                     {isDetailLayout ? "首次开通时间" : "首次开通日期时间"}
                   </FormLabel>
                   <FormControl>
-                    <Input type="datetime-local" step={1} {...field} />
+                    <Input
+                      type="datetime-local"
+                      step={1}
+                      {...field}
+                      onChange={(event) => {
+                        const openingDate = event.currentTarget.value;
+                        field.onChange(openingDate);
+                        form.setValue(
+                          "currentPeriodStartDate",
+                          syncSpaceDateTimeTimeOfDay(
+                            openingDate,
+                            form.getValues("currentPeriodStartDate"),
+                          ),
+                          { shouldDirty: true, shouldValidate: true },
+                        );
+                      }}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
