@@ -129,6 +129,30 @@ describe("dashboard overview aggregates (DASH-01 / DASH-02 / DASH-03 / DASH-04)"
     ]);
   });
 
+  it("starts space renewal risk at the exact threshold timestamp", () => {
+    const spaceRow = makeSpace({
+      name: "Threshold Time Space",
+      expiryDate: "2026-10-08T15:30:00",
+    });
+
+    const beforeThreshold = getDashboardOverview(
+      ctx.db,
+      new Date(2026, 9, 1, 15, 29, 59),
+    );
+    expect(beforeThreshold.totals.renewalRiskSpaces).toBe(0);
+    expect(beforeThreshold.expiringSpaces).toEqual([]);
+
+    const atThreshold = getDashboardOverview(
+      ctx.db,
+      new Date(2026, 9, 1, 15, 30, 0),
+    );
+    expect(atThreshold.totals.renewalRiskSpaces).toBe(1);
+    expect(atThreshold.expiringSpaces.map((item) => item.id)).toEqual([
+      spaceRow.id,
+    ]);
+    expect(atThreshold.expiringSpaces[0]?.status).toBe("soon");
+  });
+
   it("DASH-02 and DASH-03 split space spend from rented-account revenue", () => {
     const visa = insertChannel(ctx.db, "Visa");
     const alipay = insertChannel(ctx.db, "Alipay");

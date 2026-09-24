@@ -44,6 +44,26 @@ describe("expiry helpers", () => {
     );
   });
 
+  it("starts a space warning at the exact threshold time", () => {
+    const expiry = "2026-10-08T15:30:00";
+
+    expect(
+      expiryStatus(expiry, new Date(2026, 9, 1, 15, 29, 59), 7),
+    ).toBe("normal");
+    expect(expiryStatus(expiry, new Date(2026, 9, 1, 15, 30, 0), 7)).toBe(
+      "soon",
+    );
+    expect(expiryStatus(expiry, new Date(2026, 9, 1, 15, 30, 1), 7)).toBe(
+      "soon",
+    );
+  });
+
+  it("keeps child-account warnings based on the due calendar date", () => {
+    expect(
+      expiryStatus("2026-10-08", new Date(2026, 9, 8, 23, 59, 59), 7, true),
+    ).toBe("due");
+  });
+
   it("can split due today from already expired", () => {
     expect(expiryStatus("2026-06-28", new Date(2026, 5, 28), 7)).toBe("soon");
     expect(expiryStatus("2026-06-28", new Date(2026, 5, 28), 7, true)).toBe(
