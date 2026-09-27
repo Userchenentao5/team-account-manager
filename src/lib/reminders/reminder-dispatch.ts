@@ -3,7 +3,8 @@ import type { sendEmail } from "@/lib/email/smtp";
 export type ReminderEmailSettings = {
   enabled: boolean;
   recipientEmail: string;
-  sendTime: string;
+  /** Omit when the candidate query determines each row's scheduled time. */
+  sendTime?: string;
   smtpUrl: string;
   smtpFrom: string;
 };
@@ -63,7 +64,7 @@ export async function runReminderDispatch<T>({
   if (!settings.smtpUrl || !settings.smtpFrom) {
     return { checked: false, sent: 0, reason: "missing-smtp" };
   }
-  if (timeText(now) !== settings.sendTime) {
+  if (settings.sendTime !== undefined && timeText(now) !== settings.sendTime) {
     return { checked: false, sent: 0, reason: "not-scheduled-time" };
   }
 

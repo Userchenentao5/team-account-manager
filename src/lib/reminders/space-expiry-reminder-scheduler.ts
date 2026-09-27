@@ -20,17 +20,28 @@ export function startSpaceExpiryReminderScheduler(): void {
   if (!shouldStartScheduler()) return;
   if (globalForReminderScheduler.spaceExpiryReminderScheduler) return;
 
-  const tick = () => {
-    import("@/db")
-      .then(({ db }) =>
-        Promise.all([
-          runSpaceExpiryReminderJob(db),
-          runChildAccountPaymentReminderJob(db),
-        ]),
-      )
-      .catch((error) => {
-        console.error("reminder scheduler failed", error);
-      });
+  let running = false;
+  const tick = async () => {
+    if (running) return;
+    running = true;
+    try {
+      const { db } = await import("@/db");
+      // Wait for both jobs even if one fails: releasing the guard early could
+      // resend a reminder whose SMTP request is still in flight.
+      const results = await Promise.allSettled([
+        runSpaceExpiryReminderJob(db),
+        runChildAccountPaymentReminderJob(db),
+      ]);
+      for (const result of results) {
+        if (result.status === "rejected") {
+          console.error("reminder scheduler failed", result.reason);
+        }
+      }
+    } catch (error) {
+      console.error("reminder scheduler failed", error);
+    } finally {
+      running = false;
+    }
   };
 
   tick();

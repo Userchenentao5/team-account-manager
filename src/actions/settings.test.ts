@@ -22,7 +22,9 @@ vi.mock("nodemailer", () => ({
 import {
   sendChildAccountEmailReminderTest,
   sendSpaceEmailReminderTest,
+  updateSpaceEmailReminderSettings,
 } from "@/actions/settings";
+import { getSpaceEmailReminderSettings } from "@/db/settings";
 import { insertChannel } from "@/db/channels";
 import { insertChildAccount } from "@/db/childAccounts";
 import { seedCurrencies } from "@/db/seed";
@@ -44,6 +46,21 @@ describe("settings server actions", () => {
   afterEach(() => {
     vi.useRealTimers();
     ctx.sqlite.close();
+  });
+
+  it("saves space reminder settings without a separate send time", async () => {
+    const settings = {
+      enabled: true,
+      recipientEmail: "billing@example.com",
+      smtpUrl: "smtp://user:pass@smtp.example.com:587",
+      smtpFrom: "sender@example.com",
+      templateSubject: "{spaceName} reminder",
+      templateBody: "Expires on {expiryDate}",
+    };
+
+    expect(await updateSpaceEmailReminderSettings(settings)).toEqual({ ok: true });
+    expect(getSpaceEmailReminderSettings(ctx.db)).toEqual(settings);
+    expect(mailer.sendMail).not.toHaveBeenCalled();
   });
 
   it("sends a rendered template email with real space data for the reminder test", async () => {
@@ -76,7 +93,6 @@ describe("settings server actions", () => {
       {
         enabled: true,
         recipientEmail: "billing@example.com",
-        sendTime: "09:00",
         smtpUrl: "smtp://user:pass@smtp.example.com:587",
         smtpFrom: "sender@example.com",
         templateSubject: "{spaceName} reminder",
@@ -166,7 +182,6 @@ describe("settings server actions", () => {
     const res = await sendSpaceEmailReminderTest({
       enabled: false,
       recipientEmail: "",
-      sendTime: "09:00",
       smtpUrl: "",
       smtpFrom: "",
       templateSubject: "{spaceName}",

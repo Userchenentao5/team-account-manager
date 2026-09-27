@@ -66,15 +66,28 @@ export function listDueSpaceExpiryReminders(
   const reminderDate = format(today, "yyyy-MM-dd");
 
   return listSpaceExpiryReminderCandidates(db, thresholdDays, today).filter(
-    (row) =>
-      row.daysUntilExpiry > 0 &&
-      !wasSpaceExpiryReminderSent(
-        db,
-        row.id,
-        row.expiryDate,
-        thresholdDays,
-        reminderDate,
-      ),
+    (row) => {
+      if (row.daysUntilExpiry <= 0) return false;
+
+      const expiry = spaceDateTimeToDate(row.expiryDate);
+      const scheduledAt = new Date(today);
+      scheduledAt.setHours(
+        expiry.getHours(),
+        expiry.getMinutes(),
+        expiry.getSeconds(),
+        0,
+      );
+      // Include overdue reminders from today so a delayed tick or restart does
+      // not lose the day's reminder. The daily log prevents repeated delivery.
+      return today >= scheduledAt &&
+        !wasSpaceExpiryReminderSent(
+          db,
+          row.id,
+          row.expiryDate,
+          thresholdDays,
+          reminderDate,
+        );
+    },
   );
 }
 

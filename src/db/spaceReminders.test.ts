@@ -98,4 +98,36 @@ describe("space expiry reminder queries", () => {
       ),
     ).toEqual([insideWindow.id, dueOnThreshold.id]);
   });
+
+  it("uses each space's expiry time down to seconds and catches a later minute tick", () => {
+    const morning = makeSpace("Morning", "2026-07-10T09:30:45");
+    const evening = makeSpace("Evening", "2026-07-10T18:20:15");
+    makeSpace("Due Today", "2026-07-07T09:30:45");
+    makeSpace("Expired", "2026-07-06T09:30:45");
+    makeSpace("Outside Window", "2026-07-20T09:30:45");
+    makeSpace("No Expiry", null);
+
+    const dueIds = (now: Date) =>
+      listDueSpaceExpiryReminders(ctx.db, 7, now).map((row) => row.id);
+
+    expect(dueIds(new Date(2026, 6, 7, 9, 30, 44))).toEqual([]);
+    expect(dueIds(new Date(2026, 6, 7, 9, 30, 45))).toEqual([morning.id]);
+    expect(dueIds(new Date(2026, 6, 7, 9, 31, 12))).toEqual([morning.id]);
+
+    recordSpaceExpiryReminderSent(ctx.db, {
+      spaceId: morning.id,
+      expiryDate: morning.expiryDate!,
+      thresholdDays: 7,
+      recipientEmail: "billing@example.com",
+      sentAt: new Date(2026, 6, 7, 9, 31, 12),
+    });
+    expect(dueIds(new Date(2026, 6, 7, 18, 20, 14))).toEqual([]);
+    expect(dueIds(new Date(2026, 6, 7, 18, 20, 15))).toEqual([evening.id]);
+    expect(dueIds(new Date(2026, 6, 8, 0, 0, 0))).toEqual([]);
+    expect(dueIds(new Date(2026, 6, 8, 18, 21, 12))).toEqual([
+      morning.id,
+      evening.id,
+    ]);
+    expect(listDueSpaceExpiryReminders(ctx.db, 0, new Date(2026, 6, 7, 23))).toEqual([]);
+  });
 });
