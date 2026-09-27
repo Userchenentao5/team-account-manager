@@ -57,7 +57,6 @@ export const spaceEmailReminderSchema = z
         (value) => value === "" || emailAddress.safeParse(value).success,
         "请输入有效的接收邮箱。",
       ),
-    sendTime: reminderSendTime,
     smtpUrl: z.string().trim().max(500, "SMTP URL 不能超过 500 个字符。").pipe(smtpUrl),
     smtpFrom: z
       .string()

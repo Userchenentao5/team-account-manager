@@ -34,7 +34,6 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { TimePicker } from "@/components/ui/time-picker";
 import { Switch } from "@/components/ui/switch";
 import { TemplatePlaceholderList } from "@/components/settings/template-placeholder-list";
 import {
@@ -73,7 +72,6 @@ export function StatusThresholdForm({
   const [emailDraft, setEmailDraft] = useState({
     enabled: emailReminder.enabled,
     recipientEmail: emailReminder.recipientEmail,
-    sendTime: emailReminder.sendTime,
     smtpUrl: emailReminder.smtpUrl,
     smtpFrom: emailReminder.smtpFrom,
     templateSubject: emailReminder.templateSubject,
@@ -289,7 +287,9 @@ export function StatusThresholdForm({
       <Card>
         <CardHeader className="border-b">
           <CardTitle>空间邮件提醒</CardTitle>
-          <CardDescription>到达空间阈值后，在到期前每天按指定时间自动发送。</CardDescription>
+          <CardDescription>
+            到达空间阈值后，在到期前每天按各空间到期时间中的时、分、秒自动发送。
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={onEmailSubmit} className="space-y-5">
@@ -299,7 +299,7 @@ export function StatusThresholdForm({
                   开启空间邮件提醒
                 </Label>
                 <p className="text-sm text-muted-foreground">
-                  若空间尚未续费，将在提醒窗口内每天发送一次。
+                  若空间尚未续费，将在提醒窗口内每天发送一次；系统每分钟检查，到达对应时间后发送。
                 </p>
               </div>
               <Switch
@@ -325,18 +325,6 @@ export function StatusThresholdForm({
                     }
                     disabled={isEmailPending}
                     placeholder="name@example.com"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="spaceEmailSendTime">发送时间</Label>
-                  <TimePicker
-                    id="spaceEmailSendTime"
-                    value={emailDraft.sendTime}
-                    onValueChange={(value) =>
-                      updateEmailDraft("sendTime", value)
-                    }
-                    disabled={isEmailPending}
                   />
                 </div>
 

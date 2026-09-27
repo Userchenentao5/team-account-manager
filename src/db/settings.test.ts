@@ -2,7 +2,6 @@ import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import {
   DEFAULT_SPACE_EMAIL_TEMPLATE_BODY,
   DEFAULT_SPACE_EMAIL_TEMPLATE_SUBJECT,
-  DEFAULT_SPACE_EMAIL_REMINDER_SEND_TIME,
   DEFAULT_STATUS_THRESHOLDS,
   getSpaceEmailReminderSettings,
   getStatusThresholds,
@@ -10,6 +9,8 @@ import {
   setStatusThresholds,
 } from "@/db/settings";
 import { createTestDb } from "@/test/db-harness";
+import { appSetting } from "@/db/schema";
+import { getChildAccountEmailReminderSettings } from "@/db/settings";
 
 describe("status threshold settings", () => {
   let ctx: ReturnType<typeof createTestDb>;
@@ -42,7 +43,6 @@ describe("status threshold settings", () => {
     expect(getSpaceEmailReminderSettings(ctx.db)).toEqual({
       enabled: false,
       recipientEmail: "",
-      sendTime: DEFAULT_SPACE_EMAIL_REMINDER_SEND_TIME,
       smtpUrl: "",
       smtpFrom: "",
       templateSubject: DEFAULT_SPACE_EMAIL_TEMPLATE_SUBJECT,
@@ -52,7 +52,6 @@ describe("status threshold settings", () => {
     setSpaceEmailReminderSettings(ctx.db, {
       enabled: true,
       recipientEmail: "billing@example.com",
-      sendTime: "10:30",
       smtpUrl: "smtp://user:pass@smtp.example.com:587",
       smtpFrom: "sender@example.com",
       templateSubject: "{spaceName} 续费提醒",
@@ -62,12 +61,21 @@ describe("status threshold settings", () => {
     expect(getSpaceEmailReminderSettings(ctx.db)).toEqual({
       enabled: true,
       recipientEmail: "billing@example.com",
-      sendTime: "10:30",
       smtpUrl: "smtp://user:pass@smtp.example.com:587",
       smtpFrom: "sender@example.com",
       templateSubject: "{spaceName} 续费提醒",
       templateBody: "{spaceName} 还有 {daysUntilExpiry} 天到期。",
     });
     expect(getStatusThresholds(ctx.db)).toEqual(DEFAULT_STATUS_THRESHOLDS);
+  });
+
+  it("ignores the obsolete space send time while retaining the child account time", () => {
+    ctx.db.insert(appSetting).values([
+      { key: "space.emailReminder.sendTime", value: "10:30" },
+      { key: "childAccount.emailReminder.sendTime", value: "11:45" },
+    ]).run();
+
+    expect(getSpaceEmailReminderSettings(ctx.db)).not.toHaveProperty("sendTime");
+    expect(getChildAccountEmailReminderSettings(ctx.db).sendTime).toBe("11:45");
   });
 });

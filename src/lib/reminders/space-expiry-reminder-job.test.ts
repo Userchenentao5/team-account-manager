@@ -53,33 +53,31 @@ describe("space expiry reminder job", () => {
     setSpaceEmailReminderSettings(ctx.db, {
       enabled: true,
       recipientEmail: "billing@example.com",
-      sendTime: "09:30",
       smtpUrl: "smtp://user:pass@smtp.example.com:587",
       smtpFrom: "sender@example.com",
       templateSubject: "{spaceName} 自动提醒",
       templateBody:
         "{spaceName} 还有 {daysUntilExpiry} 天到期，{paymentChannelName} 支付 {amountUsd} USD。",
     });
-    const space = makeSpace("Threshold Team", "2026-07-14");
+    const space = makeSpace("Threshold Team", "2026-07-14T09:30:45");
     makeSpace("Not Yet", "2026-08-15");
     const sendEmail = vi.fn().mockResolvedValue(undefined);
 
     await expect(
       runSpaceExpiryReminderJob(
         ctx.db,
-        new Date(2026, 6, 7, 9, 29),
+        new Date(2026, 6, 7, 9, 30, 44),
         sendEmail,
       ),
     ).resolves.toMatchObject({
-      checked: false,
+      checked: true,
       sent: 0,
-      reason: "not-scheduled-time",
     });
 
     await expect(
       runSpaceExpiryReminderJob(
         ctx.db,
-        new Date(2026, 6, 7, 9, 30),
+        new Date(2026, 6, 7, 9, 30, 45),
         sendEmail,
       ),
     ).resolves.toMatchObject({ checked: true, sent: 1 });
@@ -97,7 +95,7 @@ describe("space expiry reminder job", () => {
     await expect(
       runSpaceExpiryReminderJob(
         ctx.db,
-        new Date(2026, 6, 7, 9, 30),
+        new Date(2026, 6, 7, 9, 30, 46),
         sendEmail,
       ),
     ).resolves.toMatchObject({ checked: true, sent: 0 });
@@ -106,7 +104,7 @@ describe("space expiry reminder job", () => {
     await expect(
       runSpaceExpiryReminderJob(
         ctx.db,
-        new Date(2026, 6, 8, 9, 30),
+        new Date(2026, 6, 8, 9, 31, 12),
         sendEmail,
       ),
     ).resolves.toMatchObject({ checked: true, sent: 1 });
