@@ -1,0 +1,1 @@
+Temporary Codex Code Review merge diagnostic. Target is an isolated test branch. Delete both test branches after diagnosis.
