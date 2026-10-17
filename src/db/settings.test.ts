@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import {
   DEFAULT_SPACE_EMAIL_TEMPLATE_BODY,
   DEFAULT_SPACE_EMAIL_TEMPLATE_SUBJECT,
+  DEFAULT_CHILD_ACCOUNT_EMAIL_TEMPLATE_BODY,
   DEFAULT_STATUS_THRESHOLDS,
   getSpaceEmailReminderSettings,
   getStatusThresholds,
@@ -77,5 +78,48 @@ describe("status threshold settings", () => {
 
     expect(getSpaceEmailReminderSettings(ctx.db)).not.toHaveProperty("sendTime");
     expect(getChildAccountEmailReminderSettings(ctx.db).sendTime).toBe("11:45");
+  });
+
+  it.each([
+    "{spaceName} 空间的子账号 {childAccountEmail} 今天到期，联系人：{contact}，应收金额：{amount} {currencyCode}。",
+    "<p>{spaceName} 的子账号 <strong>{childAccountEmail}</strong> 今天到期。</p><p>应收金额：{amount} {currencyCode}，下一付款日：{nextPaymentDate}。</p>",
+  ])("upgrades a saved built-in child account body: %s", (body) => {
+    ctx.db.insert(appSetting).values({
+      key: "childAccount.emailReminder.templateBody",
+      value: body,
+    }).run();
+
+    expect(getChildAccountEmailReminderSettings(ctx.db).templateBody)
+      .toBe(DEFAULT_CHILD_ACCOUNT_EMAIL_TEMPLATE_BODY);
+  });
+
+  it("retains the owner's custom child account body", () => {
+    const body = "<p>请联系 {contact}，核实后再收款。</p>";
+    ctx.db.insert(appSetting).values({
+      key: "childAccount.emailReminder.templateBody",
+      value: body,
+    }).run();
+
+    expect(getChildAccountEmailReminderSettings(ctx.db).templateBody).toBe(body);
+  });
+
+  it("upgrades the saved built-in space reminder body", () => {
+    ctx.db.insert(appSetting).values({
+      key: "space.emailReminder.templateBody",
+      value: "{spaceName}空间即将在{daysUntilExpiry}天后到期，支付渠道{paymentChannelName}需要支付{spaceName}空间{amountUsd} USD。",
+    }).run();
+
+    expect(getSpaceEmailReminderSettings(ctx.db).templateBody)
+      .toBe(DEFAULT_SPACE_EMAIL_TEMPLATE_BODY);
+  });
+
+  it("retains the owner's custom space reminder body", () => {
+    const body = "<p>请在 {expiryDate} 前检查 {paymentChannelName}。</p>";
+    ctx.db.insert(appSetting).values({
+      key: "space.emailReminder.templateBody",
+      value: body,
+    }).run();
+
+    expect(getSpaceEmailReminderSettings(ctx.db).templateBody).toBe(body);
   });
 });

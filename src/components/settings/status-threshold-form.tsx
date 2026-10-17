@@ -36,11 +36,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { TemplatePlaceholderList } from "@/components/settings/template-placeholder-list";
-import {
-  renderRichTextTemplateBody,
-  renderTemplateText,
-  sanitizeRichTextHtml,
-} from "@/lib/email/rich-text";
+import { sanitizeRichTextHtml } from "@/lib/email/rich-text";
+import { renderSpaceExpiryReminderContent } from "@/lib/email/space-expiry-reminder-content";
 import { SPACE_REMINDER_TEMPLATE_PLACEHOLDERS } from "@/lib/email/reminder-template-placeholders";
 
 type StatusThresholdFormProps = {
@@ -104,6 +101,11 @@ export function StatusThresholdForm({
     templateBodyRef.current?.focus();
     document.execCommand(command);
     onTemplateBodyInput();
+  }
+
+  function toggleTemplateEditor() {
+    setEmailDraft(currentEmailDraft());
+    setIsEditingTemplate((current) => !current);
   }
 
   function insertPlaceholder(placeholder: string) {
@@ -386,9 +388,7 @@ export function StatusThresholdForm({
                         type="button"
                         variant="outline"
                         size="sm"
-                        onClick={() =>
-                          setIsEditingTemplate((current) => !current)
-                        }
+                        onClick={toggleTemplateEditor}
                       >
                         <Pencil className="size-4" />
                         {isEditingTemplate ? "收起编辑" : "编辑模板"}
@@ -404,6 +404,10 @@ export function StatusThresholdForm({
                       </Button>
                     </div>
                   </div>
+
+                  <p className="text-sm text-muted-foreground">
+                    邮件使用统一卡片版式，自动展示到期时间、订阅金额与支付渠道。可编辑下方补充正文，支持加粗、斜体和列表。
+                  </p>
 
                   {isEditingTemplate ? (
                     <div className="space-y-3">
@@ -498,6 +502,7 @@ export function StatusThresholdForm({
                             ref={templateBodyRef}
                             id="spaceEmailTemplateBody"
                             role="textbox"
+                            aria-label="邮件正文模板"
                             aria-multiline="true"
                             contentEditable={!isEmailPending}
                             suppressContentEditableWarning
@@ -525,14 +530,17 @@ export function StatusThresholdForm({
                   ) : null}
 
                   {showPreview ? (
-                    <div className="rounded-md bg-muted/60 p-3 text-sm">
-                      <p ref={previewSubjectRef} className="font-medium" />
+                    <div className="overflow-hidden rounded-md border text-sm">
+                      <div className="space-y-1 border-b bg-muted/60 p-3">
+                        <p className="text-xs text-muted-foreground">示例数据预览 · 实际发送时替换为对应空间信息</p>
+                        <p ref={previewSubjectRef} className="break-words font-medium" />
+                      </div>
                       <div
                         ref={(node) => {
                           previewBodyRef.current = node;
                           if (node) syncPreview();
                         }}
-                        className="mt-2 text-muted-foreground [&_ol]:ml-5 [&_ol]:list-decimal [&_p]:mb-2 [&_p:last-child]:mb-0 [&_ul]:ml-5 [&_ul]:list-disc"
+                        className="[&_ol]:list-decimal [&_ul]:list-disc"
                       />
                     </div>
                   ) : null}
@@ -575,17 +583,15 @@ function renderPreview(
   },
   thresholdDays: string,
 ) {
-  const values: Record<string, string> = {
+  const values = {
     amountUsd: "25.99",
     daysUntilExpiry: thresholdDays.trim() || "7",
-    expiryDate: "2026-07-14 00:00:00",
+    expiryDate: "2026-10-25 09:30:45",
     paymentChannelName: "Visa",
     spaceName: "US Team",
   };
-  const body = renderRichTextTemplateBody(draft.templateBody, values);
-
-  return {
-    subject: renderTemplateText(draft.templateSubject, values),
-    html: body.html,
-  };
+  return renderSpaceExpiryReminderContent(
+    { subject: draft.templateSubject, body: draft.templateBody },
+    values,
+  );
 }

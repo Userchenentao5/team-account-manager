@@ -107,9 +107,11 @@ describe("child account payment reminder job", () => {
       from: "sender@example.com",
       to: "owner@example.com",
       subject: "US Team member@example.com due",
-      text: "US Team member@example.com wx-member, amount 12.99 CNY.",
-      html: "<p>US Team member@example.com wx-member, amount 12.99 CNY.</p>",
+      text: expect.stringContaining("US Team member@example.com wx-member, amount 12.99 CNY."),
+      html: expect.stringContaining("<p style=\"margin:0 0 12px;\">US Team member@example.com wx-member, amount 12.99 CNY.</p>"),
     });
+    expect(sendEmail.mock.calls[0][0].html).toContain("本期应收金额");
+    expect(sendEmail.mock.calls[0][0].html).toContain("今天到期");
 
     await expect(
       runChildAccountPaymentReminderJob(

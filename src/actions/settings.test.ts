@@ -109,9 +109,10 @@ describe("settings server actions", () => {
       from: "sender@example.com",
       to: "billing@example.com",
       subject: "Real Team reminder",
-      text: "Real Team has 6 days left via Visa: 25.99 USD on 2026-07-14 00:00:00",
-      html: "<p>Real Team has 6 days left via Visa: 25.99 USD on 2026-07-14 00:00:00</p>",
+      text: expect.stringContaining("Real Team has 6 days left via Visa: 25.99 USD on 2026-07-14 00:00:00"),
+      html: expect.stringContaining('<p style="margin:0 0 12px;">Real Team has 6 days left via Visa: 25.99 USD on 2026-07-14 00:00:00</p>'),
     });
+    expect(mailer.sendMail.mock.calls[0][0].html).toContain("空间到期时间");
   });
 
   it("sends a rendered child account reminder test with next payment date", async () => {
@@ -173,9 +174,10 @@ describe("settings server actions", () => {
       from: "sender@example.com",
       to: "billing@example.com",
       subject: "Real Team child reminder",
-      text: "Real Team member@example.com wx-member: 12.99 CNY on 2026-07-08",
-      html: "<p>Real Team member@example.com wx-member: 12.99 CNY on 2026-07-08</p>",
+      text: expect.stringContaining("Real Team member@example.com wx-member: 12.99 CNY on 2026-07-08"),
+      html: expect.stringContaining("<p style=\"margin:0 0 12px;\">Real Team member@example.com wx-member: 12.99 CNY on 2026-07-08</p>"),
     });
+    expect(mailer.sendMail.mock.calls[0][0].html).toContain("本期应收金额");
   });
 
   it("rejects unknown reminder template placeholders", async () => {

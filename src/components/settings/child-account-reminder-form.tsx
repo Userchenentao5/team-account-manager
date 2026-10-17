@@ -33,11 +33,8 @@ import { Label } from "@/components/ui/label";
 import { TimePicker } from "@/components/ui/time-picker";
 import { Switch } from "@/components/ui/switch";
 import { TemplatePlaceholderList } from "@/components/settings/template-placeholder-list";
-import {
-  renderRichTextTemplateBody,
-  renderTemplateText,
-  sanitizeRichTextHtml,
-} from "@/lib/email/rich-text";
+import { sanitizeRichTextHtml } from "@/lib/email/rich-text";
+import { renderChildAccountReminderContent } from "@/lib/email/child-account-reminder-content";
 import { CHILD_ACCOUNT_REMINDER_TEMPLATE_PLACEHOLDERS } from "@/lib/email/reminder-template-placeholders";
 
 type ChildAccountReminderFormProps = {
@@ -86,6 +83,12 @@ export function ChildAccountReminderForm({
     templateBodyRef.current?.focus();
     document.execCommand(command);
     onTemplateBodyInput();
+  }
+
+  function toggleTemplateEditor() {
+    // Retain the current body when reopening the contentEditable editor.
+    setDraft(currentDraft());
+    setIsEditingTemplate((current) => !current);
   }
 
   function insertPlaceholder(placeholder: string) {
@@ -280,9 +283,7 @@ export function ChildAccountReminderForm({
                     type="button"
                     variant="outline"
                     size="sm"
-                    onClick={() =>
-                      setIsEditingTemplate((current) => !current)
-                    }
+                    onClick={toggleTemplateEditor}
                   >
                     <Pencil className="size-4" />
                     {isEditingTemplate ? "收起编辑" : "编辑模板"}
@@ -298,6 +299,10 @@ export function ChildAccountReminderForm({
                   </Button>
                 </div>
               </div>
+
+              <p className="text-sm text-muted-foreground">
+                邮件使用统一卡片版式，自动展示金额、付款日期与账号信息。可编辑下方补充正文，支持加粗、斜体和列表。
+              </p>
 
               {isEditingTemplate ? (
                 <div className="space-y-3">
@@ -389,6 +394,7 @@ export function ChildAccountReminderForm({
                         ref={templateBodyRef}
                         id="childAccountEmailTemplateBody"
                         role="textbox"
+                        aria-label="邮件正文模板"
                         aria-multiline="true"
                         contentEditable={!isPending}
                         suppressContentEditableWarning
@@ -414,14 +420,17 @@ export function ChildAccountReminderForm({
               ) : null}
 
               {showPreview ? (
-                <div className="rounded-md bg-muted/60 p-3 text-sm">
-                  <p ref={previewSubjectRef} className="font-medium" />
+                <div className="overflow-hidden rounded-md border text-sm">
+                  <div className="space-y-1 border-b bg-muted/60 p-3">
+                    <p className="text-xs text-muted-foreground">示例数据预览 · 实际发送时替换为对应子账号信息</p>
+                    <p ref={previewSubjectRef} className="break-words font-medium" />
+                  </div>
                   <div
                     ref={(node) => {
                       previewBodyRef.current = node;
                       if (node) syncPreview();
                     }}
-                    className="mt-2 text-muted-foreground [&_ol]:ml-5 [&_ol]:list-decimal [&_p]:mb-2 [&_p:last-child]:mb-0 [&_ul]:ml-5 [&_ul]:list-disc"
+                    className="[&_ol]:list-decimal [&_ul]:list-disc"
                   />
                 </div>
               ) : null}
@@ -455,7 +464,7 @@ export function ChildAccountReminderForm({
 }
 
 function renderPreview(draft: { templateSubject: string; templateBody: string }) {
-  const values: Record<string, string> = {
+  const values = {
     amount: "12.99",
     amountUsd: "12.99",
     contact: "wx-member",
@@ -466,10 +475,8 @@ function renderPreview(draft: { templateSubject: string; templateBody: string })
     nextPaymentDate: "2026-07-14",
     spaceName: "US Team",
   };
-  const body = renderRichTextTemplateBody(draft.templateBody, values);
-
-  return {
-    subject: renderTemplateText(draft.templateSubject, values),
-    html: body.html,
-  };
+  return renderChildAccountReminderContent(
+    { subject: draft.templateSubject, body: draft.templateBody },
+    values,
+  );
 }

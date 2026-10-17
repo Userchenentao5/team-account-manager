@@ -4,9 +4,9 @@ import {
   DEFAULT_SPACE_EMAIL_TEMPLATE_SUBJECT,
 } from "@/db/settings";
 import {
-  renderRichTextTemplateBody,
-  renderTemplateText,
-} from "@/lib/email/rich-text";
+  renderSpaceExpiryReminderContent,
+  type SpaceExpiryReminderValues,
+} from "@/lib/email/space-expiry-reminder-content";
 import { formatMinor } from "@/lib/money";
 import { formatSpaceDateTime } from "@/lib/space-date-time";
 
@@ -21,7 +21,7 @@ export type SpaceExpiryReminderTemplate = {
   body: string;
 };
 
-function templateValues(row: SpaceExpiryReminderRow): Record<string, string> {
+function templateValues(row: SpaceExpiryReminderRow): SpaceExpiryReminderValues {
   return {
     amountUsd: formatMinor(row.amountUsdMinor, 2),
     daysUntilExpiry: String(row.daysUntilExpiry),
@@ -35,14 +35,7 @@ export function renderSpaceExpiryReminderTemplate(
   template: SpaceExpiryReminderTemplate,
   row: SpaceExpiryReminderRow,
 ): SpaceExpiryReminderEmail {
-  const values = templateValues(row);
-  const body = renderRichTextTemplateBody(template.body, values);
-
-  return {
-    subject: renderTemplateText(template.subject, values),
-    text: body.text,
-    html: body.html,
-  };
+  return renderSpaceExpiryReminderContent(template, templateValues(row));
 }
 
 export function composeSpaceExpiryReminderEmail(
