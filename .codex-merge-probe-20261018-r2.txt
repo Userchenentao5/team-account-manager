@@ -1,0 +1,2 @@
+Temporary permission recheck after the ChatGPT Codex Connector installation update.
+Merge only into the isolated diagnostic base branch; delete test branches after diagnosis.
