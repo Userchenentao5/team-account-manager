@@ -1,16 +1,16 @@
-# Graph Report - team-account-manager  (2026-09-27)
+# Graph Report - team-account-manager  (2026-10-18)
 
 ## Corpus Check
-- 327 files · ~213,293 words
+- 333 files · ~214,930 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 3291 nodes · 4269 edges · 1064 communities (206 shown, 858 thin omitted)
+- 3311 nodes · 4312 edges · 1063 communities (206 shown, 857 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 9 edges (avg confidence: 0.78)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `d068c421`
+- Built from commit: `c33f5b98`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -1068,11 +1068,10 @@
 - [[_COMMUNITY_SpaceTable|SpaceTable]]
 - [[_COMMUNITY_package.json|package.json]]
 - [[_COMMUNITY_channel.ts|channel.ts]]
-- [[_COMMUNITY_childAccounts.ts|childAccounts.ts]]
-- [[_COMMUNITY_expiry.ts|expiry.ts]]
-- [[_COMMUNITY_childAccount.ts|childAccount.ts]]
+- [[_COMMUNITY_package.json|package.json]]
+- [[_COMMUNITY_status-threshold-form.test.tsx|status-threshold-form.test.tsx]]
 - [[_COMMUNITY_time-picker.tsx|time-picker.tsx]]
-- [[_COMMUNITY_ExpiringSpaceTable|ExpiringSpaceTable]]
+- [[_COMMUNITY_compareRows|compareRows]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `cn()` - 105 edges
@@ -1101,27 +1100,27 @@
 ## Import Cycles
 - None detected.
 
-## Communities (1064 total, 858 thin omitted)
+## Communities (1063 total, 857 thin omitted)
 
 ### Community 0 - "UI Layout Utilities"
 Cohesion: 0.08
-Nodes (49): react, logout(), ProtectedLayout(), AppSidebar(), referenceChildren, topLevel, Alert(), AlertAction() (+41 more)
+Nodes (48): react, AppSidebar(), referenceChildren, topLevel, Alert(), AlertAction(), AlertDescription(), AlertTitle() (+40 more)
 
 ### Community 3 - "FX Rate Runtime"
-Cohesion: 0.25
-Nodes (17): deleteSpaceCascade(), updateMotherAccountEmail(), updateSpaceRow(), createSpace(), Db, deleteSpace(), failure(), renewSpace() (+9 more)
+Cohesion: 0.16
+Nodes (25): Db, deleteSpaceCascade(), DeleteSpaceCascadeResult, getSpaceDetail(), listSpaces(), SpaceInsert, SpaceRow, SpaceUpdate (+17 more)
 
 ### Community 4 - "Money Formatting and Pages"
-Cohesion: 0.11
-Nodes (37): ChannelStatusFilter, ChannelTable(), ChannelTableProps, DialogState, ExpiringChildAccountTableProps, ExpiringSpaceTableProps, BILLING_PERIOD_OPTIONS, billingPeriodLabel() (+29 more)
+Cohesion: 0.09
+Nodes (39): ChannelDialog(), ChannelStatusFilter, ChannelTableProps, DialogState, CurrencyDialog(), CurrencyTableProps, DialogState, ExpiringChildAccountTable() (+31 more)
 
 ### Community 5 - "Form and Dialog System"
-Cohesion: 0.07
-Nodes (46): LoginResult, errorText, MfaCodeInput(), ChannelDialog(), ChannelDialogProps, CurrencyDeleteDialog(), CurrencyDialog(), CurrencyDialogProps (+38 more)
+Cohesion: 0.08
+Nodes (47): errorText, LoginForm(), MfaCodeInput(), ChannelDialogProps, CurrencyDialogProps, Enrollment, BILLING_PERIOD_OPTIONS, ChildAccountForm() (+39 more)
 
 ### Community 6 - "Authentication and Rate Limits"
-Cohesion: 0.07
-Nodes (67): config, middleware(), clientIdentifier(), cookieOptions(), failedLogin(), finishLogin(), login(), loginError() (+59 more)
+Cohesion: 0.06
+Nodes (69): config, middleware(), clientIdentifier(), cookieOptions(), failedLogin(), finishLogin(), login(), loginError() (+61 more)
 
 ### Community 7 - "cn"
 Cohesion: 0.40
@@ -1132,8 +1131,8 @@ Cohesion: 0.10
 Nodes (24): RenewalRisksPage(), addBucket(), BucketSeed, childBillingPeriod(), ChildDashboardRow, ChildExpiryStatus, childNextPaymentDate(), DashboardCountSummary (+16 more)
 
 ### Community 10 - "Button and Delete Dialogs"
-Cohesion: 0.16
-Nodes (21): ArchiveDialog(), ArchiveDialogProps, CurrencyDeleteDialogProps, ChildAccountDeleteDialog(), ChildAccountDeleteDialogProps, SpaceDeleteDialog(), SpaceDeleteDialogProps, SpaceDetailActionsProps (+13 more)
+Cohesion: 0.15
+Nodes (23): ArchiveDialog(), ArchiveDialogProps, CurrencyDeleteDialog(), CurrencyDeleteDialogProps, ChildAccountDeleteDialog(), ChildAccountDeleteDialogProps, SpaceDeleteDialog(), SpaceDeleteDialogProps (+15 more)
 
 ### Community 11 - "Test Database and FX"
 Cohesion: 0.11
@@ -1143,17 +1142,21 @@ Nodes (19): dependencies, better-sqlite3, class-variance-authority, clsx, date-f
 Cohesion: 0.05
 Nodes (38): Authentication, Destructive Confirmations, Dialog Forms, `drizzle/0004_*.sql` (migration, CRUD), Explicit-DB Data Helpers, File Classification, FX Snapshot, Metadata (+30 more)
 
+### Community 13 - "Data Tables and Tooltips"
+Cohesion: 0.16
+Nodes (18): formatAsOf(), formatPeriodLabel(), SpaceDetailPage(), ExpiringSpaceTable(), formatDays(), MotherSeatCard(), SpaceTable(), COUNTRY_LABELS (+10 more)
+
 ### Community 14 - "Space Server Actions"
-Cohesion: 0.11
-Nodes (22): sendChildAccountEmailReminderTest(), ChildAccountPaymentReminderRow, ChildAccountReminderOption, ChildAccountReminderSubscription, Db, getRandomChildAccountPaymentReminderRow(), listDueChildAccountPaymentReminders(), localDateFromIsoDate() (+14 more)
+Cohesion: 0.09
+Nodes (24): sendChildAccountEmailReminderTest(), ChildAccountReminderOption, ChildAccountReminderSubscription, Db, getRandomChildAccountPaymentReminderRow(), listDueChildAccountPaymentReminders(), localDateFromIsoDate(), recordChildAccountReminderSent() (+16 more)
 
 ### Community 15 - "child-account-table.tsx"
-Cohesion: 0.12
-Nodes (18): dbHolder, fxMock, AppSettingRow, childAccount, ChildAccountReminderLogRow, ChildAccountReminderSubscriptionRow, ChildAccountRow, FxRateRow (+10 more)
+Cohesion: 0.10
+Nodes (23): dbHolder, fxMock, seedChild(), dbHolder, fxMock, ChildAccountInsert, ChildAccountUpdate, Db (+15 more)
 
 ### Community 16 - "countries.ts"
-Cohesion: 0.13
-Nodes (23): addCurrency(), CURRENCY_PATHS, CurrencyActionResult, deleteCurrency(), dbHolder, updateCurrency(), countCurrencyUsage(), CurrencyInsert (+15 more)
+Cohesion: 0.08
+Nodes (42): addCurrency(), CURRENCY_PATHS, CurrencyActionResult, deleteCurrency(), updateCurrency(), refreshRates(), RefreshRatesResult, RatesPage() (+34 more)
 
 ### Community 17 - "childAccounts.ts"
 Cohesion: 0.40
@@ -1164,27 +1167,27 @@ Cohesion: 0.06
 Nodes (30): Anti-Pattern 1: Calling the FX API on every request / page load, Anti-Pattern 2: Re-converting historical spend with today's rate, Anti-Pattern 3: Computing expiry/USD only on read, everywhere, Anti-Pattern 4: Hard-coding payment channels / currencies in code, Anti-Pattern 5: Over-engineering for one user, Anti-Patterns, Architectural Patterns, Architecture Research (+22 more)
 
 ### Community 19 - "Settings and SMTP Actions"
-Cohesion: 0.14
-Nodes (19): sendSpaceEmailReminderTest(), SettingsActionResult, updateChildAccountEmailReminderSettings(), setChildAccountEmailReminderSettings(), getRandomSpaceExpiryReminderRow(), CHILD_ACCOUNT_REMINDER_TEMPLATE_KEYS, SPACE_REMINDER_TEMPLATE_KEYS, findUnknownTemplatePlaceholders() (+11 more)
+Cohesion: 0.13
+Nodes (21): sendSpaceEmailReminderTest(), SettingsActionResult, updateChildAccountEmailReminderSettings(), updateSpaceEmailReminderSettings(), updateStatusThresholds(), setChildAccountEmailReminderSettings(), setSpaceEmailReminderSettings(), setStatusThresholds() (+13 more)
 
 ### Community 20 - "Shadcn Component Configuration"
 Cohesion: 0.09
 Nodes (21): aliases, components, hooks, lib, ui, utils, iconLibrary, menuAccent (+13 more)
 
 ### Community 21 - "Space Expiry Email Reminders"
-Cohesion: 0.16
-Nodes (20): ChildAccountReminderForm(), renderPreview(), renderPreview(), StatusThresholdForm(), SpaceExpiryReminderRow, ALLOWED_TAGS, decodeHtmlEntities(), escapeHtml() (+12 more)
+Cohesion: 0.20
+Nodes (18): renderPreview(), renderPreview(), StatusThresholdForm(), renderChildAccountReminderContent(), ReminderLayout, renderReminderLayout(), ALLOWED_TAGS, decodeHtmlEntities() (+10 more)
 
 ### Community 22 - "Child Reminder Rich Text"
-Cohesion: 0.17
-Nodes (18): updateSpaceEmailReminderSettings(), updateStatusThresholds(), LoginForm(), DistributionListProps, statusLabel, ChildAccountReminderFormProps, StatusThresholdFormProps, TemplatePlaceholderList() (+10 more)
+Cohesion: 0.14
+Nodes (20): DistributionList(), DistributionListProps, SpacePerformanceList(), statusLabel, usd(), ChildAccountReminderForm(), ChildAccountReminderFormProps, actions (+12 more)
 
 ### Community 24 - "Child Account Server Actions"
 Cohesion: 0.07
 Nodes (28): Atomic multi-row transaction (synchronous), Client form: RHF + zodResolver + server-error mapping, Explicit-`db` parameterized data helpers, File Classification, `force-dynamic` Node-runtime RSC reading SQLite, Metadata, Money is integer minor units, FX is decimal string, No Analog Found (+20 more)
 
 ### Community 25 - "space-table.tsx"
-Cohesion: 0.24
+Cohesion: 0.23
 Nodes (14): SettingsPage(), MfaSettings(), appSetting, ChildAccountEmailReminderSettings, Db, DEFAULT_STATUS_THRESHOLDS, getChildAccountEmailReminderSettings(), getSpaceEmailReminderSettings() (+6 more)
 
 ### Community 26 - "TypeScript Configuration"
@@ -1192,8 +1195,8 @@ Cohesion: 0.10
 Nodes (19): compilerOptions, allowJs, esModuleInterop, incremental, isolatedModules, jsx, lib, module (+11 more)
 
 ### Community 27 - "layout.tsx"
-Cohesion: 0.07
-Nodes (39): seedUsdRate(), refreshRates(), RefreshRatesResult, dbHolder, FIXED_USD_RATES, seedCache(), USD_RATES, VALID_CNY_RESPONSE (+31 more)
+Cohesion: 0.08
+Nodes (24): seedUsdRate(), dbHolder, dbHolder, FIXED_USD_RATES, seedCache(), USD_RATES, VALID_CNY_RESPONSE, VALID_RESPONSE (+16 more)
 
 ### Community 30 - "Settings Data and Page"
 Cohesion: 0.25
@@ -1212,8 +1215,8 @@ Cohesion: 0.29
 Nodes (6): Accepted Risks Log, Phase 05 - Security, Security Audit Trail, Sign-Off, Threat Register, Trust Boundaries
 
 ### Community 72 - "auth.ts"
-Cohesion: 0.10
-Nodes (28): formatAsOf(), formatPeriodLabel(), SpaceDetailPage(), PageHeader(), PageHeaderProps, SeatUsage(), seatUsageStatus(), SpaceDetailActions() (+20 more)
+Cohesion: 0.25
+Nodes (18): getChildAccount(), ChildAccountMutationContext, ChildAccountMutationError, ChildAccountMutationFailure, ChildAccountMutationResult, childBillingPeriod(), computeMonthlySnapshot(), createChildAccount() (+10 more)
 
 ### Community 73 - "sheet.tsx"
 Cohesion: 0.40
@@ -1776,32 +1779,32 @@ Cohesion: 0.40
 Nodes (4): Answer, Outcome, Q: dashboard中空间风险点，空间订阅和出租账号收款统计数字也希望使用需立即处理和近期关注的色号, Source Nodes
 
 ### Community 459 - "space.ts"
-Cohesion: 0.18
-Nodes (16): CnyDisplayRate, cnyFromUsd(), DashboardPage(), usd(), DistributionList(), SpacePerformanceList(), usd(), getCurrencyMinorUnit() (+8 more)
+Cohesion: 0.17
+Nodes (14): CnyDisplayRate, cnyFromUsd(), DashboardPage(), usd(), MetricCard(), MetricCardProps, toneClassNames, valueClassNames (+6 more)
 
 ### Community 461 - "Toaster"
 Cohesion: 0.40
 Nodes (4): Answer, Outcome, Q: 新增空间时，我希望可以选择埃及，当前没有，帮我增加, Source Nodes
 
 ### Community 462 - "countries.ts"
-Cohesion: 0.24
-Nodes (19): getChildAccount(), getSpaceDetail(), ChildAccountMutationContext, ChildAccountMutationError, ChildAccountMutationFailure, ChildAccountMutationResult, childBillingPeriod(), computeMonthlySnapshot() (+11 more)
+Cohesion: 0.09
+Nodes (33): ChildAccountActionResult, createChildAccount(), deleteChildAccount(), mutationContext(), renewChildAccount(), revalidateSpace(), toActionResult(), updateChildAccount() (+25 more)
 
 ### Community 1028 - "Q: 优化该问题"
 Cohesion: 0.40
 Nodes (4): Answer, Outcome, Q: 优化该问题, Source Nodes
 
 ### Community 1029 - "index.ts"
-Cohesion: 0.19
-Nodes (18): addChannel(), archiveChannel(), ChannelActionResult, reactivateChannel(), renameChannel(), dbHolder, ChannelsPage(), ChannelDb (+10 more)
+Cohesion: 0.18
+Nodes (19): addChannel(), archiveChannel(), ChannelActionResult, reactivateChannel(), renameChannel(), dbHolder, ChannelsPage(), ChannelTable() (+11 more)
 
 ### Community 1030 - "Q: 优化设置中的时间选择器，点击展开后的风格与当前系统的UI风格明显不一致"
 Cohesion: 0.40
 Nodes (4): Answer, Outcome, Q: 优化设置中的时间选择器，点击展开后的风格与当前系统的UI风格明显不一致, Source Nodes
 
 ### Community 1031 - "childAccounts.ts"
-Cohesion: 0.14
-Nodes (17): recordSpaceExpiryReminderSent(), sendEmail(), SendEmailInput, ReminderDispatchInput, ReminderDispatchResult, ReminderEmailSettings, ReminderMessage, runReminderDispatch() (+9 more)
+Cohesion: 0.18
+Nodes (12): recordSpaceExpiryReminderSent(), composeSpaceExpiryReminderEmail(), renderSpaceExpiryReminderTemplate(), row, Db, EmailSender, runSpaceExpiryReminderJob(), SpaceExpiryReminderJobResult (+4 more)
 
 ### Community 1033 - "devDependencies"
 Cohesion: 0.12
@@ -1820,12 +1823,12 @@ Cohesion: 0.40
 Nodes (4): Completed, Deferred, ECS deployment hardening, Verification
 
 ### Community 1040 - "childAccounts.test.ts"
-Cohesion: 0.13
-Nodes (25): dbHolder, fxMock, seedChild(), dbHolder, mailer, insertChannel(), deleteChildAccount(), insertChildAccount() (+17 more)
+Cohesion: 0.19
+Nodes (17): dbHolder, mailer, insertChannel(), makeSpace(), updateMotherSeat(), makeChild(), makeSpace(), currency (+9 more)
 
 ### Community 1041 - "spaceReminders.ts"
-Cohesion: 0.43
-Nodes (7): daysUntilExpiry(), spaceExpiryReminderLog, Db, listDueSpaceExpiryReminders(), listSpaceExpiryReminderCandidates(), wasSpaceExpiryReminderSent(), spaceDateTimeToDate()
+Cohesion: 0.29
+Nodes (8): ChildAccountPaymentReminderRow, ChildAccountReminderEmail, ChildAccountReminderTemplate, composeChildAccountReminderEmail(), ChildAccountReminderValues, renderChildAccountReminderTemplate(), templateValues(), row
 
 ### Community 1042 - "money.ts"
 Cohesion: 0.29
@@ -1852,16 +1855,16 @@ Cohesion: 0.40
 Nodes (4): Answer, Outcome, Q: 继续调整为全部居中对齐, Source Nodes
 
 ### Community 1050 - "rate-table.tsx"
-Cohesion: 0.10
-Nodes (27): formatAsOf(), formatRate(), RateTable(), RateTableProps, toPositiveNumber(), BILLING_PERIOD_OPTIONS, ChildAccountForm(), ChildAccountFormProps (+19 more)
+Cohesion: 0.14
+Nodes (18): formatAsOf(), formatRate(), RateTable(), RateTableProps, toPositiveNumber(), MotherSeatCardProps, CardAction(), Select() (+10 more)
 
 ### Community 1051 - "space-overview.ts"
-Cohesion: 0.12
-Nodes (22): CurrenciesPage(), SpacesPage(), CurrencyTable(), ChildAccountInsert, ChildAccountListRow, ChildAccountUpdate, Db, isSeatTypeLocked() (+14 more)
+Cohesion: 0.15
+Nodes (19): CurrenciesPage(), SpacesPage(), CurrencyTable(), ChildAccountListRow, listChildAccounts(), listCurrencies(), db, globalForDb (+11 more)
 
 ### Community 1052 - "space-date-time.ts"
-Cohesion: 0.38
-Nodes (10): defaultValues(), SpaceEditorForm(), currentSpaceDateTimeInput(), formatSpaceDateTime(), isValidSpaceDateTime(), localDateFromParts(), parseSpaceDateTime(), syncSpaceDateTimeTimeOfDay() (+2 more)
+Cohesion: 0.19
+Nodes (18): defaultValues(), SpaceEditorForm(), toFormValue(), daysUntilExpiry(), spaceExpiryReminderLog, Db, listDueSpaceExpiryReminders(), listSpaceExpiryReminderCandidates() (+10 more)
 
 ### Community 1053 - "Q: 风险页选择风险记录点击操作后，跳转后页面中可以加一个动画高亮一下对应记录背景"
 Cohesion: 0.40
@@ -1872,41 +1875,37 @@ Cohesion: 0.40
 Nodes (4): Answer, Outcome, Q: 币种还是没有埃及，导致数据不完整, Source Nodes
 
 ### Community 1055 - "scripts"
+Cohesion: 0.50
+Nodes (3): Country, CountryCode, countryOptionsFromCurrencies()
+
+### Community 1056 - "SpaceTable"
+Cohesion: 0.21
+Nodes (14): BILLING_PERIOD_OPTIONS, billingPeriodLabel(), BillingPeriodValue, ChildAccountFormValue, ChildAccountTable(), ChildAccountTableProps, childBillingPeriod(), childDisplayStatus() (+6 more)
+
+### Community 1057 - "package.json"
+Cohesion: 0.28
+Nodes (11): addPeriodToDate(), expiryStatus, ExpiryStatusWithDue, monthlyPaymentDueDate(), nextMonthlyPaymentDueDate(), nextPaymentDueDate(), paymentDateInMonth(), Period (+3 more)
+
+### Community 1058 - "channel.ts"
 Cohesion: 0.22
 Nodes (9): scripts, build, db:generate, db:migrate, db:seed, dev, lint, start (+1 more)
 
-### Community 1056 - "SpaceTable"
-Cohesion: 0.40
-Nodes (4): MetricCard(), MetricCardProps, toneClassNames, valueClassNames
-
-### Community 1057 - "package.json"
+### Community 1059 - "package.json"
 Cohesion: 0.33
 Nodes (5): engines, node, name, private, version
 
-### Community 1058 - "channel.ts"
-Cohesion: 0.23
-Nodes (14): createSpace(), deleteSpace(), deleteSpaceSchema, mutationContext(), renewSpace(), revalidateSpace(), SpaceActionResult, toActionResult() (+6 more)
-
-### Community 1059 - "childAccounts.ts"
-Cohesion: 0.33
-Nodes (12): ChildAccountActionResult, createChildAccount(), deleteChildAccount(), mutationContext(), renewChildAccount(), revalidateSpace(), toActionResult(), updateChildAccount() (+4 more)
-
-### Community 1060 - "expiry.ts"
-Cohesion: 0.28
-Nodes (11): addPeriod(), addPeriodToDate(), ExpiryStatusWithDue, monthlyPaymentDueDate(), nextMonthlyPaymentDueDate(), nextPaymentDueDate(), paymentDateInMonth(), Period (+3 more)
-
-### Community 1061 - "childAccount.ts"
-Cohesion: 0.20
-Nodes (9): billingPeriodUnitSchema, ChildAccountFormInput, childAccountFormSchema, childAccountIdSchema, SeatType, seatTypeSchema, validInput, MotherSeatFormInput (+1 more)
-
-### Community 1062 - "time-picker.tsx"
+### Community 1061 - "time-picker.tsx"
 Cohesion: 0.40
 Nodes (4): HOURS, MINUTES, TimePicker(), TimePickerProps
 
+### Community 1062 - "compareRows"
+Cohesion: 0.67
+Nodes (4): compareNullableText(), compareRows(), compareText(), SpaceListRow
+
 ## Knowledge Gaps
-- **1931 isolated node(s):** `$schema`, `style`, `rsc`, `tsx`, `config` (+1926 more)
+- **1936 isolated node(s):** `$schema`, `style`, `rsc`, `tsx`, `config` (+1931 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **858 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **857 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Work-memory lessons
 
@@ -1923,17 +1922,17 @@ Nodes (4): HOURS, MINUTES, TimePicker(), TimePickerProps
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `cn()` connect `UI Layout Utilities` to `SpaceTable`, `Money Formatting and Pages`, `Form and Dialog System`, `auth.ts`, `Button and Delete Dialogs`, `space.ts`, `Child Reminder Rich Text`, `rate-table.tsx`, `space-date-time.ts`?**
-  _High betweenness centrality (0.010) - this node is a cross-community bridge._
+- **Why does `cn()` connect `UI Layout Utilities` to `Money Formatting and Pages`, `Form and Dialog System`, `Button and Delete Dialogs`, `space.ts`, `Child Reminder Rich Text`, `rate-table.tsx`, `space-date-time.ts`?**
+  _High betweenness centrality (0.011) - this node is a cross-community bridge._
 - **Why does `dependencies` connect `Test Database and FX` to `UI Layout Utilities`, `package.json`, `Settings Data and Page`?**
   _High betweenness centrality (0.005) - this node is a cross-community bridge._
-- **Why does `db` connect `space-overview.ts` to `channel.ts`, `childAccounts.ts`, `index.ts`, `Authentication and Rate Limits`, `Dashboard Expiry Calculations`, `auth.ts`, `space.ts`, `countries.ts`, `Settings and SMTP Actions`, `space-table.tsx`, `layout.tsx`?**
-  _High betweenness centrality (0.004) - this node is a cross-community bridge._
+- **Why does `Button()` connect `Button and Delete Dialogs` to `SpaceTable`, `UI Layout Utilities`, `Money Formatting and Pages`, `Form and Dialog System`, `space.ts`, `Data Tables and Tooltips`, `Child Reminder Rich Text`, `rate-table.tsx`?**
+  _High betweenness centrality (0.005) - this node is a cross-community bridge._
 - **What connects `$schema`, `style`, `rsc` to the rest of the system?**
-  _2249 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _2254 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `UI Layout Utilities` be split into smaller, more focused modules?**
-  _Cohesion score 0.07814207650273224 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.08022598870056497 - nodes in this community are weakly interconnected._
 - **Should `Money Formatting and Pages` be split into smaller, more focused modules?**
-  _Cohesion score 0.10505050505050505 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.08956228956228957 - nodes in this community are weakly interconnected._
 - **Should `Form and Dialog System` be split into smaller, more focused modules?**
-  _Cohesion score 0.07475678443420379 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.0814207650273224 - nodes in this community are weakly interconnected._
