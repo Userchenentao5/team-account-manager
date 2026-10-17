@@ -10,14 +10,18 @@ export const DEFAULT_STATUS_THRESHOLDS = {
 
 export const DEFAULT_SPACE_EMAIL_TEMPLATE_SUBJECT = "{spaceName}空间到期提醒";
 export const DEFAULT_SPACE_EMAIL_TEMPLATE_BODY =
-  "{spaceName}空间即将在{daysUntilExpiry}天后到期，支付渠道{paymentChannelName}需要支付{spaceName}空间{amountUsd} USD。";
+  "<p>请在空间到期前确认续费安排，并检查 <strong>{paymentChannelName}</strong> 的支付状态。</p><p>续费完成后，请及时更新空间的到期时间。</p>";
+const LEGACY_SPACE_EMAIL_TEMPLATE_BODIES = new Set([
+  "{spaceName}空间即将在{daysUntilExpiry}天后到期，支付渠道{paymentChannelName}需要支付{spaceName}空间{amountUsd} USD。",
+]);
 
 export const DEFAULT_CHILD_ACCOUNT_EMAIL_REMINDER_SEND_TIME = "09:00";
 export const DEFAULT_CHILD_ACCOUNT_EMAIL_TEMPLATE_SUBJECT =
   "{spaceName} 子账号到期提醒";
 export const DEFAULT_CHILD_ACCOUNT_EMAIL_TEMPLATE_BODY =
-  "{spaceName} 空间的子账号 {childAccountEmail} 今天到期，联系人：{contact}，应收金额：{amount} {currencyCode}。";
+  "<p>请联系 <strong>{contact}</strong> 确认续费与收款。</p><p>收款后，请及时更新子账号的下一付款日。</p>";
 const LEGACY_CHILD_ACCOUNT_EMAIL_TEMPLATE_BODIES = new Set([
+  "{spaceName} 空间的子账号 {childAccountEmail} 今天到期，联系人：{contact}，应收金额：{amount} {currencyCode}。",
   "<p>{spaceName} 的子账号 <strong>{childAccountEmail}</strong> 今天到期。</p><p>应收金额：{amount} {currencyCode}，下一付款日：{nextPaymentDate}。</p>",
   "<p>{spaceName} 的子账号 <strong>{childAccountEmail}</strong> 今天到期。</p><p>应收金额：{amountUsd} USD，下一付款日：{nextPaymentDate}。</p>",
 ]);
@@ -201,8 +205,12 @@ export function getSpaceEmailReminderSettings(
       values[SPACE_EMAIL_REMINDER_TEMPLATE_SUBJECT_KEY] ??
       DEFAULT_SPACE_EMAIL_TEMPLATE_SUBJECT,
     templateBody:
-      values[SPACE_EMAIL_REMINDER_TEMPLATE_BODY_KEY] ??
-      DEFAULT_SPACE_EMAIL_TEMPLATE_BODY,
+      LEGACY_SPACE_EMAIL_TEMPLATE_BODIES.has(
+        values[SPACE_EMAIL_REMINDER_TEMPLATE_BODY_KEY] ?? "",
+      )
+        ? DEFAULT_SPACE_EMAIL_TEMPLATE_BODY
+        : (values[SPACE_EMAIL_REMINDER_TEMPLATE_BODY_KEY] ??
+          DEFAULT_SPACE_EMAIL_TEMPLATE_BODY),
   };
 }
 

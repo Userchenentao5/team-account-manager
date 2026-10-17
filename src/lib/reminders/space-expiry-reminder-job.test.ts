@@ -88,9 +88,11 @@ describe("space expiry reminder job", () => {
       from: "sender@example.com",
       to: "billing@example.com",
       subject: "Threshold Team 自动提醒",
-      text: "Threshold Team 还有 7 天到期，Visa 支付 25.99 USD。",
-      html: "<p>Threshold Team 还有 7 天到期，Visa 支付 25.99 USD。</p>",
+      text: expect.stringContaining("Threshold Team 还有 7 天到期，Visa 支付 25.99 USD。"),
+      html: expect.stringContaining('<p style="margin:0 0 12px;">Threshold Team 还有 7 天到期，Visa 支付 25.99 USD。</p>'),
     });
+    expect(sendEmail.mock.calls[0][0].html).toContain("空间到期时间");
+    expect(sendEmail.mock.calls[0][0].html).toContain("2026-07-14 09:30:45");
 
     await expect(
       runSpaceExpiryReminderJob(

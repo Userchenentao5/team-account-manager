@@ -4,9 +4,9 @@ import {
   DEFAULT_CHILD_ACCOUNT_EMAIL_TEMPLATE_SUBJECT,
 } from "@/db/settings";
 import {
-  renderRichTextTemplateBody,
-  renderTemplateText,
-} from "@/lib/email/rich-text";
+  renderChildAccountReminderContent,
+  type ChildAccountReminderValues,
+} from "@/lib/email/child-account-reminder-content";
 import { formatMinor } from "@/lib/money";
 
 export type ChildAccountReminderEmail = {
@@ -22,12 +22,12 @@ export type ChildAccountReminderTemplate = {
 
 function templateValues(
   row: ChildAccountPaymentReminderRow,
-): Record<string, string> {
+): ChildAccountReminderValues {
   const amount = formatMinor(row.amountMinor, row.currencyMinorUnit);
   return {
     amount,
     amountUsd: amount,
-    contact: row.childAccountContact || "-",
+    contact: row.childAccountContact || "未填写",
     childAccountEmail: row.childAccountEmail,
     childAccountLabel: row.childAccountLabel,
     currencyCode: row.currencyCode,
@@ -41,14 +41,7 @@ export function renderChildAccountReminderTemplate(
   template: ChildAccountReminderTemplate,
   row: ChildAccountPaymentReminderRow,
 ): ChildAccountReminderEmail {
-  const values = templateValues(row);
-  const body = renderRichTextTemplateBody(template.body, values);
-
-  return {
-    subject: renderTemplateText(template.subject, values),
-    text: body.text,
-    html: body.html,
-  };
+  return renderChildAccountReminderContent(template, templateValues(row));
 }
 
 export function composeChildAccountReminderEmail(
