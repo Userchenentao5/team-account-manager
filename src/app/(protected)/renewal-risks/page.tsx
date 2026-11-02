@@ -3,6 +3,7 @@ import { db } from "@/db";
 import { getDashboardOverview } from "@/db/dashboard";
 import { ExpiringChildAccountTable } from "@/components/dashboard/expiring-child-account-table";
 import { ExpiringSpaceTable } from "@/components/dashboard/expiring-space-table";
+import { RiskListScrollRestoration } from "@/components/dashboard/risk-navigation";
 import { PageHeader } from "@/components/layout/page-header";
 import { Button } from "@/components/ui/button";
 
@@ -20,6 +21,7 @@ export default function RenewalRisksPage() {
 
   return (
     <div className="mx-auto w-full max-w-[1440px] px-4 py-7 sm:px-6 lg:px-8">
+      <RiskListScrollRestoration />
       <PageHeader
         title="续费风险"
         description="只显示已过期、今日到期和近期到期的空间与出租账号。"

@@ -32,6 +32,8 @@ import { MotherSeatCard } from "@/components/spaces/mother-seat-card";
 import { SeatUsage } from "@/components/spaces/seat-usage";
 import { SpaceDetailActions } from "@/components/spaces/space-detail-actions";
 import { SpaceInlineEditor } from "@/components/spaces/space-form";
+import { RiskReturnLink } from "@/components/dashboard/risk-navigation";
+import { RiskRecordArrival } from "@/components/spaces/risk-record-arrival";
 
 // better-sqlite3 is a native module — keep this RSC on the Node runtime.
 export const dynamic = "force-dynamic";
@@ -121,6 +123,22 @@ export default async function SpaceDetailPage({
   const thresholds = getStatusThresholds(db);
   const { space, motherAccount, paymentChannel, currency } = overview;
   const { childAccounts, seatAvailability, cnyReference } = overview;
+  const highlightedChild = childAccounts.find(
+    ({ childAccount }) => childAccount.id === highlightedChildAccountId,
+  );
+  const highlightSpace = query.highlightSpace === "1";
+  const riskTargetId = highlightSpace
+    ? "space-risk-record"
+    : highlightedChild
+      ? `child-account-${highlightedChild.childAccount.id}`
+      : undefined;
+  const riskQuery = highlightSpace
+    ? "highlightSpace=1"
+    : highlightedChild
+      ? `highlightChild=${highlightedChild.childAccount.id}`
+      : "";
+  const detailHref = `/spaces/${space.id}${riskQuery ? `?${riskQuery}#${riskTargetId}` : ""}`;
+  const editHref = `/spaces/${space.id}?edit=1${riskQuery ? `&${riskQuery}#space-risk-record` : ""}`;
   const formValue = {
     id: space.id,
     name: space.name,
@@ -142,15 +160,22 @@ export default async function SpaceDetailPage({
 
   return (
     <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-6 px-4 py-7 sm:px-6 lg:px-8">
+      {riskTargetId && !isEditing && !isMotherSeatEditing ? (
+        <RiskRecordArrival targetId={riskTargetId} />
+      ) : null}
       <PageHeader
         variant="detail"
         title={space.name}
         leading={
           <Button asChild variant="outline" className="h-9 gap-2 px-3">
-            <Link href="/spaces">
-              <ArrowLeft aria-hidden="true" className="size-4" />
-              返回列表
-            </Link>
+            {riskTargetId ? (
+              <RiskReturnLink />
+            ) : (
+              <Link href="/spaces">
+                <ArrowLeft aria-hidden="true" className="size-4" />
+                返回列表
+              </Link>
+            )}
           </Button>
         }
         actions={
@@ -159,22 +184,33 @@ export default async function SpaceDetailPage({
             childCount={childAccounts.length}
             isEditing={isEditing}
             editFormId={editFormId}
+            detailHref={detailHref}
+            editHref={editHref}
           />
         }
       />
 
       <Card
         id="space-risk-record"
+        tabIndex={highlightSpace ? -1 : undefined}
+        aria-label={highlightSpace ? "已定位：空间详情" : undefined}
         className={`risk-record-target${
-          query.highlightSpace === "1" ? " risk-record-highlight" : ""
+          highlightSpace ? " risk-record-highlight" : ""
         }`}
       >
         <CardHeader className="border-b">
-          <CardTitle>{isEditing ? "编辑空间" : "空间详情"}</CardTitle>
+          <CardTitle className="flex flex-wrap items-center gap-2">
+            {isEditing ? "编辑空间" : "空间详情"}
+            {highlightSpace ? (
+              <span className="risk-record-location">已定位</span>
+            ) : null}
+          </CardTitle>
           <CardDescription>
             {isEditing
               ? "修改空间资料后会重新计算到期时间；金额或币种变化会重新冻结 USD 成本。"
-              : "查看当前周期、到期状态和冻结成本。"}
+              : highlightSpace
+                ? `到期时间：${formatSpaceDateTime(space.expiryDate)} · 查看并处理本期空间续费。`
+                : "查看当前周期、到期状态和冻结成本。"}
           </CardDescription>
           <CardAction>
             <ExpiryBadge
@@ -189,7 +225,7 @@ export default async function SpaceDetailPage({
               space={formValue}
               channels={channels}
               currencies={currencies}
-              cancelHref={`/spaces/${space.id}`}
+              cancelHref={detailHref}
               formId={editFormId}
             />
           ) : (
@@ -247,7 +283,10 @@ export default async function SpaceDetailPage({
 
           <div className="border-t pt-6">
             <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-              <DetailItem label="到期时间">
+              <DetailItem
+                label="到期时间"
+                className={highlightSpace ? "risk-record-key-field" : undefined}
+              >
                 <span className="font-mono">
                   {formatSpaceDateTime(space.expiryDate)}
                 </span>
@@ -285,8 +324,8 @@ export default async function SpaceDetailPage({
         motherAccount={motherAccount}
         isEditing={isMotherSeatEditing}
         formId={motherSeatFormId}
-        editHref={`/spaces/${space.id}?editMotherSeat=1`}
-        cancelHref={`/spaces/${space.id}`}
+        editHref={`/spaces/${space.id}?editMotherSeat=1${riskQuery ? `&${riskQuery}` : ""}`}
+        cancelHref={detailHref}
       />
 
       <Card>
@@ -297,7 +336,7 @@ export default async function SpaceDetailPage({
             accounts={childAccounts}
             currencies={currencies}
             childAccountSoonDays={thresholds.childAccountSoonDays}
-            highlightedAccountId={highlightedChildAccountId}
+            highlightedAccountId={highlightedChild?.childAccount.id}
           />
         </CardContent>
       </Card>

@@ -29,6 +29,8 @@ type SpaceDetailActionsProps = {
   childCount: number;
   isEditing?: boolean;
   editFormId?: string;
+  detailHref?: string;
+  editHref?: string;
 };
 
 export function SpaceDetailActions({
@@ -36,6 +38,8 @@ export function SpaceDetailActions({
   childCount,
   isEditing = false,
   editFormId,
+  detailHref = `/spaces/${space.id}`,
+  editHref = `/spaces/${space.id}?edit=1`,
 }: SpaceDetailActionsProps) {
   const router = useRouter();
   const [deleteOpen, setDeleteOpen] = useState(false);
@@ -107,14 +111,14 @@ export function SpaceDetailActions({
         <TooltipTrigger asChild>
           {isEditing ? (
             <Button asChild variant="outline">
-              <Link href={`/spaces/${space.id}`}>
+              <Link href={detailHref}>
                 <X className="size-4" />
                 取消编辑
               </Link>
             </Button>
           ) : (
             <Button asChild>
-              <Link href={`/spaces/${space.id}?edit=1`}>
+              <Link href={editHref}>
                 <Pencil className="size-4" />
                 编辑
               </Link>

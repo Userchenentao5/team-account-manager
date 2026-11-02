@@ -18,6 +18,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { ExpiryBadge } from "@/components/spaces/expiry-badge";
+import { RiskDetailLink } from "./risk-navigation";
 
 type ExpiringChildAccountTableProps = {
   accounts: DashboardExpiringChildAccountRow[];
@@ -71,7 +72,7 @@ export function ExpiringChildAccountTable({
             <TableHead scope="col">所属空间</TableHead>
             <TableHead scope="col">到期日</TableHead>
             <TableHead scope="col">剩余/逾期</TableHead>
-            <TableHead scope="col">应收 USD</TableHead>
+            <TableHead scope="col">应收￥</TableHead>
             <TableHead scope="col">联系</TableHead>
             <TableHead scope="col">操作</TableHead>
           </TableRow>
@@ -117,7 +118,13 @@ export function ExpiringChildAccountTable({
                 {formatDays(row.daysUntilExpiry)}
               </TableCell>
               <TableCell className="font-mono">
-                ${formatMinor(row.revenueUsdMinor, 2)} USD
+                {row.revenueCnyMinor === null ? (
+                  <span className="text-sm text-muted-foreground">
+                    缺少人民币汇率
+                  </span>
+                ) : (
+                  <>￥{formatMinor(row.revenueCnyMinor, 2)}</>
+                )}
               </TableCell>
               <TableCell>
                 <span
@@ -137,11 +144,12 @@ export function ExpiringChildAccountTable({
                       className="size-11"
                       aria-label="查看所属空间"
                     >
-                      <Link
+                      <RiskDetailLink
+                        id={`risk-child-link-${row.id}`}
                         href={`/spaces/${row.spaceId}?highlightChild=${row.id}#child-account-${row.id}`}
                       >
                         <Eye className="size-4" />
-                      </Link>
+                      </RiskDetailLink>
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent>查看所属空间</TooltipContent>

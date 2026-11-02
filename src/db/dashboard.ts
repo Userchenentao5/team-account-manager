@@ -4,8 +4,10 @@ import { differenceInCalendarDays } from "date-fns";
 import { formatCountryLabel } from "@/lib/countries";
 import { expiryStatus, nextPaymentDueDate, type Period } from "@/lib/expiry";
 import { formatPaymentChannelLabel } from "@/lib/payment-channel";
+import { convertUsdMinorToCurrencyMinor } from "@/lib/money";
 import { spaceDateTimeToDate } from "@/lib/space-date-time";
 import { getStatusThresholds, type StatusThresholds } from "./settings";
+import { getRate } from "./fxRates";
 import { calculateSeatAvailability } from "./spaces";
 import {
   childAccount,
@@ -49,6 +51,7 @@ export type DashboardExpiringChildAccountRow = {
   daysUntilExpiry: number;
   status: ChildExpiryStatus;
   revenueUsdMinor: number;
+  revenueCnyMinor: number | null;
 };
 
 export type DashboardSpendBucket = {
@@ -150,6 +153,7 @@ type ChildDashboardRow = {
   seatType: string;
   joinedDate: string;
   monthlyCurrencyCode: string;
+  monthlyAmountMinor: number;
   monthlyAmountUsd: number;
   monthlyRateSource: string;
   monthlyPaymentDay: number;
@@ -307,6 +311,7 @@ export function getDashboardOverview(
       seatType: childAccount.seatType,
       joinedDate: childAccount.joinedDate,
       monthlyCurrencyCode: childAccount.monthlyCurrencyCode,
+      monthlyAmountMinor: childAccount.monthlyAmountMinor,
       monthlyAmountUsd: childAccount.monthlyAmountUsd,
       monthlyRateSource: childAccount.monthlyRateSource,
       monthlyPaymentDay: childAccount.monthlyPaymentDay,
@@ -324,6 +329,7 @@ export function getDashboardOverview(
     .innerJoin(paymentChannel, eq(paymentChannel.id, space.paymentChannelId))
     .all();
 
+  const cnyRate = getRate(db, "CNY");
   const motherRows: MotherDashboardRow[] = db
     .select({
       spaceId: motherAccount.spaceId,
@@ -514,6 +520,16 @@ export function getDashboardOverview(
           daysUntilExpiry: daysUntilExpiry(nextPaymentDate, today),
           status,
           revenueUsdMinor: row.monthlyAmountUsd,
+          revenueCnyMinor:
+            row.monthlyCurrencyCode === "CNY"
+              ? row.monthlyAmountMinor
+              : cnyRate
+                ? convertUsdMinorToCurrencyMinor(
+                    row.monthlyAmountUsd,
+                    2,
+                    cnyRate.rateToUsd,
+                  )
+                : null,
         });
       }
     }
