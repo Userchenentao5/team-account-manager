@@ -2,7 +2,8 @@
 
 import { useMemo, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { Check, Pencil, Plus, RefreshCw, Trash2, X } from "lucide-react";
+import { Check, Ellipsis, Pencil, Plus, RefreshCw, Trash2, X } from "lucide-react";
+import { DropdownMenu } from "radix-ui";
 import { toast } from "sonner";
 import {
   createChildAccount,
@@ -594,7 +595,12 @@ export function ChildAccountTable({
       </div>
 
       {shouldShowTable ? (
-        <Table>
+        <Table
+          className={highlightedAccountId ? "risk-record-table" : undefined}
+          containerClassName={
+            highlightedAccountId ? "risk-record-table-container" : undefined
+          }
+        >
           <TableHeader>
             <TableRow>
               <TableHead scope="col">类型</TableHead>
@@ -607,7 +613,7 @@ export function ChildAccountTable({
               <TableHead scope="col">状态</TableHead>
               <TableHead
                 scope="col"
-                className="sticky right-0 z-10 min-w-24 border-l bg-background"
+                className="sticky right-0 z-10 min-w-24 border-l bg-background px-2 sm:px-3"
               >
                 操作
               </TableHead>
@@ -629,6 +635,7 @@ export function ChildAccountTable({
             ) : null}
             {accounts.map((row) => {
               const child = row.childAccount;
+              const isHighlighted = child.id === highlightedAccountId;
               const displayStatus = childDisplayStatus(child);
               const isSelfUse = displayStatus === "self";
               const isEditingCurrent =
@@ -654,8 +661,12 @@ export function ChildAccountTable({
                 <TableRow
                   key={child.id}
                   id={`child-account-${child.id}`}
+                  tabIndex={isHighlighted ? -1 : undefined}
+                  aria-label={
+                    isHighlighted ? `已定位：${child.email}` : undefined
+                  }
                   className={`risk-record-target${
-                    child.id === highlightedAccountId
+                    isHighlighted
                       ? " risk-record-highlight"
                       : ""
                   }`}
@@ -667,7 +678,16 @@ export function ChildAccountTable({
                       {child.seatType}
                     </Badge>
                   </TableCell>
-                  <TableCell className="font-mono">{child.email}</TableCell>
+                  <TableCell
+                    className={isHighlighted ? "risk-record-key-cell font-mono" : "font-mono"}
+                  >
+                    {child.email}
+                    {isHighlighted ? (
+                      <div className="mt-1">
+                        <span className="risk-record-location">已定位</span>
+                      </div>
+                    ) : null}
+                  </TableCell>
                   <TableCell>{child.contact || "-"}</TableCell>
                   <TableCell className="font-mono">{child.joinedDate}</TableCell>
                   <TableCell className="font-mono">
@@ -678,7 +698,9 @@ export function ChildAccountTable({
                       ? "-"
                       : `${billingPeriodLabel(child)} / ${child.monthlyPaymentDay} 日`}
                   </TableCell>
-                  <TableCell className="font-mono">
+                  <TableCell
+                    className={isHighlighted ? "risk-record-key-cell font-mono" : "font-mono"}
+                  >
                     {isSelfUse ? "-" : childExpiryDate(child)}
                   </TableCell>
                   <TableCell>
@@ -689,7 +711,7 @@ export function ChildAccountTable({
                       expireOnDate
                     />
                   </TableCell>
-                  <TableCell className="sticky right-0 z-10 min-w-24 border-l bg-background">
+                  <TableCell className="sticky right-0 z-10 min-w-24 border-l bg-background px-2 sm:px-3">
                     <div className="flex justify-center gap-1">
                       {isSelfUse ? null : (
                         <Tooltip>
@@ -702,7 +724,8 @@ export function ChildAccountTable({
                               onClick={() => setRenewTarget(child)}
                               disabled={isEditingRow || isRenewPending}
                             >
-                              <RefreshCw className="size-4" />
+                              <RefreshCw className="hidden size-4 sm:block" />
+                              <span className="text-sm sm:hidden">续费</span>
                             </Button>
                           </TooltipTrigger>
                           <TooltipContent>续费</TooltipContent>
@@ -713,7 +736,7 @@ export function ChildAccountTable({
                           <Button
                             variant="ghost"
                             size="icon"
-                            className="size-11"
+                            className="hidden size-11 sm:inline-flex"
                             aria-label={`编辑 ${child.email}`}
                             onClick={() =>
                               setFormState({
@@ -733,7 +756,7 @@ export function ChildAccountTable({
                           <Button
                             variant="ghost"
                             size="icon"
-                            className="size-11"
+                            className="hidden size-11 sm:inline-flex"
                             aria-label={`删除 ${child.email}`}
                             onClick={() => setDeleteTarget(child)}
                             disabled={isEditingRow}
@@ -743,6 +766,44 @@ export function ChildAccountTable({
                         </TooltipTrigger>
                         <TooltipContent>删除</TooltipContent>
                       </Tooltip>
+                      <DropdownMenu.Root>
+                        <DropdownMenu.Trigger asChild>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="size-11 sm:hidden"
+                            aria-label={`更多操作 ${child.email}`}
+                            disabled={isEditingRow}
+                          >
+                            <Ellipsis aria-hidden="true" className="size-4" />
+                          </Button>
+                        </DropdownMenu.Trigger>
+                        <DropdownMenu.Portal>
+                          <DropdownMenu.Content
+                            align="end"
+                            sideOffset={4}
+                            className="z-50 min-w-36 rounded-lg border bg-popover p-1 text-popover-foreground shadow-lg"
+                          >
+                            <DropdownMenu.Item
+                              className="flex min-h-11 cursor-default items-center gap-2 rounded-md px-3 text-sm outline-none focus:bg-accent"
+                              onSelect={() =>
+                                setFormState({ mode: "edit", child: toFormValue(row) })
+                              }
+                            >
+                              <Pencil aria-hidden="true" className="size-4" />
+                              编辑账号
+                            </DropdownMenu.Item>
+                            <DropdownMenu.Separator className="my-1 h-px bg-border" />
+                            <DropdownMenu.Item
+                              className="flex min-h-11 cursor-default items-center gap-2 rounded-md px-3 text-sm text-destructive outline-none focus:bg-destructive/10"
+                              onSelect={() => setDeleteTarget(child)}
+                            >
+                              <Trash2 aria-hidden="true" className="size-4" />
+                              删除账号
+                            </DropdownMenu.Item>
+                          </DropdownMenu.Content>
+                        </DropdownMenu.Portal>
+                      </DropdownMenu.Root>
                     </div>
                   </TableCell>
                 </TableRow>

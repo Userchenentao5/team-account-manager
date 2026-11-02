@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { insertChannel } from "@/db/channels";
 import { insertChildAccount, updateMotherSeat } from "@/db/childAccounts";
 import { getDashboardOverview } from "@/db/dashboard";
+import { upsertRates } from "@/db/fxRates";
 import { seedCurrencies } from "@/db/seed";
 import { setStatusThresholds } from "@/db/settings";
 import { space } from "@/db/schema";
@@ -392,6 +393,63 @@ describe("dashboard overview aggregates (DASH-01 / DASH-02 / DASH-03 / DASH-04)"
       "due",
       "soon",
     ]);
+  });
+
+  it("uses the original CNY receivable instead of converting the rounded USD snapshot", () => {
+    const spaceRow = makeSpace({ name: "CNY Receivable" });
+    const child = makeChild(spaceRow.id, {
+      monthlyCurrencyCode: "CNY",
+      monthlyAmountMinor: 1299,
+      monthlyAmountUsd: 181,
+      nextPaymentDate: "2026-07-01",
+    });
+    upsertRates(ctx.db, [{
+      currencyCode: "CNY",
+      rateToUsd: "0.125",
+      fetchedAt: "2026-07-01T00:00:00.000Z",
+    }]);
+
+    const overview = getDashboardOverview(ctx.db, new Date(2026, 6, 1));
+
+    expect(overview.expiringChildAccounts).toEqual([
+      expect.objectContaining({ id: child.id, revenueCnyMinor: 1299 }),
+    ]);
+    expect(overview.totals.childMonthlyRevenueUsdMinor).toBe(181);
+  });
+
+  it("converts foreign-currency receivables using the cached CNY rate", () => {
+    const spaceRow = makeSpace({ name: "USD Receivable" });
+    makeChild(spaceRow.id, { nextPaymentDate: "2026-07-01" });
+    upsertRates(ctx.db, [{
+      currencyCode: "CNY",
+      rateToUsd: "0.125",
+      fetchedAt: "2026-07-01T00:00:00.000Z",
+    }]);
+
+    const overview = getDashboardOverview(ctx.db, new Date(2026, 6, 1));
+
+    expect(overview.expiringChildAccounts[0].revenueCnyMinor).toBe(16000);
+    expect(overview.expiringChildAccounts[0].revenueUsdMinor).toBe(2000);
+  });
+
+  it("keeps original CNY amounts available when the conversion rate is missing", () => {
+    const spaceRow = makeSpace({ name: "No CNY Rate" });
+    const cny = makeChild(spaceRow.id, {
+      email: "cny@example.com",
+      monthlyCurrencyCode: "CNY",
+      monthlyAmountMinor: 1299,
+      monthlyAmountUsd: 181,
+      nextPaymentDate: "2026-07-01",
+    });
+    const usd = makeChild(spaceRow.id, {
+      email: "usd@example.com",
+      nextPaymentDate: "2026-07-01",
+    });
+
+    const rows = getDashboardOverview(ctx.db, new Date(2026, 6, 1)).expiringChildAccounts;
+
+    expect(rows.find((row) => row.id === cny.id)?.revenueCnyMinor).toBe(1299);
+    expect(rows.find((row) => row.id === usd.id)?.revenueCnyMinor).toBeNull();
   });
 
   it("uses the configured space expiry threshold", () => {

@@ -18,6 +18,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { ExpiryBadge } from "@/components/spaces/expiry-badge";
+import { RiskDetailLink } from "./risk-navigation";
 
 type ExpiringSpaceTableProps = {
   spaces: DashboardExpiringSpaceRow[];
@@ -111,11 +112,12 @@ export function ExpiringSpaceTable({
                       className="size-11"
                       aria-label="查看空间详情"
                     >
-                      <Link
+                      <RiskDetailLink
+                        id={`risk-space-link-${row.id}`}
                         href={`/spaces/${row.id}?highlightSpace=1#space-risk-record`}
                       >
                         <Eye className="size-4" />
-                      </Link>
+                      </RiskDetailLink>
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent>查看空间详情</TooltipContent>

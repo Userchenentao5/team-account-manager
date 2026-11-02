@@ -230,8 +230,8 @@
     "semantic_hash": ""
   },
   "src/components/spaces/child-account-table.tsx": {
-    "mtime": 1792255196.8455713,
-    "ast_hash": "15cb195e7c83045e248e41d2fbfd4cca",
+    "mtime": 1793634137.582556,
+    "ast_hash": "5f245652fff99633cf9ca26bd0baccd2",
     "semantic_hash": ""
   },
   "src/components/spaces/expiry-badge.tsx": {
@@ -250,8 +250,8 @@
     "semantic_hash": "a11ddd58859ab51b132fd5fac69232fe"
   },
   "src/components/spaces/space-detail-actions.tsx": {
-    "mtime": 1792255196.8475804,
-    "ast_hash": "ae7d2cb2764304dda84d2e13b0f71385",
+    "mtime": 1793633777.3385437,
+    "ast_hash": "d193fcb7a737403c3516a2d0bff3a8b3",
     "semantic_hash": ""
   },
   "src/components/spaces/space-form.tsx": {
@@ -345,8 +345,8 @@
     "semantic_hash": "09f5961b9ba49ec385801bf8779eeee5"
   },
   "src/components/ui/table.tsx": {
-    "mtime": 1792255196.8544059,
-    "ast_hash": "31fc8e9179f3656c6aa54e9002f48696",
+    "mtime": 1793631999.5998363,
+    "ast_hash": "1ceb08b225ff172384f0233f076fa5d1",
     "semantic_hash": ""
   },
   "src/components/ui/tooltip.tsx": {
@@ -380,13 +380,13 @@
     "semantic_hash": "cbcbe4fcfbc869ab78e7ae8a19b63d59"
   },
   "src/db/dashboard.query.test.ts": {
-    "mtime": 1792255196.861876,
-    "ast_hash": "b3aa28244ebba67d83cae891e98f295c",
+    "mtime": 1793631619.644095,
+    "ast_hash": "c5238fd67ac1f5019b518c588b5f845b",
     "semantic_hash": ""
   },
   "src/db/dashboard.ts": {
-    "mtime": 1792255196.8628857,
-    "ast_hash": "103f9e4eb64774445676046541ac1124",
+    "mtime": 1793631619.6402476,
+    "ast_hash": "8b739ca70a3364ef7c8c665b9cc804bc",
     "semantic_hash": ""
   },
   "src/db/fxRates.query.test.ts": {
@@ -1035,17 +1035,17 @@
     "semantic_hash": ""
   },
   "src/components/settings/status-threshold-form.tsx": {
-    "mtime": 1792255601.47232,
+    "mtime": 1793631274.3510313,
     "ast_hash": "fa9d21f104f9a2b28f0e066834fe685a",
     "semantic_hash": ""
   },
   "src/db/settings.test.ts": {
-    "mtime": 1792255633.992093,
+    "mtime": 1793631274.3523777,
     "ast_hash": "52309d0107673e3a7f893f42354a528e",
     "semantic_hash": ""
   },
   "src/db/settings.ts": {
-    "mtime": 1792255601.470317,
+    "mtime": 1793631274.3533876,
     "ast_hash": "6a9c12956daed5dd169c2f38f10cdc4a",
     "semantic_hash": ""
   },
@@ -1100,12 +1100,12 @@
     "semantic_hash": "ad08f0ca0bd495cec4550c3a7273a55a"
   },
   "src/lib/email/space-expiry-reminder.test.ts": {
-    "mtime": 1792255633.9879227,
+    "mtime": 1793631274.3601265,
     "ast_hash": "290f55051e18bdedf82d984d9283874a",
     "semantic_hash": ""
   },
   "src/lib/email/space-expiry-reminder.ts": {
-    "mtime": 1792255601.470317,
+    "mtime": 1793631274.3616009,
     "ast_hash": "6f54691dd6165716cf438a3ff5e28434",
     "semantic_hash": ""
   },
@@ -1120,7 +1120,7 @@
     "semantic_hash": "cd5f0485b4cb7f7e6f15d980d218781e"
   },
   "src/lib/reminders/space-expiry-reminder-job.test.ts": {
-    "mtime": 1792255633.9908094,
+    "mtime": 1793631274.3646462,
     "ast_hash": "21c5cb5a0a95fcdafd99a894b2b8660e",
     "semantic_hash": ""
   },
@@ -1135,12 +1135,12 @@
     "semantic_hash": ""
   },
   "src/actions/settings.test.ts": {
-    "mtime": 1792255633.989251,
+    "mtime": 1793631274.3464136,
     "ast_hash": "80cc13d62c11289b3a71d6b85082cadf",
     "semantic_hash": ""
   },
   "src/lib/email/rich-text.ts": {
-    "mtime": 1792255377.2647932,
+    "mtime": 1793631274.357773,
     "ast_hash": "14b9c0adf262ef594aa5376c768f4731",
     "semantic_hash": ""
   },
@@ -1155,7 +1155,7 @@
     "semantic_hash": "460be28ac575892fa8efac520dd2acb8"
   },
   "src/components/settings/child-account-reminder-form.tsx": {
-    "mtime": 1792255377.2692294,
+    "mtime": 1793631274.3490214,
     "ast_hash": "6e9fc29b33fc1ff9935fb8c54a5ca851",
     "semantic_hash": ""
   },
@@ -1165,12 +1165,12 @@
     "semantic_hash": ""
   },
   "src/lib/email/child-account-reminder.ts": {
-    "mtime": 1792255403.4031205,
+    "mtime": 1793631274.356766,
     "ast_hash": "6643a85f67c7377121457c34d1ddc006",
     "semantic_hash": ""
   },
   "src/lib/reminders/child-account-payment-reminder-job.test.ts": {
-    "mtime": 1792255403.4031205,
+    "mtime": 1793631274.3633885,
     "ast_hash": "3ef1556261e9818e28e7fe71e222af83",
     "semantic_hash": ""
   },
@@ -1250,8 +1250,8 @@
     "semantic_hash": ""
   },
   "src/app/(protected)/spaces/[id]/page.tsx": {
-    "mtime": 1792255196.8255792,
-    "ast_hash": "dd72a02e517ca87131b3acb4efc5e7c5",
+    "mtime": 1793633777.3395462,
+    "ast_hash": "9af10c173bdf24b89f9cd92b02110951",
     "semantic_hash": ""
   },
   "src/app/(protected)/spaces/page.tsx": {
@@ -1490,18 +1490,18 @@
     "semantic_hash": ""
   },
   "src/app/(protected)/renewal-risks/page.tsx": {
-    "mtime": 1792255196.8230767,
-    "ast_hash": "0b2e5028a5fc2514b76ffa05f8f88d16",
+    "mtime": 1793633409.980004,
+    "ast_hash": "eea0d31c39e553f1fd7c4cd27173217c",
     "semantic_hash": ""
   },
   "src/components/dashboard/expiring-child-account-table.tsx": {
-    "mtime": 1792255196.8372014,
-    "ast_hash": "7714c167d852b0d481a0b321418de31a",
+    "mtime": 1793633409.9882002,
+    "ast_hash": "daedd8636fdb7a0aa6c72de26288b720",
     "semantic_hash": ""
   },
   "src/components/dashboard/expiring-space-table.tsx": {
-    "mtime": 1792255196.8382037,
-    "ast_hash": "7ffc501a2327d8a6fe69c076a2d799bc",
+    "mtime": 1793633409.9861963,
+    "ast_hash": "e5c8c0756aa1082fecfcb335c59564e7",
     "semantic_hash": ""
   },
   "graphify-out/memory/query_20260814_151109_dashboard\u70b9\u51fb\u524d\u5f80\u98ce\u9669\u5904\u540e_\u770b\u5230\u7684\u662f\u6240\u6709\u7a7a\u95f4\u7684\u5217\u8868_\u4e0e\u6309\u94ae\u76ee\u7684\u4e0d\u662f\u9ad8\u5ea6\u543b\u5408.md": {
@@ -1670,33 +1670,43 @@
     "semantic_hash": ""
   },
   "src/components/settings/child-account-reminder-form.test.tsx": {
-    "mtime": 1792255425.6291142,
-    "ast_hash": "24f88df719ae9bb4d45894a26d96ed2b",
+    "mtime": 1793631274.3476157,
+    "ast_hash": "248ed3462e28109a06f22144091f7fbc",
     "semantic_hash": ""
   },
   "src/lib/email/child-account-reminder-content.ts": {
-    "mtime": 1792255602.90383,
+    "mtime": 1793631274.3533876,
     "ast_hash": "a2a7586f4fc8510fd1321cee4b6a8625",
     "semantic_hash": ""
   },
   "src/lib/email/child-account-reminder.test.ts": {
-    "mtime": 1792255403.407506,
-    "ast_hash": "5ae0f6530a2a6b97b102da24ef382829",
+    "mtime": 1793631274.3553822,
+    "ast_hash": "7133a448716cf0294e5a2da7057a1f86",
     "semantic_hash": ""
   },
   "src/components/settings/status-threshold-form.test.tsx": {
-    "mtime": 1792255644.716351,
-    "ast_hash": "f83b02e66d437956124ae391e270b159",
+    "mtime": 1793631274.3500285,
+    "ast_hash": "7f2a5ffed4daf713e4735358699bbbab",
     "semantic_hash": ""
   },
   "src/lib/email/reminder-layout.ts": {
-    "mtime": 1792255601.4655483,
-    "ast_hash": "557811e58dfd94ce4e6fd908fce0cfa9",
+    "mtime": 1793631274.356766,
+    "ast_hash": "604014274249ff6ce65fe9ec7bc268f1",
     "semantic_hash": ""
   },
   "src/lib/email/space-expiry-reminder-content.ts": {
-    "mtime": 1792255601.4683125,
-    "ast_hash": "0aab09486c4e8678e05ecf43f0e7c1c2",
+    "mtime": 1793631274.359124,
+    "ast_hash": "537b75f1d3b48eaf68c74bbf53242206",
+    "semantic_hash": ""
+  },
+  "src/components/dashboard/risk-navigation.tsx": {
+    "mtime": 1793634137.5799248,
+    "ast_hash": "0fd9a39deabdfbe64aad08e9dc9db6c2",
+    "semantic_hash": ""
+  },
+  "src/components/spaces/risk-record-arrival.tsx": {
+    "mtime": 1793634011.7846527,
+    "ast_hash": "ba2c4c5f02ac8c95f925c30765fc65ba",
     "semantic_hash": ""
   }
 }
